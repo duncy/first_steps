@@ -1,0 +1,43 @@
+{
+    "block.first_steps.stone_tin_ore": "Cassiterite Ore",
+    "block.first_steps.stone_alunite_ore": "Alunite Ore",
+    "block.first_steps.stone_copper_ore": "Malachite Ore",
+    "block.first_steps.stone_iron_ore": "Hematite Ore",
+    "block.first_steps.deepslate_copper_ore": "Chalcopyrite Ore",
+    "block.first_steps.deepslate_iron_ore": "Magnetite Ore",
+
+    "item.first_steps.raw_tin": "Raw Cassiterite",
+    "item.first_steps.raw_alunite": "Raw Alunite",
+    "item.first_steps.raw_stone_copper": "Raw Malachite",
+    "item.first_steps.raw_stone_iron": "Raw Hematite",
+    "item.first_steps.raw_deepslate_copper": "Raw Chalcopyrite",
+    "item.first_steps.raw_deepslate_iron": "Raw Magnetite",
+
+    "item.first_steps.stone_head_axe": "Stone Axe Head",
+    "item.first_steps.blackstone_head_axe": "Blackstone Axe Head",
+    
+    "item.first_steps.stone_head_shovel": "Stone Shovel Head",
+    "item.first_steps.blackstone_head_shovel": "Blackstone Shovel Head",
+
+    "item.first_steps.stone_head_knife": "Stone Knife Blade",
+    "item.first_steps.blackstone_head_knife": "Blackstone Knife Blade",
+    
+    "item.first_steps.stone_head_spear": "Stone Spear Head",
+    "item.first_steps.blackstone_head_spear": "Blackstone Spear Head",
+
+    "block.first_steps.stone_rock": "Rock",
+    "block.first_steps.blackstone_rock": "Blackstone Rock",
+    "block.first_steps.obsidian_rock": "Obsidian Rock",
+
+    "item.first_steps.blackstone_axe": "Blackstone Axe",
+
+    "item.first_steps.blackstone_spear": "Blackstone Spear",
+    
+    "tooltip.first_steps.rock_block": "Use this with rocks on the ground to create tool heads!",
+    "tooltip.first_steps.tin_source": "Source of tin",
+    "tooltip.first_steps.alum_source": "Source of alum",
+    "tooltip.first_steps.copper_source": "Source of copper",
+    "tooltip.first_steps.iron_source": "Source of iron",
+
+    "itemgroup.first_steps": "First Steps"
+}

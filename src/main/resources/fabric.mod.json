@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "first_steps",
+	"version": "${version}",
+	"name": "First Steps",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/first_steps/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"nz.duncy.first_steps.FirstSteps"
+		],
+        "client": [
+            "nz.duncy.first_steps.FirstStepsClient"
+        ],
+		"fabric-datagen": [
+			"nz.duncy.first_steps.FirstStepsDataGenerator"
+		]
+	},
+	"mixins": [
+		"first_steps.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

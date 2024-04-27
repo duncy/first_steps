@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "item": "first_steps:blackstone_head_spear"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "H",
+    "S"
+  ],
+  "result": {
+    "item": "first_steps:blackstone_spear"
+  }
+}
