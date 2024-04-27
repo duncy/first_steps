@@ -1,7 +1,0 @@
-// 1.20.4	2024-04-27T02:47:21.807477474	First Steps/Block Loot Tables
-d6274c1c332709323ac51453090c50060eb6f250 data/first_steps/loot_tables/blocks/deepslate_copper_ore.json
-1370171f7ee720947ffe2bba08fe65716f5d9bd7 data/first_steps/loot_tables/blocks/stone_copper_ore.json
-c734b63000b99c475d7d4bb7ac6efb9e06073b0d data/first_steps/loot_tables/blocks/deepslate_iron_ore.json
-52c99be4e8061bbc32c0b600c67fb4b907a07a54 data/first_steps/loot_tables/blocks/stone_alunite_ore.json
-f223f36f8d785971a82444bec5eb2da2b2fc2507 data/first_steps/loot_tables/blocks/stone_tin_ore.json
-3b0cfe2826fd83624aa37fe99f36eb4b87ae6058 data/first_steps/loot_tables/blocks/stone_iron_ore.json

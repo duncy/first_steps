@@ -1,5 +1,0 @@
-// 1.20.4	2024-04-27T02:47:21.82264926	First Steps/Tags for minecraft:block
-a09dfb6be9306af46a7e6a4b49eab7aff4f28f66 data/minecraft/tags/blocks/needs_iron_tool.json
-2f6d440bcad940e471e991479cb33faeca5fac36 data/first_steps/tags/blocks/needs_stone_rock.json
-a2bd13b570e89c21e85b902c901083f471650c30 data/first_steps/tags/blocks/needs_obsidian_rock.json
-a09dfb6be9306af46a7e6a4b49eab7aff4f28f66 data/minecraft/tags/blocks/mineable/pickaxe.json
