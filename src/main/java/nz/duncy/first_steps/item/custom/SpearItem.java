@@ -13,12 +13,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.Vanishable;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
@@ -26,11 +26,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import nz.duncy.first_steps.item.entity.SpearEntity;
 
-public class SpearItem extends Item implements Vanishable {
+public class SpearItem extends SwordItem implements Vanishable {
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
-    public SpearItem(ToolMaterial toolMaterial, float attackDamage, double attackSpeed, Item.Settings settings) {
-        super(settings);
+    public SpearItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Item.Settings settings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings);
 
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Tool modifier", 8.0, EntityAttributeModifier.Operation.ADDITION));
@@ -55,7 +55,6 @@ public class SpearItem extends Item implements Vanishable {
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        user.sendMessage(Text.literal("Use stop start"));
         if (!(user instanceof PlayerEntity)) {
             return;
         }
@@ -66,20 +65,16 @@ public class SpearItem extends Item implements Vanishable {
             return;
         }
         
-        user.sendMessage(Text.literal("Use stop client check"));
         if (!world.isClient) {
             stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(user.getActiveHand()));
 
-            user.sendMessage(Text.literal("Use stop create entity"));
             SpearEntity spearEntity = new SpearEntity(playerEntity, world, stack);
-            user.sendMessage(Text.literal("Use stop entity set velocity"));
             spearEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, 2.5f, 1.0f);
 
             if (playerEntity.getAbilities().creativeMode) {
                 spearEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
             }
 
-            user.sendMessage(Text.literal("Use stop spawn entity"));
             world.spawnEntity(spearEntity);
             world.playSoundFromEntity(null, spearEntity, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0f, 1.0f);
 
@@ -93,13 +88,11 @@ public class SpearItem extends Item implements Vanishable {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        user.sendMessage(Text.literal("Use start"));
         ItemStack itemStack = user.getStackInHand(hand);
         if (itemStack.getDamage() >= itemStack.getMaxDamage() - 1) {
             return TypedActionResult.fail(itemStack);
         }
         user.setCurrentHand(hand);
-        user.sendMessage(Text.literal("Use consume"));
         return TypedActionResult.consume(itemStack);
     }
     

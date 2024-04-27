@@ -52,7 +52,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         // Blackstone tools
         itemModelGenerator.register(ModItems.BLACKSTONE_AXE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.BLACKSTONE_SPEAR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BLACKSTONE_SPEAR, Models.HANDHELD);
 
         // Raw ores
         // Raw metals

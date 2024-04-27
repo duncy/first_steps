@@ -38,3 +38,10 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
+
+# datagen
+src/main/generated
+
+# krita
+*.png~
+*.kra
