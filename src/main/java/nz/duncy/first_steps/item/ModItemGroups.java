@@ -17,39 +17,39 @@ public class ModItemGroups {
                 .icon(() -> new ItemStack(ModItems.STONE_HEAD_AXE)).entries((displayContext, entries) -> {
                     // Tools
                     entries.add(ModItems.STONE_HEAD_AXE);
-                    entries.add(ModItems.BLACKSTONE_HEAD_AXE);
+                    entries.add(ModItems.BASALT_HEAD_AXE);
 
                     entries.add(ModItems.STONE_HEAD_SHOVEL);
-                    entries.add(ModItems.BLACKSTONE_HEAD_SHOVEL);
+                    entries.add(ModItems.BASALT_HEAD_SHOVEL);
 
                     entries.add(ModItems.STONE_HEAD_KNIFE);
-                    entries.add(ModItems.BLACKSTONE_HEAD_KNIFE);
+                    entries.add(ModItems.BASALT_HEAD_KNIFE);
 
                     entries.add(ModItems.STONE_HEAD_SPEAR);
-                    entries.add(ModItems.BLACKSTONE_HEAD_SPEAR);
+                    entries.add(ModItems.BASALT_HEAD_SPEAR);
 
                     // Raw metals
                     entries.add(ModItems.RAW_TIN);
-                    entries.add(ModItems.RAW_ALUNITE);
                     entries.add(ModItems.RAW_STONE_COPPER);
                     entries.add(ModItems.RAW_STONE_IRON);
                     entries.add(ModItems.RAW_DEEPSLATE_COPPER);
                     entries.add(ModItems.RAW_DEEPSLATE_IRON);
+                    entries.add(ModItems.RAW_MULLITE);
 
                     // Ore blocks
                     entries.add(ModBlocks.STONE_TIN_ORE);
-                    entries.add(ModBlocks.STONE_ALUNITE_ORE);
                     entries.add(ModBlocks.STONE_COPPER_ORE);
                     entries.add(ModBlocks.STONE_IRON_ORE);
                     entries.add(ModBlocks.DEEPSLATE_COPPER_ORE);
                     entries.add(ModBlocks.DEEPSLATE_IRON_ORE);
+                    entries.add(ModBlocks.BASALT_MULLITE_ORE);
 
                     // Rock blocks
                     entries.add(ModBlocks.STONE_ROCK);
-                    entries.add(ModBlocks.BLACKSTONE_ROCK);
+                    entries.add(ModBlocks.BASALT_ROCK);
                     entries.add(ModBlocks.OBSIDIAN_ROCK);
                     
-                    entries.add(ModItems.BLACKSTONE_SPEAR);
+                    entries.add(ModItems.BASALT_SPEAR);
 
                 }).build());
 

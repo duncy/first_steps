@@ -23,10 +23,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         //generateToolRecipe(exporter, ModItems.STONE_HEAD_SPEAR, ModItems.STONE_SPEAR);
         //generateToolRecipe(exporter, ModItems.STONE_HEAD_KNIFE, ModItems.STONE_KNIFE);
 
-        //generateToolRecipe(exporter, ModItems.BLACKSTONE_HEAD_AXE, Items.BLACKSTONE_AXE);
-        //generateToolRecipe(exporter, ModItems.BLACKSTONE_HEAD_SHOVEL, Items.BLACKSTONE_SHOVEL);
-        generateToolRecipe(exporter, ModItems.BLACKSTONE_HEAD_SPEAR, ModItems.BLACKSTONE_SPEAR);
-        //generateToolRecipe(exporter, ModItems.BLACKSTONE_HEAD_KNIFE, ModItems.BLACKSTONE_KNIFE);
+        //generateToolRecipe(exporter, ModItems.BASALT_HEAD_AXE, Items.BASALT_AXE);
+        //generateToolRecipe(exporter, ModItems.BASALT_HEAD_SHOVEL, Items.BASALT_SHOVEL);
+        generateToolRecipe(exporter, ModItems.BASALT_HEAD_SPEAR, ModItems.BASALT_SPEAR);
+        //generateToolRecipe(exporter, ModItems.BASALT_HEAD_KNIFE, ModItems.BASALT_KNIFE);
     }
 
     private void generateToolRecipe(RecipeExporter exporter, Item head, Item tool) {

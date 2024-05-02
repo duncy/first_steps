@@ -15,18 +15,18 @@ import nz.duncy.first_steps.block.custom.RockBlock;
 public class ModBlocks {
     // ORES
     public static final Block STONE_TIN_ORE = registerStoneOreBlock("stone_tin_ore");
-    public static final Block STONE_ALUNITE_ORE = registerStoneOreBlock("stone_alunite_ore");
     public static final Block STONE_COPPER_ORE = registerStoneOreBlock("stone_copper_ore");
     public static final Block STONE_IRON_ORE = registerStoneOreBlock("stone_iron_ore");
     public static final Block DEEPSLATE_COPPER_ORE = registerDeepslateOreBlock("deepslate_copper_ore");
     public static final Block DEEPSLATE_IRON_ORE = registerDeepslateOreBlock("deepslate_iron_ore");
+    public static final Block BASALT_MULLITE_ORE = registerStoneOreBlock("basalt_mullite_ore");
 
     // ROCKS
     public static final Block STONE_ROCK = registerBlock("stone_rock",
             new RockBlock(FabricBlockSettings.copyOf(Blocks.STONE), new Identifier("minecraft:block/stone")));
     
-    public static final Block BLACKSTONE_ROCK = registerBlock("blackstone_rock",
-            new RockBlock(FabricBlockSettings.copyOf(Blocks.STONE), new Identifier("minecraft:block/blackstone")));
+    public static final Block BASALT_ROCK = registerBlock("basalt_rock",
+            new RockBlock(FabricBlockSettings.copyOf(Blocks.STONE), new Identifier("minecraft:block/basalt_side")));
 
     public static final Block OBSIDIAN_ROCK = registerBlock("obsidian_rock",
             new RockBlock(FabricBlockSettings.copyOf(Blocks.STONE), new Identifier("minecraft:block/obsidian")));

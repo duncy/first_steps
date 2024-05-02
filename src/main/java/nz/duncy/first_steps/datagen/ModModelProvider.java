@@ -18,15 +18,15 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         // ORES
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.STONE_TIN_ORE);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.STONE_ALUNITE_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.STONE_COPPER_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.STONE_IRON_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_COPPER_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_IRON_ORE);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BASALT_MULLITE_ORE);
 
         // ROCKS
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.STONE_ROCK, new Identifier("minecraft:block/stone"));
-        blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.BLACKSTONE_ROCK, new Identifier("minecraft:block/blackstone"));
+        blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.BASALT_ROCK, new Identifier("minecraft:block/basalt_side"));
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.OBSIDIAN_ROCK, new Identifier("minecraft:block/obsidian"));
     }
 
@@ -34,7 +34,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         // Rock block items
         itemModelGenerator.register(ModBlocks.STONE_ROCK.asItem(), Models.HANDHELD);
-        itemModelGenerator.register(ModBlocks.BLACKSTONE_ROCK.asItem(), Models.HANDHELD);
+        itemModelGenerator.register(ModBlocks.BASALT_ROCK.asItem(), Models.HANDHELD);
         itemModelGenerator.register(ModBlocks.OBSIDIAN_ROCK.asItem(), Models.HANDHELD);
 
         // Tool heads
@@ -45,22 +45,22 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.STONE_HEAD_KNIFE, Models.GENERATED);
 
         // Blackstone tool heads
-        itemModelGenerator.register(ModItems.BLACKSTONE_HEAD_AXE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.BLACKSTONE_HEAD_SHOVEL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.BLACKSTONE_HEAD_SPEAR, Models.GENERATED);
-        itemModelGenerator.register(ModItems.BLACKSTONE_HEAD_KNIFE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BASALT_HEAD_AXE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BASALT_HEAD_SHOVEL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BASALT_HEAD_SPEAR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BASALT_HEAD_KNIFE, Models.GENERATED);
 
         // Blackstone tools
-        itemModelGenerator.register(ModItems.BLACKSTONE_AXE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.BLACKSTONE_SPEAR, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.BASALT_AXE, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.BASALT_SPEAR, Models.GENERATED);
 
         // Raw ores
         // Raw metals
         itemModelGenerator.register(ModItems.RAW_TIN, Models.GENERATED);
-        itemModelGenerator.register(ModItems.RAW_ALUNITE, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_STONE_COPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_STONE_IRON, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_DEEPSLATE_COPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_DEEPSLATE_IRON, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_MULLITE, Models.GENERATED);
     }
 }

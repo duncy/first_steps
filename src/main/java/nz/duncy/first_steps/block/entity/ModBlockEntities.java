@@ -12,7 +12,7 @@ public class ModBlockEntities {
     public static final BlockEntityType<RockBlockEntity> ROCK_BLOCK_ENTITY = 
         Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(FirstSteps.MOD_ID, "rock_block_be"),
             FabricBlockEntityTypeBuilder.create(RockBlockEntity::new,
-                ModBlocks.STONE_ROCK, ModBlocks.BLACKSTONE_ROCK, ModBlocks.OBSIDIAN_ROCK).build());
+                ModBlocks.STONE_ROCK, ModBlocks.BASALT_ROCK, ModBlocks.OBSIDIAN_ROCK).build());
 
     public static void registerModBlockEntities() {
         FirstSteps.LOGGER.info("Registering block entities for " + FirstSteps.MOD_ID);

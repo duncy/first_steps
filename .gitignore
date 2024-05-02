@@ -40,7 +40,7 @@ replay_*.log
 *.jfr
 
 # datagen
-src/main/generated/
+src/main/generated/.cache/
 
 # krita
 *.png~

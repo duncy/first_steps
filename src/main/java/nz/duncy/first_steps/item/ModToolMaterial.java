@@ -8,7 +8,7 @@ import net.minecraft.recipe.Ingredient;
 import nz.duncy.first_steps.block.ModBlocks;
 
 public enum ModToolMaterial implements ToolMaterial {
-    BLACKSTONE(MiningLevels.STONE, 131, 4.0f, 1.0f, 5, () -> Ingredient.ofItems(ModBlocks.BLACKSTONE_ROCK));
+    BASALT(MiningLevels.STONE, 131, 4.0f, 1.0f, 5, () -> Ingredient.ofItems(ModBlocks.BASALT_ROCK));
 
     private final int miningLevel;
     private final int itemDurability;

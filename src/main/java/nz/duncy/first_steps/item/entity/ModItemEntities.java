@@ -21,7 +21,7 @@ public class ModItemEntities {
                 .build());
     }
 
-    public static final EntityType<SpearEntity> BLACKSTONE_SPEAR = registerSpear("blackstone_spear");
+    public static final EntityType<SpearEntity> BASALT_SPEAR = registerSpear("basalt_spear");
 
     public static void registerModItemEntities() {
         FirstSteps.LOGGER.info("Registering item entities for " + FirstSteps.MOD_ID);

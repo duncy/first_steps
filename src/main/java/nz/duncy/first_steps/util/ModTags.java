@@ -16,6 +16,12 @@ public class ModTags {
         public static final TagKey<Block> NEEDS_OBSIDIAN_ROCK = 
             createTag("needs_obsidian_rock");
 
+        public static final TagKey<Block> NEEDS_COPPER_TOOL  = 
+            createTag("needs_copper_tool");
+
+        public static final TagKey<Block> NEEDS_BRONZE_TOOL = 
+            createTag("needs_bronze_tool");
+
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, new Identifier(FirstSteps.MOD_ID, name));
         }
