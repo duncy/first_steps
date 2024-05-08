@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "first_steps:item/obsidian_rock"
+    "layer0": "first_steps:item/stone_spear"
   }
 }

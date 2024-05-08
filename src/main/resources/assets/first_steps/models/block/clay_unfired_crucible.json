@@ -1,0 +1,70 @@
+{
+	"credit": "Made with Blockbench",
+	"elements": [
+		{
+			"from": [6, 0, 9],
+			"to": [10, 6, 10],
+			"color": 5,
+			"faces": {
+				"north": {"uv": [0, 0, 4, 6], "texture": "minecraft:textures/block/clay.png"},
+				"east": {"uv": [0, 0, 1, 6], "texture": "minecraft:textures/block/clay.png"},
+				"south": {"uv": [0, 0, 4, 6], "texture": "minecraft:textures/block/clay.png"},
+				"west": {"uv": [0, 0, 1, 6], "texture": "minecraft:textures/block/clay.png"},
+				"up": {"uv": [0, 0, 4, 1], "texture": "minecraft:textures/block/clay.png"},
+				"down": {"uv": [0, 0, 4, 1], "texture": "minecraft:textures/block/clay.png"}
+			}
+		},
+		{
+			"from": [6, 0, 6],
+			"to": [10, 6, 7],
+			"color": 5,
+			"faces": {
+				"north": {"uv": [0, 0, 4, 6], "texture": "minecraft:textures/block/clay.png"},
+				"east": {"uv": [0, 0, 1, 6], "texture": "minecraft:textures/block/clay.png"},
+				"south": {"uv": [0, 0, 4, 6], "texture": "minecraft:textures/block/clay.png"},
+				"west": {"uv": [0, 0, 1, 6], "texture": "minecraft:textures/block/clay.png"},
+				"up": {"uv": [0, 0, 4, 1], "texture": "minecraft:textures/block/clay.png"},
+				"down": {"uv": [0, 0, 4, 1], "texture": "minecraft:textures/block/clay.png"}
+			}
+		},
+		{
+			"from": [6, 0, 7],
+			"to": [7, 6, 9],
+			"color": 5,
+			"faces": {
+				"north": {"uv": [0, 0, 1, 6], "texture": "minecraft:textures/block/clay.png"},
+				"east": {"uv": [0, 0, 2, 6], "texture": "minecraft:textures/block/clay.png"},
+				"south": {"uv": [0, 0, 1, 6], "texture": "minecraft:textures/block/clay.png"},
+				"west": {"uv": [0, 0, 2, 6], "texture": "minecraft:textures/block/clay.png"},
+				"up": {"uv": [0, 0, 1, 2], "texture": "minecraft:textures/block/clay.png"},
+				"down": {"uv": [0, 0, 1, 2], "texture": "minecraft:textures/block/clay.png"}
+			}
+		},
+		{
+			"from": [9, 0, 7],
+			"to": [10, 6, 9],
+			"color": 5,
+			"faces": {
+				"north": {"uv": [0, 0, 1, 6], "texture": "minecraft:textures/block/clay.png"},
+				"east": {"uv": [0, 0, 2, 6], "texture": "minecraft:textures/block/clay.png"},
+				"south": {"uv": [0, 0, 1, 6], "texture": "minecraft:textures/block/clay.png"},
+				"west": {"uv": [0, 0, 2, 6], "texture": "minecraft:textures/block/clay.png"},
+				"up": {"uv": [0, 0, 1, 2], "texture": "minecraft:textures/block/clay.png"},
+				"down": {"uv": [0, 0, 1, 2], "texture": "minecraft:textures/block/clay.png"}
+			}
+		},
+		{
+			"from": [7, 0, 7],
+			"to": [9, 1, 9],
+			"color": 5,
+			"faces": {
+				"north": {"uv": [0, 0, 2, 1], "texture": "minecraft:textures/block/clay.png"},
+				"east": {"uv": [0, 0, 2, 1], "texture": "minecraft:textures/block/clay.png"},
+				"south": {"uv": [0, 0, 2, 1], "texture": "minecraft:textures/block/clay.png"},
+				"west": {"uv": [0, 0, 2, 1], "texture": "minecraft:textures/block/clay.png"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "minecraft:textures/block/clay.png"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "minecraft:textures/block/clay.png"}
+			}
+		}
+	]
+}

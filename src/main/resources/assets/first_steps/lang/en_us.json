@@ -4,14 +4,14 @@
     "block.first_steps.stone_iron_ore": "Hematite Ore",
     "block.first_steps.deepslate_copper_ore": "Chalcopyrite Ore",
     "block.first_steps.deepslate_iron_ore": "Magnetite Ore",
-    "block.first_steps.basalt_mullite_ore": "Mullite Ore",
+    "block.first_steps.basalt_mullite_ore": "Sillimanite Deposit",
 
     "item.first_steps.raw_tin": "Raw Cassiterite",
     "item.first_steps.raw_stone_copper": "Raw Malachite",
     "item.first_steps.raw_stone_iron": "Raw Hematite",
     "item.first_steps.raw_deepslate_copper": "Raw Chalcopyrite",
     "item.first_steps.raw_deepslate_iron": "Raw Magnetite",
-    "item.first_steps.raw_mullite": "Raw Mullite",
+    "item.first_steps.raw_mullite": "Sillimanite",
 
     "item.first_steps.stone_head_axe": "Stone Axe Head",
     "item.first_steps.basalt_head_axe": "Basalt Axe Head",
@@ -26,18 +26,25 @@
     "item.first_steps.basalt_head_spear": "Basalt Spear Head",
 
     "block.first_steps.stone_rock": "Rock",
-    "block.first_steps.basalt_rock": "Basalt Rock",
-    "block.first_steps.obsidian_rock": "Obsidian Rock",
+    "block.first_steps.flint_rock": "Flint",
+    "block.first_steps.basalt_rock": "Basalt",
+    "block.first_steps.obsidian_rock": "Obsidian",
 
+    "item.first_steps.stone_knife": "Stone Knife",
+    "item.first_steps.stone_spear": "Stone Spear",
+    
+    "item.first_steps.basalt_hoe": "Basalt Hoe",
+    "item.first_steps.basalt_shovel": "Basalt Shovel",
     "item.first_steps.basalt_axe": "Basalt Axe",
-
+    "item.first_steps.basalt_knife": "Basalt Knife",
     "item.first_steps.basalt_spear": "Basalt Spear",
     
     "tooltip.first_steps.rock_block": "Use this with rocks on the ground to create tool heads!",
+
     "tooltip.first_steps.tin_source": "Source of tin",
     "tooltip.first_steps.copper_source": "Source of copper",
     "tooltip.first_steps.iron_source": "Source of iron",
-    "tooltip.first_steps.mullite_source": "Source of mullite",
+    "tooltip.first_steps.mullite_source": "Source of sillimanite",
 
     "itemgroup.first_steps": "First Steps"
 }

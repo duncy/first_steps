@@ -48,8 +48,24 @@ public class ModItemGroups {
                     entries.add(ModBlocks.STONE_ROCK);
                     entries.add(ModBlocks.BASALT_ROCK);
                     entries.add(ModBlocks.OBSIDIAN_ROCK);
+
+                    // Crucibles
+                    entries.add(ModBlocks.CLAY_UNFIRED_CRUCIBLE);
+                   
+                    // Tools
+                    // Stone tools
+                    entries.add(ModItems.STONE_KNIFE);
+                    entries.add(ModItems.STONE_SPEAR);
                     
+                    // Basalt tools
+                    entries.add(ModItems.BASALT_HOE);
+                    entries.add(ModItems.BASALT_SHOVEL);
+                    entries.add(ModItems.BASALT_AXE);
+                    entries.add(ModItems.BASALT_KNIFE);
                     entries.add(ModItems.BASALT_SPEAR);
+
+                    // Ingots
+                    entries.add(ModItems.TIN_INGOT);
 
                 }).build());
 

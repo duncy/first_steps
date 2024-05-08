@@ -5,8 +5,11 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ShovelItem;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -14,6 +17,7 @@ import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.item.custom.TinSourceItem;
 import nz.duncy.first_steps.item.custom.CopperSourceItem;
 import nz.duncy.first_steps.item.custom.IronSourceItem;
+import nz.duncy.first_steps.item.custom.KnifeItem;
 import nz.duncy.first_steps.item.custom.MulliteSourceItem;
 import nz.duncy.first_steps.item.custom.SpearItem;
 
@@ -43,13 +47,27 @@ public class ModItems {
     public static final Item STONE_HEAD_SPEAR = registerItem("stone_head_spear", new Item(new FabricItemSettings()));
     public static final Item BASALT_HEAD_SPEAR = registerItem("basalt_head_spear", new Item(new FabricItemSettings()));
    
+    // Hoes
+    public static final Item BASALT_HOE = registerItem("basalt_hoe", new HoeItem(ModToolMaterial.BASALT, 9, 0.8f, new FabricItemSettings())); 
+
+    // Shovels
+    public static final Item BASALT_SHOVEL = registerItem("basalt_shovel", new ShovelItem(ModToolMaterial.BASALT, 9, 0.8f, new FabricItemSettings())); 
+
     // Axes
     public static final Item BASALT_AXE = registerItem("basalt_axe", new AxeItem(ModToolMaterial.BASALT, 9, 0.8f, new FabricItemSettings())); 
 
     // Spears
-    public static final Item BASALT_SPEAR =  registerItem("basalt_spear", new SpearItem(ModToolMaterial.BASALT, 3, 0.0f, new FabricItemSettings()));
+    public static final Item STONE_SPEAR = registerItem("stone_spear", new SpearItem(ToolMaterials.STONE, 3, new FabricItemSettings()));
+    public static final Item BASALT_SPEAR =  registerItem("basalt_spear", new SpearItem(ModToolMaterial.BASALT, 3, new FabricItemSettings()));
 
-    private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
+    // Knives
+    public static final Item STONE_KNIFE = registerItem("stone_knife", new KnifeItem(ToolMaterials.STONE, 0, new FabricItemSettings()));
+    public static final Item BASALT_KNIFE = registerItem("basalt_knife", new KnifeItem(ModToolMaterial.BASALT, 0, new FabricItemSettings()));
+
+    // Ingots
+    public static final Item TIN_INGOT = registerItem("tin_ingot", new Item(new FabricItemSettings()));
+
+    private static void addItemsToIngredientsTabItemGroup(FabricItemGroupEntries entries) {
         entries.add(STONE_HEAD_AXE);
         entries.add(BASALT_HEAD_AXE);
 
@@ -61,11 +79,25 @@ public class ModItems {
         
         entries.add(STONE_HEAD_SPEAR);
         entries.add(BASALT_HEAD_SPEAR);
-        
+
+        entries.add(TIN_INGOT);
+    }
+
+    private static void addItemsToToolsTabItemGroup(FabricItemGroupEntries entries) {
+        entries.add(BASALT_HOE);
+        entries.add(BASALT_SHOVEL);
         entries.add(BASALT_AXE);
+    }
+
+    private static void addItemsToCombatTabItemGroup(FabricItemGroupEntries entries) {
+        entries.add(STONE_KNIFE);
+        entries.add(STONE_SPEAR);
+
+        entries.add(BASALT_KNIFE);
         entries.add(BASALT_SPEAR);
     }
 
+     
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(FirstSteps.MOD_ID, name), item);
     }
@@ -73,6 +105,8 @@ public class ModItems {
     public static void registerModItems() {
         FirstSteps.LOGGER.info("Registering mod items for " + FirstSteps.MOD_ID);
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsToIngredientTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsToIngredientsTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(ModItems::addItemsToToolsTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(ModItems::addItemsToCombatTabItemGroup);
     }
 }

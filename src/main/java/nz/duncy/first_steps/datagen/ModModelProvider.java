@@ -5,7 +5,9 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.data.client.TexturedModel;
 import net.minecraft.util.Identifier;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.item.ModItems;
 
@@ -22,10 +24,11 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.STONE_IRON_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_COPPER_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_IRON_ORE);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BASALT_MULLITE_ORE);
-
+        blockStateModelGenerator.registerAxisRotated(ModBlocks.BASALT_MULLITE_ORE, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        
         // ROCKS
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.STONE_ROCK, new Identifier("minecraft:block/stone"));
+        blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.FLINT_ROCK, new Identifier(FirstSteps.MOD_ID, "block/flint_rock"));
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.BASALT_ROCK, new Identifier("minecraft:block/basalt_side"));
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.OBSIDIAN_ROCK, new Identifier("minecraft:block/obsidian"));
     }
@@ -33,9 +36,9 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         // Rock block items
-        itemModelGenerator.register(ModBlocks.STONE_ROCK.asItem(), Models.HANDHELD);
-        itemModelGenerator.register(ModBlocks.BASALT_ROCK.asItem(), Models.HANDHELD);
-        itemModelGenerator.register(ModBlocks.OBSIDIAN_ROCK.asItem(), Models.HANDHELD);
+        itemModelGenerator.register(ModBlocks.STONE_ROCK.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.BASALT_ROCK.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.OBSIDIAN_ROCK.asItem(), Models.GENERATED);
 
         // Tool heads
         // Stone tool heads
@@ -50,8 +53,15 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.BASALT_HEAD_SPEAR, Models.GENERATED);
         itemModelGenerator.register(ModItems.BASALT_HEAD_KNIFE, Models.GENERATED);
 
+        // Stone tools
+        itemModelGenerator.register(ModItems.STONE_KNIFE, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.STONE_SPEAR, Models.GENERATED);
+        
         // Blackstone tools
+        itemModelGenerator.register(ModItems.BASALT_HOE, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.BASALT_SHOVEL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.BASALT_AXE, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.BASALT_KNIFE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.BASALT_SPEAR, Models.GENERATED);
 
         // Raw ores
@@ -61,6 +71,10 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAW_STONE_IRON, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_DEEPSLATE_COPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_DEEPSLATE_IRON, Models.GENERATED);
+        // Raw minerals
         itemModelGenerator.register(ModItems.RAW_MULLITE, Models.GENERATED);
+
+        //Ingots
+        itemModelGenerator.register(ModItems.TIN_INGOT, Models.GENERATED);
     }
 }
