@@ -74,7 +74,16 @@ public class ModModelProvider extends FabricModelProvider {
         // Raw minerals
         itemModelGenerator.register(ModItems.RAW_MULLITE, Models.GENERATED);
 
-        //Ingots
+        // Ingots
         itemModelGenerator.register(ModItems.TIN_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BRONZE_INGOT, Models.GENERATED);
+
+        // Arrows
+        itemModelGenerator.register(ModItems.STONE_ARROW, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FLINT_ARROW, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BASALT_ARROW, Models.GENERATED);
+        itemModelGenerator.register(ModItems.OBSIDIAN_ARROW, Models.GENERATED);
+        itemModelGenerator.register(ModItems.COPPER_ARROW, Models.GENERATED);
+        itemModelGenerator.register(ModItems.IRON_ARROW, Models.GENERATED);
     }
 }

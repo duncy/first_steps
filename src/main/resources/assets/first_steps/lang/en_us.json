@@ -46,5 +46,14 @@
     "tooltip.first_steps.iron_source": "Source of iron",
     "tooltip.first_steps.mullite_source": "Source of sillimanite",
 
+    "item.first_steps.stone_arrow": "Stone Arrow",
+    "item.first_steps.flint_arrow": "Flint Arrow",
+    "item.first_steps.basalt_arrow": "Basalt Arrow",
+    "item.first_steps.obsidian_arrow": "Obsidian Arrow",
+    "item.first_steps.copper_arrow": "Copper Arrow",
+    "item.first_steps.bronze_arrow": "Bronze Arrow",
+    "item.first_steps.iron_arrow": "Iron Arrow",
+    "item.first_steps.steel_arrow": "Steel Arrow",
+
     "itemgroup.first_steps": "First Steps"
 }

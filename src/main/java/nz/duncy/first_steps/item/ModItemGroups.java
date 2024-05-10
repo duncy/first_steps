@@ -66,6 +66,17 @@ public class ModItemGroups {
 
                     // Ingots
                     entries.add(ModItems.TIN_INGOT);
+                    entries.add(ModItems.BRONZE_INGOT);
+
+                    // Arrows
+                    entries.add(ModItems.STONE_ARROW);
+                    entries.add(ModItems.FLINT_ARROW);
+                    entries.add(ModItems.BASALT_ARROW);
+                    entries.add(ModItems.OBSIDIAN_ARROW);
+                    entries.add(ModItems.COPPER_ARROW);
+                    entries.add(ModItems.BRONZE_ARROW);
+                    entries.add(ModItems.IRON_ARROW);
+                    entries.add(ModItems.STEEL_ARROW);
 
                 }).build());
 

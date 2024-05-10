@@ -4,6 +4,7 @@ package nz.duncy.first_steps.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.ArrowItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -66,6 +67,18 @@ public class ModItems {
 
     // Ingots
     public static final Item TIN_INGOT = registerItem("tin_ingot", new Item(new FabricItemSettings()));
+    public static final Item BRONZE_INGOT = registerItem("bronze_ingot", new Item(new FabricItemSettings()));
+
+    // Arrows
+    public static final Item STONE_ARROW = registerItem("stone_arrow", new ArrowItem(new FabricItemSettings()));
+    public static final Item FLINT_ARROW = registerItem("flint_arrow", new ArrowItem(new FabricItemSettings()));
+    public static final Item BASALT_ARROW = registerItem("basalt_arrow", new ArrowItem(new FabricItemSettings()));
+    public static final Item OBSIDIAN_ARROW = registerItem("obsidian_arrow", new ArrowItem(new FabricItemSettings()));
+    public static final Item COPPER_ARROW = registerItem("copper_arrow", new ArrowItem(new FabricItemSettings()));
+    public static final Item BRONZE_ARROW = registerItem("bronze_arrow", new ArrowItem(new FabricItemSettings()));
+    public static final Item IRON_ARROW = registerItem("iron_arrow", new ArrowItem(new FabricItemSettings()));
+    public static final Item STEEL_ARROW = registerItem("steel_arrow", new ArrowItem(new FabricItemSettings()));
+
 
     private static void addItemsToIngredientsTabItemGroup(FabricItemGroupEntries entries) {
         entries.add(STONE_HEAD_AXE);
@@ -81,6 +94,7 @@ public class ModItems {
         entries.add(BASALT_HEAD_SPEAR);
 
         entries.add(TIN_INGOT);
+        entries.add(BRONZE_INGOT);
     }
 
     private static void addItemsToToolsTabItemGroup(FabricItemGroupEntries entries) {
@@ -95,6 +109,15 @@ public class ModItems {
 
         entries.add(BASALT_KNIFE);
         entries.add(BASALT_SPEAR);
+
+        entries.add(STONE_ARROW);
+        entries.add(FLINT_ARROW);
+        entries.add(BASALT_ARROW);
+        entries.add(OBSIDIAN_ARROW);
+        entries.add(COPPER_ARROW);
+        entries.add(BRONZE_ARROW);
+        entries.add(IRON_ARROW);
+        entries.add(STEEL_ARROW);
     }
 
      
