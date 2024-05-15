@@ -39,6 +39,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModBlocks.STONE_ROCK.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.BASALT_ROCK.asItem(), Models.GENERATED);
         itemModelGenerator.register(ModBlocks.OBSIDIAN_ROCK.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.COPPER_ROCK.asItem(), Models.GENERATED);
 
         // Tool heads
         // Stone tool heads
@@ -46,12 +47,32 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.STONE_HEAD_SHOVEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.STONE_HEAD_SPEAR, Models.GENERATED);
         itemModelGenerator.register(ModItems.STONE_HEAD_KNIFE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.STONE_HEAD_ARROW, Models.GENERATED);
 
-        // Blackstone tool heads
+        // Flint tool heads
+        itemModelGenerator.register(ModItems.FLINT_HEAD_ARROW, Models.GENERATED);
+
+        // Basalt tool heads
         itemModelGenerator.register(ModItems.BASALT_HEAD_AXE, Models.GENERATED);
         itemModelGenerator.register(ModItems.BASALT_HEAD_SHOVEL, Models.GENERATED);
         itemModelGenerator.register(ModItems.BASALT_HEAD_SPEAR, Models.GENERATED);
         itemModelGenerator.register(ModItems.BASALT_HEAD_KNIFE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BASALT_HEAD_ARROW, Models.GENERATED);
+
+        // Obsidian tool heads
+        itemModelGenerator.register(ModItems.OBSIDIAN_HEAD_ARROW, Models.GENERATED);
+
+        // Copper tool heads
+        itemModelGenerator.register(ModItems.COPPER_HEAD_ARROW, Models.GENERATED);
+
+        // Bronze tool heads
+        itemModelGenerator.register(ModItems.BRONZE_HEAD_ARROW, Models.GENERATED);
+
+        // Iron tool heads
+        itemModelGenerator.register(ModItems.IRON_HEAD_ARROW, Models.GENERATED);
+
+        // Steel tool heads
+        itemModelGenerator.register(ModItems.STEEL_HEAD_ARROW, Models.GENERATED);
 
         // Stone tools
         itemModelGenerator.register(ModItems.STONE_KNIFE, Models.HANDHELD);

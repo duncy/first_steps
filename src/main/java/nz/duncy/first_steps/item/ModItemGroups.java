@@ -15,7 +15,7 @@ public class ModItemGroups {
             new Identifier(FirstSteps.MOD_ID, "stone_head_axe"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.first_steps"))
                 .icon(() -> new ItemStack(ModItems.STONE_HEAD_AXE)).entries((displayContext, entries) -> {
-                    // Tools
+                    // Tools heads
                     entries.add(ModItems.STONE_HEAD_AXE);
                     entries.add(ModItems.BASALT_HEAD_AXE);
 
@@ -27,6 +27,15 @@ public class ModItemGroups {
 
                     entries.add(ModItems.STONE_HEAD_SPEAR);
                     entries.add(ModItems.BASALT_HEAD_SPEAR);
+
+                    entries.add(ModItems.STONE_HEAD_ARROW);
+                    entries.add(ModItems.FLINT_HEAD_ARROW);
+                    entries.add(ModItems.BASALT_HEAD_ARROW);
+                    entries.add(ModItems.OBSIDIAN_HEAD_ARROW);
+                    entries.add(ModItems.COPPER_HEAD_ARROW);
+                    entries.add(ModItems.BRONZE_HEAD_ARROW);
+                    entries.add(ModItems.IRON_HEAD_ARROW);
+                    entries.add(ModItems.STEEL_HEAD_ARROW);
 
                     // Raw metals
                     entries.add(ModItems.RAW_TIN);

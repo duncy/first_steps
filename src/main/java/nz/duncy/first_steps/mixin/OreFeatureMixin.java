@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class OreFeatureMixin {
     @Inject(method = "generate", at = @At(value = "HEAD", target = "Lnet/minecraft/world/gen/feature/Feature;generate(Lnet/minecraft/world/gen/feature/util/FeatureContext;)Z"), cancellable = true)
     protected void injectGenerateMethod(FeatureContext<OreFeatureConfig> context, CallbackInfoReturnable<Boolean> cir) {
-        Block[] preventedOres = {Blocks.COPPER_ORE, Blocks.IRON_ORE, Blocks.DEEPSLATE_COPPER_ORE, Blocks.DEEPSLATE_IRON_ORE};
+        Block[] preventedOres = {Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.COPPER_ORE, Blocks.IRON_ORE, Blocks.DEEPSLATE_COPPER_ORE, Blocks.DEEPSLATE_IRON_ORE};
         for (OreFeatureConfig.Target target : context.getConfig().targets) {
             if (Arrays.asList(preventedOres).contains(target.state.getBlock())) {
                 cir.setReturnValue(false);

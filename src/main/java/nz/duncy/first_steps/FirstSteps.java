@@ -10,6 +10,7 @@ import nz.duncy.first_steps.item.ModItemGroups;
 import nz.duncy.first_steps.item.ModItems;
 import nz.duncy.first_steps.item.entity.ModItemEntities;
 import nz.duncy.first_steps.world.gen.ModWorldGeneration;
+import nz.duncy.first_steps.world.gen.feature.ModFeature;
 
 public class FirstSteps implements ModInitializer {
     public static final String MOD_ID = "first_steps";
@@ -18,11 +19,11 @@ public class FirstSteps implements ModInitializer {
 	@Override
 	public void onInitialize() {
         ModItems.registerModItems();
-        ModItemGroups.registerItemGroups();
+        ModItemEntities.registerModItemEntities();
         ModBlocks.registerModBlocks();
         ModBlockEntities.registerModBlockEntities();
-        ModItemEntities.registerModItemEntities();
-
+        ModItemGroups.registerItemGroups();
+        ModFeature.registerFeatures();
         ModWorldGeneration.generateModWorldGen();
 	}
 }

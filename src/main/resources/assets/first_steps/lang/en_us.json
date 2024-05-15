@@ -40,6 +40,7 @@
     "item.first_steps.basalt_spear": "Basalt Spear",
     
     "tooltip.first_steps.rock_block": "Use this with rocks on the ground to create tool heads!",
+    "tooltip.first_steps.ore_rock_block": "Use a rock with this to free the ore within!",
 
     "tooltip.first_steps.tin_source": "Source of tin",
     "tooltip.first_steps.copper_source": "Source of copper",

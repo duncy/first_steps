@@ -25,10 +25,10 @@ public class RockBlockEntity extends BlockEntity {
     private VoxelShape SHAPE;
     private Identifier TEXTURE_ID;
     private int VOXEL_COUNT = 64;
-    private BitSet AXE_SHAPE = BitSet.valueOf(new long[] {0b110011110001110000100000000111001111L}); 
-    private BitSet SHOVEL_SHAPE = BitSet.valueOf(new long[] {0b1101110001000001000011000}); 
-    private BitSet KNIFE_SHAPE = BitSet.valueOf(new long[] {0b1011100111100111110011110}); 
-    private BitSet SPEAR_SHAPE = BitSet.valueOf(new long[] {0b1101110011000011100111110}); 
+    private static final BitSet AXE_SHAPE = BitSet.valueOf(new long[] {0b110011110001110000100000000111001111L}); 
+    private static final BitSet SHOVEL_SHAPE = BitSet.valueOf(new long[] {0b1101110001000001000011000}); 
+    private static final BitSet KNIFE_SHAPE = BitSet.valueOf(new long[] {0b1011100111100111110011110}); 
+    private static final BitSet SPEAR_SHAPE = BitSet.valueOf(new long[] {0b1101110011000011100111110}); 
 
     public RockBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ROCK_BLOCK_ENTITY, pos, state);
@@ -95,25 +95,29 @@ public class RockBlockEntity extends BlockEntity {
                 if (checkAxe()) {
                     ItemStack itemStack = new ItemStack(ModItems.STONE_HEAD_AXE);
                     world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
-                    destroyBlock();
+                    destroyBlock(false);
                 }
                 break;
             case 16:
                 if (checkShovel()) {
                     ItemStack itemStack = new ItemStack(ModItems.STONE_HEAD_SHOVEL);
                     world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
-                    destroyBlock();
+                    destroyBlock(false);
                 }
                 break;
             case 10:
                 if (checkKnife()) {
                     ItemStack itemStack = new ItemStack(ModItems.STONE_HEAD_KNIFE);
                     world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                    destroyBlock(false);
                 }else if (checkSpear()) {
                     ItemStack itemStack = new ItemStack(ModItems.STONE_HEAD_SPEAR);
                     world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
+                    destroyBlock(false);
+                }else {
+                    destroyBlock(true);
                 }
-                destroyBlock();
+                
                 break;
         }
     }
@@ -237,9 +241,9 @@ public class RockBlockEntity extends BlockEntity {
         return checkShape(SPEAR_SHAPE, 5, 25);
     }
 
-    private void destroyBlock() {
+    private void destroyBlock(boolean drop) {
         if (world != null && !world.isClient) {
-            world.breakBlock(pos, true);
+            world.breakBlock(pos, drop);
         }
     }
 

@@ -47,6 +47,16 @@ public class ModItems {
     // Spear heads
     public static final Item STONE_HEAD_SPEAR = registerItem("stone_head_spear", new Item(new FabricItemSettings()));
     public static final Item BASALT_HEAD_SPEAR = registerItem("basalt_head_spear", new Item(new FabricItemSettings()));
+
+    // Arrow heads
+    public static final Item STONE_HEAD_ARROW = registerItem("stone_head_arrow", new Item(new FabricItemSettings()));
+    public static final Item FLINT_HEAD_ARROW = registerItem("flint_head_arrow", new Item(new FabricItemSettings()));
+    public static final Item BASALT_HEAD_ARROW = registerItem("basalt_head_arrow", new Item(new FabricItemSettings()));
+    public static final Item OBSIDIAN_HEAD_ARROW = registerItem("obsidian_head_arrow", new Item(new FabricItemSettings()));
+    public static final Item COPPER_HEAD_ARROW = registerItem("copper_head_arrow", new Item(new FabricItemSettings()));
+    public static final Item BRONZE_HEAD_ARROW = registerItem("bronze_head_arrow", new Item(new FabricItemSettings()));
+    public static final Item IRON_HEAD_ARROW = registerItem("iron_head_arrow", new Item(new FabricItemSettings()));
+    public static final Item STEEL_HEAD_ARROW = registerItem("steel_head_arrow", new Item(new FabricItemSettings()));
    
     // Hoes
     public static final Item BASALT_HOE = registerItem("basalt_hoe", new HoeItem(ModToolMaterial.BASALT, 9, 0.8f, new FabricItemSettings())); 
@@ -92,6 +102,15 @@ public class ModItems {
         
         entries.add(STONE_HEAD_SPEAR);
         entries.add(BASALT_HEAD_SPEAR);
+
+        entries.add(STONE_HEAD_ARROW);
+        entries.add(FLINT_HEAD_ARROW);
+        entries.add(BASALT_HEAD_ARROW);
+        entries.add(OBSIDIAN_HEAD_ARROW);
+        entries.add(COPPER_HEAD_ARROW);
+        entries.add(BRONZE_HEAD_ARROW);
+        entries.add(IRON_HEAD_ARROW);
+        entries.add(STEEL_HEAD_ARROW);
 
         entries.add(TIN_INGOT);
         entries.add(BRONZE_INGOT);

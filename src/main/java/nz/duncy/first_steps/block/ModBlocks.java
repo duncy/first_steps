@@ -6,7 +6,9 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.PillarBlock;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -14,6 +16,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.block.custom.OreRockBlock;
 import nz.duncy.first_steps.block.custom.RockBlock;
 
 public class ModBlocks {
@@ -27,16 +30,19 @@ public class ModBlocks {
 
     // ROCKS
     public static final Block STONE_ROCK = registerBlock("stone_rock",
-        new RockBlock(FabricBlockSettings.copyOf(Blocks.STONE), new Identifier("minecraft:block/stone")));
+        new RockBlock(FabricBlockSettings.create().strength(0.0F, 0.0F).pistonBehavior(PistonBehavior.DESTROY).mapColor(MapColor.STONE_GRAY), new Identifier("minecraft:block/stone")));
     
     public static Block FLINT_ROCK = registerFlintRockBlock("flint_rock", 
-       new RockBlock(FabricBlockSettings.copyOf(Blocks.STONE), new Identifier(FirstSteps.MOD_ID, "block/flint_rock")));
+       new RockBlock(FabricBlockSettings.copyOf(STONE_ROCK).mapColor(MapColor.BLACK), new Identifier(FirstSteps.MOD_ID, "block/flint_rock")));
 
     public static final Block BASALT_ROCK = registerBlock("basalt_rock",
-        new RockBlock(FabricBlockSettings.copyOf(Blocks.STONE), new Identifier("minecraft:block/basalt_side")));
+        new RockBlock(FabricBlockSettings.copyOf(STONE_ROCK), new Identifier("minecraft:block/basalt_side")));
 
     public static final Block OBSIDIAN_ROCK = registerBlock("obsidian_rock",
-        new RockBlock(FabricBlockSettings.copyOf(Blocks.STONE), new Identifier("minecraft:block/obsidian")));
+        new RockBlock(FabricBlockSettings.copyOf(FLINT_ROCK), new Identifier("minecraft:block/obsidian")));
+
+    public static final Block COPPER_ROCK = registerBlock("copper_rock",
+        new OreRockBlock(FabricBlockSettings.copyOf(STONE_ROCK)));
 
     // CRAFTING
     // CRUCIBLES
