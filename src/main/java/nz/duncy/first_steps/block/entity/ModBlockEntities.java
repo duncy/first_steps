@@ -14,6 +14,11 @@ public class ModBlockEntities {
             FabricBlockEntityTypeBuilder.create(RockBlockEntity::new,
                 ModBlocks.STONE_ROCK, ModBlocks.FLINT_ROCK, ModBlocks.BASALT_ROCK, ModBlocks.OBSIDIAN_ROCK).build());
 
+    public static final BlockEntityType<KilnBlockEntity> KILN_BLOCK_ENTITY = 
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(FirstSteps.MOD_ID, "kiln_block_be"),
+            FabricBlockEntityTypeBuilder.create(KilnBlockEntity::new,
+                ModBlocks.KILN).build());
+
     public static void registerModBlockEntities() {
         FirstSteps.LOGGER.info("Registering block entities for " + FirstSteps.MOD_ID);
         

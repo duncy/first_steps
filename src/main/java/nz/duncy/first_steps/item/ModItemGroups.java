@@ -58,6 +58,9 @@ public class ModItemGroups {
                     entries.add(ModBlocks.BASALT_ROCK);
                     entries.add(ModBlocks.OBSIDIAN_ROCK);
 
+                    // Kiln
+                    entries.add(ModBlocks.KILN);
+
                     // Crucibles
                     entries.add(ModBlocks.CLAY_UNFIRED_CRUCIBLE);
                    

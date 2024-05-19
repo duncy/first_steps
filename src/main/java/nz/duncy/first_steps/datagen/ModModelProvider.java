@@ -31,6 +31,9 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.FLINT_ROCK, new Identifier(FirstSteps.MOD_ID, "block/flint_rock"));
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.BASALT_ROCK, new Identifier("minecraft:block/basalt_side"));
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.OBSIDIAN_ROCK, new Identifier("minecraft:block/obsidian"));
+
+        // KILN
+        blockStateModelGenerator.registerCooker(ModBlocks.KILN, TexturedModel.ORIENTABLE);
     }
 
     @Override

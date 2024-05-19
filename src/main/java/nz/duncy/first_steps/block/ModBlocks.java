@@ -16,6 +16,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.block.custom.KilnBlock;
 import nz.duncy.first_steps.block.custom.OreRockBlock;
 import nz.duncy.first_steps.block.custom.RockBlock;
 
@@ -45,6 +46,9 @@ public class ModBlocks {
         new OreRockBlock(FabricBlockSettings.copyOf(STONE_ROCK)));
 
     // CRAFTING
+    // KILN
+    public static final Block KILN = registerBlock("kiln", new KilnBlock(FabricBlockSettings.copyOf(Blocks.TERRACOTTA)));
+
     // CRUCIBLES
     public static final Block CLAY_UNFIRED_CRUCIBLE = registerBlock("clay_unfired_crucible", new Block(FabricBlockSettings.copyOf(Blocks.CLAY)));
 
