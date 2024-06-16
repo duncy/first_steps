@@ -45,3 +45,6 @@ src/main/generated/.cache/
 # krita
 *.png~
 *.kra
+
+# backups
+*.backup

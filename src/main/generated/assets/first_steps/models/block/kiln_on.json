@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/orientable",
+  "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
+    "bottom": "first_steps:block/kiln_bottom",
     "front": "first_steps:block/kiln_front_on",
     "side": "first_steps:block/kiln_side",
     "top": "first_steps:block/kiln_top"

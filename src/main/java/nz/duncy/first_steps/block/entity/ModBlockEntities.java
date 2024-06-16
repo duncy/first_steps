@@ -21,7 +21,6 @@ public class ModBlockEntities {
 
     public static void registerModBlockEntities() {
         FirstSteps.LOGGER.info("Registering block entities for " + FirstSteps.MOD_ID);
-        
     }
 
 }

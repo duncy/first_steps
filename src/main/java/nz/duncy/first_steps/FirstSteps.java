@@ -9,7 +9,7 @@ import nz.duncy.first_steps.block.entity.ModBlockEntities;
 import nz.duncy.first_steps.item.ModItemGroups;
 import nz.duncy.first_steps.item.ModItems;
 import nz.duncy.first_steps.item.entity.ModItemEntities;
-import nz.duncy.first_steps.recipe.ModRecipes;
+// import nz.duncy.first_steps.recipe.ModRecipes;
 import nz.duncy.first_steps.stat.ModStats;
 import nz.duncy.first_steps.world.gen.ModWorldGeneration;
 import nz.duncy.first_steps.world.gen.feature.ModFeature;
@@ -27,7 +27,7 @@ public class FirstSteps implements ModInitializer {
         ModItemGroups.registerItemGroups();
         ModFeature.registerFeatures();
         ModWorldGeneration.generateModWorldGen();
-        ModRecipes.registerRecipes();
+        // ModRecipes.registerRecipes();
         ModStats.registerStats();
 	}
 }

@@ -33,7 +33,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.OBSIDIAN_ROCK, new Identifier("minecraft:block/obsidian"));
 
         // KILN
-        blockStateModelGenerator.registerCooker(ModBlocks.KILN, TexturedModel.ORIENTABLE);
+        blockStateModelGenerator.registerCooker(ModBlocks.KILN, TexturedModel.ORIENTABLE_WITH_BOTTOM);
     }
 
     @Override
