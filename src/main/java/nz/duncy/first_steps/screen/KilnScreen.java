@@ -35,19 +35,27 @@ public class KilnScreen extends HandledScreen<KilnScreenHandler> {
 
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        // renderProgressArrow(context, x, y);
+        renderBurnProgress(context, x, y);
         renderTemperatureBar(context, x, y);
     }
 
-    private void renderProgressArrow(DrawContext context, int x, int y) {
+    @Override
+    protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
+        super.drawForeground(context, mouseX, mouseY);
+        String temperatureBarTitle = String.valueOf(handler.getTemperature()) + "°C";
+        context.drawText(this.textRenderer, temperatureBarTitle, this.backgroundWidth - 8 - this.textRenderer.getWidth(temperatureBarTitle), this.titleY, 4210752, false);
+     }
+
+    private void renderBurnProgress(DrawContext context, int x, int y) {
         if (handler.isCrafting()) {
-            context.drawTexture(TEXTURE, x + 85, y + 30, 176, 0, 0, handler.getScaledProgress());
+            int burningProgress = handler.getBurningProgress();
+            context.drawTexture(TEXTURE, x + 80, y + (65 - burningProgress), 180, 14 - burningProgress, 14, burningProgress);
         }
     }
 
     private void renderTemperatureBar(DrawContext context, int x, int y) {
-        int temperature = handler.getTemperature();
-        context.drawTexture(TEXTURE, x + 164, y  + (73 - temperature), 176, 59 - temperature, 4, temperature);
+        int temperatureBarValue = handler.getTemperatureBarValue();
+        context.drawTexture(TEXTURE, x + 149, y  + (71 - temperatureBarValue), 176, 55 - temperatureBarValue, 4, temperatureBarValue);
     }
 
     @Override

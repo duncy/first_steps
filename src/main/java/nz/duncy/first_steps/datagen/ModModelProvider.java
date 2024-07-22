@@ -109,5 +109,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.OBSIDIAN_ARROW, Models.GENERATED);
         itemModelGenerator.register(ModItems.COPPER_ARROW, Models.GENERATED);
         itemModelGenerator.register(ModItems.IRON_ARROW, Models.GENERATED);
+
+        // Crucible
+        itemModelGenerator.register(ModBlocks.CLAY_FIRED_CRUCIBLE.asItem(), Models.GENERATED);
+
+        // // Tongs
+        itemModelGenerator.register(ModItems.WOODEN_TONGS, Models.GENERATED);
     }
 }

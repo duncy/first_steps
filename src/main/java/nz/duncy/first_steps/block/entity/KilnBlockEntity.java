@@ -1,27 +1,19 @@
 package nz.duncy.first_steps.block.entity;
 
-import java.util.Map;
-
 import org.jetbrains.annotations.Nullable;
-
-import com.google.common.collect.Maps;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -30,29 +22,36 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import nz.duncy.first_steps.FirstSteps;
-import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.block.custom.KilnBlock;
 import nz.duncy.first_steps.screen.KilnScreenHandler;
 
 public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
-    private static final int INPUT_SLOT_1 = 0;
-    private static final int INPUT_SLOT_2 = 1;
-    private static final int OUTPUT_SLOT = 2;
+    private static final int KILN_FUEL_INPUT_SLOT = 0; // Fuel input
+    private static final int KILN_INPUT_SLOT = 1; // Kiln top input
+    private static final int KILN_FUEL_OUTPUT_SLOT = 2; // Fuel output
 
     protected final PropertyDelegate propertyDelegate;
-    private int progress = 0;
-    private int maxProgress = 72;
-    private int temperature = 50;
+
+    private int burnTime;
+    private int fuelTime;
+
+    private int temperature;
+    private int maxTemperature;
+    private static final int minTemperature = 20;
 
     public KilnBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.KILN_BLOCK_ENTITY, pos, state);
+
+        this.temperature = 20;
+
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> KilnBlockEntity.this.progress;
-                    case 1 -> KilnBlockEntity.this.maxProgress;
+                    case 0 -> KilnBlockEntity.this.burnTime;
+                    case 1 -> KilnBlockEntity.this.fuelTime;
                     case 2 -> KilnBlockEntity.this.temperature;
                     default -> 0;
                 };
@@ -61,8 +60,8 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> KilnBlockEntity.this.progress = value;
-                    case 1 -> KilnBlockEntity.this.maxProgress = value;
+                    case 0 -> KilnBlockEntity.this.burnTime = value;
+                    case 1 -> KilnBlockEntity.this.fuelTime = value;
                     case 2 -> KilnBlockEntity.this.temperature = value;
                 };
             }
@@ -91,18 +90,20 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
 
     @Override
     public void writeNbt(NbtCompound nbt) {
+        nbt.putInt("kiln.burnTime", this.burnTime);
+        nbt.putInt("kiln.temperature", this.temperature);
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("kiln.progress", progress);
-        nbt.putInt("kiln.temperature", temperature);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("kiln.progress");
-        temperature = nbt.getInt("kiln.temperature");
+        this.burnTime = nbt.getInt("kiln.burnTime");
+        this.fuelTime = this.getFuelTime((ItemStack)this.inventory.get(KILN_FUEL_INPUT_SLOT));
+        this.maxTemperature = this.getMaxTemperature((ItemStack)this.inventory.get(KILN_FUEL_INPUT_SLOT));
+        this.temperature = nbt.getInt("kiln.temperature");
     }
 
     @Nullable
@@ -111,66 +112,149 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
         return new KilnScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
-
-    public void tick(World world, BlockPos pos, BlockState state) {
+    public void tick(World world, BlockPos pos, BlockState state, KilnBlockEntity blockEntity) {
         if (world.isClient()) {
             return;
         }
 
-        if (isOutputSlotEmptyOrReceivable()) {
-            if (this.hasRecipe()) {
-                this.increaseCraftProgress();
-                markDirty(world, pos, state);
+        boolean burning = blockEntity.isBurning();
+        boolean dirty = false;
 
-                if(hasCraftingFinished()) {
-                    this.craftItem();
-                    this.resetProgress();
-                }
-            } else {
-                this.resetProgress();
+        ItemStack fuelItemstack = blockEntity.inventory.get(KILN_FUEL_INPUT_SLOT);
+
+        if (blockEntity.isBurning()) {
+            --blockEntity.burnTime;
+            if (blockEntity.temperature < blockEntity.maxTemperature) {
+                ++blockEntity.temperature;
             }
-        } else {
-            this.resetProgress();
+            if (blockEntity.burnTime == 0) {
+                ItemStack result = getWasteProductRecipe(fuelItemstack);
+                craftWasteProduct(result);
+            }
+        } else if (blockEntity.temperature > minTemperature){
+            --blockEntity.temperature;
+        }
+
+        // Kiln is burning OR
+        // Fuel slot is not empty and output slot empty or can receive new items
+        if (blockEntity.isBurning() || (!isFuelSlotEmpty(blockEntity) && isOutputSlotEmptyOrReceivable())) {
+            
+            if (!blockEntity.isBurning()) {
+                blockEntity.burnTime = getFuelTime(fuelItemstack); // Get fuel burn time
+                blockEntity.fuelTime = blockEntity.burnTime;
+                blockEntity.maxTemperature = getMaxTemperature(fuelItemstack);
+                if (blockEntity.isBurning()) {
+                    dirty = true;
+                    if (!isFuelSlotEmpty(blockEntity)) {
+                        Item remainderFuelItem = fuelItemstack.getItem().getRecipeRemainder(); 
+                        fuelItemstack.decrement(1); // Consume fuel
+                        if (fuelItemstack.isEmpty()) {
+                            // Add the empty bucket back to the fuel slot
+                            blockEntity.inventory.set(KILN_FUEL_INPUT_SLOT, remainderFuelItem == null ? ItemStack.EMPTY : new ItemStack(remainderFuelItem)); 
+                        }
+                    }
+                }
+            }
+        }
+
+        if (burning != blockEntity.isBurning()) {
+            dirty = true;
+            state = (BlockState)state.with(KilnBlock.LIT, blockEntity.isBurning());
+            world.setBlockState(pos, state, 3);
+        }
+
+        if (!isTopInputSlotEmpty(blockEntity)) {
+            ItemStack crucibleItemStack = blockEntity.inventory.get(KILN_INPUT_SLOT);
+            NbtCompound nbtCompound = crucibleItemStack.getOrCreateNbt();
+
+            int crucibleTemperature = 20;
+            if (nbtCompound.contains("crucible.temperature")) {
+                crucibleTemperature = nbtCompound.getInt("crucible.temperature");
+                if (crucibleTemperature < blockEntity.temperature) {
+                    crucibleTemperature++;
+                } else if (crucibleTemperature > blockEntity.temperature) {
+                    crucibleTemperature--;
+                }
+            }
+
+            dirty = true;
+            nbtCompound.putInt("crucible.temperature", crucibleTemperature);
+            crucibleItemStack.setNbt(nbtCompound);
+        }
+        
+        if (dirty) {
             markDirty(world, pos, state);
         }
     }
 
-    private void resetProgress() {
-        this.progress = 0;
+    protected int getFuelTime(ItemStack fuel) {
+        if (fuel.isEmpty()) {
+             return 0;
+        } else {
+            Item item = fuel.getItem();
+            return (Integer)AbstractFurnaceBlockEntity.createFuelTimeMap().getOrDefault(item, 0);
+        }
     }
 
-    private void craftItem() {
-        this.removeStack(INPUT_SLOT_1, 1);
+    private boolean isFuelSlotEmpty(KilnBlockEntity blockEntity) {
+        return blockEntity.inventory.get(KILN_FUEL_INPUT_SLOT).isEmpty();
+    }
+
+    public boolean isTopInputSlotEmpty(KilnBlockEntity blockEntity) {
+        return blockEntity.inventory.get(KILN_INPUT_SLOT).isEmpty();
+    }
+
+    private ItemStack getWasteProductRecipe(ItemStack fuel) {
+        boolean hasInput = fuel.getItem() == Items.ACACIA_LOG;
         ItemStack result = new ItemStack(Items.CHARCOAL);
 
-        this.setStack(OUTPUT_SLOT, new ItemStack(result.getItem(), getStack(OUTPUT_SLOT).getCount() + result.getCount()));
+        if (hasInput && canInsertAmountIntoOutputSlot(result) && canInsertItemIntoOutputSlot(result.getItem())) {
+            return result;
+        } else {
+            return ItemStack.EMPTY;
+        }
     }
 
-    private boolean hasCraftingFinished() {
-        return progress >= maxProgress;
-    }
-
-    private void increaseCraftProgress() {
-        progress++;
-    }
-
-    private boolean hasRecipe() {
-        ItemStack result = new ItemStack(Items.CHARCOAL);
-        boolean hasInput = getStack(INPUT_SLOT_1).getItem() == Items.ACACIA_LOG;
-
-        return hasInput && canInsertAmountIntoOutputSlot(result) && canInsertItemIntoOutputSlot(result.getItem());
+    private void craftWasteProduct(ItemStack result) {
+        if (result != ItemStack.EMPTY) {
+            this.setStack(KILN_FUEL_OUTPUT_SLOT, new ItemStack(result.getItem(), getStack(KILN_FUEL_OUTPUT_SLOT).getCount() + result.getCount()));
+        }
     }
 
     private boolean canInsertItemIntoOutputSlot(Item item) {
-        return this.getStack(OUTPUT_SLOT).getItem() == item || this.getStack(OUTPUT_SLOT).isEmpty();
+        return this.getStack(KILN_FUEL_OUTPUT_SLOT).getItem() == item || this.getStack(KILN_FUEL_OUTPUT_SLOT).isEmpty();
     }
 
     private boolean canInsertAmountIntoOutputSlot(ItemStack result) {
-        return this.getStack(OUTPUT_SLOT).getCount() + result.getCount() <= getStack(OUTPUT_SLOT).getMaxCount();
+        return this.getStack(KILN_FUEL_OUTPUT_SLOT).getCount() + result.getCount() <= getStack(KILN_FUEL_OUTPUT_SLOT).getMaxCount();
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
-        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+        return this.getStack(KILN_FUEL_OUTPUT_SLOT).isEmpty() || this.getStack(KILN_FUEL_OUTPUT_SLOT).getCount() < this.getStack(KILN_FUEL_OUTPUT_SLOT).getMaxCount();
+    }
+
+    private boolean isBurning() {
+        return this.burnTime > 0;
+    }
+
+    private int getMaxTemperature(ItemStack itemStack) {
+        return switch (itemStack.getRegistryEntry().toString()) {
+            case "minecraft:lava_bucket" -> 1200;
+            case "minecraft:coal" -> 1600;
+            case "minecraft:coal_block" -> 1600;
+            case "minecraft:charcoal" -> 1200;
+            case "minecraft:dried_kelp_block" -> 50;
+            case "minecraft:blaze_rod" -> 1200;
+            default -> 950;
+        };
+    }
+
+    public void removeCrucible() {
+        this.inventory.set(KILN_INPUT_SLOT, ItemStack.EMPTY);
+    }
+
+    public ItemStack getCrucible() {
+        return this.inventory.get(KILN_INPUT_SLOT);
     }
 
 

@@ -33,6 +33,16 @@
     "container.first_steps.kiln": "Kiln",
     "block.first_steps.kiln": "Kiln",
 
+    "container.first_steps.clay_unfired_crucible": "Clay Crucible",
+    "block.first_steps.clay_unfired_crucible": "Clay Crucible",
+
+    "container.first_steps.clay_fired_crucible": "Ceramic Crucible",
+    "block.first_steps.clay_fired_crucible": "Ceramic Crucible",
+
+    "tooltip.first_steps.crucible.temperature": "Temperature: %d°C",
+    "tooltip.first_steps.crucible.itemCount": "%s x%s",
+    "tooltip.first_steps.crucible.more": "and %s more...",
+
     "item.first_steps.stone_knife": "Stone Knife",
     "item.first_steps.stone_spear": "Stone Spear",
     
@@ -58,6 +68,11 @@
     "item.first_steps.bronze_arrow": "Bronze Arrow",
     "item.first_steps.iron_arrow": "Iron Arrow",
     "item.first_steps.steel_arrow": "Steel Arrow",
+
+    "item.first_steps.wooden_tongs": "Wooden Tongs",
+
+    "tooltip.first_steps.tongs.hint": "Use this to hold hot items!",
+    "tooltip.first_steps.tongs.holding": "Holding %s",
 
     "itemgroup.first_steps": "First Steps"
 }

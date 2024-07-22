@@ -14,8 +14,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.block.custom.CrucibleBlock;
 import nz.duncy.first_steps.block.custom.KilnBlock;
 import nz.duncy.first_steps.block.custom.OreRockBlock;
 import nz.duncy.first_steps.block.custom.RockBlock;
@@ -47,13 +49,19 @@ public class ModBlocks {
 
     // CRAFTING
     // KILN
-    public static final Block KILN = registerBlock("kiln", new KilnBlock(FabricBlockSettings.copyOf(Blocks.TERRACOTTA)));
+    public static final Block KILN = registerBlock("kiln", new KilnBlock(FabricBlockSettings.copyOf(Blocks.TERRACOTTA).luminance(Blocks.createLightLevelFromLitBlockState(13))));
 
     // CRUCIBLES
-    public static final Block CLAY_UNFIRED_CRUCIBLE = registerBlock("clay_unfired_crucible", new Block(FabricBlockSettings.copyOf(Blocks.CLAY)));
+    public static final Block CLAY_UNFIRED_CRUCIBLE = registerUniqueBlock("clay_unfired_crucible", new Block(FabricBlockSettings.copyOf(Blocks.CLAY)));
+    public static final Block CLAY_FIRED_CRUCIBLE = registerUniqueBlock("clay_fired_crucible", new CrucibleBlock(FabricBlockSettings.create().strength(0.0F, 0.0F).pistonBehavior(PistonBehavior.DESTROY).mapColor(MapColor.TERRACOTTA_RED).nonOpaque().sounds(BlockSoundGroup.DECORATED_POT)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
+        return Registry.register(Registries.BLOCK, new Identifier(FirstSteps.MOD_ID, name), block);
+    }
+
+    private static Block registerUniqueBlock(String name, Block block) {
+        registerUniqueBlockItem(name, block);
         return Registry.register(Registries.BLOCK, new Identifier(FirstSteps.MOD_ID, name), block);
     }
 
@@ -67,6 +75,11 @@ public class ModBlocks {
     public static Item registerBlockItem(String name, Block block) {
         return Registry.register(Registries.ITEM, new Identifier(FirstSteps.MOD_ID, name),
                 new BlockItem(block, new FabricItemSettings()));
+    }  
+
+    public static Item registerUniqueBlockItem(String name, Block block) {
+        return Registry.register(Registries.ITEM, new Identifier(FirstSteps.MOD_ID, name),
+                new BlockItem(block, new FabricItemSettings().maxCount(1)));
     }   
 
     public static Block registerStoneOreBlock(String name) {

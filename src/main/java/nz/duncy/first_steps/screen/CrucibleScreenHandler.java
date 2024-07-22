@@ -11,34 +11,38 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import nz.duncy.first_steps.block.entity.KilnBlockEntity;
+import nz.duncy.first_steps.block.entity.CrucibleBlockEntity;
 
-public class KilnScreenHandler extends ScreenHandler {
+public class CrucibleScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
-    public final KilnBlockEntity blockEntity;
+    public final CrucibleBlockEntity blockEntity;
 
-    public KilnScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
+    public CrucibleScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
         this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
             new ArrayPropertyDelegate(3));
     }
 
-    public KilnScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
-        super(ModScreenHandlers.KILN_SCREEN_HANDLER, syncId);
+    public CrucibleScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
+        super(ModScreenHandlers.CRUCIBLE_SCREEN_HANDLER, syncId);
         this.inventory = ((Inventory) blockEntity);
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = arrayPropertyDelegate;
-        this.blockEntity = ((KilnBlockEntity) blockEntity);
+        this.blockEntity = ((CrucibleBlockEntity) blockEntity);
 
-        this.addSlot(new KilnFuelSlot(this, inventory, 0, 44, 50)); // Fuel input
-        this.addSlot(new KilnTopSlot(inventory, 1, 80, 21)); // Top input
-        this.addSlot(new KilnOutputSlot(playerInventory.player, inventory, 2, 116, 50)); // Fuel output
+        // this.addSlot(new KilnFuelSlot(this, inventory, 0, 44, 50)); // Fuel input
+        // this.addSlot(new KilnTopSlot(inventory, 1, 80, 21)); // Top input
+        // this.addSlot(new KilnOutputSlot(playerInventory.player, inventory, 2, 116, 50)); // Fuel output
+        for (int i = 0; i < 9; i++) {
+            this.addSlot(new Slot(inventory, i, 26 + (18 * (i % 3)), 16 + (18 * ((int) Math.ceil(i/3)))));
+        }
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
 
         addProperties(arrayPropertyDelegate);
     }
+
 
     public boolean isCrafting() {
         return propertyDelegate.get(0) > 0;
@@ -94,7 +98,6 @@ public class KilnScreenHandler extends ScreenHandler {
     public boolean canUse(PlayerEntity player) {
         return this.inventory.canPlayerUse(player);
     }
-
 
     private void addPlayerInventory(PlayerInventory playerInventory) {
         for (int i = 0; i < 3; ++i) {

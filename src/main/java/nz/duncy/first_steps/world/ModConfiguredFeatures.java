@@ -9,18 +9,13 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.RandomPatchFeature;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
-import nz.duncy.first_steps.world.gen.feature.ModFeature;
-import nz.duncy.first_steps.world.gen.feature.RockFeature;
-import nz.duncy.first_steps.world.gen.feature.RockFeatureConfig;
+
 
 public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<? ,?>> STONE_TIN_ORE_KEY = registerKey("stone_tin_ore");

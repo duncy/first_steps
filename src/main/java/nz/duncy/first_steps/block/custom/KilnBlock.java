@@ -5,7 +5,6 @@ import org.jetbrains.annotations.Nullable;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -15,10 +14,13 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.resource.metadata.BlockEntry;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -30,15 +32,19 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Direction.Axis;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.entity.KilnBlockEntity;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
+import nz.duncy.first_steps.item.custom.TongItem;
 
-public class KilnBlock extends BlockWithEntity implements BlockEntityProvider {
+public class KilnBlock extends BlockWithEntity {
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 16, 16);
     public static final DirectionProperty FACING;
     public static final BooleanProperty LIT;
@@ -99,21 +105,39 @@ public class KilnBlock extends BlockWithEntity implements BlockEntityProvider {
                 ItemScatterer.spawn(world, pos, (KilnBlockEntity) blockEntity);
                 world.updateComparators(pos, this);
             }
-            super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = ((KilnBlockEntity) world.getBlockEntity(pos));
+            KilnBlockEntity kilnBlockEntity = (KilnBlockEntity) world.getBlockEntity(pos);
+            if (!tongCrucibleCheck(player, kilnBlockEntity)) {
+                NamedScreenHandlerFactory screenHandlerFactory = kilnBlockEntity;
 
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
+                if (screenHandlerFactory != null) {
+                    player.openHandledScreen(screenHandlerFactory);
+                }
+                return ActionResult.SUCCESS;
             }
+            
         }
         
-        return ActionResult.SUCCESS;
+        return ActionResult.FAIL;
+    }
+
+    private boolean tongCrucibleCheck(PlayerEntity player, KilnBlockEntity kilnBlockEntity) {
+        return ((player.getOffHandStack().getItem() instanceof TongItem) || (player.getMainHandStack().getItem() instanceof TongItem)) && !kilnBlockEntity.isTopInputSlotEmpty(kilnBlockEntity);
+    }
+
+    @Override
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof KilnBlockEntity) {
+            world.removeBlockEntity(pos);
+        }
+
+        return super.onBreak(world, pos, state, player);
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -124,8 +148,31 @@ public class KilnBlock extends BlockWithEntity implements BlockEntityProvider {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return validateTicker(type, ModBlockEntities.KILN_BLOCK_ENTITY,
-            (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+            (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1, blockEntity));
     }
+
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if ((Boolean)state.get(LIT)) {
+            double d = (double)pos.getX() + 0.5;
+            double e = (double)pos.getY();
+            double f = (double)pos.getZ() + 0.5;
+            if (random.nextDouble() < 0.1) {
+                world.playSound(d, e, f, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+            }
+
+            Direction direction = (Direction)state.get(FACING);
+            Direction.Axis axis = direction.getAxis();
+
+            double h = random.nextDouble() * 0.6 - 0.3;
+            double i = axis == Axis.X ? (double)direction.getOffsetX() * 0.52 : h;
+            double j = random.nextDouble() * 6.0 / 16.0;
+            double k = axis == Axis.Z ? (double)direction.getOffsetZ() * 0.52 : h;
+            world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0, 0.0, 0.0);
+            world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0, 0.0, 0.0);
+            world.addParticle(ParticleTypes.SMOKE, d, e + 1.1, f, 0.0, 0.0, 0.0);
+        }
+    }
+
 
     static {
         FACING = HorizontalFacingBlock.FACING;

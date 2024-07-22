@@ -8,13 +8,11 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import nz.duncy.first_steps.FirstSteps;
-import nz.duncy.first_steps.world.gen.feature.ModFeature;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
-import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
 
 public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> STONE_TIN_ORE_PLACED_KEY = registerKey("stone_tin_ore_placed");

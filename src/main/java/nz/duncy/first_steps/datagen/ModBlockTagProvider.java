@@ -4,6 +4,7 @@ import java.util.concurrent.CompletableFuture;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 import nz.duncy.first_steps.block.ModBlocks;
@@ -29,7 +30,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             .add(ModBlocks.STONE_IRON_ORE)
             .add(ModBlocks.DEEPSLATE_COPPER_ORE)
             .add(ModBlocks.DEEPSLATE_IRON_ORE)
-            .add(ModBlocks.BASALT_MULLITE_ORE);
+            .add(ModBlocks.BASALT_MULLITE_ORE)
+            .add(ModBlocks.KILN);
 
         getOrCreateTagBuilder(ModTags.Blocks.NEEDS_COPPER_TOOL)
             .add(ModBlocks.STONE_TIN_ORE)
@@ -41,6 +43,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             .add(ModBlocks.DEEPSLATE_COPPER_ORE);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
-            .add(ModBlocks.BASALT_MULLITE_ORE);
+            .add(ModBlocks.BASALT_MULLITE_ORE)
+            .add(Blocks.OBSIDIAN);
     }
 }

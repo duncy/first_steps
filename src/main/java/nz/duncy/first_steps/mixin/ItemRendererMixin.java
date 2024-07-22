@@ -12,15 +12,21 @@ import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.item.ModItems;
 
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
     @ModifyVariable(method = "renderItem", at = @At(value = "HEAD"), argsOnly = true)
-    public BakedModel useBasaltSpearModel(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if ((stack.isOf(ModItems.BASALT_SPEAR) || stack.isOf(ModItems.STONE_SPEAR)) && renderMode != ModelTransformationMode.GUI && renderMode != ModelTransformationMode.FIXED && renderMode != ModelTransformationMode.GROUND) {
-            return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(FirstSteps.MOD_ID, "basalt_spear_3d", "inventory"));
+    public BakedModel useModel(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        if (renderMode != ModelTransformationMode.GUI && renderMode != ModelTransformationMode.FIXED && renderMode != ModelTransformationMode.GROUND) {
+            if (stack.isOf(ModItems.BASALT_SPEAR) || stack.isOf(ModItems.STONE_SPEAR)) {
+                return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(FirstSteps.MOD_ID, "basalt_spear_3d", "inventory"));
+            } else if (stack.isOf(ModItems.WOODEN_TONGS)) {
+                return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(new ModelIdentifier(FirstSteps.MOD_ID, "wooden_tongs_dim", "inventory"));
+            } 
         }
+        
         return value;
     }
 }

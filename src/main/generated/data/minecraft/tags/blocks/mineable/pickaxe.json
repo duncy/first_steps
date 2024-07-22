@@ -6,6 +6,7 @@
     "first_steps:stone_iron_ore",
     "first_steps:deepslate_copper_ore",
     "first_steps:deepslate_iron_ore",
-    "first_steps:basalt_mullite_ore"
+    "first_steps:basalt_mullite_ore",
+    "first_steps:kiln"
   ]
 }

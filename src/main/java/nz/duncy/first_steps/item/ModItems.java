@@ -16,6 +16,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.item.custom.TinSourceItem;
+import nz.duncy.first_steps.item.custom.TongItem;
 import nz.duncy.first_steps.item.custom.CopperSourceItem;
 import nz.duncy.first_steps.item.custom.IronSourceItem;
 import nz.duncy.first_steps.item.custom.KnifeItem;
@@ -88,6 +89,13 @@ public class ModItems {
     public static final Item BRONZE_ARROW = registerItem("bronze_arrow", new ArrowItem(new FabricItemSettings()));
     public static final Item IRON_ARROW = registerItem("iron_arrow", new ArrowItem(new FabricItemSettings()));
     public static final Item STEEL_ARROW = registerItem("steel_arrow", new ArrowItem(new FabricItemSettings()));
+
+    // Tongs
+    public static final Item WOODEN_TONGS = registerItem("wooden_tongs", new TongItem(new FabricItemSettings()));
+
+    // I know this is wrong, I don't care.
+    public static final Item WOODEN_TONGS_MODEL = registerItem("wooden_tongs_model", new Item(new FabricItemSettings()));
+
 
 
     private static void addItemsToIngredientsTabItemGroup(FabricItemGroupEntries entries) {

@@ -19,6 +19,11 @@ public class ModBlockEntities {
             FabricBlockEntityTypeBuilder.create(KilnBlockEntity::new,
                 ModBlocks.KILN).build());
 
+    public static final BlockEntityType<CrucibleBlockEntity> CRUCIBLE_BLOCK_ENTITY = 
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(FirstSteps.MOD_ID, "crucible_block_be"),
+            FabricBlockEntityTypeBuilder.create(CrucibleBlockEntity::new,
+                ModBlocks.CLAY_FIRED_CRUCIBLE).build());
+
     public static void registerModBlockEntities() {
         FirstSteps.LOGGER.info("Registering block entities for " + FirstSteps.MOD_ID);
     }
