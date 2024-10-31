@@ -93,8 +93,12 @@ public class ModItems {
     // Tongs
     public static final Item WOODEN_TONGS = registerItem("wooden_tongs", new TongItem(new FabricItemSettings()));
 
-    // I know this is wrong, I don't care.
-    public static final Item WOODEN_TONGS_MODEL = registerItem("wooden_tongs_model", new Item(new FabricItemSettings()));
+    // Roasted metals
+    public static final Item ROASTED_TIN = registerItem("roasted_tin", new TinSourceItem(new FabricItemSettings()));
+    public static final Item ROASTED_STONE_COPPER = registerItem("roasted_stone_copper", new CopperSourceItem(new FabricItemSettings()));
+    public static final Item ROASTED_STONE_IRON = registerItem("roasted_stone_iron", new IronSourceItem(new FabricItemSettings()));
+    public static final Item ROASTED_DEEPSLATE_COPPER = registerItem("roasted_deepslate_copper", new CopperSourceItem(new FabricItemSettings()));
+    public static final Item ROASTED_DEEPSLATE_IRON = registerItem("roasted_deepslate_iron", new IronSourceItem(new FabricItemSettings()));
 
 
 

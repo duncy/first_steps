@@ -45,5 +45,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
             .add(ModBlocks.BASALT_MULLITE_ORE)
             .add(Blocks.OBSIDIAN);
+
+        getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE)
+            .add(ModBlocks.CLAY);
     }
 }

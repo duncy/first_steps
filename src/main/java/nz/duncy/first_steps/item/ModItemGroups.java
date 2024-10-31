@@ -12,7 +12,7 @@ import nz.duncy.first_steps.block.ModBlocks;
 
 public class ModItemGroups {
     public static final ItemGroup FIRST_STEPS_GROUP = Registry.register(Registries.ITEM_GROUP,
-            new Identifier(FirstSteps.MOD_ID, "stone_head_axe"),
+            new Identifier(FirstSteps.MOD_ID, "clay_fired_crucible"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.first_steps"))
                 .icon(() -> new ItemStack(ModItems.STONE_HEAD_AXE)).entries((displayContext, entries) -> {
                     // Tools heads
@@ -55,15 +55,26 @@ public class ModItemGroups {
 
                     // Rock blocks
                     entries.add(ModBlocks.STONE_ROCK);
+                    entries.add(ModBlocks.FLINT_ROCK);
                     entries.add(ModBlocks.BASALT_ROCK);
                     entries.add(ModBlocks.OBSIDIAN_ROCK);
 
                     // Kiln
                     entries.add(ModBlocks.KILN);
 
-                    // Crucibles
-                    entries.add(ModBlocks.CLAY_UNFIRED_CRUCIBLE);
-                   
+                    // Pottery
+                    entries.add(ModBlocks.POTTERS_WHEEL);
+                    // Fired
+                    entries.add(ModBlocks.FIRED_CRUCIBLE);
+
+                    // Unfired
+                    entries.add(ModBlocks.UNFIRED_CRUCIBLE);
+                    entries.add(ModBlocks.UNFIRED_FLOWER_POT);
+                    entries.add(ModBlocks.UNFIRED_DECORATED_POT);
+
+                    // Clay
+                    entries.add(ModBlocks.CLAY);
+                    
                     // Tools
                     // Stone tools
                     entries.add(ModItems.STONE_KNIFE);

@@ -10,6 +10,7 @@ import nz.duncy.first_steps.FirstSteps;
 
 public class ModStats {
     public static Identifier INTERACT_WITH_KILN;
+    public static Identifier POTTERS_WHEEL_SPINS;
 
     private static Identifier register(String id, StatFormatter formatter) {
         Identifier identifier = new Identifier(FirstSteps.MOD_ID, id);
@@ -20,5 +21,6 @@ public class ModStats {
 
     public static void registerStats() {
         INTERACT_WITH_KILN = register("interact_with_kiln", StatFormatter.DEFAULT);
+        POTTERS_WHEEL_SPINS = register("potters_wheel_spins", StatFormatter.DEFAULT);
     }
 }

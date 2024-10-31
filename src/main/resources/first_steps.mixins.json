@@ -9,7 +9,8 @@
         "ItemRendererAccessor",
 		"ItemRendererMixin",
 		"ModelLoaderMixin",
-		"PlayerEntityRendererMixin"
+		"PlayerEntityRendererMixin",
+		"BakedModelManagerMixin"
     ],
 	"injectors": {
 		"defaultRequire": 1

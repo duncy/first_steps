@@ -33,11 +33,10 @@
     "container.first_steps.kiln": "Kiln",
     "block.first_steps.kiln": "Kiln",
 
-    "container.first_steps.clay_unfired_crucible": "Clay Crucible",
-    "block.first_steps.clay_unfired_crucible": "Clay Crucible",
+    "block.first_steps.unfired_crucible": "Clay Crucible",
 
-    "container.first_steps.clay_fired_crucible": "Ceramic Crucible",
-    "block.first_steps.clay_fired_crucible": "Ceramic Crucible",
+    "container.first_steps.fired_crucible": "Ceramic Crucible",
+    "block.first_steps.fired_crucible": "Ceramic Crucible",
 
     "tooltip.first_steps.crucible.temperature": "Temperature: %d°C",
     "tooltip.first_steps.crucible.itemCount": "%s x%s",
@@ -73,6 +72,14 @@
 
     "tooltip.first_steps.tongs.hint": "Use this to hold hot items!",
     "tooltip.first_steps.tongs.holding": "Holding %s",
+
+    "block.first_steps.clay": "Clay Ball",
+
+    "tooltip.first_steps.clay": "Use this on a potter's wheel to shape pottery!",
+
+    "block.first_steps.potters_wheel": "Potter's Wheel",
+
+    "block.first_steps.unfired_decorated_pot": "Clay Decorated Pot",
 
     "itemgroup.first_steps": "First Steps"
 }

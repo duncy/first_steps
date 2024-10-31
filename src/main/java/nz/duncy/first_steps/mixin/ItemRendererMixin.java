@@ -12,7 +12,6 @@ import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import nz.duncy.first_steps.FirstSteps;
-import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.item.ModItems;
 
 @Mixin(ItemRenderer.class)

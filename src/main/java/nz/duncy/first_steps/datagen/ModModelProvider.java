@@ -2,14 +2,25 @@ package nz.duncy.first_steps.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.BlockStateVariant;
+import net.minecraft.data.client.BlockStateVariantMap;
 import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.ModelIds;
 import net.minecraft.data.client.Models;
+import net.minecraft.data.client.TextureMap;
 import net.minecraft.data.client.TexturedModel;
+import net.minecraft.data.client.VariantSetting;
+import net.minecraft.data.client.VariantSettings;
+import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
+import nz.duncy.first_steps.client.render.entity.model.PottersWheelModel;
 import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.state.ModProperties;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -34,7 +45,32 @@ public class ModModelProvider extends FabricModelProvider {
 
         // KILN
         blockStateModelGenerator.registerCooker(ModBlocks.KILN, TexturedModel.ORIENTABLE_WITH_BOTTOM);
+
+        // UNFIRED
+        blockStateModelGenerator.registerBuiltin(ModBlocks.UNFIRED_DECORATED_POT, Blocks.CLAY).includeWithoutItem(new Block[]{ModBlocks.UNFIRED_DECORATED_POT});
+
+        // CLAY
+        registerClays(blockStateModelGenerator);
     }
+
+    private void registerClays(BlockStateModelGenerator blockStateModelGenerator) {
+        TextureMap textureMap = TextureMap.all(Blocks.CLAY);
+        // Identifier identifier = Models.GENERATED.g .CUBE_ALL upload(Blocks.CLAY, textureMap, blockStateModelGenerator.modelCollector);
+        blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(ModBlocks.CLAY).coordinate(BlockStateVariantMap.create(ModProperties.CLAY_LAYERS).register((height) -> {
+           BlockStateVariant blockStateVariant = BlockStateVariant.create();
+           VariantSetting variantSetting = VariantSettings.MODEL;
+           Identifier id;
+           if (height < 4) {
+              id = ModelIds.getBlockSubModelId(ModBlocks.CLAY, "_height" + height * 4);
+           } else {
+            id = new Identifier("minecraft:block/clay");
+           }
+  
+           return blockStateVariant.put(variantSetting, id);
+        })));
+        // blockStateModelGenerator.blockStateCollector.accept(blockStateModelGenerator.createSingletonBlockState(Blocks.CLAY, identifier));
+    }
+
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
@@ -111,7 +147,10 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.IRON_ARROW, Models.GENERATED);
 
         // Crucible
-        itemModelGenerator.register(ModBlocks.CLAY_FIRED_CRUCIBLE.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.FIRED_CRUCIBLE.asItem(), Models.GENERATED);
+
+        // Unfireds
+        itemModelGenerator.register(ModBlocks.UNFIRED_CRUCIBLE.asItem(), Models.GENERATED);
 
         // // Tongs
         itemModelGenerator.register(ModItems.WOODEN_TONGS, Models.GENERATED);

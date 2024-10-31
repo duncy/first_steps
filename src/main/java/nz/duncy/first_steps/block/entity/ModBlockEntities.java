@@ -7,6 +7,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
+import nz.duncy.first_steps.client.render.block.entity.UnfiredDecoratedPotBlockEntityRenderer;
 
 public class ModBlockEntities {
     public static final BlockEntityType<RockBlockEntity> ROCK_BLOCK_ENTITY = 
@@ -22,7 +23,17 @@ public class ModBlockEntities {
     public static final BlockEntityType<CrucibleBlockEntity> CRUCIBLE_BLOCK_ENTITY = 
         Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(FirstSteps.MOD_ID, "crucible_block_be"),
             FabricBlockEntityTypeBuilder.create(CrucibleBlockEntity::new,
-                ModBlocks.CLAY_FIRED_CRUCIBLE).build());
+                ModBlocks.FIRED_CRUCIBLE).build());
+
+    public static final BlockEntityType<PottersWheelBlockEntity> POTTERS_WHEEL_BLOCK_ENTITY = 
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(FirstSteps.MOD_ID, "potters_wheel_block_be"),
+            FabricBlockEntityTypeBuilder.create(PottersWheelBlockEntity::new,
+                ModBlocks.POTTERS_WHEEL).build());
+
+    public static final BlockEntityType<UnfiredDecoratedPotBlockEntity> UNFIRED_DECORATED_POT_BLOCK_ENTITY = 
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(FirstSteps.MOD_ID, "unfired_decorated_pot_block_be"),
+            FabricBlockEntityTypeBuilder.create(UnfiredDecoratedPotBlockEntity::new,
+                ModBlocks.UNFIRED_DECORATED_POT).build());
 
     public static void registerModBlockEntities() {
         FirstSteps.LOGGER.info("Registering block entities for " + FirstSteps.MOD_ID);
