@@ -14,7 +14,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -39,10 +38,10 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.entity.KilnBlockEntity;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
 import nz.duncy.first_steps.item.custom.TongItem;
+import nz.duncy.first_steps.stat.ModStats;
 
 public class KilnBlock extends BlockWithEntity {
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 16, 16);
@@ -110,21 +109,26 @@ public class KilnBlock extends BlockWithEntity {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            KilnBlockEntity kilnBlockEntity = (KilnBlockEntity) world.getBlockEntity(pos);
-            if (!tongCrucibleCheck(player, kilnBlockEntity)) {
-                NamedScreenHandlerFactory screenHandlerFactory = kilnBlockEntity;
+        if (world.isClient) {
+            return ActionResult.SUCCESS;
+        } else {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
 
-                if (screenHandlerFactory != null) {
-                    player.openHandledScreen(screenHandlerFactory);
+            if (blockEntity instanceof KilnBlockEntity) {
+                if (!tongCrucibleCheck(player, (KilnBlockEntity) blockEntity)) {
+                    this.openScreen(blockEntity, player);
+                    return ActionResult.CONSUME;
                 }
                 return ActionResult.SUCCESS;
-            }
-            
+            }   
         }
-        
         return ActionResult.FAIL;
     }
+
+    private void openScreen(BlockEntity blockEntity, PlayerEntity player) {
+        player.openHandledScreen((NamedScreenHandlerFactory)blockEntity);
+        player.incrementStat(ModStats.INTERACT_WITH_KILN);
+     }
 
     private boolean tongCrucibleCheck(PlayerEntity player, KilnBlockEntity kilnBlockEntity) {
         return ((player.getOffHandStack().getItem() instanceof TongItem) || (player.getMainHandStack().getItem() instanceof TongItem)) && !kilnBlockEntity.isTopInputSlotEmpty(kilnBlockEntity);

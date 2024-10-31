@@ -9,8 +9,6 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.item.ModItems;
-// import nz.duncy.first_steps.recipe.KilnRecipe;
-// import nz.duncy.first_steps.recipe.ModRecipes;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
     public ModRecipeProvider(FabricDataOutput output) {
@@ -20,7 +18,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     @Override
     public void generate(RecipeExporter exporter) {
         generateToolRecipes(exporter);
-        // generateKilnRecipes(exporter);
     }
 
     private void generateToolRecipes(RecipeExporter exporter) {
@@ -41,24 +38,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
            .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
            .offerTo(exporter, new Identifier(getRecipeName(tool)));
     }
-
-    // private void generateKilnRecipes(RecipeExporter exporter) {
-    //     generateKilnRecipe(exporter, ItemTags.LOGS, Items.CHARCOAL, "logs");
-    // }
-
-    // private void generateKilnRecipe(RecipeExporter exporter, ItemConvertible input, Item output) {
-    //     KilnRecipeJsonBuilder.create(Ingredient.ofItems(new ItemConvertible[]{input}), RecipeCategory.MISC, output, 1.0f, 60, ModRecipes.KILN_SERIALIZER, KilnRecipe::new)
-    //         .group("kiln")
-    //         .criterion(hasItem(input), conditionsFromItem(input))
-    //         .offerTo(exporter, getItemPath(output) + "_from_kilning_" + getItemPath(input));
-    // }
-
-    // private void generateKilnRecipe(RecipeExporter exporter, TagKey<Item> tag, Item output, String tagpath) {
-    //     KilnRecipeJsonBuilder.create(Ingredient.fromTag(tag), RecipeCategory.MISC, output, 1.0f, 60, ModRecipes.KILN_SERIALIZER, KilnRecipe::new)
-    //         .group("kiln")
-    //         .criterion("has_" + tagpath, conditionsFromTag(tag))
-    //         .offerTo(exporter, getItemPath(output) + "_from_kilning_" + tagpath);
-    // }
 
 }
 

@@ -14,7 +14,7 @@ public class KilnTopSlot extends Slot {
    }
 
    public boolean canInsert(ItemStack stack) {
-      return stack.getItem() == ModBlocks.CLAY_FIRED_CRUCIBLE.asItem();
+      return stack.getItem() == ModBlocks.FIRED_CRUCIBLE.asItem();
    }
    
    @Override

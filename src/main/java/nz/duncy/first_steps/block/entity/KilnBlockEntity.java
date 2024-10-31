@@ -1,5 +1,7 @@
 package nz.duncy.first_steps.block.entity;
 
+import java.util.Optional;
+
 import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -9,11 +11,14 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -23,6 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.custom.KilnBlock;
+import nz.duncy.first_steps.recipe.KilningRecipe;
 import nz.duncy.first_steps.screen.KilnScreenHandler;
 
 public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
@@ -31,6 +37,8 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
     private static final int KILN_FUEL_INPUT_SLOT = 0; // Fuel input
     private static final int KILN_INPUT_SLOT = 1; // Kiln top input
     private static final int KILN_FUEL_OUTPUT_SLOT = 2; // Fuel output
+
+    private ItemStack currentFuel = ItemStack.EMPTY;
 
     protected final PropertyDelegate propertyDelegate;
 
@@ -128,8 +136,12 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
                 ++blockEntity.temperature;
             }
             if (blockEntity.burnTime == 0) {
-                ItemStack result = getWasteProductRecipe(fuelItemstack);
-                craftWasteProduct(result);
+                FirstSteps.LOGGER.info("burn over, checking recipe");
+                if (hasWasteProductRecipe()) {
+                    FirstSteps.LOGGER.info("has recipe");
+                    craftWasteProduct();
+                }
+                FirstSteps.LOGGER.info("done");
             }
         } else if (blockEntity.temperature > minTemperature){
             --blockEntity.temperature;
@@ -147,6 +159,7 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
                     dirty = true;
                     if (!isFuelSlotEmpty(blockEntity)) {
                         Item remainderFuelItem = fuelItemstack.getItem().getRecipeRemainder(); 
+                        this.currentFuel = new ItemStack(fuelItemstack.getItem(), 1);
                         fuelItemstack.decrement(1); // Consume fuel
                         if (fuelItemstack.isEmpty()) {
                             // Add the empty bucket back to the fuel slot
@@ -204,21 +217,29 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
         return blockEntity.inventory.get(KILN_INPUT_SLOT).isEmpty();
     }
 
-    private ItemStack getWasteProductRecipe(ItemStack fuel) {
-        boolean hasInput = fuel.getItem() == Items.ACACIA_LOG;
-        ItemStack result = new ItemStack(Items.CHARCOAL);
-
-        if (hasInput && canInsertAmountIntoOutputSlot(result) && canInsertItemIntoOutputSlot(result.getItem())) {
-            return result;
-        } else {
-            return ItemStack.EMPTY;
-        }
+    private boolean hasWasteProductRecipe() {
+        Optional<RecipeEntry<KilningRecipe>> recipe = getWasteProductRecipe();
+        FirstSteps.LOGGER.info(String.valueOf(recipe));
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe.get().value().getResult(null))
+                && canInsertItemIntoOutputSlot(recipe.get().value().getResult(null).getItem());
     }
 
-    private void craftWasteProduct(ItemStack result) {
-        if (result != ItemStack.EMPTY) {
-            this.setStack(KILN_FUEL_OUTPUT_SLOT, new ItemStack(result.getItem(), getStack(KILN_FUEL_OUTPUT_SLOT).getCount() + result.getCount()));
-        }
+    private Optional<RecipeEntry<KilningRecipe>> getWasteProductRecipe() {
+        Inventory inv = new SimpleInventory(1);
+        inv.setStack(KILN_FUEL_INPUT_SLOT, this.currentFuel);
+        FirstSteps.LOGGER.info(String.valueOf(inv));
+
+        return getWorld().getRecipeManager().getFirstMatch(KilningRecipe.Type.INSTANCE, inv, getWorld());
+
+    }
+
+    private void craftWasteProduct() {
+        Optional<RecipeEntry<KilningRecipe>> recipe = getWasteProductRecipe();
+
+        // this.removeStack(KILN_FUEL_INPUT_SLOT, 1);
+
+        this.setStack(KILN_FUEL_OUTPUT_SLOT, new ItemStack(recipe.get().value().getResult(null).getItem(),
+                getStack(KILN_FUEL_OUTPUT_SLOT).getCount() + recipe.get().value().getResult(null).getCount()));
     }
 
     private boolean canInsertItemIntoOutputSlot(Item item) {

@@ -21,7 +21,7 @@ import java.util.List;
 // https://github.com/TeamGalacticraft/Galacticraft/tree/main (MIT License)
 public class KilningCategory implements DisplayCategory<BasicDisplay> {
     public static final Identifier TEXTURE =
-            new Identifier(FirstSteps.MOD_ID, "textures/gui/gem_polishing_station_gui.png");
+            new Identifier(FirstSteps.MOD_ID, "textures/gui/kiln_gui.png");
     public static final CategoryIdentifier<KilningDisplay> FUEL_WASTE =
             CategoryIdentifier.of(FirstSteps.MOD_ID, "kilning");
 
@@ -44,12 +44,12 @@ public class KilningCategory implements DisplayCategory<BasicDisplay> {
     public List<Widget> setupDisplay(BasicDisplay display, Rectangle bounds) {
         final Point startPoint = new Point(bounds.getCenterX() - 87, bounds.getCenterY() - 35);
         List<Widget> widgets = new LinkedList<>();
-        widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 175, 82)));
+        widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x, startPoint.y, 175, 166)));
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 80, startPoint.y + 11))
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 44, startPoint.y + 50))
                 .entries(display.getInputEntries().get(0)));
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 80, startPoint.y + 59))
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 116, startPoint.y + 50))
                 .markOutput().entries(display.getOutputEntries().get(0)));
 
 
