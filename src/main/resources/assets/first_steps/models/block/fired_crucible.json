@@ -1,0 +1,22 @@
+{
+	"textures": {
+		"bottom": "first_steps:block/fired_crucible_bottom",
+		"side": "first_steps:block/fired_crucible_side",
+		"top": "first_steps:block/fired_crucible_top",
+		"particle": "first_steps:block/fired_crucible_side"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 10, 13],
+			"faces": {
+				"north": {"uv": [0, 0, 10, 10], "texture": "#side"},
+				"east": {"uv": [0, 0, 10, 10], "texture": "#side"},
+				"south": {"uv": [0, 0, 10, 10], "texture": "#side"},
+				"west": {"uv": [0, 0, 10, 10], "texture": "#side"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#top"},
+				"down": {"uv": [0, 0, 10, 10], "texture": "#bottom"}
+			}
+		}
+	]
+}
