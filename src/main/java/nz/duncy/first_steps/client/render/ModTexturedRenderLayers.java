@@ -2,25 +2,15 @@ package nz.duncy.first_steps.client.render;
 
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.serialization.Lifecycle;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.Bootstrap;
-import net.minecraft.block.DecoratedPotPatterns;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.SpriteIdentifier;
-import net.minecraft.registry.DefaultedRegistry;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 import nz.duncy.first_steps.FirstSteps;

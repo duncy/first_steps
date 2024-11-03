@@ -1,15 +1,11 @@
 package nz.duncy.first_steps;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.util.ModelIdentifier;
-import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
-import nz.duncy.first_steps.client.render.ModTexturedRenderLayers;
 import nz.duncy.first_steps.client.render.block.entity.PottersWheelBlockEntityRenderer;
 import nz.duncy.first_steps.client.render.block.entity.RockBlockEntityRenderer;
 import nz.duncy.first_steps.client.render.block.entity.UnfiredDecoratedPotBlockEntityRenderer;

@@ -14,19 +14,53 @@ public class ModItemGroups {
     public static final ItemGroup FIRST_STEPS_GROUP = Registry.register(Registries.ITEM_GROUP,
             new Identifier(FirstSteps.MOD_ID, "clay_fired_crucible"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.first_steps"))
-                .icon(() -> new ItemStack(ModItems.STONE_HEAD_AXE)).entries((displayContext, entries) -> {
+                .icon(() -> new ItemStack(ModBlocks.FIRED_CRUCIBLE)).entries((displayContext, entries) -> {
+
                     // Tools heads
+                    entries.add(ModItems.STONE_HEAD_HOE);
+                    entries.add(ModItems.FLINT_HEAD_HOE);
+                    entries.add(ModItems.BASALT_HEAD_HOE);
+                    entries.add(ModItems.OBSIDIAN_HEAD_HOE);
+                    entries.add(ModItems.COPPER_HEAD_HOE);
+                    entries.add(ModItems.BRONZE_HEAD_HOE);
+                    entries.add(ModItems.IRON_HEAD_HOE);
+                    entries.add(ModItems.STEEL_HEAD_HOE);
+
                     entries.add(ModItems.STONE_HEAD_AXE);
+                    entries.add(ModItems.FLINT_HEAD_AXE);
                     entries.add(ModItems.BASALT_HEAD_AXE);
+                    entries.add(ModItems.OBSIDIAN_HEAD_AXE);
+                    entries.add(ModItems.COPPER_HEAD_AXE);
+                    entries.add(ModItems.BRONZE_HEAD_AXE);
+                    entries.add(ModItems.IRON_HEAD_AXE);
+                    entries.add(ModItems.STEEL_HEAD_AXE);
 
                     entries.add(ModItems.STONE_HEAD_SHOVEL);
+                    entries.add(ModItems.FLINT_HEAD_SHOVEL);
                     entries.add(ModItems.BASALT_HEAD_SHOVEL);
+                    entries.add(ModItems.OBSIDIAN_HEAD_SHOVEL);
+                    entries.add(ModItems.COPPER_HEAD_SHOVEL);
+                    entries.add(ModItems.BRONZE_HEAD_SHOVEL);
+                    entries.add(ModItems.IRON_HEAD_SHOVEL);
+                    entries.add(ModItems.STEEL_HEAD_SHOVEL);
 
                     entries.add(ModItems.STONE_HEAD_KNIFE);
+                    entries.add(ModItems.FLINT_HEAD_KNIFE);
                     entries.add(ModItems.BASALT_HEAD_KNIFE);
+                    entries.add(ModItems.OBSIDIAN_HEAD_KNIFE);
+                    entries.add(ModItems.COPPER_HEAD_KNIFE);
+                    entries.add(ModItems.BRONZE_HEAD_KNIFE);
+                    entries.add(ModItems.IRON_HEAD_KNIFE);
+                    entries.add(ModItems.STEEL_HEAD_KNIFE);
 
                     entries.add(ModItems.STONE_HEAD_SPEAR);
+                    entries.add(ModItems.FLINT_HEAD_SPEAR);
                     entries.add(ModItems.BASALT_HEAD_SPEAR);
+                    entries.add(ModItems.OBSIDIAN_HEAD_SPEAR);
+                    entries.add(ModItems.COPPER_HEAD_SPEAR);
+                    entries.add(ModItems.BRONZE_HEAD_SPEAR);
+                    entries.add(ModItems.IRON_HEAD_SPEAR);
+                    entries.add(ModItems.STEEL_HEAD_SPEAR);
 
                     entries.add(ModItems.STONE_HEAD_ARROW);
                     entries.add(ModItems.FLINT_HEAD_ARROW);
@@ -36,6 +70,16 @@ public class ModItemGroups {
                     entries.add(ModItems.BRONZE_HEAD_ARROW);
                     entries.add(ModItems.IRON_HEAD_ARROW);
                     entries.add(ModItems.STEEL_HEAD_ARROW);
+
+                    entries.add(ModItems.COPPER_HEAD_SWORD);
+                    entries.add(ModItems.BRONZE_HEAD_SWORD);
+                    entries.add(ModItems.IRON_HEAD_SWORD);
+                    entries.add(ModItems.STEEL_HEAD_SWORD);
+
+                    entries.add(ModItems.COPPER_HEAD_PICKAXE);
+                    entries.add(ModItems.BRONZE_HEAD_PICKAXE);
+                    entries.add(ModItems.IRON_HEAD_PICKAXE);
+                    entries.add(ModItems.STEEL_HEAD_PICKAXE);
 
                     // Raw metals
                     entries.add(ModItems.RAW_TIN);
@@ -52,6 +96,13 @@ public class ModItemGroups {
                     entries.add(ModBlocks.DEEPSLATE_COPPER_ORE);
                     entries.add(ModBlocks.DEEPSLATE_IRON_ORE);
                     entries.add(ModBlocks.BASALT_MULLITE_ORE);
+
+                    // Raw metal blocks
+                    entries.add(ModBlocks.RAW_TIN);
+                    entries.add(ModBlocks.RAW_STONE_COPPER);
+                    entries.add(ModBlocks.RAW_STONE_IRON);
+                    entries.add(ModBlocks.RAW_DEEPSLATE_COPPER);
+                    entries.add(ModBlocks.RAW_DEEPSLATE_IRON);
 
                     // Rock blocks
                     entries.add(ModBlocks.STONE_ROCK);
@@ -80,6 +131,13 @@ public class ModItemGroups {
                     entries.add(ModItems.STONE_KNIFE);
                     entries.add(ModItems.STONE_SPEAR);
                     
+                    // Flint tools
+                    entries.add(ModItems.FLINT_HOE);
+                    entries.add(ModItems.FLINT_SHOVEL);
+                    entries.add(ModItems.FLINT_AXE);
+                    entries.add(ModItems.FLINT_KNIFE);
+                    entries.add(ModItems.FLINT_SPEAR);
+
                     // Basalt tools
                     entries.add(ModItems.BASALT_HOE);
                     entries.add(ModItems.BASALT_SHOVEL);
@@ -87,9 +145,48 @@ public class ModItemGroups {
                     entries.add(ModItems.BASALT_KNIFE);
                     entries.add(ModItems.BASALT_SPEAR);
 
+                    // Obsidian tools
+                    entries.add(ModItems.OBSIDIAN_HOE);
+                    entries.add(ModItems.OBSIDIAN_SHOVEL);
+                    entries.add(ModItems.OBSIDIAN_AXE);
+                    entries.add(ModItems.OBSIDIAN_KNIFE);
+                    entries.add(ModItems.OBSIDIAN_SPEAR);
+
+                    // Copper tools
+                    entries.add(ModItems.COPPER_HOE);
+                    entries.add(ModItems.COPPER_SHOVEL);
+                    entries.add(ModItems.COPPER_AXE);
+                    entries.add(ModItems.COPPER_KNIFE);
+                    entries.add(ModItems.COPPER_SPEAR);
+                    entries.add(ModItems.COPPER_PICKAXE);
+                    entries.add(ModItems.COPPER_SWORD);
+
+                    // Bronze tools
+                    entries.add(ModItems.BRONZE_HOE);
+                    entries.add(ModItems.BRONZE_SHOVEL);
+                    entries.add(ModItems.BRONZE_AXE);
+                    entries.add(ModItems.BRONZE_KNIFE);
+                    entries.add(ModItems.BRONZE_SPEAR);
+                    entries.add(ModItems.BRONZE_PICKAXE);
+                    entries.add(ModItems.BRONZE_SWORD);
+
+                    // Iron tools
+                    entries.add(ModItems.IRON_KNIFE);
+                    entries.add(ModItems.IRON_SPEAR);
+
+                    // Steel tools
+                    entries.add(ModItems.STEEL_HOE);
+                    entries.add(ModItems.STEEL_SHOVEL);
+                    entries.add(ModItems.STEEL_AXE);
+                    entries.add(ModItems.STEEL_KNIFE);
+                    entries.add(ModItems.STEEL_SPEAR);
+                    entries.add(ModItems.STEEL_PICKAXE);
+                    entries.add(ModItems.STEEL_SWORD);
+
                     // Ingots
                     entries.add(ModItems.TIN_INGOT);
                     entries.add(ModItems.BRONZE_INGOT);
+                    entries.add(ModItems.STEEL_INGOT);
 
                     // Arrows
                     entries.add(ModItems.STONE_ARROW);
@@ -100,6 +197,9 @@ public class ModItemGroups {
                     entries.add(ModItems.BRONZE_ARROW);
                     entries.add(ModItems.IRON_ARROW);
                     entries.add(ModItems.STEEL_ARROW);
+
+                    // Tongs
+                    entries.add(ModItems.WOODEN_TONGS);
 
                 }).build());
 

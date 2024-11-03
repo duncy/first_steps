@@ -24,6 +24,7 @@ import nz.duncy.first_steps.block.custom.OreRockBlock;
 import nz.duncy.first_steps.block.custom.RockBlock;
 import nz.duncy.first_steps.block.custom.UnfiredCrucibleBlock;
 import nz.duncy.first_steps.block.custom.UnfiredDecoratedPotBlock;
+import nz.duncy.first_steps.block.custom.UnfiredMoldBlock;
 import nz.duncy.first_steps.block.custom.PottersWheelBlock;
 
 public class ModBlocks {
@@ -34,6 +35,13 @@ public class ModBlocks {
         public static final Block DEEPSLATE_COPPER_ORE = registerDeepslateOreBlock("deepslate_copper_ore");
         public static final Block DEEPSLATE_IRON_ORE = registerDeepslateOreBlock("deepslate_iron_ore");
         public static final Block BASALT_MULLITE_ORE = registerBasaltOreBlock("basalt_mullite_ore");
+
+        // RAW ORE BLOCK
+        public static final Block RAW_TIN = registerStoneOreBlock("raw_tin_block");
+        public static final Block RAW_STONE_COPPER = registerStoneOreBlock("raw_stone_copper_block");
+        public static final Block RAW_STONE_IRON = registerStoneOreBlock("raw_stone_iron_block");
+        public static final Block RAW_DEEPSLATE_COPPER = registerDeepslateOreBlock("raw_deepslate_copper_block");
+        public static final Block RAW_DEEPSLATE_IRON = registerDeepslateOreBlock("raw_deepslate_iron_block");
 
         // ROCKS
         public static final Block STONE_ROCK = registerBlock("stone_rock",
@@ -87,6 +95,12 @@ public class ModBlocks {
                 return (Integer)state.get(ClayBlock.CLAY_LAYERS) >= 4;
                }).pistonBehavior(PistonBehavior.DESTROY)),
                Items.CLAY_BALL);
+
+
+        // CAST MOLDS
+        public static final Block HOE_HEAD_MOLD = registerBlock("hoe_head_mold", new UnfiredMoldBlock(FabricBlockSettings.copyOf(Blocks.CLAY).breakInstantly()));
+
+
 
         private static Block registerBlock(String name, Block block) {
                 registerBlockItem(name, block);

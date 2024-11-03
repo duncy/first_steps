@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
-import nz.duncy.first_steps.client.render.block.entity.PottersWheelBlockEntityRenderer;
 import nz.duncy.first_steps.client.render.block.entity.UnfiredDecoratedPotBlockEntityRenderer;
 
 @Environment(EnvType.CLIENT)

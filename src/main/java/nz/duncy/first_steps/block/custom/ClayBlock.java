@@ -13,24 +13,18 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.LightType;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.state.ModProperties;
 
 public class ClayBlock extends Block {
@@ -75,13 +69,6 @@ public class ClayBlock extends Block {
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-    }
-
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.getLightLevel(LightType.BLOCK, pos) > 11) {
-            dropStacks(state, world, pos);
-            world.removeBlock(pos, false);
-        }
     }
 
     public boolean canReplace(BlockState state, ItemPlacementContext context) {

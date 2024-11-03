@@ -1,22 +1,7 @@
 package nz.duncy.first_steps.client.render.entity.model;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.renderer.v1.Renderer;
-import net.fabricmc.fabric.api.renderer.v1.RendererAccess;
-import net.fabricmc.fabric.api.renderer.v1.mesh.Mesh;
-import net.fabricmc.fabric.api.renderer.v1.mesh.MeshBuilder;
-import net.fabricmc.fabric.api.renderer.v1.mesh.MutableQuadView;
-import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
-import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
-import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -26,23 +11,9 @@ import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.BakedQuad;
-import net.minecraft.client.render.model.Baker;
-import net.minecraft.client.render.model.ModelBakeSettings;
-import net.minecraft.client.render.model.UnbakedModel;
-import net.minecraft.client.render.model.json.ModelOverrideList;
-import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.texture.Sprite;
-import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockRenderView;
 import nz.duncy.first_steps.FirstSteps;
 
 @Environment(EnvType.CLIENT)

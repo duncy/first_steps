@@ -21,7 +21,15 @@ public class ModItemEntities {
                 .build());
     }
 
+    public static final EntityType<SpearEntity> STONE_SPEAR = registerSpear("stone_spear");
+    public static final EntityType<SpearEntity> FLINT_SPEAR = registerSpear("flint_spear");
     public static final EntityType<SpearEntity> BASALT_SPEAR = registerSpear("basalt_spear");
+    public static final EntityType<SpearEntity> OBSIDIAN_SPEAR = registerSpear("obsidian_spear");
+    public static final EntityType<SpearEntity> COPPER_SPEAR = registerSpear("copper_spear");
+    public static final EntityType<SpearEntity> BRONZE_SPEAR = registerSpear("bronze_spear");
+    public static final EntityType<SpearEntity> IRON_SPEAR = registerSpear("iron_spear");
+    public static final EntityType<SpearEntity> STEEL_SPEAR = registerSpear("steel_spear");
+
 
     public static void registerModItemEntities() {
         FirstSteps.LOGGER.info("Registering item entities for " + FirstSteps.MOD_ID);

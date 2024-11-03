@@ -6,7 +6,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.DecoratedPotPatterns;
 import net.minecraft.block.entity.DecoratedPotBlockEntity;
-import net.minecraft.block.entity.DecoratedPotBlockEntity.WobbleType;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -15,21 +14,16 @@ import net.minecraft.client.model.ModelPartData;
 import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
-import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.entity.UnfiredDecoratedPotBlockEntity;
 import nz.duncy.first_steps.client.render.ModTexturedRenderLayers;
 import nz.duncy.first_steps.client.render.entity.model.ModEntityModelLayers;
@@ -38,13 +32,6 @@ import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRenderer<UnfiredDecoratedPotBlockEntity> {
-   private static final String NECK = "neck";
-   private static final String FRONT = "front";
-   private static final String BACK = "back";
-   private static final String LEFT = "left";
-   private static final String RIGHT = "right";
-   private static final String TOP = "top";
-   private static final String BOTTOM = "bottom";
    private final ModelPart neck;
    private final ModelPart front;
    private final ModelPart back;
@@ -53,11 +40,9 @@ public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRender
    private final ModelPart top;
    private final ModelPart bottom;
    public final SpriteIdentifier baseTexture;
-   private static final float field_46728 = 0.125F;
 
    public UnfiredDecoratedPotBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
       this.baseTexture = (SpriteIdentifier)Objects.requireNonNull(ModTexturedRenderLayers.getUnfiredDecoratedPotPatternTextureId(DecoratedPotPatterns.DECORATED_POT_BASE_KEY));
-      // FirstSteps.LOGGER.info(String.valueOf(this.baseTexture));
       ModelPart modelPart = context.getLayerModelPart(ModEntityModelLayers.UNFIRED_DECORATED_POT_BASE);
       this.neck = modelPart.getChild("neck");
       this.top = modelPart.getChild("top");
@@ -98,7 +83,6 @@ public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRender
       if (spriteIdentifier == null) {
          spriteIdentifier = ModTexturedRenderLayers.getUnfiredDecoratedPotPatternTextureId(DecoratedPotPatterns.fromSherd(Items.BRICK));
       }
-      // FirstSteps.LOGGER.info(String.valueOf(spriteIdentifier));
       return spriteIdentifier;
    }
 

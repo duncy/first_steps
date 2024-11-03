@@ -7,7 +7,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
-import nz.duncy.first_steps.client.render.block.entity.UnfiredDecoratedPotBlockEntityRenderer;
 
 public class ModBlockEntities {
     public static final BlockEntityType<RockBlockEntity> ROCK_BLOCK_ENTITY = 

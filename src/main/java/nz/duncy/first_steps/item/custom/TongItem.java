@@ -5,15 +5,11 @@ import java.util.Iterator;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.google.common.collect.Lists;
-
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -31,11 +27,7 @@ import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.GameEvent.Emitter;
@@ -43,6 +35,7 @@ import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.custom.CrucibleBlock;
 import nz.duncy.first_steps.block.custom.KilnBlock;
+import nz.duncy.first_steps.block.entity.CrucibleBlockEntity;
 import nz.duncy.first_steps.block.entity.KilnBlockEntity;
 
 public class TongItem extends Item {
@@ -55,7 +48,6 @@ public class TongItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        FirstSteps.LOGGER.info(String.valueOf(stack));
         if (!isEmpty(stack)) {
             tooltip.add(Text.translatable("tooltip.first_steps.tongs.holding", getHeldItem(stack).getName()).formatted(Formatting.GRAY));
 
@@ -82,13 +74,20 @@ public class TongItem extends Item {
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
 
-        if (world.getBlockState(pos).getBlock() instanceof KilnBlock) {
+        Block block = world.getBlockState(pos).getBlock();
+
+        if (block instanceof KilnBlock) {
             KilnBlockEntity kilnBlockEntity = (KilnBlockEntity) context.getWorld().getBlockEntity(pos);
             FirstSteps.LOGGER.info("kiln block interaction");
             if (pickupItem(context.getStack(), kilnBlockEntity)) {
                 FirstSteps.LOGGER.info("crucibo should be taken");
                 return ActionResult.SUCCESS;
             }
+        } else if (block instanceof CrucibleBlock) {
+            CrucibleBlockEntity crucibleBlockEntity = (CrucibleBlockEntity) context.getWorld().getBlockEntity(pos);
+            // if (pickupBlock(context.getStack(), crucibleBlockEntity)) {
+            //     return ActionResult.SUCCESS;
+            // }
         } else {
             ActionResult actionResult = place(new ItemPlacementContext(context));
             if (actionResult.isAccepted()) {
@@ -110,32 +109,32 @@ public class TongItem extends Item {
         if (context.canPlace()) {
             ItemStack heldItemStack = getHeldItem(context.getStack());
             
-            Item heldItem = heldItemStack.getItem();
-            BlockState blockState = ((BlockItem) heldItem).getBlock().getPlacementState(context);
-            if (canPlace(context, blockState)) {
-                FirstSteps.LOGGER.info("can place");
-                if (context.getWorld().setBlockState(context.getBlockPos(), blockState, 11)) {
-                    BlockPos blockPos = context.getBlockPos();
-                    World world = context.getWorld();
-                    PlayerEntity playerEntity = context.getPlayer();
-                    BlockState worldBlockState = world.getBlockState(blockPos);
-                    if (worldBlockState.isOf(blockState.getBlock())) {
-                        worldBlockState = placeFromNbt(blockPos, world, heldItemStack, worldBlockState);
-                        postPlacement(blockPos, world, playerEntity, heldItemStack, worldBlockState);
-                        if (playerEntity instanceof ServerPlayerEntity) {
-                            Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity) playerEntity, blockPos, heldItemStack);
+            if (heldItemStack != null) {
+                Item heldItem = heldItemStack.getItem();
+                BlockState blockState = ((BlockItem) heldItem).getBlock().getPlacementState(context);
+                if (canPlace(context, blockState)) {
+                    FirstSteps.LOGGER.info("can place");
+                    if (context.getWorld().setBlockState(context.getBlockPos(), blockState, 11)) {
+                        BlockPos blockPos = context.getBlockPos();
+                        World world = context.getWorld();
+                        PlayerEntity playerEntity = context.getPlayer();
+                        BlockState worldBlockState = world.getBlockState(blockPos);
+                        if (worldBlockState.isOf(blockState.getBlock())) {
+                            worldBlockState = placeFromNbt(blockPos, world, heldItemStack, worldBlockState);
+                            postPlacement(blockPos, world, playerEntity, heldItemStack, worldBlockState);
+                            if (playerEntity instanceof ServerPlayerEntity) {
+                                Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity) playerEntity, blockPos, heldItemStack);
+                            }
                         }
+
+                        BlockSoundGroup blockSoundGroup = worldBlockState.getSoundGroup();
+                        world.playSound(playerEntity, blockPos, getPlaceSound(worldBlockState), SoundCategory.BLOCKS, (blockSoundGroup.getVolume() + 1.0F) / 2.0F, blockSoundGroup.getPitch() * 0.8F);
+                        world.emitGameEvent(GameEvent.BLOCK_PLACE, blockPos, Emitter.of(playerEntity, worldBlockState));
+
+                        return ActionResult.success(world.isClient);
                     }
-
-                    BlockSoundGroup blockSoundGroup = worldBlockState.getSoundGroup();
-                    world.playSound(playerEntity, blockPos, getPlaceSound(worldBlockState), SoundCategory.BLOCKS, (blockSoundGroup.getVolume() + 1.0F) / 2.0F, blockSoundGroup.getPitch() * 0.8F);
-                    world.emitGameEvent(GameEvent.BLOCK_PLACE, blockPos, Emitter.of(playerEntity, worldBlockState));
-
-                    return ActionResult.success(world.isClient);
-                }
-            }  
-            
-            
+                }  
+            }
         } 
 
         return ActionResult.FAIL;
@@ -191,10 +190,7 @@ public class TongItem extends Item {
     }
 
     private boolean pickupItem(ItemStack tongs, KilnBlockEntity blockentity) {
-        if (!isEmpty(tongs)) {
-            FirstSteps.LOGGER.info("is not empty");
-            return false;
-        } else {
+        if (isEmpty(tongs)) {
             ItemStack crucibleStack = blockentity.getCrucible();
             Item crucible = crucibleStack.getItem();
             if (crucible instanceof BlockItem) {
@@ -209,6 +205,17 @@ public class TongItem extends Item {
         return false;
     }
 
+    private boolean pickupBlock(ItemStack tongs, World world, BlockPos pos) {
+        if (isEmpty(tongs)) {
+            // if the tongs are empty and this method is active it is a crucible
+            // get the itemstack of the crucible OR its nbt
+            // remove the block
+            return false;
+        }
+
+        return false;
+    }
+
     private void putCrucible(ItemStack tongs, ItemStack crucible) {
         NbtCompound nbtCompound = tongs.getOrCreateNbt();
         NbtList nbtList;
@@ -218,21 +225,19 @@ public class TongItem extends Item {
             nbtList = new NbtList();
         }
 
-        FirstSteps.LOGGER.info("nbtlist: " + String.valueOf(crucible));
         nbtList.add(crucible.getNbt());
         FirstSteps.LOGGER.info("nbtlist: " + String.valueOf(nbtList));
         nbtCompound.put("tongs.holding", nbtList);
     }
 
     private static ItemStack getHeldItem(ItemStack tongs) {
-        NbtCompound nbtCompound = tongs.getNbt();
+        NbtCompound nbtCompound = tongs.getNbt(); 
 
         if (nbtCompound != null && nbtCompound.contains("tongs.holding", 9)) {
             NbtList nbtList = nbtCompound.getList("tongs.holding", 10);
             if (!nbtList.isEmpty()) {
-                FirstSteps.LOGGER.info("nbtlist: " + String.valueOf(nbtList));
                 NbtCompound nbtListCompound = nbtList.getCompound(0);
-                ItemStack itemStack = new ItemStack(ModBlocks.CLAY_FIRED_CRUCIBLE.asItem());
+                ItemStack itemStack = new ItemStack(ModBlocks.FIRED_CRUCIBLE.asItem());
                 itemStack.setNbt(nbtListCompound);
                 return itemStack;
             }

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -24,6 +25,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import nz.duncy.first_steps.item.entity.ModItemEntities;
 import nz.duncy.first_steps.item.entity.SpearEntity;
 
 public class SpearItem extends ToolItem implements Vanishable {
@@ -73,7 +75,39 @@ public class SpearItem extends ToolItem implements Vanishable {
         if (!world.isClient) {
             stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(user.getActiveHand()));
 
-            SpearEntity spearEntity = new SpearEntity(playerEntity, world, stack);
+            EntityType<SpearEntity> type;
+
+            switch (stack.getItem().toString()) {
+                case "stone_spear":
+                    type = ModItemEntities.STONE_SPEAR;
+                    break;
+                case "flint_spear":
+                    type = ModItemEntities.FLINT_SPEAR;
+                    break;
+                case "basalt_spear":
+                    type = ModItemEntities.BASALT_SPEAR;
+                    break;
+                case "obsidian_spear":
+                    type = ModItemEntities.OBSIDIAN_SPEAR;
+                    break;
+                case "copper_spear":
+                    type = ModItemEntities.COPPER_SPEAR;
+                    break;
+                case "bronze_spear":
+                    type = ModItemEntities.BRONZE_SPEAR;
+                    break;
+                case "iron_spear":
+                    type = ModItemEntities.IRON_SPEAR;
+                    break;
+                case "steel_spear":
+                    type = ModItemEntities.STEEL_SPEAR;
+                    break;
+                default:
+                    type = ModItemEntities.STONE_SPEAR;
+                    break;
+            }
+
+            SpearEntity spearEntity = new SpearEntity(playerEntity, world, stack, type);
             spearEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, 2.5f, 1.0f);
 
             if (playerEntity.getAbilities().creativeMode) {

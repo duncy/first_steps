@@ -20,6 +20,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.item.ModItems;
 
 import org.jetbrains.annotations.Nullable;
@@ -38,8 +39,8 @@ public class SpearEntity extends PersistentProjectileEntity {
         super(type, x, y, z, world, stack);
     }
 
-    public SpearEntity(LivingEntity owner, World world, ItemStack stack) {
-        super(ModItemEntities.BASALT_SPEAR, owner, world, stack);
+    public SpearEntity(LivingEntity owner, World world, ItemStack stack, EntityType<SpearEntity> type) {
+        super(type, owner, world, stack);
         this.dataTracker.set(LOYALTY, (byte)EnchantmentHelper.getLoyalty(stack));
         this.dataTracker.set(ENCHANTED, stack.hasGlint());
     }
@@ -63,8 +64,9 @@ public class SpearEntity extends PersistentProjectileEntity {
         Entity entity = this.getOwner();
         byte i = this.dataTracker.get(LOYALTY);
         if (i > 0 && (this.dealtDamage || this.isNoClip()) && entity != null) {
+            World world = this.getWorld();
             if (!this.isOwnerAlive()) {
-                if (!this.getWorld().isClient && this.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED) {
+                if (!world.isClient && this.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED) {
                     this.dropStack(this.asItemStack(), 0.1f);
                 }
                 this.discard();
@@ -72,7 +74,8 @@ public class SpearEntity extends PersistentProjectileEntity {
                 this.setNoClip(true);
                 Vec3d vec3d = entity.getEyePos().subtract(this.getPos());
                 this.setPos(this.getX(), this.getY() + vec3d.y * 0.015 * (double)i, this.getZ());
-                if (this.getWorld().isClient) {
+                
+                if (world.isClient) {
                     this.lastRenderY = this.getY();
                 }
                 double d = 0.05 * (double)i;
