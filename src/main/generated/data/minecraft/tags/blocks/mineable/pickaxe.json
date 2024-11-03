@@ -7,6 +7,11 @@
     "first_steps:deepslate_copper_ore",
     "first_steps:deepslate_iron_ore",
     "first_steps:basalt_mullite_ore",
+    "first_steps:raw_tin_block",
+    "first_steps:raw_stone_copper_block",
+    "first_steps:raw_stone_iron_block",
+    "first_steps:raw_deepslate_copper_block",
+    "first_steps:raw_deepslate_iron_block",
     "first_steps:kiln"
   ]
 }

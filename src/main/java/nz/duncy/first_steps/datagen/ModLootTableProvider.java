@@ -20,7 +20,6 @@ import net.minecraft.loot.entry.DynamicEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
-import net.minecraft.loot.entry.LootTableEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.CopyNameLootFunction;
 import net.minecraft.loot.function.CopyNbtLootFunction;
@@ -29,7 +28,6 @@ import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.function.CopyNameLootFunction.Source;
 import net.minecraft.loot.provider.nbt.ContextLootNbtProvider;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.loot.provider.number.LootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.custom.ClayBlock;
@@ -51,6 +49,12 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.DEEPSLATE_COPPER_ORE, rawOreDrops(ModBlocks.DEEPSLATE_COPPER_ORE, ModItems.RAW_DEEPSLATE_COPPER));
         addDrop(ModBlocks.DEEPSLATE_IRON_ORE, rawOreDrops(ModBlocks.DEEPSLATE_IRON_ORE, ModItems.RAW_DEEPSLATE_IRON));
         addDrop(ModBlocks.BASALT_MULLITE_ORE, rawOreDrops(ModBlocks.BASALT_MULLITE_ORE, ModItems.RAW_MULLITE));
+
+        addDrop(ModBlocks.RAW_TIN);
+        addDrop(ModBlocks.RAW_STONE_COPPER);
+        addDrop(ModBlocks.RAW_STONE_IRON);
+        addDrop(ModBlocks.RAW_DEEPSLATE_COPPER);
+        addDrop(ModBlocks.RAW_DEEPSLATE_IRON);
 
         addDrop(ModBlocks.STONE_ROCK);
         addDrop(ModBlocks.FLINT_ROCK, Items.FLINT);
