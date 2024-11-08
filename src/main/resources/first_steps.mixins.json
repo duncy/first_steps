@@ -3,7 +3,8 @@
 	"package": "nz.duncy.first_steps.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-        "OreFeatureMixin"
+        "OreFeatureMixin",
+		"CampfireBlockMixin"
 	],
     "client": [
         "ItemRendererAccessor",
