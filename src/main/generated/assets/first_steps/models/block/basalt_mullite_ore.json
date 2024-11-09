@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "first_steps:block/basalt_mullite_ore_top",
-    "side": "first_steps:block/basalt_mullite_ore"
-  }
-}

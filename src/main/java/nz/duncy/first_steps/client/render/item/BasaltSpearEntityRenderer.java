@@ -6,6 +6,6 @@ import nz.duncy.first_steps.FirstSteps;
 
 public class BasaltSpearEntityRenderer extends SpearEntityRenderer {
     public BasaltSpearEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new Identifier(FirstSteps.MOD_ID, "textures/entity/basalt_spear.png"));
+        super(context, Identifier.of(FirstSteps.MOD_ID, "textures/entity/basalt_spear.png"));
     }
 }

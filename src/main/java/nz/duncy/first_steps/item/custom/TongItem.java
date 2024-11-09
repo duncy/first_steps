@@ -41,13 +41,13 @@ import nz.duncy.first_steps.block.entity.KilnBlockEntity;
 public class TongItem extends Item {
     private int temperature;
 
-    public TongItem(Settings settings) {
+    public TongItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
         temperature = 20;
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, net.minecraft.item.Item.TooltipContext context) {
         if (!isEmpty(stack)) {
             tooltip.add(Text.translatable("tooltip.first_steps.tongs.holding", getHeldItem(stack).getName()).formatted(Formatting.GRAY));
 

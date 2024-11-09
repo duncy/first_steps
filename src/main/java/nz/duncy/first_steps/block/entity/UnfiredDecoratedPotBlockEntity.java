@@ -2,11 +2,8 @@ package nz.duncy.first_steps.block.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.DecoratedPotBlockEntity.Sherds;
+import net.minecraft.block.entity.Sherds;
 import net.minecraft.block.entity.DecoratedPotBlockEntity.WobbleType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.LootableInventory;
-import net.minecraft.inventory.SingleStackInventory;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -26,15 +23,13 @@ public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
    @Nullable
    public WobbleType lastWobbleType;
    private Sherds sherds;
-   private ItemStack stack;
    @Nullable
    protected Identifier lootTableId;
    protected long lootTableSeed;
 
    public UnfiredDecoratedPotBlockEntity(BlockPos pos, BlockState state) {
       super(ModBlockEntities.UNFIRED_DECORATED_POT_BLOCK_ENTITY, pos, state);
-      this.stack = ItemStack.EMPTY;
-      this.sherds = net.minecraft.block.entity.DecoratedPotBlockEntity.Sherds.DEFAULT;
+      this.sherds = Sherds.DEFAULT;
    }
 
    protected void writeNbt(NbtCompound nbt) {
@@ -45,7 +40,7 @@ public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
 
    public void readNbt(NbtCompound nbt) {
       super.readNbt(nbt);
-      this.sherds = net.minecraft.block.entity.DecoratedPotBlockEntity.Sherds.fromNbt(nbt);
+      this.sherds = Sherds.fromNbt(nbt);
 
    }
 
@@ -88,16 +83,10 @@ public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
       }
 
       stack.decrement(1);
-
-      // this.back = item;
-      // this.left = item2;
-      // this.right = item3;
-      // this.front = item4;
-      
    }
 
    public void readNbtFromStack(ItemStack stack) {
-      this.sherds = net.minecraft.block.entity.DecoratedPotBlockEntity.Sherds.fromNbt(BlockItem.getBlockEntityNbt(stack));
+      this.sherds = Sherds.fromNbt(BlockItem.getBlockEntityNbt(stack));
    }
 
    public ItemStack asStack() {
@@ -128,9 +117,6 @@ public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
       this.lootTableSeed = lootTableSeed;
    }
 
-   public void setStack(ItemStack stack) {
-      this.stack = stack;
-   }
 
    public BlockEntity asBlockEntity() {
       return this;

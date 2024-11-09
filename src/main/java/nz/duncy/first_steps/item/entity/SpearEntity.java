@@ -20,7 +20,6 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.item.ModItems;
 
 import org.jetbrains.annotations.Nullable;

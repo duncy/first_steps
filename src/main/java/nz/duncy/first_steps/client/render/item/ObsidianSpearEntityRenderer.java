@@ -6,6 +6,6 @@ import nz.duncy.first_steps.FirstSteps;
 
 public class ObsidianSpearEntityRenderer extends SpearEntityRenderer {
     public ObsidianSpearEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new Identifier(FirstSteps.MOD_ID, "textures/entity/obsidian_spear.png"));
+        super(context, Identifier.of(FirstSteps.MOD_ID, "textures/entity/obsidian_spear.png"));
     }
 }

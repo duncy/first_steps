@@ -166,7 +166,20 @@
 
     "block.first_steps.potters_wheel": "Potter's Wheel",
 
-    "block.first_steps.unfired_decorated_pot": "Clay Decorated Pot",
+    "block.first_stepsunfired_decorated_pot": "Clay Decorated Pot",
 
-    "itemgroup.first_steps": "First Steps"
+    "itemgroup.first_steps": "First Steps",
+
+    "screen.first_steps.knapping.hoe_head": "Hoe Head",
+    "screen.first_steps.knapping.shovel_head": "Shovel Head",
+    "screen.first_steps.knapping.axe_head": "Axe Head",
+    "screen.first_steps.knapping.knife_head": "Knife Head",
+    "screen.first_steps.knapping.spear_head": "Spear Head",
+    "screen.first_steps.knapping.sword_head": "Sword Head",
+    "screen.first_steps.knapping.pickaxe_head": "Pickaxe Head",
+    "screen.first_steps.knapping.arrow_head": "Arrow Head",
+
+    "screen.first_steps.knapping.switcher": "Select a tool head",
+    "screen.first_steps.knapping.select": "%s Select",
+    "screen.first_steps.knapping.press_enter": "[ LEFT MOUSE ]"
 }

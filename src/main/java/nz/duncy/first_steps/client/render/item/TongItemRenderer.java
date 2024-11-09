@@ -15,6 +15,7 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.item.custom.TongItem;
@@ -28,7 +29,7 @@ public class TongItemRenderer implements BuiltinItemRendererRegistry.DynamicItem
         VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
         MinecraftClient client = MinecraftClient.getInstance();
-        BakedModel tongModel = client.getBakedModelManager().getModel(new ModelIdentifier(FirstSteps.MOD_ID, "wooden_tongs", "inventory"));
+        BakedModel tongModel = client.getBakedModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(FirstSteps.MOD_ID, "wooden_tongs")));
         VertexConsumer consumer = vertexConsumers.getBuffer(RenderLayer.getCutout());
 
         matrices.push();
@@ -40,7 +41,7 @@ public class TongItemRenderer implements BuiltinItemRendererRegistry.DynamicItem
         // matrices.multiply(new Quaternionf(-0.5f, 0.5f, -0.5f, 0.5f));
         MatrixStack.Entry entry = matrices.peek();
         tongModel.getQuads(null, null, client.world.random).forEach(quad -> {
-            consumer.quad(entry, quad, 1F, 1F, 1F, light, overlay);
+            consumer.quad(entry, quad, 1F, 1F, 1F, 0.0F, light, overlay);
         });
         
         matrices.pop();

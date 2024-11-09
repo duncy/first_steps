@@ -15,6 +15,10 @@ public class ModScreenHandlers {
     public static final ScreenHandlerType<CrucibleScreenHandler> CRUCIBLE_SCREEN_HANDLER = 
         Registry.register(Registries.SCREEN_HANDLER, new Identifier(FirstSteps.MOD_ID, "crucible"),
         new ExtendedScreenHandlerType<>(CrucibleScreenHandler::new));
+
+    public static final ScreenHandlerType<KnappingSelectionScreenHandler> KNAPPING_SELECTION_SCREEN_HANDLER = 
+        Registry.register(Registries.SCREEN_HANDLER, new Identifier(FirstSteps.MOD_ID, "selection"),
+        new ExtendedScreenHandlerType<>(KnappingSelectionScreenHandler::new));
     
     public static void registerScreenHandlers() {
         FirstSteps.LOGGER.info("Registering ScreenHandlers for " + FirstSteps.MOD_ID);

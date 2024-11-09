@@ -4,9 +4,6 @@ import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.ShulkerBoxBlockEntity.AnimationStage;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -14,7 +11,6 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import nz.duncy.first_steps.FirstSteps;
 
 public class PottersWheelBlockEntity extends BlockEntity {
     public float spin;

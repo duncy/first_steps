@@ -36,7 +36,7 @@ public class ModEntityModelLayers {
     }
 
     private static EntityModelLayer create(String id, String layer) {
-        return new EntityModelLayer(new Identifier(FirstSteps.MOD_ID, id), layer);
+        return new EntityModelLayer(Identifier.of(FirstSteps.MOD_ID, id), layer);
     }
 
     public static void registerEntityModelLayers() {

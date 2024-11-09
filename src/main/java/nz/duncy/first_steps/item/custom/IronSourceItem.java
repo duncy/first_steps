@@ -10,12 +10,12 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 public class IronSourceItem extends Item {
-    public IronSourceItem(Settings settings) {
+    public IronSourceItem(net.minecraft.item.Item.Settings settings) {
         super(settings);
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, net.minecraft.item.Item.TooltipContext context) {
         tooltip.add(Text.translatable("tooltip.first_steps.iron_source").formatted(Formatting.DARK_GRAY));
         super.appendTooltip(stack, world, tooltip, context);
     }

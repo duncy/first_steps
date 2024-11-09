@@ -6,6 +6,6 @@ import nz.duncy.first_steps.FirstSteps;
 
 public class CopperSpearEntityRenderer extends SpearEntityRenderer {
     public CopperSpearEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new Identifier(FirstSteps.MOD_ID, "textures/entity/copper_spear.png"));
+        super(context, Identifier.of(FirstSteps.MOD_ID, "textures/entity/copper_spear.png"));
     }
 }

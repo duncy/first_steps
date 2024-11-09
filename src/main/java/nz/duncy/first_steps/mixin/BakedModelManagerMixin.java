@@ -24,7 +24,7 @@ public class BakedModelManagerMixin {
     @Inject(method="<clinit>", at = @At("TAIL"))
     private static void customAtlas(CallbackInfo callbackInfo) {
         LAYERS_TO_LOADERS = new HashMap<Identifier, Identifier>(LAYERS_TO_LOADERS);
-        LAYERS_TO_LOADERS.put(ModTexturedRenderLayers.UNFIRED_DECORATED_POT_ATLAS_TEXTURE, new Identifier(FirstSteps.MOD_ID, "unfired_decorated_pot"));
+        LAYERS_TO_LOADERS.put(ModTexturedRenderLayers.UNFIRED_DECORATED_POT_ATLAS_TEXTURE, Identifier.of(FirstSteps.MOD_ID, "unfired_decorated_pot"));
     }
 }
 

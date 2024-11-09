@@ -2,8 +2,7 @@ package nz.duncy.first_steps.block;
 
 import com.feintha.regedit.RegistryEditEvent;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
@@ -25,6 +24,7 @@ import nz.duncy.first_steps.block.custom.RockBlock;
 import nz.duncy.first_steps.block.custom.UnfiredCrucibleBlock;
 import nz.duncy.first_steps.block.custom.UnfiredDecoratedPotBlock;
 import nz.duncy.first_steps.block.custom.UnfiredMoldBlock;
+import nz.duncy.first_steps.client.render.item.RockBlockItem;
 import nz.duncy.first_steps.block.custom.PottersWheelBlock;
 
 public class ModBlocks {
@@ -34,7 +34,7 @@ public class ModBlocks {
         public static final Block STONE_IRON_ORE = registerStoneOreBlock("stone_iron_ore");
         public static final Block DEEPSLATE_COPPER_ORE = registerDeepslateOreBlock("deepslate_copper_ore");
         public static final Block DEEPSLATE_IRON_ORE = registerDeepslateOreBlock("deepslate_iron_ore");
-        public static final Block BASALT_MULLITE_ORE = registerBasaltOreBlock("basalt_mullite_ore");
+        // public static final Block BASALT_MULLITE_ORE = registerBasaltOreBlock("basalt_mullite_ore");
 
         // RAW ORE BLOCK
         public static final Block RAW_TIN = registerStoneOreBlock("raw_tin_block");
@@ -44,105 +44,129 @@ public class ModBlocks {
         public static final Block RAW_DEEPSLATE_IRON = registerDeepslateOreBlock("raw_deepslate_iron_block");
 
         // ROCKS
-        public static final Block STONE_ROCK = registerBlock("stone_rock",
-                        new RockBlock(FabricBlockSettings.create().strength(0.0F, 0.0F)
+        public static final Block STONE_ROCK = registerRockBlock("stone_rock",
+                        new RockBlock(AbstractBlock.Settings.create().strength(0.0F, 0.0F)
                                         .pistonBehavior(PistonBehavior.DESTROY)
-                                        .mapColor(MapColor.STONE_GRAY), new Identifier("minecraft:block/stone")));
+                                        .mapColor(MapColor.STONE_GRAY), Identifier.of("minecraft:block/stone")));
 
-        public static Block FLINT_ROCK = registerBlockWithExistingVanillaItem("flint_rock",
-                        new RockBlock(FabricBlockSettings.copyOf(STONE_ROCK).mapColor(MapColor.BLACK),
-                                        new Identifier(FirstSteps.MOD_ID, "block/flint_rock")),
+        public static Block FLINT_ROCK = registerRockBlockWithExistingVanillaItem("flint_rock",
+                        new RockBlock(AbstractBlock.Settings.copy(STONE_ROCK).mapColor(MapColor.BLACK),
+                                        Identifier.of(FirstSteps.MOD_ID, "block/flint_rock")),
                                         Items.FLINT);
 
-        public static final Block BASALT_ROCK = registerBlock("basalt_rock",
-                        new RockBlock(FabricBlockSettings.copyOf(STONE_ROCK),
-                                        new Identifier("minecraft:block/basalt_side")));
+        public static final Block BASALT_ROCK = registerRockBlock("basalt_rock",
+                        new RockBlock(AbstractBlock.Settings.copy(STONE_ROCK),
+                                        Identifier.of("minecraft:block/basalt_side")));
 
-        public static final Block OBSIDIAN_ROCK = registerBlock("obsidian_rock",
-                        new RockBlock(FabricBlockSettings.copyOf(FLINT_ROCK),
-                                        new Identifier("minecraft:block/obsidian")));
+        public static final Block OBSIDIAN_ROCK = registerRockBlock("obsidian_rock",
+                        new RockBlock(AbstractBlock.Settings.copy(FLINT_ROCK),
+                                        Identifier.of("minecraft:block/obsidian")));
 
         public static final Block COPPER_ROCK = registerBlock("copper_rock",
-                        new OreRockBlock(FabricBlockSettings.copyOf(STONE_ROCK)));
+                        new OreRockBlock(AbstractBlock.Settings.copy(STONE_ROCK)));
 
         // CRAFTING
         // KILN
         public static final Block KILN = registerBlock("kiln", new KilnBlock(
-                        FabricBlockSettings.copyOf(Blocks.TERRACOTTA)
+                        AbstractBlock.Settings.copy(Blocks.TERRACOTTA)
                                         .luminance(Blocks.createLightLevelFromLitBlockState(13))));
 
         // POTTERY
         public static final Block POTTERS_WHEEL = registerBlock("potters_wheel",
-                        new PottersWheelBlock(FabricBlockSettings.copyOf(Blocks.TERRACOTTA)));
+                        new PottersWheelBlock(AbstractBlock.Settings.copy(Blocks.TERRACOTTA)));
 
         // FIRED
         public static final Block FIRED_CRUCIBLE = registerUniqueBlock("fired_crucible",
-                        new CrucibleBlock(FabricBlockSettings.create().strength(0.0F, 0.0F)
+                        new CrucibleBlock(AbstractBlock.Settings.create().strength(0.0F, 0.0F)
                                         .pistonBehavior(PistonBehavior.DESTROY)
                                         .mapColor(MapColor.TERRACOTTA_RED).nonOpaque()
                                         .sounds(BlockSoundGroup.DECORATED_POT)));
 
         // UNFIRED
         public static final Block UNFIRED_CRUCIBLE = registerUniqueBlock("unfired_crucible",
-                        new UnfiredCrucibleBlock(FabricBlockSettings.copyOf(Blocks.CLAY).breakInstantly()));
+                        new UnfiredCrucibleBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
         public static final Block UNFIRED_FLOWER_POT = registerBlock("unfired_flower_pot",
-                        new Block(FabricBlockSettings.copyOf(Blocks.CLAY).breakInstantly()));
+                        new Block(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
         public static final Block UNFIRED_DECORATED_POT = registerBlock("unfired_decorated_pot",
-                        new UnfiredDecoratedPotBlock(FabricBlockSettings.copyOf(Blocks.CLAY).breakInstantly()));
+                        new UnfiredDecoratedPotBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
 
         // CLAY
-        public static final Block CLAY = registerBlockWithExistingVanillaItem("clay", new ClayBlock(FabricBlockSettings.copyOf(Blocks.CLAY).blockVision((state, world, pos) -> {
+        public static final Block CLAY = registerBlockWithExistingVanillaItem("clay", new ClayBlock(AbstractBlock.Settings.copy(Blocks.CLAY).blockVision((state, world, pos) -> {
                 return (Integer)state.get(ClayBlock.CLAY_LAYERS) >= 4;
                }).pistonBehavior(PistonBehavior.DESTROY)),
                Items.CLAY_BALL);
 
 
         // CAST MOLDS
-        public static final Block HOE_HEAD_MOLD = registerBlock("hoe_head_mold", new UnfiredMoldBlock(FabricBlockSettings.copyOf(Blocks.CLAY).breakInstantly()));
+        public static final Block HOE_HEAD_MOLD = registerBlock("hoe_head_mold", new UnfiredMoldBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
+        public static final Block AXE_HEAD_MOLD = registerBlock("axe_head_mold", new UnfiredMoldBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
+        public static final Block SHOVEL_HEAD_MOLD = registerBlock("shovel_head_mold", new UnfiredMoldBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
+        public static final Block KNIFE_HEAD_MOLD = registerBlock("knife_head_mold", new UnfiredMoldBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
+        public static final Block SPEAR_HEAD_MOLD = registerBlock("spear_head_mold", new UnfiredMoldBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
+        public static final Block ARROW_HEAD_MOLD = registerBlock("arrow_head_mold", new UnfiredMoldBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
+        public static final Block PICKAXE_HEAD_MOLD = registerBlock("pickaxe_head_mold", new UnfiredMoldBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
+        public static final Block SWORD_HEAD_MOLD = registerBlock("sword_head_mold", new UnfiredMoldBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
+        
 
-
+        private static Block registerRockBlock(String name, Block block) {
+                registerRockBlockItem(name, block);
+                return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
+        }
 
         private static Block registerBlock(String name, Block block) {
                 registerBlockItem(name, block);
-                return Registry.register(Registries.BLOCK, new Identifier(FirstSteps.MOD_ID, name), block);
+                return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
         }
 
         private static Block registerUniqueBlock(String name, Block block) {
                 registerUniqueBlockItem(name, block);
-                return Registry.register(Registries.BLOCK, new Identifier(FirstSteps.MOD_ID, name), block);
+                return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
+        }
+
+        public static Block registerRockBlockWithExistingVanillaItem(String name, Block block, Item vanillaItem) {
+                RegistryEditEvent.EVENT.register(manipulator -> {
+                        manipulator.Redirect(Registries.ITEM, vanillaItem,
+                                        new RockBlockItem(block, new Item.Settings()));
+                });
+                return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
         }
 
         public static Block registerBlockWithExistingVanillaItem(String name, Block block, Item vanillaItem) {
                 RegistryEditEvent.EVENT.register(manipulator -> {
                         manipulator.Redirect(Registries.ITEM, vanillaItem,
-                                        new BlockItem(block, new FabricItemSettings()));
+                                        new BlockItem(block, new Item.Settings()));
                 });
-                return Registry.register(Registries.BLOCK, new Identifier(FirstSteps.MOD_ID, name), block);
+                return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
         }
 
         public static Item registerBlockItem(String name, Block block) {
-                return Registry.register(Registries.ITEM, new Identifier(FirstSteps.MOD_ID, name),
-                                new BlockItem(block, new FabricItemSettings()));
+                return Registry.register(Registries.ITEM, Identifier.of(FirstSteps.MOD_ID, name),
+                                new BlockItem(block, new Item.Settings()));
+        }
+
+        public static Item registerRockBlockItem(String name, Block block) {
+                return Registry.register(Registries.ITEM, Identifier.of(FirstSteps.MOD_ID, name),
+                                new RockBlockItem(block, new Item.Settings()));
         }
 
         public static Item registerUniqueBlockItem(String name, Block block) {
-                return Registry.register(Registries.ITEM, new Identifier(FirstSteps.MOD_ID, name),
-                                new BlockItem(block, new FabricItemSettings().maxCount(1)));
+                return Registry.register(Registries.ITEM, Identifier.of(FirstSteps.MOD_ID, name),
+                                new BlockItem(block, new Item.Settings().maxCount(1)));
         }
 
         public static Block registerStoneOreBlock(String name) {
                 return registerBlock(name,
-                                new Block(FabricBlockSettings.copyOf(Blocks.STONE)));
+                                new Block(AbstractBlock.Settings.copy(Blocks.STONE)));
         }
 
         public static Block registerDeepslateOreBlock(String name) {
                 return registerBlock(name,
-                                new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE)));
+                                new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE)));
         }
 
         public static Block registerBasaltOreBlock(String name) {
                 return registerBlock(name,
-                                new PillarBlock(FabricBlockSettings.copyOf(Blocks.BASALT)));
+                                new PillarBlock(AbstractBlock.Settings.copy(Blocks.BASALT)));
         }
 
         public static void registerModBlocks() {

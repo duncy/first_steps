@@ -12,7 +12,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
-import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.client.render.entity.model.ModEntityModelLayers;
 import nz.duncy.first_steps.client.render.entity.model.SpearModel;
 import nz.duncy.first_steps.item.entity.SpearEntity;

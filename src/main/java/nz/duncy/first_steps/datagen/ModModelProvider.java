@@ -34,7 +34,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.STONE_IRON_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_COPPER_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DEEPSLATE_IRON_ORE);
-        blockStateModelGenerator.registerAxisRotated(ModBlocks.BASALT_MULLITE_ORE, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        // blockStateModelGenerator.registerAxisRotated(ModBlocks.BASALT_MULLITE_ORE, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
 
         // RAW ORE BLOCK
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RAW_TIN);
@@ -45,10 +45,10 @@ public class ModModelProvider extends FabricModelProvider {
 
         
         // ROCKS
-        blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.STONE_ROCK, new Identifier("minecraft:block/stone"));
-        blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.FLINT_ROCK, new Identifier(FirstSteps.MOD_ID, "block/flint_rock"));
-        blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.BASALT_ROCK, new Identifier("minecraft:block/basalt_side"));
-        blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.OBSIDIAN_ROCK, new Identifier("minecraft:block/obsidian"));
+        // blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.STONE_ROCK, new Identifier("minecraft:block/stone"));
+        // blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.FLINT_ROCK, new Identifier(FirstSteps.MOD_ID, "block/flint_rock"));
+        // blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.BASALT_ROCK, new Identifier("minecraft:block/basalt_side"));
+        // blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.OBSIDIAN_ROCK, new Identifier("minecraft:block/obsidian"));
 
         // KILN
         blockStateModelGenerator.registerCooker(ModBlocks.KILN, TexturedModel.ORIENTABLE_WITH_BOTTOM);
@@ -151,14 +151,14 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.IRON_HEAD_ARROW, Models.GENERATED);
 
         // Steel tool heads
-        itemModelGenerator.register(ModItems.STEEL_HEAD_HOE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_HEAD_AXE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_HEAD_SHOVEL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_HEAD_SPEAR, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_HEAD_KNIFE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_HEAD_SWORD, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_HEAD_PICKAXE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_HEAD_ARROW, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_HEAD_HOE, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_HEAD_AXE, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_HEAD_SHOVEL, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_HEAD_SPEAR, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_HEAD_KNIFE, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_HEAD_SWORD, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_HEAD_PICKAXE, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_HEAD_ARROW, Models.GENERATED);
 
         // Stone tools
         itemModelGenerator.register(ModItems.STONE_KNIFE, Models.HANDHELD);
@@ -208,13 +208,13 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.IRON_SPEAR, Models.HANDHELD);
 
         // Steel tools
-        itemModelGenerator.register(ModItems.STEEL_HOE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.STEEL_SHOVEL, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.STEEL_AXE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.STEEL_KNIFE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.STEEL_SPEAR, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.STEEL_SWORD, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.STEEL_PICKAXE, Models.HANDHELD);
+        // itemModelGenerator.register(ModItems.STEEL_HOE, Models.HANDHELD);
+        // itemModelGenerator.register(ModItems.STEEL_SHOVEL, Models.HANDHELD);
+        // itemModelGenerator.register(ModItems.STEEL_AXE, Models.HANDHELD);
+        // itemModelGenerator.register(ModItems.STEEL_KNIFE, Models.HANDHELD);
+        // itemModelGenerator.register(ModItems.STEEL_SPEAR, Models.HANDHELD);
+        // itemModelGenerator.register(ModItems.STEEL_SWORD, Models.HANDHELD);
+        // itemModelGenerator.register(ModItems.STEEL_PICKAXE, Models.HANDHELD);
 
 
         // Raw ores
@@ -225,12 +225,12 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.RAW_DEEPSLATE_COPPER, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_DEEPSLATE_IRON, Models.GENERATED);
         // Raw minerals
-        itemModelGenerator.register(ModItems.RAW_MULLITE, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.RAW_MULLITE, Models.GENERATED);
 
         // Ingots
         itemModelGenerator.register(ModItems.TIN_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.BRONZE_INGOT, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_INGOT, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_INGOT, Models.GENERATED);
 
         // Arrows
         itemModelGenerator.register(ModItems.STONE_ARROW, Models.GENERATED);
@@ -240,13 +240,25 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.COPPER_ARROW, Models.GENERATED);
         itemModelGenerator.register(ModItems.BRONZE_ARROW, Models.GENERATED);
         itemModelGenerator.register(ModItems.IRON_ARROW, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_ARROW, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.STEEL_ARROW, Models.GENERATED);
 
-        // Crucible
+        // Fired pottery
         itemModelGenerator.register(ModBlocks.FIRED_CRUCIBLE.asItem(), Models.GENERATED);
 
-        // Unfireds
+        // Unfired pottery
         itemModelGenerator.register(ModBlocks.UNFIRED_CRUCIBLE.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.UNFIRED_FLOWER_POT.asItem(), Models.GENERATED);
+
+        // Molds
+        itemModelGenerator.register(ModBlocks.HOE_HEAD_MOLD.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.AXE_HEAD_MOLD.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.SHOVEL_HEAD_MOLD.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.KNIFE_HEAD_MOLD.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.SPEAR_HEAD_MOLD.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.ARROW_HEAD_MOLD.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.PICKAXE_HEAD_MOLD.asItem(), Models.GENERATED);
+        itemModelGenerator.register(ModBlocks.SWORD_HEAD_MOLD.asItem(), Models.GENERATED);
+
 
         // // Tongs
         itemModelGenerator.register(ModItems.WOODEN_TONGS, Models.GENERATED);

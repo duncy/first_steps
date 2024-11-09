@@ -17,7 +17,7 @@ import net.minecraft.util.math.Direction;
 import nz.duncy.first_steps.FirstSteps;
 
 @Environment(EnvType.CLIENT)
-public class PottersWheelModel extends Model{
+public class PottersWheelModel extends Model {
     private static final String LID = "lid";
     private static final String BASE = "base";
     private static final String ROD = "rod";
@@ -36,7 +36,7 @@ public class PottersWheelModel extends Model{
     private final ModelPart stand_leg_4;
     private final ModelPart stand_lid;
 
-    public static final Identifier POTTERS_WHEEL_TEXTURE = new Identifier(FirstSteps.MOD_ID, "textures/block/potters_wheel.png");
+    public static final Identifier POTTERS_WHEEL_TEXTURE = Identifier.of(FirstSteps.MOD_ID, "textures/block/potters_wheel.png");
 
 
 

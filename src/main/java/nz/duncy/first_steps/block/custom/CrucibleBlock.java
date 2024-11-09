@@ -5,55 +5,40 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.google.common.collect.Iterators;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.resource.metadata.BlockEntry;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Direction.Axis;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
@@ -66,10 +51,11 @@ import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.entity.CrucibleBlockEntity;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
 
-public class CrucibleBlock extends BlockWithEntity implements BlockEntityProvider {
+public class CrucibleBlock extends BlockWithEntity {
     private static final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 10, 13);
-    public static final BooleanProperty LIT;
-    public static final Identifier CONTENTS_DYNAMIC_DROP_ID;
+    public static final BooleanProperty LIT = Properties.LIT;
+    public static final Identifier CONTENTS_DYNAMIC_DROP_ID = Identifier.ofVanilla("contents");
+    private static final Text UNKNOWN_CONTENTS_TEXT = Text.translatable("container." + FirstSteps.MOD_ID + ".crucible.unknownContents");
 
     public static final MapCodec<CrucibleBlock> CODEC = CrucibleBlock.createCodec(CrucibleBlock::new);
 
@@ -88,16 +74,6 @@ public class CrucibleBlock extends BlockWithEntity implements BlockEntityProvide
         return SHAPE;
     }
 
-    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.hasCustomName()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CrucibleBlockEntity) {
-                    ((CrucibleBlockEntity)blockEntity).setCustomName(itemStack.getName());
-            }
-        }
-  
-    }
-
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
@@ -112,11 +88,7 @@ public class CrucibleBlock extends BlockWithEntity implements BlockEntityProvide
         if (blockEntity instanceof CrucibleBlockEntity crucibleBlockEntity) {
             if (!world.isClient && player.isCreative() && !crucibleBlockEntity.isEmpty()) {
                 ItemStack itemStack = new ItemStack(this);
-                blockEntity.setStackNbt(itemStack);
-                if (crucibleBlockEntity.hasCustomName()) {
-                    itemStack.setCustomName(crucibleBlockEntity.getCustomName());
-                }
-
+                itemStack.applyComponentsFrom(blockEntity.createComponentMap());
                 ItemEntity itemEntity = new ItemEntity(world, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, itemStack);
                 itemEntity.setToDefaultPickupDelay();
                 world.spawnEntity(itemEntity);
@@ -170,7 +142,7 @@ public class CrucibleBlock extends BlockWithEntity implements BlockEntityProvide
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
         } else if (player.isSpectator()) {
@@ -222,68 +194,39 @@ public class CrucibleBlock extends BlockWithEntity implements BlockEntityProvide
     // }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
-        NbtCompound nbtCompound = stack.getNbt();
-        
-        // FirstSteps.LOGGER.info(String.valueOf(nbtCompound));
-        int temperature = 20;
-        if (nbtCompound != null) {
-            
-            if (nbtCompound.contains("crucible.temperature", 3)) {
-                temperature = nbtCompound.getInt("crucible.temperature");
-            } 
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
+        super.appendTooltip(stack, context, tooltip, options);
+        if (stack.contains(DataComponentTypes.CONTAINER_LOOT)) {
+			tooltip.add(UNKNOWN_CONTENTS_TEXT);
+		}
 
-            tooltip.add(Text.translatable("tooltip.first_steps.crucible.temperature", temperature).formatted(Formatting.GRAY, Formatting.ITALIC));
-            
-            NbtCompound blockEntityNbtCompound = nbtCompound.getCompound("BlockEntityTag");
+        int temperature = stack.getTemperature();
 
-            if (blockEntityNbtCompound.contains("Items", 9)) {
-                DefaultedList<ItemStack> defaultedList = DefaultedList.ofSize(9, ItemStack.EMPTY);
-                Inventories.readNbt(blockEntityNbtCompound, defaultedList);
-                int i = 0;
-                int j = 0;
-                Iterator iterator = defaultedList.iterator();
-                
-                if (iterator.hasNext()) {
-                    tooltip.add(Text.empty());
+        tooltip.add(Text.translatable("tooltip.first_steps.crucible.temperature", temperature).formatted(Formatting.GRAY, Formatting.ITALIC));
 
-                    while(iterator.hasNext()) {
-                        ItemStack itemStack = (ItemStack)iterator.next();
-                        if (!itemStack.isEmpty()) {
-                            ++j;
-                            if (i <= 2) {
-                                ++i;
-                                tooltip.add(Text.translatable("tooltip." + FirstSteps.MOD_ID + ".crucible.itemCount", new Object[]{itemStack.getName(), String.valueOf(itemStack.getCount())}));
-                            }
-                        }
-                    }
-         
-                    if (j - i > 0) {
-                        tooltip.add(Text.translatable("tooltip." + FirstSteps.MOD_ID + ".crucible.more", new Object[]{j - i}).formatted(Formatting.ITALIC));
-                    }
-                }
-            }
-        } else {
-            tooltip.add(Text.translatable("tooltip.first_steps.crucible.temperature", temperature).formatted(Formatting.GRAY, Formatting.ITALIC));
-        }
+        int i = 0;
+		int j = 0;
 
-        super.appendTooltip(stack, world, tooltip, context);
+		for (ItemStack itemStack : stack.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT).iterateNonEmpty()) {
+			j++;
+			if (i <= 4) {
+				i++;
+				tooltip.add(Text.translatable("container." + FirstSteps.MOD_ID + ".crucible.itemCount", itemStack.getName(), itemStack.getCount()));
+			}
+		}
+
+		if (j - i > 0) {
+			tooltip.add(Text.translatable("container." + FirstSteps.MOD_ID + ".crucible.more", j - i).formatted(Formatting.ITALIC));
+		}
     }
 
     public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
         ItemStack itemStack = super.getPickStack(world, pos, state);
-        world.getBlockEntity(pos, ModBlockEntities.CRUCIBLE_BLOCK_ENTITY).ifPresent((blockEntity) -> {
-           blockEntity.setStackNbt(itemStack);
-        });
+        world.getBlockEntity(pos, BlockEntityType.SHULKER_BOX).ifPresent(blockEntity -> blockEntity.setStackNbt(itemStack, world.getRegistryManager()));
         return itemStack;
     }
 
     public static ItemStack getItemStack() {
-        return new ItemStack(ModBlocks.CLAY_FIRED_CRUCIBLE);
+        return new ItemStack(ModBlocks.FIRED_CRUCIBLE);
     }
-
-    static {
-        LIT = Properties.LIT;
-        CONTENTS_DYNAMIC_DROP_ID = new Identifier("contents");
-     }
 }

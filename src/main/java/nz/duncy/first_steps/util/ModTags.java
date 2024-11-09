@@ -22,8 +22,15 @@ public class ModTags {
         public static final TagKey<Block> NEEDS_BRONZE_TOOL = 
             createTag("needs_bronze_tool");
 
+        public static final TagKey<Block> INCORRECT_FOR_COPPER_TOOL = 
+            createTag("incorrect_for_copper_tool");
+
+	    public static final TagKey<Block> INCORRECT_FOR_BRONZE_TOOL = 
+            createTag("incorrect_for_bronze_tool");
+	
+
         private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, new Identifier(FirstSteps.MOD_ID, name));
+            return TagKey.of(RegistryKeys.BLOCK, Identifier.of(FirstSteps.MOD_ID, name));
         }
 
     }
@@ -33,8 +40,10 @@ public class ModTags {
         public static final TagKey<Item> ORES = createTag("ores");
 
         private static TagKey<Item> createTag(String name) {
-           return TagKey.of(RegistryKeys.ITEM, new Identifier(FirstSteps.MOD_ID, name));
+           return TagKey.of(RegistryKeys.ITEM, Identifier.of(FirstSteps.MOD_ID, name));
         }
 
     }
+
+    public static final String INCORRECT_FOR_BRONZE_TOOL = null;
 }

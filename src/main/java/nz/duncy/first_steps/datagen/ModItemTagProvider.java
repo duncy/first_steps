@@ -24,8 +24,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
             .add(ModItems.OBSIDIAN_ARROW)
             .add(ModItems.COPPER_ARROW)
             .add(ModItems.BRONZE_ARROW)
-            .add(ModItems.IRON_ARROW)
-            .add(ModItems.STEEL_ARROW);
+            .add(ModItems.IRON_ARROW);
+            // .add(ModItems.STEEL_ARROW);
 
         getOrCreateTagBuilder(ModTags.Items.ORES)
             .add(ModItems.RAW_STONE_COPPER)

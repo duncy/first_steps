@@ -30,7 +30,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             .add(ModBlocks.STONE_IRON_ORE)
             .add(ModBlocks.DEEPSLATE_COPPER_ORE)
             .add(ModBlocks.DEEPSLATE_IRON_ORE)
-            .add(ModBlocks.BASALT_MULLITE_ORE)
+            // .add(ModBlocks.BASALT_MULLITE_ORE)
             .add(ModBlocks.RAW_TIN)
             .add(ModBlocks.RAW_STONE_COPPER)
             .add(ModBlocks.RAW_STONE_IRON)
@@ -48,7 +48,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             .add(ModBlocks.DEEPSLATE_COPPER_ORE);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
-            .add(ModBlocks.BASALT_MULLITE_ORE)
+            // .add(ModBlocks.BASALT_MULLITE_ORE)
             .add(Blocks.OBSIDIAN);
 
         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE)

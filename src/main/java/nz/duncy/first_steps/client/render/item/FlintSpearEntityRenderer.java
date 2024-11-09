@@ -6,6 +6,6 @@ import nz.duncy.first_steps.FirstSteps;
 
 public class FlintSpearEntityRenderer extends SpearEntityRenderer {
     public FlintSpearEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new Identifier(FirstSteps.MOD_ID, "textures/entity/flint_spear.png"));
+        super(context, Identifier.of(FirstSteps.MOD_ID, "textures/entity/flint_spear.png"));
     }
 }

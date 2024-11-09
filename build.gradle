@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.7.4'
+	id 'fabric-loom' version '1.8-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -31,6 +31,19 @@ repositories {
         }
     }
 }
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"first_steps" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+
+}
+
 
 fabricApi {
 	configureDataGeneration()
@@ -65,7 +78,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
@@ -74,8 +87,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {

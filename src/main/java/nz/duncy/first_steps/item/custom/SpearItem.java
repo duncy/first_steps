@@ -75,7 +75,28 @@ public class SpearItem extends ToolItem implements Vanishable {
         if (!world.isClient) {
             stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(user.getActiveHand()));
 
-            EntityType<SpearEntity> type;
+            
+
+            SpearEntity spearEntity = getEntity(stack, world, playerEntity);
+            spearEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, 2.5f, 1.0f);
+
+            if (playerEntity.getAbilities().creativeMode) {
+                spearEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+            }
+
+            world.spawnEntity(spearEntity);
+            world.playSoundFromEntity(null, spearEntity, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0f, 1.0f);
+
+            if (!playerEntity.getAbilities().creativeMode) {
+                playerEntity.getInventory().removeOne(stack);
+            }
+        }
+
+        playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
+    }
+
+    public SpearEntity getEntity(ItemStack stack, World world, PlayerEntity playerEntity) {
+        EntityType<SpearEntity> type;
 
             switch (stack.getItem().toString()) {
                 case "stone_spear":
@@ -107,22 +128,7 @@ public class SpearItem extends ToolItem implements Vanishable {
                     break;
             }
 
-            SpearEntity spearEntity = new SpearEntity(playerEntity, world, stack, type);
-            spearEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, 2.5f, 1.0f);
-
-            if (playerEntity.getAbilities().creativeMode) {
-                spearEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
-            }
-
-            world.spawnEntity(spearEntity);
-            world.playSoundFromEntity(null, spearEntity, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0f, 1.0f);
-
-            if (!playerEntity.getAbilities().creativeMode) {
-                playerEntity.getInventory().removeOne(stack);
-            }
-        }
-
-        playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
+            return new SpearEntity(playerEntity, world, stack, type);
     }
 
     @Override
