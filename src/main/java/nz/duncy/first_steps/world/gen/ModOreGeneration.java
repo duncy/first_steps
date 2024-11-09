@@ -33,8 +33,8 @@ public class ModOreGeneration {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
                 GenerationStep.Feature.UNDERGROUND_ORES, ModPlacedFeatures.DEEPSLATE_IRON_ORE_PLACED_KEY);
 
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.BASALT_DELTAS),
-                GenerationStep.Feature.UNDERGROUND_ORES , ModPlacedFeatures.SILIMANTITE_ORE_PLACED_KEY);
+        // BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.BASALT_DELTAS),
+        //         GenerationStep.Feature.UNDERGROUND_ORES , ModPlacedFeatures.SILIMANTITE_ORE_PLACED_KEY);
 
 
     }

@@ -20,7 +20,7 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> STONE_IRON_ORE_PLACED_KEY = registerKey("stone_iron_ore_placed");
     public static final RegistryKey<PlacedFeature> DEEPSLATE_COPPER_ORE_PLACED_KEY = registerKey("deepslate_copper_ore_placed");
     public static final RegistryKey<PlacedFeature> DEEPSLATE_IRON_ORE_PLACED_KEY = registerKey("deepslate_iron_ore_placed");
-    public static final RegistryKey<PlacedFeature> SILIMANTITE_ORE_PLACED_KEY = registerKey("silimantite_ore_placed");
+    // public static final RegistryKey<PlacedFeature> SILIMANTITE_ORE_PLACED_KEY = registerKey("silimantite_ore_placed");
 
     //public static final RegistryKey<PlacedFeature> STONE_ROCK_PLACED_KEY = registerKey(ModFeature.ROCK_FEATURE_ID);
     // public static final RegistryKey<PlacedFeature> FLINT_ROCK_ORE_PLACED_KEY = registerKey("flint_rock_placed");
@@ -53,9 +53,9 @@ public class ModPlacedFeatures {
                 ModOrePlacement.modifiersWithCount(10, // Veins per chunk
                     HeightRangePlacementModifier.uniform(YOffset.fixed(-64), YOffset.fixed(0))));
 
-        register(context, SILIMANTITE_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SILIMANTITE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(12, // Veins per chunk
-                    HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
+        // register(context, SILIMANTITE_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SILIMANTITE_ORE_KEY),
+        //         ModOrePlacement.modifiersWithCount(12, // Veins per chunk
+        //             HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
 
         //register(context, STONE_ROCK_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.STONE_ROCK_KEY),
         //        List.of(SquarePlacementModifier.of()));

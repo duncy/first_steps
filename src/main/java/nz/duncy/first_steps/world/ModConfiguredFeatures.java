@@ -23,7 +23,7 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<? ,?>> STONE_IRON_ORE_KEY = registerKey("stone_iron_ore");
     public static final RegistryKey<ConfiguredFeature<? ,?>> DEEPSLATE_COPPER_ORE_KEY = registerKey("deepslate_copper_ore");
     public static final RegistryKey<ConfiguredFeature<? ,?>> DEEPSLATE_IRON_ORE_KEY = registerKey("deepslate_iron_ore");
-    public static final RegistryKey<ConfiguredFeature<? ,?>> SILIMANTITE_ORE_KEY = registerKey("silimantite_ore");
+    // public static final RegistryKey<ConfiguredFeature<? ,?>> SILIMANTITE_ORE_KEY = registerKey("silimantite_ore");
 
     //public static final RegistryKey<ConfiguredFeature<? ,?>> STONE_ROCK_KEY = registerKey("stone_rock");
     // public static final RegistryKey<ConfiguredFeature<? ,?>> FLINT_ROCK_KEY = registerKey("flint_rock");
@@ -51,15 +51,15 @@ public class ModConfiguredFeatures {
         List<OreFeatureConfig.Target> overworldDeepslateIronOres =
             List.of(OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.DEEPSLATE_IRON_ORE.getDefaultState()));
 
-        List<OreFeatureConfig.Target> netherSilimantiteOres =
-           List.of(OreFeatureConfig.createTarget(netherReplacables, ModBlocks.BASALT_MULLITE_ORE.getDefaultState()));
+        // List<OreFeatureConfig.Target> netherSilimantiteOres =
+        //    List.of(OreFeatureConfig.createTarget(netherReplacables, ModBlocks.BASALT_MULLITE_ORE.getDefaultState()));
         
         register(context, STONE_TIN_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldStoneTinOres, 16));
         register(context, STONE_COPPER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldStoneCopperOres, 12));
         register(context, STONE_IRON_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldStoneIronOres, 5));
         register(context, DEEPSLATE_COPPER_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldDeepslateCopperOres, 14));
         register(context, DEEPSLATE_IRON_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldDeepslateIronOres, 10));
-        register(context, SILIMANTITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherSilimantiteOres, 12));
+        // register(context, SILIMANTITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(netherSilimantiteOres, 12));
 
         //register(context, STONE_ROCK_KEY, ModFeature.ROCK_FEATURE, new RockFeatureConfig(10, new Identifier(FirstSteps.MOD_ID, "stone_rock")));
     }
