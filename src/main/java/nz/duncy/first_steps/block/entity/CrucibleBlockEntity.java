@@ -5,7 +5,6 @@ import java.util.stream.IntStream;
 
 import org.jetbrains.annotations.Nullable;
 
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -15,10 +14,10 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -30,7 +29,7 @@ import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.custom.CrucibleBlock;
 import nz.duncy.first_steps.screen.CrucibleScreenHandler;
 
-public class CrucibleBlockEntity extends LootableContainerBlockEntity implements ExtendedScreenHandlerFactory, SidedInventory {
+public class CrucibleBlockEntity extends LootableContainerBlockEntity implements NamedScreenHandlerFactory, SidedInventory {
     private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 9).toArray();
     private DefaultedList<ItemStack> inventory;
     private HashMap<String, Integer> volumeContents = new HashMap<>(); 
@@ -89,26 +88,26 @@ public class CrucibleBlockEntity extends LootableContainerBlockEntity implements
         return Text.translatable("container." + FirstSteps.MOD_ID + ".fired_crucible");
     }
 
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        this.readInventoryNbt(nbt);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
+        this.readInventoryNbt(nbt, registryLookup);
         if (nbt.contains("crucible.temperature", 3)) {
             this.temperature = nbt.getInt("crucible.temperature");
         }
     }
 
-    protected void writeNbt(NbtCompound nbt) {
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         nbt.putInt("crucible.temperature", this.temperature);
-        super.writeNbt(nbt);
+        super.writeNbt(nbt, registryLookup);
         if (!this.writeLootTable(nbt)) {
-            Inventories.writeNbt(nbt, this.inventory, false);
+            Inventories.writeNbt(nbt, this.inventory, false, registryLookup);
         }
     }
 
-    public void readInventoryNbt(NbtCompound nbt) {
+    public void readInventoryNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
         if (!this.readLootTable(nbt) && nbt.contains("Items", 9)) {
-            Inventories.readNbt(nbt, this.inventory);
+            Inventories.readNbt(nbt, this.inventory, registryLookup);
         }
     }
 
@@ -136,11 +135,6 @@ public class CrucibleBlockEntity extends LootableContainerBlockEntity implements
         return new CrucibleScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
-    @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
-    }
-
     public void tick(World world, BlockPos pos, BlockState state, CrucibleBlockEntity blockEntity) {
         if (!world.isClient()) {
             boolean dirty = false;
@@ -153,4 +147,14 @@ public class CrucibleBlockEntity extends LootableContainerBlockEntity implements
             }
         }
     }
+
+    @Override
+	protected DefaultedList<ItemStack> getHeldStacks() {
+		return this.inventory;
+	}
+
+    @Override
+	protected void setHeldStacks(DefaultedList<ItemStack> inventory) {
+		this.inventory = inventory;
+	}
 }

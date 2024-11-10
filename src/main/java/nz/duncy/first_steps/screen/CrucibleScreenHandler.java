@@ -4,6 +4,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
@@ -15,19 +16,17 @@ import nz.duncy.first_steps.block.entity.CrucibleBlockEntity;
 public class CrucibleScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
-    public final CrucibleBlockEntity blockEntity;
 
-    public CrucibleScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
-        this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
+    public CrucibleScreenHandler(int syncId, PlayerInventory playerInventory) {
+        this(syncId, playerInventory, new SimpleInventory(9),
             new ArrayPropertyDelegate(3));
     }
 
-    public CrucibleScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
+    public CrucibleScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate arrayPropertyDelegate) {
         super(ModScreenHandlers.CRUCIBLE_SCREEN_HANDLER, syncId);
-        this.inventory = ((Inventory) blockEntity);
+        this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = arrayPropertyDelegate;
-        this.blockEntity = ((CrucibleBlockEntity) blockEntity);
 
         // this.addSlot(new KilnFuelSlot(this, inventory, 0, 44, 50)); // Fuel input
         // this.addSlot(new KilnTopSlot(inventory, 1, 80, 21)); // Top input
@@ -43,7 +42,7 @@ public class CrucibleScreenHandler extends ScreenHandler {
     }
 
     public boolean isFull() {
-        return this.blockEntity.isFull();
+        return false;
     }
 
     public boolean isSmelting() {

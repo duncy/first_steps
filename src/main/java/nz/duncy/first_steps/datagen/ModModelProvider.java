@@ -16,7 +16,6 @@ import net.minecraft.data.client.VariantSetting;
 import net.minecraft.data.client.VariantSettings;
 import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.util.Identifier;
-import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.item.ModItems;
 import nz.duncy.first_steps.state.ModProperties;
@@ -70,7 +69,7 @@ public class ModModelProvider extends FabricModelProvider {
            if (height < 4) {
               id = ModelIds.getBlockSubModelId(ModBlocks.CLAY, "_height" + height * 4);
            } else {
-            id = new Identifier("minecraft:block/clay");
+            id = Identifier.ofVanilla("block/clay");
            }
   
            return blockStateVariant.put(variantSetting, id);

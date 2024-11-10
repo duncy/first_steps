@@ -21,7 +21,7 @@ import java.util.List;
 // https://github.com/TeamGalacticraft/Galacticraft/tree/main (MIT License)
 public class KilningCategory implements DisplayCategory<BasicDisplay> {
     public static final Identifier TEXTURE =
-            new Identifier(FirstSteps.MOD_ID, "textures/gui/kiln_gui.png");
+            Identifier.of(FirstSteps.MOD_ID, "textures/gui/kiln_gui.png");
     public static final CategoryIdentifier<KilningDisplay> FUEL_WASTE =
             CategoryIdentifier.of(FirstSteps.MOD_ID, "kilning");
 

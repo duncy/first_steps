@@ -13,7 +13,7 @@ public class ModStats {
     public static Identifier POTTERS_WHEEL_SPINS;
 
     private static Identifier register(String id, StatFormatter formatter) {
-        Identifier identifier = new Identifier(FirstSteps.MOD_ID, id);
+        Identifier identifier = Identifier.of(FirstSteps.MOD_ID, id);
         Registry.register(Registries.CUSTOM_STAT, id, identifier);
         Stats.CUSTOM.getOrCreateStat(identifier, formatter);
         return identifier;

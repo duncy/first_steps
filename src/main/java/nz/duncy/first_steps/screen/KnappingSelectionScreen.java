@@ -28,9 +28,9 @@ import net.minecraft.world.GameMode;
 import nz.duncy.first_steps.FirstSteps;
 
 public class KnappingSelectionScreen extends HandledScreen<KnappingSelectionScreenHandler> {
-   static final Identifier SLOT_TEXTURE = new Identifier("gamemode_switcher/slot");
-   static final Identifier SELECTION_TEXTURE = new Identifier("gamemode_switcher/selection");
-   private static final Identifier TEXTURE = new Identifier(FirstSteps.MOD_ID, "textures/gui/switcher.png");
+   static final Identifier SLOT_TEXTURE = Identifier.ofVanilla("gamemode_switcher/slot");
+   static final Identifier SELECTION_TEXTURE = Identifier.ofVanilla("gamemode_switcher/selection");
+   private static final Identifier TEXTURE = Identifier.of(FirstSteps.MOD_ID, "textures/gui/switcher.png");
    private static final int TEXTURE_WIDTH = 128;
    private static final int TEXTURE_HEIGHT = 128;
    private static final int BUTTON_SIZE = 26;
@@ -154,8 +154,6 @@ public class KnappingSelectionScreen extends HandledScreen<KnappingSelectionScre
 
    @Override
    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Unimplemented method 'drawBackground'");
    }
 
    

@@ -9,8 +9,8 @@ public class ModRecipes {
 
    public static void registerRecipes() {
       FirstSteps.LOGGER.info("Registering ModRecipes for " + FirstSteps.MOD_ID);
-      Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(FirstSteps.MOD_ID, KilningRecipe.Serializer.ID), KilningRecipe.Serializer.INSTANCE);
-      Registry.register(Registries.RECIPE_TYPE, new Identifier(FirstSteps.MOD_ID, KilningRecipe.Type.ID), KilningRecipe.Type.INSTANCE);
+      Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(FirstSteps.MOD_ID, KilningRecipe.Serializer.ID), KilningRecipe.Serializer.INSTANCE);
+      Registry.register(Registries.RECIPE_TYPE, Identifier.of(FirstSteps.MOD_ID, KilningRecipe.Type.ID), KilningRecipe.Type.INSTANCE);
    }
 
 }

@@ -13,8 +13,8 @@ public class ModItemEntities {
     public static EntityType<SpearEntity> registerSpear(String id) {
         return Registry.register(
                 Registries.ENTITY_TYPE,
-                new Identifier(FirstSteps.MOD_ID, id),
-                FabricEntityTypeBuilder.<SpearEntity>create(SpawnGroup.MISC, SpearEntity::new)
+                Identifier.of(FirstSteps.MOD_ID, id),
+                EntityType.Builder.create(SpearEntity::new, SpawnGroup.MISC)
                 .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
                 .trackRangeBlocks(4)
                 .trackedUpdateRate(10)

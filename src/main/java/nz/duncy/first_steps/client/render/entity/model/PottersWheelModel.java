@@ -92,8 +92,7 @@ public class PottersWheelModel extends Model {
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green,
-            float blue, float alpha) {
+    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
         this.renderBase(matrices, vertices, light, overlay);
         this.renderWheel(matrices, vertices, light, overlay, 0.0F);
     }

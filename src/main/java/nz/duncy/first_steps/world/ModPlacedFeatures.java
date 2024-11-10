@@ -78,7 +78,7 @@ public class ModPlacedFeatures {
     }
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {
-        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(FirstSteps.MOD_ID, name));
+        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(FirstSteps.MOD_ID, name));
     }
 
     public static RegistryKey<PlacedFeature> registerKey(Identifier featureIdentifier) {

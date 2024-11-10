@@ -1,6 +1,5 @@
 package nz.duncy.first_steps.block.custom;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
@@ -17,26 +16,21 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -49,7 +43,7 @@ import net.minecraft.world.WorldView;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.entity.CrucibleBlockEntity;
-import nz.duncy.first_steps.block.entity.ModBlockEntities;
+import nz.duncy.first_steps.component.ModDataComponentTypes;
 
 public class CrucibleBlock extends BlockWithEntity {
     private static final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 10, 13);
@@ -200,7 +194,7 @@ public class CrucibleBlock extends BlockWithEntity {
 			tooltip.add(UNKNOWN_CONTENTS_TEXT);
 		}
 
-        int temperature = stack.getTemperature();
+        int temperature  = stack.getOrDefault(ModDataComponentTypes.TEMPERATURE, 20);
 
         tooltip.add(Text.translatable("tooltip.first_steps.crucible.temperature", temperature).formatted(Formatting.GRAY, Formatting.ITALIC));
 

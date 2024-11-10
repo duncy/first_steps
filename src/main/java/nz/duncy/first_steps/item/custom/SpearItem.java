@@ -1,13 +1,16 @@
 package nz.duncy.first_steps.item.custom;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
+import java.util.List;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.EnchantmentEffectComponentTypes;
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.component.type.ToolComponent;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,8 +19,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.Vanishable;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
@@ -28,22 +32,35 @@ import net.minecraft.world.World;
 import nz.duncy.first_steps.item.entity.ModItemEntities;
 import nz.duncy.first_steps.item.entity.SpearEntity;
 
-public class SpearItem extends ToolItem implements Vanishable {
-    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
-    private final float attackDamage;
+public class SpearItem extends ToolItem {
 
-    public SpearItem(ToolMaterial toolMaterial, int attackDamage, Item.Settings settings) {
-        super(toolMaterial, settings);
-        this.attackDamage = (float)attackDamage + toolMaterial.getAttackDamage();
-        ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", this.attackDamage, EntityAttributeModifier.Operation.ADDITION));
-        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", -2.9f, EntityAttributeModifier.Operation.ADDITION));
-        this.attributeModifiers = builder.build();
+    public SpearItem(ToolMaterial toolMaterial, Item.Settings settings) {
+        super(toolMaterial, settings.component(DataComponentTypes.TOOL, createToolComponent()));
     }
 
-    public float getAttackDamage() {
-        return this.attackDamage;
+    private static ToolComponent createToolComponent() {
+		    return new ToolComponent(
+			List.of(), 1.0F, 2
+		);
     }
+
+    public static AttributeModifiersComponent createAttributeModifiers(ToolMaterial material, int baseAttackDamage, float attackSpeed) {
+		return AttributeModifiersComponent.builder()
+			.add(
+				EntityAttributes.GENERIC_ATTACK_DAMAGE,
+				new EntityAttributeModifier(
+					BASE_ATTACK_DAMAGE_MODIFIER_ID, (double)((float)baseAttackDamage + material.getAttackDamage()), EntityAttributeModifier.Operation.ADD_VALUE
+				),
+				AttributeModifierSlot.MAINHAND
+			)
+			.add(
+				EntityAttributes.GENERIC_ATTACK_SPEED,
+				new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, (double)attackSpeed, EntityAttributeModifier.Operation.ADD_VALUE),
+				AttributeModifierSlot.MAINHAND
+			)
+			.build();
+	}
+
 
     @Override
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
@@ -56,9 +73,9 @@ public class SpearItem extends ToolItem implements Vanishable {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
-        return 72000;
-    }
+	public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+		return 72000;
+	}
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
@@ -67,32 +84,37 @@ public class SpearItem extends ToolItem implements Vanishable {
         }
 
         PlayerEntity playerEntity = (PlayerEntity) user;
-        int i = this.getMaxUseTime(stack) - remainingUseTicks;
+        int i = this.getMaxUseTime(stack, user) - remainingUseTicks;
         if (i < 10) {
             return;
         }
+
+        if (!isAboutToBreak(stack)) {
+            RegistryEntry<SoundEvent> registryEntry = (RegistryEntry<SoundEvent>)EnchantmentHelper.getEffect(stack, EnchantmentEffectComponentTypes.TRIDENT_SOUND)
+                .orElse(SoundEvents.ITEM_TRIDENT_THROW);
         
-        if (!world.isClient) {
-            stack.damage(1, playerEntity, p -> p.sendToolBreakStatus(user.getActiveHand()));
+            if (!world.isClient) {
+                stack.damage(1, playerEntity, LivingEntity.getSlotForHand(user.getActiveHand()));
 
-            
+                
 
-            SpearEntity spearEntity = getEntity(stack, world, playerEntity);
-            spearEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, 2.5f, 1.0f);
+                SpearEntity spearEntity = getEntity(stack, world, playerEntity);
+                spearEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0f, 2.5f, 1.0f);
 
-            if (playerEntity.getAbilities().creativeMode) {
-                spearEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+                if (playerEntity.getAbilities().creativeMode) {
+                    spearEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+                }
+
+                world.spawnEntity(spearEntity);
+                world.playSoundFromEntity(null, spearEntity, registryEntry.value(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+
+                if (!playerEntity.getAbilities().creativeMode) {
+                    playerEntity.getInventory().removeOne(stack);
+                }
             }
 
-            world.spawnEntity(spearEntity);
-            world.playSoundFromEntity(null, spearEntity, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0f, 1.0f);
-
-            if (!playerEntity.getAbilities().creativeMode) {
-                playerEntity.getInventory().removeOne(stack);
-            }
+            playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
-
-        playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
     }
 
     public SpearEntity getEntity(ItemStack stack, World world, PlayerEntity playerEntity) {
@@ -134,7 +156,7 @@ public class SpearItem extends ToolItem implements Vanishable {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        if (itemStack.getDamage() >= itemStack.getMaxDamage() - 1) {
+        if (isAboutToBreak(itemStack)) {
             return TypedActionResult.fail(itemStack);
         }
         user.setCurrentHand(hand);
@@ -143,25 +165,12 @@ public class SpearItem extends ToolItem implements Vanishable {
     
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
         return true;
     }
 
-    @Override
-    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        if ((double)state.getHardness(world, pos) != 0.0) {
-            stack.damage(2, miner, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
-        }
-        return true;
-    }
-
-    @Override
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
-        if (slot == EquipmentSlot.MAINHAND) {
-            return this.attributeModifiers;
-        }
-        return super.getAttributeModifiers(slot);
-    }
+    private static boolean isAboutToBreak(ItemStack stack) {
+		return stack.getDamage() >= stack.getMaxDamage() - 1;
+	}
 
     @Override
     public int getEnchantability() {

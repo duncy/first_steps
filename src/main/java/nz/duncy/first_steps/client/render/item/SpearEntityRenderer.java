@@ -34,7 +34,7 @@ public class SpearEntityRenderer extends EntityRenderer<SpearEntity> {
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(g, spearEntity.prevPitch, spearEntity.getPitch()) + 135.0f));
         matrixStack.translate(-0.25f, 0, 0);
         VertexConsumer vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumerProvider, this.model.getLayer(this.getTexture(spearEntity)), false, spearEntity.isEnchanted());
-        this.model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
+        this.model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, 1);
         matrixStack.pop();
         super.render(spearEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }

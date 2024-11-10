@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -30,7 +31,7 @@ import nz.duncy.first_steps.block.custom.KilnBlock;
 import nz.duncy.first_steps.recipe.KilningRecipe;
 import nz.duncy.first_steps.screen.KilnScreenHandler;
 
-public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
+public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
     private static final int KILN_FUEL_INPUT_SLOT = 0; // Fuel input
@@ -78,11 +79,6 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
                 return 3;
             }
         };
-    }
-
-    @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
     }
 
     @Override
@@ -227,9 +223,8 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
         Inventory inv = new SimpleInventory(1);
         inv.setStack(KILN_FUEL_INPUT_SLOT, this.currentFuel);
         FirstSteps.LOGGER.info(String.valueOf(inv));
-
-        return getWorld().getRecipeManager().getFirstMatch(KilningRecipe.Type.INSTANCE, inv, getWorld());
-
+ 
+        return world.getRecipeManager().getFirstMatch(KilningRecipe.Type.INSTANCE, inv, world);
     }
 
     private void craftWasteProduct() {
@@ -276,6 +271,4 @@ public class KilnBlockEntity extends BlockEntity implements ExtendedScreenHandle
     public ItemStack getCrucible() {
         return this.inventory.get(KILN_INPUT_SLOT);
     }
-
-
 }

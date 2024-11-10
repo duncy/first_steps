@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 
 public class CrucibleScreen extends HandledScreen<CrucibleScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(FirstSteps.MOD_ID, "textures/gui/crucible_gui.png");
+    private static final Identifier TEXTURE = Identifier.of(FirstSteps.MOD_ID, "textures/gui/crucible_gui.png");
     private static final int backgroundHeight = 168;
 
     public CrucibleScreen(CrucibleScreenHandler handler, PlayerInventory inventory, Text title) {

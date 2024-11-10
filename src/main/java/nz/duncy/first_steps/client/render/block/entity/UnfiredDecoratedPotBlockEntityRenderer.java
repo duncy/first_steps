@@ -2,10 +2,12 @@ package nz.duncy.first_steps.client.render.block.entity;
 
 import java.util.EnumSet;
 import java.util.Objects;
+import java.util.Optional;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.DecoratedPotPatterns;
-import net.minecraft.block.entity.DecoratedPotBlockEntity;
+import net.minecraft.block.entity.Sherds;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -21,7 +23,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.RotationAxis;
 import nz.duncy.first_steps.block.entity.UnfiredDecoratedPotBlockEntity;
@@ -42,7 +43,7 @@ public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRender
    public final SpriteIdentifier baseTexture;
 
    public UnfiredDecoratedPotBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-      this.baseTexture = (SpriteIdentifier)Objects.requireNonNull(ModTexturedRenderLayers.getUnfiredDecoratedPotPatternTextureId(DecoratedPotPatterns.DECORATED_POT_BASE_KEY));
+      this.baseTexture = (SpriteIdentifier)Objects.requireNonNull(ModTexturedRenderLayers.getUnfiredDecoratedPotPatternTextureId(DecoratedPotPatterns.BLANK));
       ModelPart modelPart = context.getLayerModelPart(ModEntityModelLayers.UNFIRED_DECORATED_POT_BASE);
       this.neck = modelPart.getChild("neck");
       this.top = modelPart.getChild("top");
@@ -78,29 +79,29 @@ public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRender
    }
 
    @Nullable
-   private static SpriteIdentifier getTextureIdFromSherd(Item item) {
-      SpriteIdentifier spriteIdentifier = ModTexturedRenderLayers.getUnfiredDecoratedPotPatternTextureId(DecoratedPotPatterns.fromSherd(item));
-      if (spriteIdentifier == null) {
-         spriteIdentifier = ModTexturedRenderLayers.getUnfiredDecoratedPotPatternTextureId(DecoratedPotPatterns.fromSherd(Items.BRICK));
+   private static SpriteIdentifier getTextureIdFromSherd(Optional<Item> sherd) {
+      if (sherd.isPresent()) {
+         SpriteIdentifier spriteIdentifier = ModTexturedRenderLayers.getUnfiredDecoratedPotPatternTextureId(DecoratedPotPatterns.fromSherd((Item)sherd.get()));
+			if (spriteIdentifier != null) {
+				return spriteIdentifier;
+			}
       }
-      return spriteIdentifier;
+
+      return ModTexturedRenderLayers.UNFIRED_DECORATED_POT_SIDE;
    }
 
-   public void render(UnfiredDecoratedPotBlockEntity decoratedPotBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
+   public void render(UnfiredDecoratedPotBlockEntity unfiredDecoratedPotBlockEntity, float f, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
       matrixStack.push();
-      Direction direction = decoratedPotBlockEntity.getHorizontalFacing();
+      Direction direction = unfiredDecoratedPotBlockEntity.getHorizontalFacing();
       matrixStack.translate(0.5, 0.0, 0.5);
       matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F - direction.asRotation()));
       matrixStack.translate(-0.5, 0.0, -0.5);
    
-
-      VertexConsumer vertexConsumer = this.baseTexture.getVertexConsumer(vertexConsumerProvider, RenderLayer::getEntitySolid);
-      
-
+      VertexConsumer vertexConsumer = ModTexturedRenderLayers.UNFIRED_DECORATED_POT_BASE.getVertexConsumer(vertexConsumerProvider, RenderLayer::getEntitySolid);
       this.neck.render(matrixStack, vertexConsumer, i, j);
       this.top.render(matrixStack, vertexConsumer, i, j);
       this.bottom.render(matrixStack, vertexConsumer, i, j);
-      DecoratedPotBlockEntity.Sherds sherds = decoratedPotBlockEntity.getSherds();
+      Sherds sherds = unfiredDecoratedPotBlockEntity.getSherds();
       this.renderDecoratedSide(this.front, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.front()));
       this.renderDecoratedSide(this.back, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.back()));
       this.renderDecoratedSide(this.left, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.left()));
@@ -108,14 +109,7 @@ public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRender
       matrixStack.pop();
    }
 
-   private void renderDecoratedSide(ModelPart part, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, @Nullable SpriteIdentifier textureId) {
-      if (textureId == null) {
-         textureId = getTextureIdFromSherd(Items.BRICK);
-      }
-
-      if (textureId != null) {
-         part.render(matrices, textureId.getVertexConsumer(vertexConsumers, RenderLayer::getEntitySolid), light, overlay);
-      }
-
-   }
+   private void renderDecoratedSide(ModelPart part, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, SpriteIdentifier textureId) {
+		part.render(matrices, textureId.getVertexConsumer(vertexConsumers, RenderLayer::getEntitySolid), light, overlay);
+	}
 }

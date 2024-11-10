@@ -9,7 +9,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import nz.duncy.first_steps.FirstSteps;
 
 public class ModFeature {
-    public static final Identifier ROCK_FEATURE_ID = new Identifier(FirstSteps.MOD_ID, "rock_feature");
+    public static final Identifier ROCK_FEATURE_ID = Identifier.of(FirstSteps.MOD_ID, "rock_feature");
     public static final RockFeature ROCK_FEATURE = new RockFeature(RockFeatureConfig.CODEC);
 
     private static <FC extends FeatureConfig, F extends Feature<FC>> void register(Identifier feature_id, F feature) {

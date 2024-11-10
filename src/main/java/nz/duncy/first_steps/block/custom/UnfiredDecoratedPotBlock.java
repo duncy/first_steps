@@ -21,7 +21,6 @@ import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemPlacementContext;
@@ -30,6 +29,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.registry.tag.EnchantmentTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.state.StateManager;
@@ -284,7 +284,7 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
       ItemStack itemStack = player.getMainHandStack();
       BlockState blockState = state;
-      if (itemStack.isIn(ItemTags.SHOVELS) && !EnchantmentHelper.hasSilkTouch(itemStack)) {
+      if (itemStack.isIn(ItemTags.SHOVELS) && !EnchantmentHelper.hasAnyEnchantmentsIn(itemStack, EnchantmentTags.PREVENTS_DECORATED_POT_SHATTERING)) {
          blockState = (BlockState) state.with(CRACKED, true);
          world.setBlockState(pos, blockState, 4);
       }

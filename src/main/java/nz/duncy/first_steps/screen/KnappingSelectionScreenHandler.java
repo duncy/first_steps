@@ -11,19 +11,18 @@ import net.minecraft.network.packet.s2c.play.ScreenHandlerPropertyUpdateS2CPacke
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
 import nz.duncy.first_steps.block.entity.RockBlockEntity;
 
 public class KnappingSelectionScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;
-    public final RockBlockEntity blockEntity;
 
-    public KnappingSelectionScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
-        this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(buf.readBlockPos()), new ArrayPropertyDelegate(3));
-    }
+    public KnappingSelectionScreenHandler(int syncId, PlayerInventory playerInventory) {
+		this(syncId, playerInventory, new ArrayPropertyDelegate(1));
+	}
 
-    public KnappingSelectionScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
+    public KnappingSelectionScreenHandler(int syncId, PlayerInventory playerInventory, PropertyDelegate arrayPropertyDelegate) {
         super(ModScreenHandlers.KNAPPING_SELECTION_SCREEN_HANDLER, syncId);
-        this.blockEntity = (RockBlockEntity) blockEntity;
         this.propertyDelegate = arrayPropertyDelegate;
 
 

@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 
 public class KilnScreen extends HandledScreen<KilnScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(FirstSteps.MOD_ID, "textures/gui/kiln_gui.png");
+    private static final Identifier TEXTURE = Identifier.of(FirstSteps.MOD_ID, "textures/gui/kiln_gui.png");
 
     public KilnScreen(KilnScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
