@@ -5,7 +5,6 @@ import org.jetbrains.annotations.Nullable;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.Blocks;
@@ -15,7 +14,6 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -72,11 +70,6 @@ public class PottersWheelBlock extends BlockWithEntity {
         return SHAPE;
     }
 
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED;
-    }
-
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
@@ -121,17 +114,14 @@ public class PottersWheelBlock extends BlockWithEntity {
                         world.playSound(null, pos, SoundEvents.BLOCK_MUD_FALL, SoundCategory.BLOCKS, 1f, 1f);
 
                         ServerWorld serverWorld = (ServerWorld) world;
-                        ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-                        serverWorld.spawnParticles(serverPlayer, ParticleTypes.POOF, true, hit.getPos().getX(), hit.getPos().getY(), hit.getPos().getZ(), 5, 0.0, 0.0, 0.0, 0.0);
-
+                        serverWorld.spawnParticles(ParticleTypes.POOF, true, true, hit.getPos().getX(), hit.getPos().getY(), hit.getPos().getZ(), 5, 0.0, 0.0, 0.0, 0.0);
                     } else if (blockState.getBlock() == Blocks.CLAY) {
                         world.setBlockState(abovePos, Blocks.DECORATED_POT.getDefaultState());
                         
                         world.playSound(null, pos, SoundEvents.BLOCK_MUD_HIT, SoundCategory.BLOCKS, 1f, 1f);
 
                         ServerWorld serverWorld = (ServerWorld) world;
-                        ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-                        serverWorld.spawnParticles(serverPlayer, ParticleTypes.POOF, true, hit.getPos().getX(), hit.getPos().getY(), hit.getPos().getZ(), 5, 0.0, 0.0, 0.0, 0.0);
+                        serverWorld.spawnParticles(ParticleTypes.POOF, true, true, hit.getPos().getX(), hit.getPos().getY(), hit.getPos().getZ(), 5, 0.0, 0.0, 0.0, 0.0);
                     }
 
                     return ActionResult.SUCCESS;

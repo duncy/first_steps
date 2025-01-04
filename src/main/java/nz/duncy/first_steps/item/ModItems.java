@@ -1,5 +1,7 @@
 package nz.duncy.first_steps.item;
 
+import java.util.function.Function;
+
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ArrowItem;
@@ -7,12 +9,15 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.Items;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterials;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.item.custom.TinSourceItem;
@@ -104,76 +109,57 @@ public class ModItems {
     public static final Item IRON_HEAD_SWORD = registerItem("iron_head_sword", new Item(new Item.Settings()));
    
     // Hoes
-    public static final Item FLINT_HOE = registerItem("flint_hoe", new HoeItem(ModToolMaterials.FLINT, new Item.Settings()
-        .attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.FLINT, -1.0F, -2.0F)))); 
-    public static final Item BASALT_HOE = registerItem("basalt_hoe", new HoeItem(ModToolMaterials.BASALT, new Item.Settings()
-        .attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.BASALT, -1.0F, -2.0F))));
-    public static final Item OBSIDIAN_HOE = registerItem("obsidian_hoe", new HoeItem(ModToolMaterials.OBSIDIAN, new Item.Settings()
-        .attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.OBSIDIAN, -1.0F, -2.0F))));
-    public static final Item COPPER_HOE = registerItem("copper_hoe", new HoeItem(ModToolMaterials.COPPER, new Item.Settings()
-        .attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.COPPER, -1.5F, -1.5F))));
-    public static final Item BRONZE_HOE = registerItem("bronze_hoe", new HoeItem(ModToolMaterials.BRONZE, new Item.Settings()
-        .attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.BRONZE, -2.0F, -1.0F))));
+    public static final Item FLINT_HOE = registerItem("flint_hoe", settings -> new HoeItem(ModToolMaterials.FLINT, -1.0F, -2.0F, settings)); 
+    public static final Item BASALT_HOE = registerItem("basalt_hoe", settings -> new HoeItem(ModToolMaterials.BASALT, -1.0F, -2.0F, settings));
+    public static final Item OBSIDIAN_HOE = registerItem("obsidian_hoe", settings -> new HoeItem(ModToolMaterials.OBSIDIAN, -1.0F, -2.0F, settings));
+    public static final Item COPPER_HOE = registerItem("copper_hoe", settings -> new HoeItem(ModToolMaterials.COPPER, -1.5F, -1.5F, settings));
+    public static final Item BRONZE_HOE = registerItem("bronze_hoe", settings -> new HoeItem(ModToolMaterials.BRONZE, -2.0F, -1.0F, settings));
     // public static final Item STEEL_HOE = registerItem("steel_hoe", new HoeItem(ModToolMaterials.STEEL, -1, -2.0F, new Item.Settings()));
 
     // Shovels
-    public static final Item FLINT_SHOVEL = registerItem("flint_shovel", new ShovelItem(ModToolMaterials.FLINT, new Item.Settings()
-        .attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.FLINT, 1.5F, -3.0F))));
-    public static final Item BASALT_SHOVEL = registerItem("basalt_shovel", new ShovelItem(ModToolMaterials.BASALT, new Item.Settings()
-        .attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.BASALT, 1.5F, -3.0F))));
-    public static final Item OBSIDIAN_SHOVEL = registerItem("obsidian_shovel", new ShovelItem(ModToolMaterials.OBSIDIAN, new Item.Settings()
-        .attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.OBSIDIAN, 1.5F, -3.0F))));
-    public static final Item COPPER_SHOVEL = registerItem("copper_shovel", new ShovelItem(ModToolMaterials.COPPER, new Item.Settings()
-        .attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.COPPER, 1.5F, -3.0F))));
-    public static final Item BRONZE_SHOVEL = registerItem("bronze_shovel", new ShovelItem(ModToolMaterials.BRONZE, new Item.Settings()
-        .attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.BRONZE, 1.5F, -3.0F))));
+    public static final Item FLINT_SHOVEL = registerItem("flint_shovel", settings -> new ShovelItem(ModToolMaterials.FLINT, 1.5F, -3.0F, settings));
+    public static final Item BASALT_SHOVEL = registerItem("basalt_shovel", settings -> new ShovelItem(ModToolMaterials.BASALT, 1.5F, -3.0F, settings));
+    public static final Item OBSIDIAN_SHOVEL = registerItem("obsidian_shovel", settings -> new ShovelItem(ModToolMaterials.OBSIDIAN, 1.5F, -3.0F, settings));
+    public static final Item COPPER_SHOVEL = registerItem("copper_shovel", settings -> new ShovelItem(ModToolMaterials.COPPER, 1.5F, -3.0F, settings));
+    public static final Item BRONZE_SHOVEL = registerItem("bronze_shovel", settings -> new ShovelItem(ModToolMaterials.BRONZE, 1.5F, -3.0F, settings));
     // public static final Item STEEL_SHOVEL = registerItem("steel_shovel", new ShovelItem(ModToolMaterials.STEEL, 1.5F, -3.0F, new Item.Settings()));
 
     // Axes
-    public static final Item FLINT_AXE = registerItem("flint_axe", new AxeItem(ModToolMaterials.FLINT, new Item.Settings()
-        .attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.FLINT, 7.0F, -3.2F)))); 
-    public static final Item BASALT_AXE = registerItem("basalt_axe", new AxeItem(ModToolMaterials.BASALT, new Item.Settings()
-        .attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.BASALT, 7.0F, -3.2F))));
-    public static final Item OBSIDIAN_AXE = registerItem("obsidian_axe", new AxeItem(ModToolMaterials.OBSIDIAN, new Item.Settings()
-        .attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.OBSIDIAN, 7.0F, -3.2F))));
-    public static final Item COPPER_AXE = registerItem("copper_axe", new AxeItem(ModToolMaterials.COPPER, new Item.Settings()
-        .attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.COPPER, 6.0F, -3.1F))));
-    public static final Item BRONZE_AXE = registerItem("bronze_axe", new AxeItem(ModToolMaterials.BRONZE, new Item.Settings()
-        .attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.BRONZE, 6.0F, -3.1F))));
+    public static final Item FLINT_AXE = registerItem("flint_axe", settings -> new AxeItem(ModToolMaterials.FLINT, 7.0F, -3.2F, settings)); 
+    public static final Item BASALT_AXE = registerItem("basalt_axe", settings -> new AxeItem(ModToolMaterials.BASALT, 7.0F, -3.2F, settings));
+    public static final Item OBSIDIAN_AXE = registerItem("obsidian_axe", settings -> new AxeItem(ModToolMaterials.OBSIDIAN, 7.0F, -3.2F, settings));
+    public static final Item COPPER_AXE = registerItem("copper_axe", settings -> new AxeItem(ModToolMaterials.COPPER, 6.0F, -3.1F, settings));
+    public static final Item BRONZE_AXE = registerItem("bronze_axe", settings -> new AxeItem(ModToolMaterials.BRONZE, 6.0F, -3.1F, settings));
     // public static final Item STEEL_AXE = registerItem("steel_axe", new AxeItem(ModToolMaterials.STEEL, 5.0F, -3.0f, new Item.Settings()));
 
     // Pickaxes
-    public static final Item COPPER_PICKAXE = registerItem("copper_pickaxe", new PickaxeItem(ModToolMaterials.COPPER,new Item.Settings()
-        .attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.COPPER, 1.0F, -2.8F))));
-    public static final Item BRONZE_PICKAXE = registerItem("bronze_pickaxe", new PickaxeItem(ModToolMaterials.BRONZE, new Item.Settings()
-        .attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.COPPER, 1.0F, -2.8F))));
+    public static final Item COPPER_PICKAXE = registerItem("copper_pickaxe", settings -> new PickaxeItem(ModToolMaterials.COPPER, 1.0F, -2.8F, settings));
+    public static final Item BRONZE_PICKAXE = registerItem("bronze_pickaxe", settings -> new PickaxeItem(ModToolMaterials.BRONZE, 1.0F, -2.8F, settings));
     // public static final Item STEEL_PICKAXE = registerItem("steel_pickaxe", new PickaxeItem(ModToolMaterials.STEEL, 1, -2.8F, new Item.Settings()));
 
     // Spears
-    public static final Item STONE_SPEAR = registerItem("stone_spear", new SpearItem(ToolMaterials.STONE, 3, new Item.Settings()));
-    public static final Item FLINT_SPEAR =  registerItem("flint_spear", new SpearItem(ModToolMaterials.FLINT, 3, new Item.Settings()));
-    public static final Item BASALT_SPEAR =  registerItem("basalt_spear", new SpearItem(ModToolMaterials.BASALT, 3, new Item.Settings()));
-    public static final Item OBSIDIAN_SPEAR =  registerItem("obsidian_spear", new SpearItem(ModToolMaterials.OBSIDIAN, 3, new Item.Settings()));
-    public static final Item COPPER_SPEAR =  registerItem("copper_spear", new SpearItem(ModToolMaterials.COPPER, 3, new Item.Settings()));
-    public static final Item BRONZE_SPEAR =  registerItem("bronze_spear", new SpearItem(ModToolMaterials.BRONZE, 3, new Item.Settings()));
-    public static final Item IRON_SPEAR =  registerItem("iron_spear", new SpearItem(ToolMaterials.IRON, 3, new Item.Settings()));
+    public static final Item STONE_SPEAR = registerItem("stone_spear", settings -> new SpearItem(ToolMaterial.STONE, 1.0F, settings));
+    public static final Item FLINT_SPEAR =  registerItem("flint_spear", settings -> new SpearItem(ModToolMaterials.FLINT, 1.0F, settings));
+    public static final Item BASALT_SPEAR =  registerItem("basalt_spear", settings -> new SpearItem(ModToolMaterials.BASALT, 1.0F, settings));
+    public static final Item OBSIDIAN_SPEAR =  registerItem("obsidian_spear", settings -> new SpearItem(ModToolMaterials.OBSIDIAN, 1.0F, settings));
+    public static final Item COPPER_SPEAR =  registerItem("copper_spear", settings -> new SpearItem(ModToolMaterials.COPPER, 1.0F, settings));
+    public static final Item BRONZE_SPEAR =  registerItem("bronze_spear", settings -> new SpearItem(ModToolMaterials.BRONZE, 1.0F, settings));
+    public static final Item IRON_SPEAR =  registerItem("iron_spear", settings -> new SpearItem(ToolMaterial.IRON, 1.0F, settings));
     // public static final Item STEEL_SPEAR =  registerItem("steel_spear", new SpearItem(ModToolMaterials.STEEL, 3, new Item.Settings()));
 
     // Knives
-    public static final Item STONE_KNIFE = registerItem("stone_knife", new KnifeItem(ToolMaterials.STONE, 0, new Item.Settings()));
-    public static final Item FLINT_KNIFE =  registerItem("flint_knife", new KnifeItem(ModToolMaterials.FLINT, 0, new Item.Settings()));
-    public static final Item BASALT_KNIFE =  registerItem("basalt_knife", new KnifeItem(ModToolMaterials.BASALT, 0, new Item.Settings()));
-    public static final Item OBSIDIAN_KNIFE =  registerItem("obsidian_knife", new KnifeItem(ModToolMaterials.OBSIDIAN, 0, new Item.Settings()));
-    public static final Item COPPER_KNIFE =  registerItem("copper_knife", new KnifeItem(ModToolMaterials.COPPER, 0, new Item.Settings()));
-    public static final Item BRONZE_KNIFE =  registerItem("bronze_knife", new KnifeItem(ModToolMaterials.BRONZE, 0, new Item.Settings()));
-    public static final Item IRON_KNIFE =  registerItem("iron_knife", new KnifeItem(ToolMaterials.IRON, 0, new Item.Settings()));
+    public static final Item STONE_KNIFE = registerItem("stone_knife", settings -> new KnifeItem(ToolMaterial.STONE, settings));
+    public static final Item FLINT_KNIFE =  registerItem("flint_knife", settings -> new KnifeItem(ModToolMaterials.FLINT, settings));
+    public static final Item BASALT_KNIFE =  registerItem("basalt_knife", settings -> new KnifeItem(ModToolMaterials.BASALT, settings));
+    public static final Item OBSIDIAN_KNIFE =  registerItem("obsidian_knife", settings -> new KnifeItem(ModToolMaterials.OBSIDIAN, settings));
+    public static final Item COPPER_KNIFE =  registerItem("copper_knife", settings -> new KnifeItem(ModToolMaterials.COPPER, settings));
+    public static final Item BRONZE_KNIFE =  registerItem("bronze_knife", settings -> new KnifeItem(ModToolMaterials.BRONZE, settings));
+    public static final Item IRON_KNIFE =  registerItem("iron_knife", settings -> new KnifeItem(ToolMaterial.IRON, settings));
     // public static final Item STEEL_KNIFE =  registerItem("steel_knife", new KnifeItem(ModToolMaterials.STEEL, 0, new Item.Settings()));
 
     // Swords
-    public static final Item COPPER_SWORD = registerItem("copper_sword", new SwordItem(ModToolMaterials.COPPER, 
-        new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.WOOD, 3, -2.4F))));
-    public static final Item BRONZE_SWORD = registerItem("bronze_sword", new SwordItem(ModToolMaterials.BRONZE, 
-        new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.WOOD, 3, -2.4F))));
+    public static final Item COPPER_SWORD = registerItem("copper_sword", settings -> new SwordItem(ModToolMaterials.COPPER, 3.0F, -2.4F, settings));
+    public static final Item BRONZE_SWORD = registerItem("bronze_sword", settings -> new SwordItem(ModToolMaterials.BRONZE, 3.0F, -2.4F, settings));
     // public static final Item STEEL_SWORD = registerItem("steel_sword", new SwordItem(ModToolMaterials.STEEL, 3, -2.4f, new Item.Settings()));
 
     // Ingots
@@ -340,6 +326,14 @@ public class ModItems {
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(FirstSteps.MOD_ID, name), item);
     }
+
+    public static Item registerItem(String id, Function<Item.Settings, Item> factory) {
+		return Items.register(keyOf(id), factory, new Item.Settings());
+	}
+
+    private static RegistryKey<Item> keyOf(String id) {
+		return RegistryKey.of(RegistryKeys.ITEM, Identifier.of(FirstSteps.MOD_ID, id));
+	}
 
     public static void registerModItems() {
         FirstSteps.LOGGER.info("Registering mod items for " + FirstSteps.MOD_ID);

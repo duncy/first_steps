@@ -9,12 +9,10 @@ import net.minecraft.client.gui.widget.ClickableWidget;
 @Environment(EnvType.CLIENT)
 public class ButtonWidget extends ClickableWidget {
    private boolean selected;
-   private final KnappingSelectionScreen selectionScreen;
    public final KnappingSelection selection;
 
-   public ButtonWidget(KnappingSelectionScreen selectionScreen, KnappingSelection selection, int x, int y) {
+   public ButtonWidget(KnappingSelection selection, int x, int y) {
       super(x, y, 26, 26, selection.getText());
-      this.selectionScreen = selectionScreen;
       this.selection = selection;
    }
 

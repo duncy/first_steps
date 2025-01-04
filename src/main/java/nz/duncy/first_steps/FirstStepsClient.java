@@ -37,6 +37,8 @@ public class FirstStepsClient implements ClientModInitializer {
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WOODEN_TONGS, new TongItemRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.POTTERS_WHEEL.asItem(), new ModBuiltinModelItemRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.UNFIRED_DECORATED_POT.asItem(), new ModBuiltinModelItemRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.STONE_SPEAR, new ModBuiltinModelItemRenderer());
+
 
         // Register Screen Handlers
         HandledScreens.register(ModScreenHandlers.KILN_SCREEN_HANDLER, KilnScreen::new);

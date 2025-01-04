@@ -1,16 +1,16 @@
 package nz.duncy.first_steps.block;
 
-import com.feintha.regedit.RegistryEditEvent;
+// import com.feintha.regedit.RegistryEditEvent;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.PillarBlock;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -24,7 +24,7 @@ import nz.duncy.first_steps.block.custom.RockBlock;
 import nz.duncy.first_steps.block.custom.UnfiredCrucibleBlock;
 import nz.duncy.first_steps.block.custom.UnfiredDecoratedPotBlock;
 import nz.duncy.first_steps.block.custom.UnfiredMoldBlock;
-import nz.duncy.first_steps.client.render.item.RockBlockItem;
+import nz.duncy.first_steps.item.custom.RockBlockItem;
 import nz.duncy.first_steps.block.custom.PottersWheelBlock;
 
 public class ModBlocks {
@@ -47,20 +47,18 @@ public class ModBlocks {
         public static final Block STONE_ROCK = registerRockBlock("stone_rock",
                         new RockBlock(AbstractBlock.Settings.create().strength(0.0F, 0.0F)
                                         .pistonBehavior(PistonBehavior.DESTROY)
-                                        .mapColor(MapColor.STONE_GRAY), Identifier.of("minecraft:block/stone")));
+                                        .mapColor(MapColor.STONE_GRAY)));
 
-        public static Block FLINT_ROCK = registerRockBlockWithExistingVanillaItem("flint_rock",
-                        new RockBlock(AbstractBlock.Settings.copy(STONE_ROCK).mapColor(MapColor.BLACK),
-                                        Identifier.of(FirstSteps.MOD_ID, "block/flint_rock")),
-                                        Items.FLINT);
+        public static Block FLINT_ROCK = registerRockBlock("flint_rock",
+                        new RockBlock(AbstractBlock.Settings.copy(STONE_ROCK)
+                                        .mapColor(MapColor.BLACK)));
+                                        // Items.FLINT);
 
         public static final Block BASALT_ROCK = registerRockBlock("basalt_rock",
-                        new RockBlock(AbstractBlock.Settings.copy(STONE_ROCK),
-                                        Identifier.of("minecraft:block/basalt_side")));
+                        new RockBlock(AbstractBlock.Settings.copy(STONE_ROCK)));
 
         public static final Block OBSIDIAN_ROCK = registerRockBlock("obsidian_rock",
-                        new RockBlock(AbstractBlock.Settings.copy(FLINT_ROCK),
-                                        Identifier.of("minecraft:block/obsidian")));
+                        new RockBlock(AbstractBlock.Settings.copy(FLINT_ROCK)));
 
         public static final Block COPPER_ROCK = registerBlock("copper_rock",
                         new OreRockBlock(AbstractBlock.Settings.copy(STONE_ROCK)));
@@ -91,10 +89,10 @@ public class ModBlocks {
                         new UnfiredDecoratedPotBlock(AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly()));
 
         // CLAY
-        public static final Block CLAY = registerBlockWithExistingVanillaItem("clay", new ClayBlock(AbstractBlock.Settings.copy(Blocks.CLAY).blockVision((state, world, pos) -> {
+        public static final Block CLAY = registerBlock("clay", new ClayBlock(AbstractBlock.Settings.copy(Blocks.CLAY).blockVision((state, world, pos) -> {
                 return (Integer)state.get(ClayBlock.CLAY_LAYERS) >= 4;
-               }).pistonBehavior(PistonBehavior.DESTROY)),
-               Items.CLAY_BALL);
+               }).pistonBehavior(PistonBehavior.DESTROY)));
+        //        Items.CLAY_BALL);
 
 
         // CAST MOLDS
@@ -123,21 +121,21 @@ public class ModBlocks {
                 return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
         }
 
-        public static Block registerRockBlockWithExistingVanillaItem(String name, Block block, Item vanillaItem) {
-                RegistryEditEvent.EVENT.register(manipulator -> {
-                        manipulator.Redirect(Registries.ITEM, vanillaItem,
-                                        new RockBlockItem(block, new Item.Settings()));
-                });
-                return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
-        }
+        // public static Block registerRockBlockWithExistingVanillaItem(String name, Block block, Item vanillaItem) {
+        //         RegistryEditEvent.EVENT.register(manipulator -> {
+        //                 manipulator.Redirect(Registries.ITEM, vanillaItem,
+        //                                 new RockBlockItem(block, new Item.Settings()));
+        //         });
+        //         return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
+        // }
 
-        public static Block registerBlockWithExistingVanillaItem(String name, Block block, Item vanillaItem) {
-                RegistryEditEvent.EVENT.register(manipulator -> {
-                        manipulator.Redirect(Registries.ITEM, vanillaItem,
-                                        new BlockItem(block, new Item.Settings()));
-                });
-                return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
-        }
+        // public static Block registerBlockWithExistingVanillaItem(String name, Block block, Item vanillaItem) {
+        //         RegistryEditEvent.EVENT.register(manipulator -> {
+        //                 manipulator.Redirect(Registries.ITEM, vanillaItem,
+        //                                 new BlockItem(block, new Item.Settings()));
+        //         });
+        //         return Registry.register(Registries.BLOCK, Identifier.of(FirstSteps.MOD_ID, name), block);
+        // }
 
         public static Item registerBlockItem(String name, Block block) {
                 return Registry.register(Registries.ITEM, Identifier.of(FirstSteps.MOD_ID, name),

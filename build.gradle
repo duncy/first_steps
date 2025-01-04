@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.8-SNAPSHOT'
+	id 'fabric-loom' version '1.9-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -29,19 +29,7 @@ repositories {
         filter {
             includeGroup "maven.modrinth"
         }
-    }
-}
-
-loom {
-	splitEnvironmentSourceSets()
-
-	mods {
-		"first_steps" {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
-		}
 	}
-
 }
 
 
@@ -58,10 +46,10 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation "maven.modrinth:regedit:1.0.4"
+	// modImplementation "maven.modrinth:regedit:1.0.4"
 
-	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:14.1.786"
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:14.1.786"
+	// modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:16.0.783"
+    // modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:16.0.783"
 	
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
@@ -100,9 +88,11 @@ jar {
 // configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
 			from components.java
 		}
+
 	}
 
 	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.

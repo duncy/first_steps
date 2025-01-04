@@ -2,13 +2,10 @@ package nz.duncy.first_steps.screen;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.world.GameMode;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.item.ModItems;
 

@@ -13,20 +13,17 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -36,18 +33,18 @@ import nz.duncy.first_steps.block.entity.RockBlockEntity;
 
 public class RockBlock extends Block implements BlockEntityProvider {
     private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 1, 12);
-    private Identifier TEXTURE_ID;
-    public static final DirectionProperty FACING;
+    // private Identifier TEXTURE_ID;
+    public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING;
 
-    public RockBlock(Settings settings, Identifier texture_id) {
+    public RockBlock(Settings settings) {
         super(settings);
         this.setDefaultState((BlockState)((BlockState)((BlockState)this.stateManager.getDefaultState()).with(FACING, Direction.NORTH)));
-        TEXTURE_ID = texture_id;
+        // TEXTURE_ID = texture_id;
     }
 
-    public Identifier getTextureId() {
-        return TEXTURE_ID;
-    }
+    // public Identifier getTextureId() {
+    //     return TEXTURE_ID;
+    // }
 
     public BlockState rotate(BlockState state, BlockRotation rotation) {
         return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
@@ -135,12 +132,12 @@ public class RockBlock extends Block implements BlockEntityProvider {
         super.appendTooltip(stack, context, tooltip, options);
     }
 
-    private void openScreen(BlockEntity blockEntity, PlayerEntity player) {
-        player.openHandledScreen((NamedScreenHandlerFactory)blockEntity);
-    }
+    // private void openScreen(BlockEntity blockEntity, PlayerEntity player) {
+    //     player.openHandledScreen((NamedScreenHandlerFactory)blockEntity);
+    // }
 
-    static {
-        FACING = HorizontalFacingBlock.FACING;
+    // static {
+    //     FACING = HorizontalFacingBlock.FACING;
         // SHAPES = new VoxelShape[]{Block.createCuboidShape(4, 0, 4, 12, 1, 12),  // Normal
         //     // Hoe
         //     VoxelShapes.union(
@@ -187,5 +184,5 @@ public class RockBlock extends Block implements BlockEntityProvider {
         //     // Arrowhead
         //     Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0)
         // };          
-    }
 }
+// }

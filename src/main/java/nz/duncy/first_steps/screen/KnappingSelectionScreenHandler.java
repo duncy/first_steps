@@ -1,18 +1,11 @@
 package nz.duncy.first_steps.screen;
 
-import java.util.List;
-
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.s2c.play.ScreenHandlerPropertyUpdateS2CPacket;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerContext;
-import nz.duncy.first_steps.block.entity.RockBlockEntity;
 
 public class KnappingSelectionScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;

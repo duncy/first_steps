@@ -8,6 +8,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -70,24 +71,24 @@ public class PottersWheelBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
         this.spinning = nbt.getBoolean("spinning");
         this.spin = nbt.getFloat("spin");
         this.previousSpin = nbt.getFloat("previousSpin");
     }
   
     @Override
-    public void writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         nbt.putBoolean("spinning", this.spinning);
         nbt.putFloat("spin", this.spin);
         nbt.putFloat("previousSpin", this.previousSpin);
-        super.writeNbt(nbt);
+        super.writeNbt(nbt, registryLookup);
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return createNbt(registryLookup);
     }
 
     @Nullable

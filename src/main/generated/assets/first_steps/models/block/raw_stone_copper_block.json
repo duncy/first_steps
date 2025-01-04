@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "first_steps:block/raw_stone_copper_block"
+  }
+}

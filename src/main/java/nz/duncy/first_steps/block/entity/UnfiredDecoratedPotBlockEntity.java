@@ -3,16 +3,23 @@ package nz.duncy.first_steps.block.entity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.Sherds;
+import net.minecraft.component.ComponentMap;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.entity.DecoratedPotBlockEntity.WobbleType;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.block.ModBlocks;
+
+import java.util.Optional;
+
 import org.jetbrains.annotations.Nullable;
 
 public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
@@ -32,14 +39,14 @@ public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
       this.sherds = Sherds.DEFAULT;
    }
 
-   protected void writeNbt(NbtCompound nbt) {
-      super.writeNbt(nbt);
+   protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+      super.writeNbt(nbt, registryLookup);
       this.sherds.toNbt(nbt);
 
    }
 
-   public void readNbt(NbtCompound nbt) {
-      super.readNbt(nbt);
+   public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+      super.readNbt(nbt, registryLookup);
       this.sherds = Sherds.fromNbt(nbt);
 
    }
@@ -48,8 +55,8 @@ public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
       return BlockEntityUpdateS2CPacket.create(this);
    }
 
-   public NbtCompound toInitialChunkDataNbt() {
-      return this.createNbt();
+   public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+      return this.createNbt(registryLookup);
    }
 
    public Direction getHorizontalFacing() {
@@ -60,81 +67,70 @@ public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
       return this.sherds;
    }
 
-   public void setSherd(ItemStack stack, int index) {
+   public void setSherd(ItemStack stack, int index, PlayerEntity player) {
+      FirstSteps.LOGGER.info(String.valueOf(stack) + " " + String.valueOf(index));
       switch (index) {
          case 0: // north
-            this.sherds = new Sherds(this.sherds.back(), this.sherds.left(), this.sherds.right(), stack.getItem());
+            this.sherds = new Sherds(this.sherds.back(), this.sherds.left(), this.sherds.right(), Optional.of(stack.getItem()));
             break;
       
          case 1: // east
-            this.sherds = new Sherds(this.sherds.back(), stack.getItem(), this.sherds.right(), this.sherds.front());
+            this.sherds = new Sherds(this.sherds.back(), Optional.of(stack.getItem()), this.sherds.right(), this.sherds.front());
             break;
       
          case 2: // south
-            this.sherds = new Sherds(stack.getItem(), this.sherds.left(), this.sherds.right(), this.sherds.front());
+            this.sherds = new Sherds(Optional.of(stack.getItem()), this.sherds.left(), this.sherds.right(), this.sherds.front());
             break;
       
          case 3: // west
-            this.sherds = new Sherds(this.sherds.back(), this.sherds.left(), stack.getItem(), this.sherds.front());
+            this.sherds = new Sherds(this.sherds.back(), this.sherds.left(), Optional.of(stack.getItem()), this.sherds.front());
             break;
       
          default:
             break;
       }
 
-      stack.decrement(1);
+      if (!player.isCreative()) {
+         stack.decrement(1);
+      }
    }
 
-   public void readNbtFromStack(ItemStack stack) {
-      this.sherds = Sherds.fromNbt(BlockItem.getBlockEntityNbt(stack));
-   }
+   public void readFrom(ItemStack stack) {
+		this.readComponents(stack);
+	}
 
    public ItemStack asStack() {
-      return getStackWith(this.sherds);
+      ItemStack itemStack = ModBlocks.UNFIRED_DECORATED_POT.asItem().getDefaultStack();
+		itemStack.applyComponentsFrom(this.createComponentMap());
+		return itemStack;
    }
 
    public static ItemStack getStackWith(Sherds sherds) {
-      ItemStack itemStack = Items.DECORATED_POT.getDefaultStack();
-      NbtCompound nbtCompound = sherds.toNbt(new NbtCompound());
-      BlockItem.setBlockEntityNbt(itemStack, ModBlockEntities.UNFIRED_DECORATED_POT_BLOCK_ENTITY, nbtCompound);
-      return itemStack;
-   }
-
-   @Nullable
-   public Identifier getLootTableId() {
-      return this.lootTableId;
-   }
-
-   public void setLootTableId(@Nullable Identifier lootTableId) {
-      this.lootTableId = lootTableId;
-   }
-
-   public long getLootTableSeed() {
-      return this.lootTableSeed;
-   }
-
-   public void setLootTableSeed(long lootTableSeed) {
-      this.lootTableSeed = lootTableSeed;
+      ItemStack itemStack = ModBlocks.UNFIRED_DECORATED_POT.asItem().getDefaultStack();
+		itemStack.set(DataComponentTypes.POT_DECORATIONS, sherds);
+		return itemStack;
    }
 
 
-   public BlockEntity asBlockEntity() {
-      return this;
-   }
+   @Override
+	protected void addComponents(ComponentMap.Builder componentMapBuilder) {
+		super.addComponents(componentMapBuilder);
+		componentMapBuilder.add(DataComponentTypes.POT_DECORATIONS, this.sherds);
+	}
 
-   public void wobble(WobbleType wobbleType) {
-      if (this.world != null && !this.world.isClient()) {
-         this.world.addSyncedBlockEvent(this.getPos(), this.getCachedState().getBlock(), 1, wobbleType.ordinal());
-      }
-   }
+	@Override
+	protected void readComponents(BlockEntity.ComponentsAccess components) {
+		super.readComponents(components);
+		this.sherds = components.getOrDefault(DataComponentTypes.POT_DECORATIONS, Sherds.DEFAULT);
+	}
 
-   public boolean onSyncedBlockEvent(int type, int data) {
-      if (this.world != null && type == 1 && data >= 0 && data < net.minecraft.block.entity.DecoratedPotBlockEntity.WobbleType.values().length) {
-         this.lastWobbleTime = this.world.getTime();
-         this.lastWobbleType = net.minecraft.block.entity.DecoratedPotBlockEntity.WobbleType.values()[data];
-         return true;
-      } else {
-         return super.onSyncedBlockEvent(type, data);
-      }
-   }
+	@Override
+	public void removeFromCopiedStackNbt(NbtCompound nbt) {
+		super.removeFromCopiedStackNbt(nbt);
+		nbt.remove("sherds");
+	}
+
+	public BlockEntity asBlockEntity() {
+		return this;
+	}
 }

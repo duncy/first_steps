@@ -12,7 +12,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.entity.ItemEntity;
@@ -22,10 +21,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
@@ -39,7 +38,6 @@ import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.entity.CrucibleBlockEntity;
@@ -49,7 +47,6 @@ public class CrucibleBlock extends BlockWithEntity {
     private static final VoxelShape SHAPE = Block.createCuboidShape(3, 0, 3, 13, 10, 13);
     public static final BooleanProperty LIT = Properties.LIT;
     public static final Identifier CONTENTS_DYNAMIC_DROP_ID = Identifier.ofVanilla("contents");
-    private static final Text UNKNOWN_CONTENTS_TEXT = Text.translatable("container." + FirstSteps.MOD_ID + ".crucible.unknownContents");
 
     public static final MapCodec<CrucibleBlock> CODEC = CrucibleBlock.createCodec(CrucibleBlock::new);
 
@@ -94,7 +91,7 @@ public class CrucibleBlock extends BlockWithEntity {
         return super.onBreak(world, pos, state, player);
     }
 
-    public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+    public List<ItemStack> getDroppedStacks(BlockState state, LootWorldContext.Builder builder) {
         BlockEntity blockEntity = (BlockEntity)builder.getOptional(LootContextParameters.BLOCK_ENTITY);
         if (blockEntity instanceof CrucibleBlockEntity crucibleBlockEntity) {
            builder = builder.addDynamicDrop(CONTENTS_DYNAMIC_DROP_ID, (lootConsumer) -> {
@@ -137,21 +134,12 @@ public class CrucibleBlock extends BlockWithEntity {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (world.isClient) {
-            return ActionResult.SUCCESS;
-        } else if (player.isSpectator()) {
-            return ActionResult.CONSUME;
-        } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CrucibleBlockEntity) {
-                NamedScreenHandlerFactory screenHandlerFactory = (CrucibleBlockEntity) blockEntity;
-                player.openHandledScreen(screenHandlerFactory);
-                PiglinBrain.onGuardedBlockInteracted(player, true);
-                return ActionResult.CONSUME;
-            } else {
-                return ActionResult.PASS;
-            }
+        if (world instanceof ServerWorld serverWorld && world.getBlockEntity(pos) instanceof CrucibleBlockEntity crucibleBlockEntity) {
+            player.openHandledScreen(crucibleBlockEntity);
+            PiglinBrain.onGuardedBlockInteracted(serverWorld, player, true);
         }
+
+        return ActionResult.SUCCESS;
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -190,9 +178,6 @@ public class CrucibleBlock extends BlockWithEntity {
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         super.appendTooltip(stack, context, tooltip, options);
-        if (stack.contains(DataComponentTypes.CONTAINER_LOOT)) {
-			tooltip.add(UNKNOWN_CONTENTS_TEXT);
-		}
 
         int temperature  = stack.getOrDefault(ModDataComponentTypes.TEMPERATURE, 20);
 
@@ -205,19 +190,13 @@ public class CrucibleBlock extends BlockWithEntity {
 			j++;
 			if (i <= 4) {
 				i++;
-				tooltip.add(Text.translatable("container." + FirstSteps.MOD_ID + ".crucible.itemCount", itemStack.getName(), itemStack.getCount()));
+				tooltip.add(Text.translatable("tooltip." + FirstSteps.MOD_ID + ".crucible.itemCount", itemStack.getName(), itemStack.getCount()));
 			}
 		}
 
 		if (j - i > 0) {
-			tooltip.add(Text.translatable("container." + FirstSteps.MOD_ID + ".crucible.more", j - i).formatted(Formatting.ITALIC));
+			tooltip.add(Text.translatable("tooltip." + FirstSteps.MOD_ID + ".crucible.more", j - i).formatted(Formatting.ITALIC));
 		}
-    }
-
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
-        ItemStack itemStack = super.getPickStack(world, pos, state);
-        world.getBlockEntity(pos, BlockEntityType.SHULKER_BOX).ifPresent(blockEntity -> blockEntity.setStackNbt(itemStack, world.getRegistryManager()));
-        return itemStack;
     }
 
     public static ItemStack getItemStack() {

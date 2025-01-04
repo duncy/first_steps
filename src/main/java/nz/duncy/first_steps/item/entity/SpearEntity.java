@@ -1,7 +1,6 @@
 package nz.duncy.first_steps.item.entity;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -11,13 +10,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import nz.duncy.first_steps.item.ModItems;
@@ -34,25 +32,27 @@ public class SpearEntity extends PersistentProjectileEntity {
     private boolean dealtDamage;
     public int returnTimer;
 
-    public SpearEntity(EntityType<SpearEntity> type, double x, double y, double z, World world, ItemStack stack) {
-        super(type, x, y, z, world, stack);
+    public SpearEntity(EntityType<SpearEntity> entityType, World world) {
+        super(entityType, world);
     }
 
-    public SpearEntity(LivingEntity owner, World world, ItemStack stack, EntityType<SpearEntity> type) {
-        super(type, owner, world, stack);
-        this.dataTracker.set(LOYALTY, (byte)EnchantmentHelper.getLoyalty(stack));
-        this.dataTracker.set(ENCHANTED, stack.hasGlint());
+    public SpearEntity(EntityType<SpearEntity> entityType, World world, LivingEntity owner, ItemStack stack) {
+        super(entityType, owner, world, stack, null);
+        this.dataTracker.set(LOYALTY, this.getLoyalty(stack));
+		this.dataTracker.set(ENCHANTED, stack.hasGlint());
     }
 
-    public SpearEntity(EntityType<SpearEntity> type, World world) {
-        super(type, world, DEFAULT_STACK);
+    public SpearEntity(EntityType<SpearEntity> entityType, World world, double x, double y, double z, ItemStack stack) {
+        super(entityType, x, y, z, world, stack, stack);
+		this.dataTracker.set(LOYALTY, this.getLoyalty(stack));
+		this.dataTracker.set(ENCHANTED, stack.hasGlint());
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(LOYALTY, (byte)0);
-        this.dataTracker.startTracking(ENCHANTED, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+		builder.add(LOYALTY, (byte)0);
+		builder.add(ENCHANTED, false);
     }
 
     @Override
@@ -102,58 +102,37 @@ public class SpearEntity extends PersistentProjectileEntity {
     @Override
     @Nullable
     protected EntityHitResult getEntityCollision(Vec3d currentPosition, Vec3d nextPosition) {
-        if (this.dealtDamage) {
-            return null;
-        }
-        return super.getEntityCollision(currentPosition, nextPosition);
+        return this.dealtDamage ? null : super.getEntityCollision(currentPosition, nextPosition);
     }
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         float f = 8.0f;
-        if (entity instanceof LivingEntity) {
-            LivingEntity livingEntity = (LivingEntity)entity;
-            f += EnchantmentHelper.getAttackDamage(this.getItemStack(), livingEntity.getGroup());
-        }
         Entity entity2 = this.getOwner();
-        DamageSource damageSource = this.getDamageSources().trident(this, entity2 == null ? this : entity2);
-        this.dealtDamage = true;
-        SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_HIT;
-        if (entity.damage(damageSource, f)) {
-            if (entity.getType() == EntityType.ENDERMAN) {
-                return;
-            }
-            if (entity instanceof LivingEntity) {
-                LivingEntity livingEntity2 = (LivingEntity)entity;
-                if (entity2 instanceof LivingEntity) {
-                    EnchantmentHelper.onUserDamaged(livingEntity2, entity2);
-                    EnchantmentHelper.onTargetDamaged((LivingEntity)entity2, livingEntity2);
-                }
-                this.onHit(livingEntity2);
-            }
-        } else if (entity.getType().isIn(EntityTypeTags.DEFLECTS_TRIDENTS)) {
-            this.deflect();
-            return;
-        }
-        this.setVelocity(this.getVelocity().multiply(-0.01, -0.1, -0.01));
-        float g = 1.0f;
-        if (this.getWorld() instanceof ServerWorld && this.getWorld().isThundering() && this.hasChanneling()) {
-            LightningEntity lightningEntity;
-            BlockPos blockPos = entity.getBlockPos();
-            if (this.getWorld().isSkyVisible(blockPos) && (lightningEntity = EntityType.LIGHTNING_BOLT.create(this.getWorld())) != null) {
-                lightningEntity.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos));
-                lightningEntity.setChanneler(entity2 instanceof ServerPlayerEntity ? (ServerPlayerEntity)entity2 : null);
-                this.getWorld().spawnEntity(lightningEntity);
-                soundEvent = SoundEvents.ITEM_TRIDENT_THUNDER;
-                g = 5.0f;
-            }
-        }
-        this.playSound(soundEvent, g, 1.0f);
-    }
+		DamageSource damageSource = this.getDamageSources().trident(this, (Entity)(entity2 == null ? this : entity2));
+		if (this.getWorld() instanceof ServerWorld serverWorld) {
+			f = EnchantmentHelper.getDamage(serverWorld, this.getWeaponStack(), entity, damageSource, f);
+		}
 
-    public boolean hasChanneling() {
-        return EnchantmentHelper.hasChanneling(this.getItemStack());
+		this.dealtDamage = true;
+		if (entity.damage(damageSource, f)) {
+			if (entity.getType() == EntityType.ENDERMAN) {
+				return;
+			}
+
+			if (this.getWorld() instanceof ServerWorld serverWorld) {
+				EnchantmentHelper.onTargetDamaged(serverWorld, entity, damageSource, this.getWeaponStack());
+			}
+
+			if (entity instanceof LivingEntity livingEntity) {
+				this.knockback(livingEntity, damageSource);
+				this.onHit(livingEntity);
+			}
+		}
+
+		this.setVelocity(this.getVelocity().multiply(-0.01, -0.1, -0.01));
+		this.playSound(SoundEvents.ITEM_TRIDENT_HIT, 1.0F, 1.0F);
     }
 
     @Override
@@ -176,8 +155,8 @@ public class SpearEntity extends PersistentProjectileEntity {
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        this.dealtDamage = nbt.getBoolean("DealtDamage");
-        this.dataTracker.set(LOYALTY, (byte)EnchantmentHelper.getLoyalty(this.getItemStack()));
+		this.dealtDamage = nbt.getBoolean("DealtDamage");
+		this.dataTracker.set(LOYALTY, this.getLoyalty(this.getItemStack()));
     }
 
     @Override
@@ -203,4 +182,15 @@ public class SpearEntity extends PersistentProjectileEntity {
     public boolean shouldRender(double cameraX, double cameraY, double cameraZ) {
         return true;
     }
+
+    private byte getLoyalty(ItemStack stack) {
+		return this.getWorld() instanceof ServerWorld serverWorld
+			? (byte)MathHelper.clamp(EnchantmentHelper.getTridentReturnAcceleration(serverWorld, stack, this), 0, 127)
+			: 0;
+	}
+
+    @Override
+	protected ItemStack getDefaultItemStack() {
+		return DEFAULT_STACK;
+	}
 }

@@ -4,17 +4,16 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.BlockStateVariant;
-import net.minecraft.data.client.BlockStateVariantMap;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.ModelIds;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TextureMap;
-import net.minecraft.data.client.TexturedModel;
-import net.minecraft.data.client.VariantSetting;
-import net.minecraft.data.client.VariantSettings;
-import net.minecraft.data.client.VariantsBlockStateSupplier;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.BlockStateVariant;
+import net.minecraft.client.data.BlockStateVariantMap;
+import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.ModelIds;
+import net.minecraft.client.data.Models;
+import net.minecraft.client.data.TexturedModel;
+import net.minecraft.client.data.VariantSetting;
+import net.minecraft.client.data.VariantSettings;
+import net.minecraft.client.data.VariantsBlockStateSupplier;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.item.ModItems;
@@ -60,11 +59,11 @@ public class ModModelProvider extends FabricModelProvider {
     }
 
     private void registerClays(BlockStateModelGenerator blockStateModelGenerator) {
-        TextureMap textureMap = TextureMap.all(Blocks.CLAY);
+        // TextureMap textureMap = TextureMap.all(Blocks.CLAY);
         // Identifier identifier = Models.GENERATED.g .CUBE_ALL upload(Blocks.CLAY, textureMap, blockStateModelGenerator.modelCollector);
         blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(ModBlocks.CLAY).coordinate(BlockStateVariantMap.create(ModProperties.CLAY_LAYERS).register((height) -> {
            BlockStateVariant blockStateVariant = BlockStateVariant.create();
-           VariantSetting variantSetting = VariantSettings.MODEL;
+           VariantSetting<Identifier> variantSetting = VariantSettings.MODEL;
            Identifier id;
            if (height < 4) {
               id = ModelIds.getBlockSubModelId(ModBlocks.CLAY, "_height" + height * 4);

@@ -1,12 +1,7 @@
 package nz.duncy.first_steps.block.entity;
 
-import java.util.BitSet;
-import java.util.List;
-
 import org.jetbrains.annotations.Nullable;
 
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
@@ -14,25 +9,20 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import nz.duncy.first_steps.FirstSteps;
-import nz.duncy.first_steps.block.custom.RockBlock;
 import nz.duncy.first_steps.item.ModItems;
-import nz.duncy.first_steps.screen.KnappingSelection;
 import nz.duncy.first_steps.screen.KnappingSelectionScreenHandler;
 
-public class RockBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory {
+public class RockBlockEntity extends BlockEntity implements NamedScreenHandlerFactory {
     // private BitSet KNAPPED_VOXELS;
     // private VoxelShape SHAPE;
     // private Identifier TEXTURE_ID;
@@ -48,7 +38,7 @@ public class RockBlockEntity extends BlockEntity implements ExtendedScreenHandle
         super(ModBlockEntities.ROCK_BLOCK_ENTITY, pos, state);
         // KNAPPED_VOXELS = new BitSet();
         // SHAPE = Block.createCuboidShape(4, 0, 4, 12, 1, 12);
-        RockBlock block = (RockBlock) state.getBlock();
+        // RockBlock block = (RockBlock) state.getBlock();
         // TEXTURE_ID = block.getTextureId();
         this.selection = -1;
         this.propertyDelegate = new PropertyDelegate() {
@@ -327,16 +317,16 @@ public class RockBlockEntity extends BlockEntity implements ExtendedScreenHandle
     // }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         // long[] longArray = getKnappedVoxels().toLongArray();
         // nbt.putInt("count", this.VOXEL_COUNT);
         // nbt.putLongArray("bitset", longArray);
-        super.writeNbt(nbt);
+        super.writeNbt(nbt, registryLookup);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
         // long[] longArray = nbt.getLongArray("bitset");
         // this.KNAPPED_VOXELS = BitSet.valueOf(longArray);
         // this.VOXEL_COUNT = nbt.getInt("count");
@@ -350,24 +340,18 @@ public class RockBlockEntity extends BlockEntity implements ExtendedScreenHandle
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
-    }
-
-    @Override
-    public Text getDisplayName() {
-        return Text.translatable("");
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return createNbt(registryLookup);
     }
 
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new KnappingSelectionScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+        return new KnappingSelectionScreenHandler(syncId, playerInventory, this.propertyDelegate);
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        FirstSteps.LOGGER.info(String.valueOf(this.selection));
-        buf.writeBlockPos(this.pos);
+    public Text getDisplayName() {
+        return Text.empty();
     }
 
 

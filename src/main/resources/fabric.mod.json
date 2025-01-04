@@ -23,21 +23,16 @@
         ],
 		"fabric-datagen": [
 			"nz.duncy.first_steps.FirstStepsDataGenerator"
-		],
-		"rei_client": [
-			"nz.duncy.first_steps.compat.FirstStepsREIClientPlugin"
 		]
 	},
 	"mixins": [
 		"first_steps.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.15.7",
-		"minecraft": "~1.20.4",
-		"java": ">=17",
-		"fabric-api": "*",
-		"roughlyenoughitems": "14.1.786",
-		"regedit": "1.0.4"
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
 	},
 	"suggests": {
 		"another-mod": "*"

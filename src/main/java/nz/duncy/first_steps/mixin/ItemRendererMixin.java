@@ -4,6 +4,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.At;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
@@ -15,12 +17,14 @@ import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.item.ModItems;
 
+@Environment(EnvType.CLIENT)
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
     @ModifyVariable(method = "renderItem", at = @At(value = "HEAD"), argsOnly = true)
     public BakedModel useModel(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         if (renderMode != ModelTransformationMode.GUI && renderMode != ModelTransformationMode.FIXED && renderMode != ModelTransformationMode.GROUND) {
             if (stack.isOf(ModItems.STONE_SPEAR)) {
+                FirstSteps.LOGGER.info(ModelIdentifier.ofInventoryVariant(Identifier.of(FirstSteps.MOD_ID, "item/stone_spear_3d")).toString());
                 return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(FirstSteps.MOD_ID, "stone_spear_3d")));
             } else if (stack.isOf(ModItems.FLINT_SPEAR)) {
                 return ((ItemRendererAccessor) this).mccourse$getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(Identifier.of(FirstSteps.MOD_ID, "flint_spear_3d")));

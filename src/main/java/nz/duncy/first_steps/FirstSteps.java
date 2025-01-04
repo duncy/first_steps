@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import net.fabricmc.api.ModInitializer;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
+import nz.duncy.first_steps.component.ModDataComponentTypes;
 import nz.duncy.first_steps.item.ModItemGroups;
 import nz.duncy.first_steps.item.ModItems;
 import nz.duncy.first_steps.item.entity.ModItemEntities;
@@ -29,5 +30,6 @@ public class FirstSteps implements ModInitializer {
         ModWorldGeneration.generateModWorldGen();
         ModRecipes.registerRecipes();
         ModStats.registerStats();
+        ModDataComponentTypes.registerDataComponentTypes();
 	}
 }

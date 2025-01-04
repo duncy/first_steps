@@ -1,5 +1,7 @@
 package nz.duncy.first_steps.recipe;
 
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -7,10 +9,25 @@ import nz.duncy.first_steps.FirstSteps;
 
 public class ModRecipes {
 
+   public static final RecipeType<KilningRecipe> KILNING_TYPE = Registry.register(
+      Registries.RECIPE_TYPE, 
+      Identifier.of(FirstSteps.MOD_ID, "kilning"),
+      new RecipeType<KilningRecipe>() {
+         public String toString() {
+            return "kilning";
+         }
+      }
+   );
+
+   public static final RecipeSerializer<KilningRecipe> KILNING_SERIALIZER = Registry.register(
+      Registries.RECIPE_SERIALIZER, 
+      Identifier.of(FirstSteps.MOD_ID, "kilning"), 
+      new KilningRecipeSerializer(KilningRecipe::new, 0)
+   );
+
    public static void registerRecipes() {
       FirstSteps.LOGGER.info("Registering ModRecipes for " + FirstSteps.MOD_ID);
-      Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(FirstSteps.MOD_ID, KilningRecipe.Serializer.ID), KilningRecipe.Serializer.INSTANCE);
-      Registry.register(Registries.RECIPE_TYPE, Identifier.of(FirstSteps.MOD_ID, KilningRecipe.Type.ID), KilningRecipe.Type.INSTANCE);
+      
    }
 
 }

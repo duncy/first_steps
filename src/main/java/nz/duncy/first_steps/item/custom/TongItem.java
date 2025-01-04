@@ -1,14 +1,14 @@
 package nz.duncy.first_steps.item.custom;
 
 import java.util.List;
-import java.util.Iterator;
-
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.BlockStateComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -16,14 +16,10 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -37,6 +33,7 @@ import nz.duncy.first_steps.block.custom.CrucibleBlock;
 import nz.duncy.first_steps.block.custom.KilnBlock;
 import nz.duncy.first_steps.block.entity.CrucibleBlockEntity;
 import nz.duncy.first_steps.block.entity.KilnBlockEntity;
+import nz.duncy.first_steps.component.ModDataComponentTypes;
 
 public class TongItem extends Item {
     private int temperature;
@@ -78,9 +75,7 @@ public class TongItem extends Item {
 
         if (block instanceof KilnBlock) {
             KilnBlockEntity kilnBlockEntity = (KilnBlockEntity) context.getWorld().getBlockEntity(pos);
-            FirstSteps.LOGGER.info("kiln block interaction");
             if (pickupItem(context.getStack(), kilnBlockEntity)) {
-                FirstSteps.LOGGER.info("crucibo should be taken");
                 return ActionResult.SUCCESS;
             }
         } else if (block instanceof CrucibleBlock) {
@@ -100,9 +95,8 @@ public class TongItem extends Item {
     }
 
     private static void setNotHolding(ItemStack stack) {
-        NbtCompound nbtCompound = stack.getOrCreateNbt();
-        NbtList nbtList = new NbtList();
-        nbtCompound.put("tongs.holding", nbtList);
+        stack.remove(ModDataComponentTypes.TEMPERATURE);
+        stack.remove(DataComponentTypes.CONTAINER);
     }
 
     private ActionResult place(ItemPlacementContext context) {
@@ -148,35 +142,19 @@ public class TongItem extends Item {
         return BlockItem.writeNbtToBlockEntity(world, player, pos, stack);
     }
 
-    private static <T extends Comparable<T>> BlockState with(BlockState state, Property<T> property, String name) {
-        return (BlockState)property.parse(name).map((value) -> {
-           return (BlockState)state.with(property, value);
-        }).orElse(state);
-    }
-
     private BlockState placeFromNbt(BlockPos pos, World world, ItemStack stack, BlockState state) {
-        BlockState blockState = state;
-        NbtCompound nbtCompound = stack.getNbt();
-        if (nbtCompound != null) {
-           NbtCompound nbtCompound2 = nbtCompound.getCompound("BlockStateTag");
-           StateManager<Block, BlockState> stateManager = state.getBlock().getStateManager();
-           Iterator<String> nbtIterator = nbtCompound2.getKeys().iterator();
-  
-           while(nbtIterator.hasNext()) {
-              String string = (String)nbtIterator.next();
-              Property<?> property = stateManager.getProperty(string);
-              if (property != null) {
-                 String string2 = nbtCompound2.get(string).asString();
-                 blockState = with(blockState, property, string2);
-              }
-           }
-        }
-  
-        if (blockState != state) {
-           world.setBlockState(pos, blockState, 2);
-        }
-  
-        return blockState;
+        BlockStateComponent blockStateComponent = stack.getOrDefault(DataComponentTypes.BLOCK_STATE, BlockStateComponent.DEFAULT);
+
+        if (blockStateComponent.isEmpty()) {
+			return state;
+		} else {
+			BlockState blockState = blockStateComponent.applyToState(state);
+			if (blockState != state) {
+				world.setBlockState(pos, blockState, Block.NOTIFY_LISTENERS);
+			}
+
+			return blockState;
+		}
      }
 
     private boolean canPlace(ItemPlacementContext context, BlockState state) {
@@ -196,7 +174,7 @@ public class TongItem extends Item {
             if (crucible instanceof BlockItem) {
                 if (((BlockItem) crucible).getBlock() instanceof CrucibleBlock) {
                     blockentity.removeCrucible();
-                    putCrucible(tongs, crucibleStack);
+                    takeCrucible(tongs, crucibleStack);
                     return true;
                 } 
             }
@@ -216,31 +194,17 @@ public class TongItem extends Item {
         return false;
     }
 
-    private void putCrucible(ItemStack tongs, ItemStack crucible) {
-        NbtCompound nbtCompound = tongs.getOrCreateNbt();
-        NbtList nbtList;
-        if (nbtCompound.contains("tongs.holding", 9)) {
-            nbtList = nbtCompound.getList("tongs.holding", 10);
-        } else {
-            nbtList = new NbtList();
-        }
-
-        nbtList.add(crucible.getNbt());
-        FirstSteps.LOGGER.info("nbtlist: " + String.valueOf(nbtList));
-        nbtCompound.put("tongs.holding", nbtList);
+    private void takeCrucible(ItemStack tongs, ItemStack crucible) {
+        tongs.set(ModDataComponentTypes.TEMPERATURE, crucible.getOrDefault(ModDataComponentTypes.TEMPERATURE, 20));
+        tongs.set(DataComponentTypes.CONTAINER, crucible.get(DataComponentTypes.CONTAINER));
     }
 
     private static ItemStack getHeldItem(ItemStack tongs) {
-        NbtCompound nbtCompound = tongs.getNbt(); 
-
-        if (nbtCompound != null && nbtCompound.contains("tongs.holding", 9)) {
-            NbtList nbtList = nbtCompound.getList("tongs.holding", 10);
-            if (!nbtList.isEmpty()) {
-                NbtCompound nbtListCompound = nbtList.getCompound(0);
-                ItemStack itemStack = new ItemStack(ModBlocks.FIRED_CRUCIBLE.asItem());
-                itemStack.setNbt(nbtListCompound);
-                return itemStack;
-            }
+        if (tongs.contains(ModDataComponentTypes.TEMPERATURE) && tongs.contains(DataComponentTypes.CONTAINER)) {
+            ItemStack itemStack = new ItemStack(ModBlocks.FIRED_CRUCIBLE.asItem());
+            itemStack.set(ModDataComponentTypes.TEMPERATURE, tongs.get(ModDataComponentTypes.TEMPERATURE));
+            itemStack.set(DataComponentTypes.CONTAINER, tongs.get(DataComponentTypes.CONTAINER));
+            return itemStack;
         }
         
         return null;

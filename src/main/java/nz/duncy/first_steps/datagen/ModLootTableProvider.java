@@ -28,9 +28,7 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.CopyComponentsLootFunction;
-import net.minecraft.loot.function.CopyNbtLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.provider.nbt.ContextLootNbtProvider;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import nz.duncy.first_steps.block.ModBlocks;
@@ -135,16 +133,17 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     }
 
     private LootTable.Builder unfiredDecoratedPotDrops(Block block) {
-        LootCondition.Builder ifCracked = BlockStatePropertyLootCondition.builder(block).properties(Builder.create().exactMatch(UnfiredDecoratedPotBlock.CRACKED, true));
+        LootCondition.Builder ifCracked = BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create().exactMatch(UnfiredDecoratedPotBlock.CRACKED, true));
 
         LootPoolEntry.Builder entryClay =  ItemEntry.builder(Items.CLAY_BALL).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(4.0F)));
 
-        LootPoolEntry.Builder entryPot =  ItemEntry.builder(block).apply(CopyNbtLootFunction.builder(ContextLootNbtProvider.BLOCK_ENTITY)
-                                          .withOperation("sherds", "BlockEntityTag.sherds"))
+        LootPoolEntry.Builder entryPot =  ItemEntry.builder(block).apply(
+                                            CopyComponentsLootFunction.builder(CopyComponentsLootFunction.Source.BLOCK_ENTITY)
+                                            .include(DataComponentTypes.POT_DECORATIONS)
                                             .conditionally(BlockStatePropertyLootCondition.builder(block)
-                                            .properties(Builder.create().exactMatch(UnfiredDecoratedPotBlock.CRACKED, false)));
+                                            .properties(Builder.create().exactMatch(UnfiredDecoratedPotBlock.CRACKED, false))));
 
-        LootPoolEntry.Builder entrySherds =  DynamicEntry.builder(UnfiredDecoratedPotBlock.SHERDS_DYNAMIC_DROP_ID);
+        LootPoolEntry.Builder entrySherds = DynamicEntry.builder(UnfiredDecoratedPotBlock.SHERDS_DYNAMIC_DROP_ID);
 
         LootPool.Builder sherdPool = LootPool.builder().rolls(ConstantLootNumberProvider.create(1.0F)).conditionally(ifCracked).with(entrySherds);
 

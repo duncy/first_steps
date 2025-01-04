@@ -34,7 +34,7 @@ public class ModConfiguredFeatures {
     public static void boostrap(Registerable<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplacables = new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplacables = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
-        RuleTest netherReplacables = new TagMatchRuleTest(BlockTags.NETHER_CARVER_REPLACEABLES);
+        // RuleTest netherReplacables = new TagMatchRuleTest(BlockTags.NETHER_CARVER_REPLACEABLES);
 
         List<OreFeatureConfig.Target> overworldStoneTinOres =
             List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.STONE_TIN_ORE.getDefaultState()));

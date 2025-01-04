@@ -1,7 +1,6 @@
 package nz.duncy.first_steps.client.render.block.entity;
 
 import java.util.EnumSet;
-import java.util.Objects;
 import java.util.Optional;
 
 import net.fabricmc.api.EnvType;
@@ -20,6 +19,8 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
@@ -27,8 +28,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.RotationAxis;
 import nz.duncy.first_steps.block.entity.UnfiredDecoratedPotBlockEntity;
 import nz.duncy.first_steps.client.render.ModTexturedRenderLayers;
-import nz.duncy.first_steps.client.render.entity.model.ModEntityModelLayers;
-
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
@@ -40,42 +39,44 @@ public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRender
    private final ModelPart right;
    private final ModelPart top;
    private final ModelPart bottom;
-   public final SpriteIdentifier baseTexture;
 
    public UnfiredDecoratedPotBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-      this.baseTexture = (SpriteIdentifier)Objects.requireNonNull(ModTexturedRenderLayers.getUnfiredDecoratedPotPatternTextureId(DecoratedPotPatterns.BLANK));
-      ModelPart modelPart = context.getLayerModelPart(ModEntityModelLayers.UNFIRED_DECORATED_POT_BASE);
-      this.neck = modelPart.getChild("neck");
-      this.top = modelPart.getChild("top");
-      this.bottom = modelPart.getChild("bottom");
-      ModelPart modelPart2 = context.getLayerModelPart(ModEntityModelLayers.UNFIRED_DECORATED_POT_SIDES);
-      this.front = modelPart2.getChild("front");
-      this.back = modelPart2.getChild("back");
-      this.left = modelPart2.getChild("left");
-      this.right = modelPart2.getChild("right");
+   ModelPart modelPart = context.getLayerModelPart(EntityModelLayers.DECORATED_POT_BASE);
+		this.neck = modelPart.getChild(EntityModelPartNames.NECK);
+		this.top = modelPart.getChild("top");
+		this.bottom = modelPart.getChild("bottom");
+		ModelPart modelPart2 = context.getLayerModelPart(EntityModelLayers.DECORATED_POT_SIDES);
+		this.front = modelPart2.getChild("front");
+		this.back = modelPart2.getChild("back");
+		this.left = modelPart2.getChild("left");
+		this.right = modelPart2.getChild("right");
    }
 
    public static TexturedModelData getTopBottomNeckTexturedModelData() {
       ModelData modelData = new ModelData();
-      ModelPartData modelPartData = modelData.getRoot();
-      Dilation dilation = new Dilation(0.2F);
-      Dilation dilation2 = new Dilation(-0.1F);
-      modelPartData.addChild("neck", ModelPartBuilder.create().uv(0, 0).cuboid(4.0F, 17.0F, 4.0F, 8.0F, 3.0F, 8.0F, dilation2).uv(0, 5).cuboid(5.0F, 20.0F, 5.0F, 6.0F, 1.0F, 6.0F, dilation), ModelTransform.of(0.0F, 37.0F, 16.0F, 3.1415927F, 0.0F, 0.0F));
-      ModelPartBuilder modelPartBuilder = ModelPartBuilder.create().uv(-14, 13).cuboid(0.0F, 0.0F, 0.0F, 14.0F, 0.0F, 14.0F);
-      modelPartData.addChild("top", modelPartBuilder, ModelTransform.of(1.0F, 16.0F, 1.0F, 0.0F, 0.0F, 0.0F));
-      modelPartData.addChild("bottom", modelPartBuilder, ModelTransform.of(1.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F));
-      return TexturedModelData.of(modelData, 32, 32);
+		ModelPartData modelPartData = modelData.getRoot();
+		Dilation dilation = new Dilation(0.2F);
+		Dilation dilation2 = new Dilation(-0.1F);
+		modelPartData.addChild(
+			EntityModelPartNames.NECK,
+			ModelPartBuilder.create().uv(0, 0).cuboid(4.0F, 17.0F, 4.0F, 8.0F, 3.0F, 8.0F, dilation2).uv(0, 5).cuboid(5.0F, 20.0F, 5.0F, 6.0F, 1.0F, 6.0F, dilation),
+			ModelTransform.of(0.0F, 37.0F, 16.0F, (float) Math.PI, 0.0F, 0.0F)
+		);
+		ModelPartBuilder modelPartBuilder = ModelPartBuilder.create().uv(-14, 13).cuboid(0.0F, 0.0F, 0.0F, 14.0F, 0.0F, 14.0F);
+		modelPartData.addChild("top", modelPartBuilder, ModelTransform.of(1.0F, 16.0F, 1.0F, 0.0F, 0.0F, 0.0F));
+		modelPartData.addChild("bottom", modelPartBuilder, ModelTransform.of(1.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F));
+		return TexturedModelData.of(modelData, 32, 32);
    }
 
    public static TexturedModelData getSidesTexturedModelData() {
       ModelData modelData = new ModelData();
-      ModelPartData modelPartData = modelData.getRoot();
-      ModelPartBuilder modelPartBuilder = ModelPartBuilder.create().uv(1, 0).cuboid(0.0F, 0.0F, 0.0F, 14.0F, 16.0F, 0.0F, EnumSet.of(Direction.NORTH));
-      modelPartData.addChild("back", modelPartBuilder, ModelTransform.of(15.0F, 16.0F, 1.0F, 0.0F, 0.0F, 3.1415927F));
-      modelPartData.addChild("left", modelPartBuilder, ModelTransform.of(1.0F, 16.0F, 1.0F, 0.0F, -1.5707964F, 3.1415927F));
-      modelPartData.addChild("right", modelPartBuilder, ModelTransform.of(15.0F, 16.0F, 15.0F, 0.0F, 1.5707964F, 3.1415927F));
-      modelPartData.addChild("front", modelPartBuilder, ModelTransform.of(1.0F, 16.0F, 15.0F, 3.1415927F, 0.0F, 0.0F));
-      return TexturedModelData.of(modelData, 16, 16);
+		ModelPartData modelPartData = modelData.getRoot();
+		ModelPartBuilder modelPartBuilder = ModelPartBuilder.create().uv(1, 0).cuboid(0.0F, 0.0F, 0.0F, 14.0F, 16.0F, 0.0F, EnumSet.of(Direction.NORTH));
+		modelPartData.addChild("back", modelPartBuilder, ModelTransform.of(15.0F, 16.0F, 1.0F, 0.0F, 0.0F, (float) Math.PI));
+		modelPartData.addChild("left", modelPartBuilder, ModelTransform.of(1.0F, 16.0F, 1.0F, 0.0F, (float) (-Math.PI / 2), (float) Math.PI));
+		modelPartData.addChild("right", modelPartBuilder, ModelTransform.of(15.0F, 16.0F, 15.0F, 0.0F, (float) (Math.PI / 2), (float) Math.PI));
+		modelPartData.addChild("front", modelPartBuilder, ModelTransform.of(1.0F, 16.0F, 15.0F, (float) Math.PI, 0.0F, 0.0F));
+		return TexturedModelData.of(modelData, 16, 16);
    }
 
    @Nullable
@@ -102,6 +103,7 @@ public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRender
       this.top.render(matrixStack, vertexConsumer, i, j);
       this.bottom.render(matrixStack, vertexConsumer, i, j);
       Sherds sherds = unfiredDecoratedPotBlockEntity.getSherds();
+
       this.renderDecoratedSide(this.front, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.front()));
       this.renderDecoratedSide(this.back, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.back()));
       this.renderDecoratedSide(this.left, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.left()));

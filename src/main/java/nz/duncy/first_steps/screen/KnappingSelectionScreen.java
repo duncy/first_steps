@@ -7,36 +7,20 @@ import java.util.List;
 
 import org.lwjgl.glfw.GLFW;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.client.util.NarratorManager;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.slot.Slot;
-import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.GameMode;
 import nz.duncy.first_steps.FirstSteps;
 
 public class KnappingSelectionScreen extends HandledScreen<KnappingSelectionScreenHandler> {
    static final Identifier SLOT_TEXTURE = Identifier.ofVanilla("gamemode_switcher/slot");
    static final Identifier SELECTION_TEXTURE = Identifier.ofVanilla("gamemode_switcher/selection");
    private static final Identifier TEXTURE = Identifier.of(FirstSteps.MOD_ID, "textures/gui/switcher.png");
-   private static final int TEXTURE_WIDTH = 128;
-   private static final int TEXTURE_HEIGHT = 128;
-   private static final int BUTTON_SIZE = 26;
-   private static final int ICON_OFFSET = 5;
-   private static final int field_32314 = 31;
-   private static final int field_32315 = 5;
    private static final int UI_WIDTH = KnappingSelection.values().length * 31 - 5;
    private static final Text SELECT_TEXT;
    private KnappingSelection selection;
@@ -58,7 +42,7 @@ public class KnappingSelectionScreen extends HandledScreen<KnappingSelectionScre
 
       for(int i = 0; i < KnappingSelection.values().length; ++i) {
          KnappingSelection selection = KnappingSelection.VALUES[i];
-         this.buttons.add(new ButtonWidget(this, selection, this.width / 2 - UI_WIDTH / 2 + i * 31, this.height / 2 - 31));
+         this.buttons.add(new ButtonWidget(selection, this.width / 2 - UI_WIDTH / 2 + i * 31, this.height / 2 - 31));
       }
 
    }
@@ -87,7 +71,7 @@ public class KnappingSelectionScreen extends HandledScreen<KnappingSelectionScre
             }
 
             boolean bl = this.lastMouseX == mouseX && this.lastMouseY == mouseY;
-            Iterator iterator = this.buttons.iterator();
+            Iterator<ButtonWidget> iterator = this.buttons.iterator();
 
             while(iterator.hasNext()) {
                 ButtonWidget buttonWidget = (ButtonWidget)iterator.next();

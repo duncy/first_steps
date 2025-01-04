@@ -12,11 +12,9 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.block.entity.Sherds;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -27,32 +25,32 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.registry.tag.EnchantmentTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
-import nz.duncy.first_steps.block.entity.ModBlockEntities;
+import net.minecraft.world.tick.ScheduledTickView;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.entity.UnfiredDecoratedPotBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -60,9 +58,9 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
    public static final MapCodec<UnfiredDecoratedPotBlock> CODEC = createCodec(UnfiredDecoratedPotBlock::new);
    public static final Identifier SHERDS_DYNAMIC_DROP_ID = Identifier.ofVanilla("sherds");
    private static final VoxelShape SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
-   private static final DirectionProperty FACING;
-   public static final BooleanProperty CRACKED;
-   private static final BooleanProperty WATERLOGGED;
+	private static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
+	public static final BooleanProperty CRACKED = Properties.CRACKED;
+	private static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
    public MapCodec<UnfiredDecoratedPotBlock> getCodec() {
       return CODEC;
@@ -74,13 +72,19 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
             .with(FACING, Direction.NORTH)).with(WATERLOGGED, false)).with(CRACKED, false));
    }
 
-   public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
-         WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+   public BlockState getStateForNeighborUpdate(BlockState state,
+		WorldView world,
+		ScheduledTickView tickView,
+		BlockPos pos,
+		Direction direction,
+		BlockPos neighborPos,
+		BlockState neighborState,
+		Random random) {
       if ((Boolean) state.get(WATERLOGGED)) {
-         world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+         tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
       }
 
-      return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+      return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
    }
 
    public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -90,41 +94,42 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
             .with(CRACKED, false);
    }
 
-   public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
-         BlockHitResult hit) {
+   @Override
+   public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
       BlockEntity blockEntity = world.getBlockEntity(pos);
+      FirstSteps.LOGGER.info(String.valueOf(blockEntity));
       if (blockEntity instanceof UnfiredDecoratedPotBlockEntity) {
          if (world.isClient) {
             return ActionResult.CONSUME;
          } else {
-            ItemStack itemStack = player.getStackInHand(hand);
+            ItemStack itemStack = player.getStackInHand(player.getActiveHand());
 
             if (itemStack.isIn(ItemTags.DECORATED_POT_SHERDS)) { // Item is a sherd
                UnfiredDecoratedPotBlockEntity unfiredDecoratedPotBlockEntity = (UnfiredDecoratedPotBlockEntity) blockEntity;
 
                Sherds sherds = unfiredDecoratedPotBlockEntity.getSherds();
-
+               FirstSteps.LOGGER.info(String.valueOf(unfiredDecoratedPotBlockEntity.getHorizontalFacing().ordinal()));
                switch (unfiredDecoratedPotBlockEntity.getHorizontalFacing().ordinal()) {
                   case 3: // south
                      switch (hit.getSide().ordinal()) {
                         case 3: // back
-                           if (!sherds.back().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 2);
+                           if (sherds.back().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 2, player);
                            }
                            break;
                         case 5: // right
-                           if (!sherds.left().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 1);
+                           if (sherds.left().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 1, player);
                            }
                            break;
                         case 4: // left
-                           if (!sherds.right().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 3);
+                           if (sherds.right().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 3, player);
                            }
                            break;
                         case 2: // front
-                           if (!sherds.front().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 0);
+                           if (sherds.front().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 0, player);
                            }
                            break;
                         default:
@@ -134,23 +139,23 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
                   case 5: // east
                      switch (hit.getSide().ordinal()) {
                         case 5: // back
-                           if (!sherds.back().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 2);
+                           if (sherds.back().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 2, player);
                            }
                            break;
                         case 2: // right
-                           if (!sherds.left().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 1);
+                           if (sherds.left().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 1, player);
                            }
                            break;
                         case 3: // left
-                           if (!sherds.right().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 3);
+                           if (sherds.right().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 3, player);
                            }
                            break;
                         case 4: // front
-                           if (!sherds.front().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 0);
+                           if (sherds.front().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 0, player);
                            }
                            break;
                         default:
@@ -158,25 +163,26 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
                      }
                      break;
                   case 4: // west
+                     FirstSteps.LOGGER.info(String.valueOf(hit.getSide().ordinal()));
                      switch (hit.getSide().ordinal()) {
                         case 4: // back
-                           if (!sherds.back().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 2);
+                           if (sherds.back().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 2, player);
                            }
                            break;
                         case 3: // right
-                           if (!sherds.left().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 1);
+                           if (sherds.left().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 1, player);
                            }
                            break;
                         case 2: // left
-                           if (!sherds.right().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 3);
+                           if (sherds.right().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 3, player);
                            }
                            break;
                         case 5: // front
-                           if (!sherds.front().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 0);
+                           if (sherds.front().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 0, player);
                            }
                            break;
                         default:
@@ -186,23 +192,23 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
                   case 2: // north
                      switch (hit.getSide().ordinal()) {
                         case 2: // back
-                           if (!sherds.back().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 2);
+                           if (sherds.back().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 2, player);
                            }
                            break;
                         case 4: // right
-                           if (!sherds.left().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 1);
+                           if (sherds.left().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 1, player);
                            }
                            break;
                         case 5: // left
-                           if (!sherds.right().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 3);
+                           if (sherds.right().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 3, player);
                            }
                            break;
                         case 3: // front
-                           if (!sherds.front().get().getDefaultStack().isIn(ItemTags.DECORATED_POT_SHERDS)) {
-                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 0);
+                           if (sherds.front().isEmpty()) {
+                              unfiredDecoratedPotBlockEntity.setSherd(itemStack, 0, player);
                            }
                            break;
                         default:
@@ -227,16 +233,6 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
       }
    }
 
-   public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer,
-         ItemStack itemStack) {
-      if (world.isClient) {
-         world.getBlockEntity(pos, ModBlockEntities.UNFIRED_DECORATED_POT_BLOCK_ENTITY).ifPresent((blockEntity) -> {
-            blockEntity.readNbtFromStack(itemStack);
-         });
-      }
-
-   }
-
    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
       return false;
    }
@@ -259,11 +255,11 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
       super.onStateReplaced(state, world, pos, newState, moved);
    }
 
-   public List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+   public List<ItemStack> getDroppedStacks(BlockState state, LootWorldContext.Builder builder) {
       BlockEntity blockEntity = (BlockEntity) builder.getOptional(LootContextParameters.BLOCK_ENTITY);
       if (blockEntity instanceof UnfiredDecoratedPotBlockEntity unfiredDecoratedPotBlockEntity) {
          builder.addDynamicDrop(SHERDS_DYNAMIC_DROP_ID, lootConsumer -> {
-				for (Item item : unfiredDecoratedPotBlockEntity.getSherds().stream()) {
+				for (Item item : unfiredDecoratedPotBlockEntity.getSherds().toList()) {
 					lootConsumer.accept(this.removeBrick(item));
 				}
 			});
@@ -303,22 +299,18 @@ public class UnfiredDecoratedPotBlock extends BlockWithEntity implements Waterlo
 		if (!sherds.equals(Sherds.DEFAULT)) {
 			tooltip.add(ScreenTexts.EMPTY);
 			Stream.of(sherds.front(), sherds.left(), sherds.right(), sherds.back())
-				.forEach(sherd -> tooltip.add(new ItemStack((ItemConvertible)sherd.orElse(Items.BRICK), 1).getName().copyContentOnly().formatted(Formatting.GRAY)));
+				.forEach(sherd -> tooltip.add(new ItemStack((ItemConvertible)sherd.orElse(Items.CLAY_BALL), 1).getName().copyContentOnly().formatted(Formatting.GRAY)));
 		}
 	}
 
-   public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
-      BlockEntity var5 = world.getBlockEntity(pos);
-      if (var5 instanceof DecoratedPotBlockEntity decoratedPotBlockEntity) {
-         return decoratedPotBlockEntity.asStack();
-      } else {
-         return super.getPickStack(world, pos, state);
-      }
-   }
+   @Override
+	protected ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
+		if (world.getBlockEntity(pos) instanceof UnfiredDecoratedPotBlockEntity unfiredDecoratedPotBlockEntity) {
+			Sherds sherds = unfiredDecoratedPotBlockEntity.getSherds();
+			return UnfiredDecoratedPotBlockEntity.getStackWith(sherds);
+		} else {
+			return super.getPickStack(world, pos, state, includeData);
+		}
+	}
 
-   static {
-      FACING = Properties.HORIZONTAL_FACING;
-      CRACKED = Properties.CRACKED;
-      WATERLOGGED = Properties.WATERLOGGED;
-   }
 }

@@ -46,7 +46,7 @@ public class OreRockBlock extends Block {
                 }              
             }              
         }
-        return ActionResult.success(false);
+        return ActionResult.SUCCESS_SERVER;
     }
 
 

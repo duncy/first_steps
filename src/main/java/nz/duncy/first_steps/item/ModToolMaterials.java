@@ -1,75 +1,30 @@
 package nz.duncy.first_steps.item;
 
-import java.util.function.Supplier;
-
-import com.google.common.base.Suppliers;
+import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Items;
+import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.component.type.ToolComponent;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryEntryLookup;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
-import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.util.ModTags;
 
-public enum ModToolMaterials implements ToolMaterial {
-    FLINT(BlockTags.INCORRECT_FOR_STONE_TOOL, 131, 4.0F, 1.0F, 5, () -> Ingredient.ofItems(ModBlocks.FLINT_ROCK)),
-    BASALT(BlockTags.INCORRECT_FOR_STONE_TOOL, 131, 4.0F, 1.0F, 5, () -> Ingredient.ofItems(ModBlocks.BASALT_ROCK)),
-    OBSIDIAN(BlockTags.INCORRECT_FOR_STONE_TOOL, 131, 4.0F, 1.0F, 5, () -> Ingredient.ofItems(ModBlocks.OBSIDIAN_ROCK)),
-    COPPER(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL, 160, 4.5F, 2.0F, 14, () -> Ingredient.ofItems(Items.COPPER_INGOT)),
-	BRONZE(ModTags.Blocks.INCORRECT_FOR_BRONZE_TOOL, 200, 5.0F, 2.0F, 8, () -> Ingredient.ofItems(ModItems.BRONZE_INGOT));
-    // STEEL(MiningLevels.DIAMOND, 1561, 8.0f, 3.0f, 10, () -> Ingredient.ofItems(ModItems.STEEL_INGOT));
+public class ModToolMaterials {
+	public static final ToolMaterial FLINT = new ToolMaterial(BlockTags.INCORRECT_FOR_STONE_TOOL, 131, 4.0F, 1.0F, 5, ModTags.Items.FLINT_TOOL_MATERIALS);
+	public static final ToolMaterial BASALT = new ToolMaterial(BlockTags.INCORRECT_FOR_STONE_TOOL, 131, 4.0F, 1.0F, 5, ModTags.Items.BASALT_TOOL_MATERIALS);
+	public static final ToolMaterial OBSIDIAN = new ToolMaterial(BlockTags.INCORRECT_FOR_STONE_TOOL, 131, 4.0F, 1.0F, 5, ModTags.Items.OBSIDIAN_TOOL_MATERIALS);
+	public static final ToolMaterial COPPER = new ToolMaterial(ModTags.Blocks.INCORRECT_FOR_COPPER_TOOL, 160, 4.5F, 2.0F, 14, ModTags.Items.COPPER_TOOL_MATERIALS);
+	public static final ToolMaterial BRONZE = new ToolMaterial(ModTags.Blocks.INCORRECT_FOR_BRONZE_TOOL, 200, 5.0F, 2.0F, 8, ModTags.Items.BRONZE_TOOL_MATERIALS);
+	// public static final ToolMaterial STEEL = new ToolMaterial(ModTags.Blocks.INCORRECT_FOR_STEEL_TOOL, 1561, 8.0F, 3.0F, 10, ItemTags.STEEL_TOOL_MATERIALS);;   
 
-    private final TagKey<Block> inverseTag;
-	private final int itemDurability;
-	private final float miningSpeed;
-	private final float attackDamage;
-	private final int enchantability;
-	private final Supplier<Ingredient> repairIngredient;
-
-    private ModToolMaterials(
-		final TagKey<Block> inverseTag,
-		final int itemDurability,
-		final float miningSpeed,
-		final float attackDamage,
-		final int enchantability,
-		final Supplier<Ingredient> repairIngredient) {
-		this.inverseTag = inverseTag;
-		this.itemDurability = itemDurability;
-		this.miningSpeed = miningSpeed;
-		this.attackDamage = attackDamage;
-		this.enchantability = enchantability;
-		this.repairIngredient = Suppliers.memoize(repairIngredient::get);
-	}
-
-	@Override
-	public int getDurability() {
-		return this.itemDurability;
-	}
-
-	@Override
-	public float getMiningSpeedMultiplier() {
-		return this.miningSpeed;
-	}
-
-	@Override
-	public float getAttackDamage() {
-		return this.attackDamage;
-	}
-
-	@Override
-	public TagKey<Block> getInverseTag() {
-		return this.inverseTag;
-	}
-
-	@Override
-	public int getEnchantability() {
-		return this.enchantability;
-	}
-
-	@Override
-	public Ingredient getRepairIngredient() {
-		return (Ingredient)this.repairIngredient.get();
-	}
 }
+

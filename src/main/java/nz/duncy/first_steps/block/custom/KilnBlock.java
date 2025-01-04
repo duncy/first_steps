@@ -22,7 +22,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
@@ -44,8 +44,8 @@ import nz.duncy.first_steps.stat.ModStats;
 
 public class KilnBlock extends BlockWithEntity {
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 16, 16);
-    public static final DirectionProperty FACING;
-    public static final BooleanProperty LIT;
+    public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING;
+    public static final BooleanProperty LIT = Properties.LIT;
 
     public static final MapCodec<KilnBlock> CODEC = KilnBlock.createCodec(KilnBlock::new);
 
@@ -175,10 +175,4 @@ public class KilnBlock extends BlockWithEntity {
             world.addParticle(ParticleTypes.SMOKE, d, e + 1.1, f, 0.0, 0.0, 0.0);
         }
     }
-
-
-    static {
-        FACING = HorizontalFacingBlock.FACING;
-        LIT = Properties.LIT;
-     }
 }
