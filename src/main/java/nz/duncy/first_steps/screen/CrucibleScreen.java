@@ -1,10 +1,8 @@
 package nz.duncy.first_steps.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -29,13 +27,13 @@ public class CrucibleScreen extends HandledScreen<CrucibleScreenHandler> {
 
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-        RenderSystem.setShaderTexture(0, TEXTURE);
+        // RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+        // RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        // RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
 
-        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256);
 
         renderSmeltProgress(context, x, y);
         renderTemperatureBar(context, x, y);
@@ -52,7 +50,7 @@ public class CrucibleScreen extends HandledScreen<CrucibleScreenHandler> {
         if (handler.isSmelting()) {
             for (int i = 0; i < 9; i++) {
                 int smeltingProgress = handler.getSmeltingProgress(i);
-                context.drawTexture(TEXTURE, ((i % 3) * 22) + x + 20, y + (34 + ((int) Math.floor(i/3) * 18) - smeltingProgress), 246, 16 - smeltingProgress, 2, smeltingProgress);
+                context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, ((i % 3) * 22) + x + 20, y + (34 + ((int) Math.floor(i/3) * 18) - smeltingProgress), 246, 16 - smeltingProgress, 2, smeltingProgress, 256, 256);
             }
             
             
@@ -62,7 +60,7 @@ public class CrucibleScreen extends HandledScreen<CrucibleScreenHandler> {
     private void renderTemperatureBar(DrawContext context, int x, int y) {
         int temperatureBarValue = handler.getTemperatureBarValue();
         temperatureBarValue = 35;
-        context.drawTexture(TEXTURE, x + 149, y  + (71 - temperatureBarValue), 248, 55 - temperatureBarValue, 4, temperatureBarValue);
+        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x + 149, y  + (71 - temperatureBarValue), 248, 55 - temperatureBarValue, 4, temperatureBarValue, 256, 256);
     }
 
     @Override

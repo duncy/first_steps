@@ -18,6 +18,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -148,11 +149,19 @@ public class KilnBlock extends BlockWithEntity {
     }
 
     @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, ModBlockEntities.KILN_BLOCK_ENTITY,
-            (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1, blockEntity));
-    }
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+		return validateTicker(world, type, ModBlockEntities.KILN_BLOCK_ENTITY);
+	}
+    
+    @Nullable
+	public static <T extends BlockEntity> BlockEntityTicker<T> validateTicker(
+		World world, BlockEntityType<T> givenType, BlockEntityType<KilnBlockEntity> expectedType
+	) {
+		return world instanceof ServerWorld serverWorld
+			? validateTicker(givenType, expectedType, (worldx, pos, state, blockEntity) -> KilnBlockEntity.tick(serverWorld, pos, state, blockEntity))
+			: null;
+	}
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if ((Boolean)state.get(LIT)) {

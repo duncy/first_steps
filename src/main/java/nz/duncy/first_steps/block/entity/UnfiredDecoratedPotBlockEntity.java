@@ -124,12 +124,6 @@ public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
 		this.sherds = components.getOrDefault(DataComponentTypes.POT_DECORATIONS, Sherds.DEFAULT);
 	}
 
-	@Override
-	public void removeFromCopiedStackNbt(NbtCompound nbt) {
-		super.removeFromCopiedStackNbt(nbt);
-		nbt.remove("sherds");
-	}
-
 	public BlockEntity asBlockEntity() {
 		return this;
 	}

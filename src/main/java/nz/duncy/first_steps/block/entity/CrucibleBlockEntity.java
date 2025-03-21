@@ -15,7 +15,6 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
@@ -29,7 +28,7 @@ import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.custom.CrucibleBlock;
 import nz.duncy.first_steps.screen.CrucibleScreenHandler;
 
-public class CrucibleBlockEntity extends LootableContainerBlockEntity implements NamedScreenHandlerFactory, SidedInventory {
+public class CrucibleBlockEntity extends LootableContainerBlockEntity implements SidedInventory {
     private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 9).toArray();
     private DefaultedList<ItemStack> inventory;
     private HashMap<String, Integer> volumeContents = new HashMap<>(); 

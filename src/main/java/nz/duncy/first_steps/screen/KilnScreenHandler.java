@@ -1,6 +1,6 @@
 package nz.duncy.first_steps.screen;
 
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -107,6 +107,6 @@ public class KilnScreenHandler extends ScreenHandler {
     }
 
     protected boolean isFuel(ItemStack itemStack) {
-        return AbstractFurnaceBlockEntity.canUseAsFuel(itemStack);
+        return MinecraftClient.getInstance().world.getFuelRegistry().isFuel(itemStack);
     }
 }

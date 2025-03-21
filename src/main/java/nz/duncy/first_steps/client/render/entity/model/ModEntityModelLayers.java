@@ -41,7 +41,7 @@ public class ModEntityModelLayers {
 
     public static void registerEntityModelLayers() {
         EntityModelLayerRegistry.registerModelLayer(ModEntityModelLayers.SPEAR, SpearModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(ModEntityModelLayers.POTTERS_WHEEL, PottersWheelModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModEntityModelLayers.POTTERS_WHEEL, PottersWheelBlockModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModEntityModelLayers.UNFIRED_DECORATED_POT_BASE, UnfiredDecoratedPotBlockEntityRenderer::getTopBottomNeckTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModEntityModelLayers.UNFIRED_DECORATED_POT_SIDES, UnfiredDecoratedPotBlockEntityRenderer::getSidesTexturedModelData);
     }

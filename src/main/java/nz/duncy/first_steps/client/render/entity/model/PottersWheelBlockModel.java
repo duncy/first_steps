@@ -17,7 +17,7 @@ import net.minecraft.util.math.Direction;
 import nz.duncy.first_steps.FirstSteps;
 
 @Environment(EnvType.CLIENT)
-public class PottersWheelModel extends Model {
+public class PottersWheelBlockModel extends Model {
     private static final String LID = "lid";
     private static final String BASE = "base";
     private static final String ROD = "rod";
@@ -40,8 +40,8 @@ public class PottersWheelModel extends Model {
 
 
 
-    public PottersWheelModel(ModelPart modelPart) {
-        super(RenderLayer::getEntitySolid);
+    public PottersWheelBlockModel(ModelPart modelPart) {
+        super(modelPart, RenderLayer::getEntitySolid);
         this.lid = modelPart.getChild(LID);
         this.base = modelPart.getChild(BASE);
         this.rod = modelPart.getChild(ROD);
@@ -90,11 +90,4 @@ public class PottersWheelModel extends Model {
         this.lid.render(matrices, vertexConsumer, light, overlay);
         this.rod.render(matrices, vertexConsumer, light, overlay);
     }
-
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-        this.renderBase(matrices, vertices, light, overlay);
-        this.renderWheel(matrices, vertices, light, overlay, 0.0F);
-    }
- 
 }

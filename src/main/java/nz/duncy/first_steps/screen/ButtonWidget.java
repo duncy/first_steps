@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.render.RenderLayer;
 
 @Environment(EnvType.CLIENT)
 public class ButtonWidget extends ClickableWidget {
@@ -38,10 +39,10 @@ public class ButtonWidget extends ClickableWidget {
    }
 
    private void drawBackground(DrawContext context) {
-      context.drawGuiTexture(KnappingSelectionScreen.SLOT_TEXTURE, this.getX(), this.getY(), 26, 26);
+      context.drawGuiTexture(RenderLayer::getGuiTextured, KnappingSelectionScreen.SLOT_TEXTURE, this.getX(), this.getY(), 26, 26);
    }
 
    private void drawSelectionBox(DrawContext context) {
-      context.drawGuiTexture(KnappingSelectionScreen.SELECTION_TEXTURE, this.getX(), this.getY(), 26, 26);
+      context.drawGuiTexture(RenderLayer::getGuiTextured, KnappingSelectionScreen.SELECTION_TEXTURE, this.getX(), this.getY(), 26, 26);
    }
 }

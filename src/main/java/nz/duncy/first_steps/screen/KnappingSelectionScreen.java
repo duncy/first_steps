@@ -1,15 +1,17 @@
 package nz.duncy.first_steps.screen;
 
-import com.google.common.collect.Lists;
-import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.Iterator;
 import java.util.List;
 
 import org.lwjgl.glfw.GLFW;
 
+import com.google.common.collect.Lists;
+import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
@@ -53,7 +55,7 @@ public class KnappingSelectionScreen extends HandledScreen<KnappingSelectionScre
             RenderSystem.enableBlend();
             int i = this.width / 2 - 62;
             int j = this.height / 2 - 31 - 27;
-            context.drawTexture(TEXTURE, i, j, 0.0F, 0.0F, 125, 75, 128, 128);
+            context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, i, j, 0.0F, 0.0F, 125, 75, 128, 128);
             context.getMatrices().pop();
             super.render(context, mouseX, mouseY, delta);
             if (this.selection != null) {

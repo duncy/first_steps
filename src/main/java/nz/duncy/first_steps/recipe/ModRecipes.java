@@ -22,7 +22,7 @@ public class ModRecipes {
    public static final RecipeSerializer<KilningRecipe> KILNING_SERIALIZER = Registry.register(
       Registries.RECIPE_SERIALIZER, 
       Identifier.of(FirstSteps.MOD_ID, "kilning"), 
-      new KilningRecipeSerializer(KilningRecipe::new, 0)
+      new KilningRecipe.Serializer()
    );
 
    public static void registerRecipes() {

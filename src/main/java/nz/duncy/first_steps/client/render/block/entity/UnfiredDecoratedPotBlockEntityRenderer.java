@@ -3,6 +3,8 @@ package nz.duncy.first_steps.client.render.block.entity;
 import java.util.EnumSet;
 import java.util.Optional;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.DecoratedPotPatterns;
@@ -19,7 +21,6 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
@@ -28,7 +29,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.RotationAxis;
 import nz.duncy.first_steps.block.entity.UnfiredDecoratedPotBlockEntity;
 import nz.duncy.first_steps.client.render.ModTexturedRenderLayers;
-import org.jetbrains.annotations.Nullable;
+import nz.duncy.first_steps.client.render.entity.model.ModEntityModelLayers;
 
 @Environment(EnvType.CLIENT)
 public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRenderer<UnfiredDecoratedPotBlockEntity> {
@@ -41,11 +42,11 @@ public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRender
    private final ModelPart bottom;
 
    public UnfiredDecoratedPotBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-   ModelPart modelPart = context.getLayerModelPart(EntityModelLayers.DECORATED_POT_BASE);
+   ModelPart modelPart = context.getLayerModelPart(ModEntityModelLayers.UNFIRED_DECORATED_POT_BASE);
 		this.neck = modelPart.getChild(EntityModelPartNames.NECK);
 		this.top = modelPart.getChild("top");
 		this.bottom = modelPart.getChild("bottom");
-		ModelPart modelPart2 = context.getLayerModelPart(EntityModelLayers.DECORATED_POT_SIDES);
+		ModelPart modelPart2 = context.getLayerModelPart(ModEntityModelLayers.UNFIRED_DECORATED_POT_SIDES);
 		this.front = modelPart2.getChild("front");
 		this.back = modelPart2.getChild("back");
 		this.left = modelPart2.getChild("left");
@@ -95,7 +96,7 @@ public class UnfiredDecoratedPotBlockEntityRenderer implements BlockEntityRender
       matrixStack.push();
       Direction direction = unfiredDecoratedPotBlockEntity.getHorizontalFacing();
       matrixStack.translate(0.5, 0.0, 0.5);
-      matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F - direction.asRotation()));
+      matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F - direction.getPositiveHorizontalDegrees()));
       matrixStack.translate(-0.5, 0.0, -0.5);
    
       VertexConsumer vertexConsumer = ModTexturedRenderLayers.UNFIRED_DECORATED_POT_BASE.getVertexConsumer(vertexConsumerProvider, RenderLayer::getEntitySolid);
