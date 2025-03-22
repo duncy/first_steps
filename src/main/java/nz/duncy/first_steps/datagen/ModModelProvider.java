@@ -1,8 +1,7 @@
 package nz.duncy.first_steps.datagen;
 
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.BlockStateVariant;
@@ -52,7 +51,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCooker(ModBlocks.KILN, TexturedModel.ORIENTABLE_WITH_BOTTOM);
 
         // UNFIRED
-        blockStateModelGenerator.registerBuiltin(ModBlocks.UNFIRED_DECORATED_POT, Blocks.CLAY).includeWithoutItem(new Block[]{ModBlocks.UNFIRED_DECORATED_POT});
+        blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.UNFIRED_DECORATED_POT, Blocks.CLAY);
 
         // CLAY
         registerClays(blockStateModelGenerator);

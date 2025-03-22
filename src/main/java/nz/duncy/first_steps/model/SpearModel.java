@@ -18,11 +18,9 @@ import net.minecraft.util.Identifier;
 public class SpearModel
 extends Model {
     public final Identifier TEXTURE;
-    private final ModelPart root;
 
     public SpearModel(ModelPart root, Identifier texture) {
-        super(RenderLayer::getEntitySolid);
-        this.root = root;
+        super(root, RenderLayer::getEntitySolid);
         this.TEXTURE = texture;
     }
 
@@ -64,10 +62,5 @@ extends Model {
         //modelPartData2.addChild("middle_spike", ModelPartBuilder.create().uv(0, 0).cuboid(-0.5f, -4.0f, -0.5f, 1.0f, 4.0f, 1.0f), ModelTransform.NONE);
         //modelPartData2.addChild("right_spike", ModelPartBuilder.create().uv(4, 3).mirrored().cuboid(1.5f, -3.0f, -0.5f, 1.0f, 4.0f, 1.0f), ModelTransform.NONE);
         return TexturedModelData.of(modelData, 32, 32);
-    }
-
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-        this.root.render(matrices, vertices, light, overlay, color);
     }
 }

@@ -9,7 +9,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 public class TinSourceItem extends Item {
-    public TinSourceItem(net.minecraft.item.Item.Settings settings) {
+    public TinSourceItem(Item.Settings settings) {
         super(settings);
     }
 

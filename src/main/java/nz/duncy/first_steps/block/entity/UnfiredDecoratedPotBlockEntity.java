@@ -6,7 +6,6 @@ import net.minecraft.block.entity.Sherds;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.block.entity.DecoratedPotBlockEntity.WobbleType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
@@ -26,9 +25,7 @@ public class UnfiredDecoratedPotBlockEntity extends BlockEntity {
    public static final String SHERDS_NBT_KEY = "sherds";
    public static final String ITEM_NBT_KEY = "item";
    public static final int field_46660 = 1;
-   public long lastWobbleTime;
    @Nullable
-   public WobbleType lastWobbleType;
    private Sherds sherds;
    @Nullable
    protected Identifier lootTableId;

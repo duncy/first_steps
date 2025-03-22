@@ -65,9 +65,9 @@ public class SpearEntity extends PersistentProjectileEntity {
         if (i > 0 && (this.dealtDamage || this.isNoClip()) && entity != null) {
             World world = this.getWorld();
             if (!this.isOwnerAlive()) {
-                if (!world.isClient && this.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED) {
-                    this.dropStack(this.asItemStack(), 0.1f);
-                }
+                if (this.getWorld() instanceof ServerWorld serverWorld && this.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED) {
+					this.dropStack(serverWorld, this.asItemStack(), 0.1F);
+				}
                 this.discard();
             } else {
                 this.setNoClip(true);
@@ -116,7 +116,7 @@ public class SpearEntity extends PersistentProjectileEntity {
 		}
 
 		this.dealtDamage = true;
-		if (entity.damage(damageSource, f)) {
+		if (entity.sidedDamage(damageSource, f)) {
 			if (entity.getType() == EntityType.ENDERMAN) {
 				return;
 			}

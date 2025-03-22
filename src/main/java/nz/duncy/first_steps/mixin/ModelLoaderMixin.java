@@ -1,10 +1,10 @@
-package nz.duncy.first_steps.mixin;
+// package nz.duncy.first_steps.mixin;
 
-import org.spongepowered.asm.mixin.Mixin;
-import net.minecraft.client.render.model.ModelLoader;
+// import org.spongepowered.asm.mixin.Mixin;
+// import net.minecraft.client.render.model.ModelLoader;
 
-@Mixin(ModelLoader.class)
-public abstract class ModelLoaderMixin {
+// @Mixin(ModelLoader.class)
+// public abstract class ModelLoaderMixin {
     // @Shadow
     // protected abstract void loadInventoryVariantItemModel(Identifier id);
 
@@ -22,4 +22,4 @@ public abstract class ModelLoaderMixin {
     //     this.loadInventoryVariantItemModel(Identifier.of(FirstSteps.MOD_ID, "wooden_tongs_dim"));
     // }
     
-}
+// }

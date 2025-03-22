@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:basalt_spear"
+        "recipe": "first_steps:basalt_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:basalt_spear"
+      "first_steps:basalt_spear"
     ]
   }
 }

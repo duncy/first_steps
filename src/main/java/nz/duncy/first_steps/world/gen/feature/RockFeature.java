@@ -8,6 +8,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
@@ -49,7 +50,7 @@ public class RockFeature extends Feature<RockFeatureConfig> {
                         testPos = testPos.up();
 
                         // Ensure not exceeding world limit
-                        if (testPos.getY() >= world.getTopY()) break;
+                        if (testPos.getY() >= world.getTopY(Heightmap.Type.WORLD_SURFACE, testPos.getX(), testPos.getZ())) break;
                     }
                     return true;
                 }

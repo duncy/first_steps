@@ -125,7 +125,7 @@ public class TongItem extends Item {
                         world.playSound(playerEntity, blockPos, getPlaceSound(worldBlockState), SoundCategory.BLOCKS, (blockSoundGroup.getVolume() + 1.0F) / 2.0F, blockSoundGroup.getPitch() * 0.8F);
                         world.emitGameEvent(GameEvent.BLOCK_PLACE, blockPos, Emitter.of(playerEntity, worldBlockState));
 
-                        return ActionResult.success(world.isClient);
+                        return ActionResult.SUCCESS_SERVER;
                     }
                 }  
             }

@@ -7,10 +7,6 @@
 		"CampfireBlockMixin"
 	],
     "client": [
-        "ItemRendererAccessor",
-		"ItemRendererMixin",
-		"ModelLoaderMixin",
-		"PlayerEntityRendererMixin",
 		"BakedModelManagerMixin"
     ],
 	"injectors": {

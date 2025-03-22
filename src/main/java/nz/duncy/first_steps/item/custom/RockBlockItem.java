@@ -24,7 +24,7 @@ public class RockBlockItem extends BlockItem {
             if (!context.getWorld().isClient) {
                 player.openHandledScreen((NamedScreenHandlerFactory) context.getWorld().getBlockEntity(context.getBlockPos()) );
             }
-            return ActionResult.success(false); // Prevent block placement
+            return ActionResult.SUCCESS_SERVER; // Prevent block placement
         }
 
         return super.useOnBlock(context);

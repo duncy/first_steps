@@ -1,19 +1,15 @@
 package nz.duncy.first_steps;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+// import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
 import nz.duncy.first_steps.client.render.block.entity.PottersWheelBlockEntityRenderer;
 // import nz.duncy.first_steps.client.render.block.entity.RockBlockEntityRenderer;
 import nz.duncy.first_steps.client.render.block.entity.UnfiredDecoratedPotBlockEntityRenderer;
 import nz.duncy.first_steps.client.render.entity.ModEntityRenderer;
 import nz.duncy.first_steps.client.render.entity.model.ModEntityModelLayers;
-import nz.duncy.first_steps.client.render.item.ModBuiltinModelItemRenderer;
-import nz.duncy.first_steps.client.render.item.TongItemRenderer;
-import nz.duncy.first_steps.item.ModItems;
 import nz.duncy.first_steps.screen.CrucibleScreen;
 import nz.duncy.first_steps.screen.KilnScreen;
 import nz.duncy.first_steps.screen.KnappingSelectionScreen;
@@ -34,10 +30,10 @@ public class FirstStepsClient implements ClientModInitializer {
         ModEntityModelLayers.registerEntityModelLayers();
         
         // Register Item Renderers
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WOODEN_TONGS, new TongItemRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.POTTERS_WHEEL.asItem(), new ModBuiltinModelItemRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.UNFIRED_DECORATED_POT.asItem(), new ModBuiltinModelItemRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.STONE_SPEAR, new ModBuiltinModelItemRenderer());
+        // BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WOODEN_TONGS, new TongItemRenderer());
+        // BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.POTTERS_WHEEL.asItem(), new ModBuiltinModelItemRenderer());
+        // BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.UNFIRED_DECORATED_POT.asItem(), new ModBuiltinModelItemRenderer());
+        // BuiltinItemRendererRegistry.INSTANCE.register(ModItems.STONE_SPEAR, new ModBuiltinModelItemRenderer());
 
 
         // Register Screen Handlers

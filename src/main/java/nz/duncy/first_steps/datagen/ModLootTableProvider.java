@@ -99,7 +99,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     }
 
     private LootTable.Builder rawOreDrops(Block block, Item item) {
-        RegistryWrapper.Impl<Enchantment> impl = this.registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+        RegistryWrapper.Impl<Enchantment> impl = this.registries.getOrThrow(RegistryKeys.ENCHANTMENT);
 		return this.dropsWithSilkTouch(
 			block,
 			(LootPoolEntry.Builder<?>)this.applyExplosionDecay(

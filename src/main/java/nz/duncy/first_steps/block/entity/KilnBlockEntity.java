@@ -1,29 +1,20 @@
 package nz.duncy.first_steps.block.entity;
 
-import java.util.Optional;
-
 import org.jetbrains.annotations.Nullable;
 
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
-import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.FuelRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.DynamicRegistryManager;
@@ -41,7 +32,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.custom.KilnBlock;
-import nz.duncy.first_steps.component.ModDataComponentTypes;
 import nz.duncy.first_steps.recipe.KilningRecipe;
 import nz.duncy.first_steps.recipe.ModRecipes;
 import nz.duncy.first_steps.screen.KilnScreenHandler;
@@ -54,8 +44,8 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
     private static final int KILN_FUEL_OUTPUT_SLOT = 2; // Fuel output
 
     private int temperature;
-    private int maxTemperature;
-    private static final int minTemperature = 20;
+    // private int maxTemperature;
+    // private static final int minTemperature = 20;
 
     int litTimeRemaining;
 	int litTotalTime;
@@ -133,7 +123,7 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
 			this.recipesUsed.put(RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(string)), nbtCompound.getInt(string));
 		}
 
-        this.maxTemperature = this.getMaxTemperature((ItemStack)this.inventory.get(KILN_FUEL_INPUT_SLOT));
+        // this.maxTemperature = this.getMaxTemperature((ItemStack)this.inventory.get(KILN_FUEL_INPUT_SLOT));
 	}
 
 	@Override
@@ -305,6 +295,13 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
 			.orElse(200);
 	}
 
+	public void setLastRecipe(@Nullable RecipeEntry<KilningRecipe> recipe) {
+		if (recipe != null) {
+			RegistryKey<Recipe<?>> registryKey = recipe.id();
+			this.recipesUsed.addTo(registryKey, 1);
+		}
+	}
+
     private static boolean craftRecipe(
 		DynamicRegistryManager dynamicRegistryManager,
 		@Nullable RecipeEntry<KilningRecipe> recipe,
@@ -333,32 +330,6 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
     private static boolean canAcceptRecipeOutput(
 		DynamicRegistryManager dynamicRegistryManager,
 		@Nullable RecipeEntry<KilningRecipe> recipe,
-		SingleStackRecipeInput input,
-		DefaultedList<ItemStack> inventory,
-		int maxCount
-	) {
-		if (!inventory.get(0).isEmpty() && recipe != null) {
-			ItemStack itemStack = recipe.value().craft(input, dynamicRegistryManager);
-			if (itemStack.isEmpty()) {
-				return false;
-			} else {
-				ItemStack itemStack2 = inventory.get(2);
-				if (itemStack2.isEmpty()) {
-					return true;
-				} else if (!ItemStack.areItemsAndComponentsEqual(itemStack2, itemStack)) {
-					return false;
-				} else {
-					return itemStack2.getCount() < maxCount && itemStack2.getCount() < itemStack2.getMaxCount() ? true : itemStack2.getCount() < itemStack.getMaxCount();
-				}
-			}
-		} else {
-			return false;
-		}
-	}
-    
-    private static boolean canAcceptRecipeOutput(
-		DynamicRegistryManager dynamicRegistryManager,
-		@Nullable KilningRecipe recipe,
 		SingleStackRecipeInput input,
 		DefaultedList<ItemStack> inventory,
 		int maxCount
@@ -431,17 +402,17 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
 		return this.litTimeRemaining > 0;
 	}
 
-    private int getMaxTemperature(ItemStack itemStack) {
-        return switch (itemStack.getRegistryEntry().toString()) {
-            case "minecraft:lava_bucket" -> 1200;
-            case "minecraft:coal" -> 1600;
-            case "minecraft:coal_block" -> 1600;
-            case "minecraft:charcoal" -> 1200;
-            case "minecraft:dried_kelp_block" -> 50;
-            case "minecraft:blaze_rod" -> 1200;
-            default -> 950;
-        };
-    }
+    // private int getMaxTemperature(ItemStack itemStack) {
+    //     return switch (itemStack.getRegistryEntry().toString()) {
+    //         case "minecraft:lava_bucket" -> 1200;
+    //         case "minecraft:coal" -> 1600;
+    //         case "minecraft:coal_block" -> 1600;
+    //         case "minecraft:charcoal" -> 1200;
+    //         case "minecraft:dried_kelp_block" -> 50;
+    //         case "minecraft:blaze_rod" -> 1200;
+    //         default -> 950;
+    //     };
+    // }
 
     public void removeCrucible() {
         this.inventory.set(KILN_INPUT_SLOT, ItemStack.EMPTY);

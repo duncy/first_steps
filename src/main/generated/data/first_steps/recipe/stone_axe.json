@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "H": {
-      "item": "first_steps:stone_head_axe"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    }
+    "H": "first_steps:stone_head_axe",
+    "S": "minecraft:stick"
   },
   "pattern": [
     "H",
