@@ -8,11 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.IngredientPlacement;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SingleStackRecipe;
+import net.minecraft.recipe.book.CookingRecipeCategory;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
@@ -91,6 +93,11 @@ public class KilningRecipe extends SingleStackRecipe  {
 		return this.ingredientPlacement;
    }
    
+   @FunctionalInterface
+	public interface RecipeFactory<T extends KilningRecipe> {
+		T create(KilningRecipeCategory category, Ingredient ingredient, ItemStack result, int cookingTime);
+	}
+
    public static class Serializer implements RecipeSerializer<KilningRecipe> {
       private final MapCodec<KilningRecipe> codec = RecordCodecBuilder.mapCodec(
             instance -> instance.group(

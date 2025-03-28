@@ -1,10 +1,10 @@
 {
-    "block.first_steps.stone_tin_ore": "Cassiterite Ore",
-    "block.first_steps.stone_copper_ore": "Malachite Ore",
-    "block.first_steps.stone_iron_ore": "Hematite Ore",
-    "block.first_steps.deepslate_copper_ore": "Chalcopyrite Ore",
-    "block.first_steps.deepslate_iron_ore": "Magnetite Ore",
-    "block.first_steps.basalt_mullite_ore": "Sillimanite Deposit",
+    "item.first_steps.stone_tin_ore": "Cassiterite Ore",
+    "item.first_steps.stone_copper_ore": "Malachite Ore",
+    "item.first_steps.stone_iron_ore": "Hematite Ore",
+    "item.first_steps.deepslate_copper_ore": "Chalcopyrite Ore",
+    "item.first_steps.deepslate_iron_ore": "Magnetite Ore",
+    "item.first_steps.basalt_mullite_ore": "Sillimanite Deposit",
 
     "item.first_steps.raw_tin": "Raw Cassiterite",
     "item.first_steps.raw_stone_copper": "Raw Malachite",
@@ -12,6 +12,22 @@
     "item.first_steps.raw_deepslate_copper": "Raw Chalcopyrite",
     "item.first_steps.raw_deepslate_iron": "Raw Magnetite",
     "item.first_steps.raw_mullite": "Sillimanite",
+
+    "item.first_steps.raw_tin_block": "Raw Cassiterite Block",
+    "item.first_steps.raw_stone_copper_block": "Raw Malachite Block",
+    "item.first_steps.raw_stone_iron_block": "Raw Hematite Block",
+    "item.first_steps.raw_deepslate_copper_block": "Raw Chalcopyrite Block",
+    "item.first_steps.raw_deepslate_iron_block": "Raw Magnetite Block",
+    "item.first_steps.raw_mullite_block": "Sillimanite Block",
+
+    "item.first_steps.stone_head_hoe": "Stone Hoe Head",
+    "item.first_steps.flint_head_hoe": "Flint Hoe Head",
+    "item.first_steps.basalt_head_hoe": "Basalt Hoe Head",
+    "item.first_steps.obsidian_head_hoe": "Obsidian Hoe Head",
+    "item.first_steps.copper_head_hoe": "Copper Hoe Head",
+    "item.first_steps.bronze_head_hoe": "Bronze Hoe Head",
+    "item.first_steps.iron_head_hoe": "Iron Hoe Head",
+    "item.first_steps.steel_head_hoe": "Steel Hoe Head",
 
     "item.first_steps.stone_head_axe": "Stone Axe Head",
     "item.first_steps.flint_head_axe": "Flint Axe Head",
@@ -116,18 +132,20 @@
     "item.first_steps.steel_sword": "Steel Sword", 
     "item.first_steps.steel_pickaxe": "Steel Pickaxe",
 
-    "block.first_steps.stone_rock": "Rock",
-    "block.first_steps.flint_rock": "Flint",
-    "block.first_steps.basalt_rock": "Basalt",
-    "block.first_steps.obsidian_rock": "Obsidian",
+    "item.first_steps.stone_rock": "Rock",
+    "item.first_steps.flint_rock": "Flint",
+    "item.first_steps.basalt_rock": "Basalt",
+    "item.first_steps.obsidian_rock": "Obsidian",
 
     "container.first_steps.kiln": "Kiln",
-    "block.first_steps.kiln": "Kiln",
+    "item.first_steps.kiln": "Kiln",
 
-    "block.first_steps.unfired_crucible": "Clay Crucible",
+    "item.first_steps.unfired_flower_pot": "Clay Flower Pot",
+    "item.first_steps.unfired_crucible": "Clay Crucible",
+    "item.first_steps.unfired_decorated_pot": "Clay Decorated Pot",
 
     "container.first_steps.fired_crucible": "Ceramic Crucible",
-    "block.first_steps.fired_crucible": "Ceramic Crucible",
+    "item.first_steps.fired_crucible": "Ceramic Crucible",
 
     "tooltip.first_steps.crucible.temperature": "Temperature: %d°C",
     "tooltip.first_steps.crucible.itemCount": "%s x%s",
@@ -160,15 +178,22 @@
     "tooltip.first_steps.tongs.hint": "Use this to hold hot items!",
     "tooltip.first_steps.tongs.holding": "Holding %s",
 
-    "block.first_steps.clay": "Clay Ball",
+    "item.first_steps.clay": "Clay Ball",
 
     "tooltip.first_steps.clay": "Use this on a potter's wheel to shape pottery!",
 
-    "block.first_steps.potters_wheel": "Potter's Wheel",
-
-    "block.first_steps.unfired_decorated_pot": "Clay Decorated Pot",
+    "item.first_steps.potters_wheel": "Potter's Wheel",
 
     "itemgroup.first_steps": "First Steps",
+
+    "item.first_steps.hoe_head_mold": "Hoe Head Mold",
+    "item.first_steps.axe_head_mold": "Axe Head Mold",
+    "item.first_steps.shovel_head_mold": "Shovel Head Mold",
+    "item.first_steps.knife_head_mold": "Knife Head Mold",
+    "item.first_steps.spear_head_mold": "Spear Head Mold",
+    "item.first_steps.arrow_head_mold": "Arrow Head Mold",
+    "item.first_steps.pickaxe_head_mold": "Pickaxe Head Mold",
+    "item.first_steps.sword_head_mold": "Sword Blade Mold",
 
     "screen.first_steps.knapping.hoe_head": "Hoe Head",
     "screen.first_steps.knapping.shovel_head": "Shovel Head",

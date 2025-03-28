@@ -16,7 +16,7 @@ public class ModToolRecipes extends RecipeGenerator {
 
     public ModToolRecipes(RegistryWrapper.WrapperLookup wrapperLookup, RecipeExporter recipeExporter) {
         super(wrapperLookup, recipeExporter);
-        this.itemLookup = registries.getOrThrow(RegistryKeys.ITEM);;
+        this.itemLookup = registries.getOrThrow(RegistryKeys.ITEM);
     }
 
     private void generateToolRecipe(RecipeExporter exporter, Item head, Item tool) {

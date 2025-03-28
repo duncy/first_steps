@@ -38,6 +38,7 @@ public class KilnScreenHandler extends ScreenHandler {
 
     public boolean isCrafting() {
         return propertyDelegate.get(0) > 0;
+        
     }
 
     public int getBurningProgress() {
@@ -64,24 +65,25 @@ public class KilnScreenHandler extends ScreenHandler {
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(invSlot);
-        if (slot != null && slot.hasStack()) {
-            ItemStack originalStack = slot.getStack();
-            newStack = originalStack.copy();
-            if (invSlot < this.inventory.size()) {
-                if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
-                return ItemStack.EMPTY;
-            }
+        // Slot slot = this.slots.get(invSlot);
+        // FirstSteps.LOGGER.info("inv slot: " + String.valueOf(invSlot));
+        // if (slot != null && slot.hasStack()) {
+        //     ItemStack originalStack = slot.getStack();
+        //     newStack = originalStack.copy();
+        //     if (invSlot < this.inventory.size()) {
+        //         if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
+        //             return ItemStack.EMPTY;
+        //         }
+        //     } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
+        //         return ItemStack.EMPTY;
+        //     }
 
-            if (originalStack.isEmpty()) {
-                slot.setStack(ItemStack.EMPTY);
-            } else {
-                slot.markDirty();
-            }
-        }
+        //     if (originalStack.isEmpty()) {
+        //         slot.setStack(ItemStack.EMPTY);
+        //     } else {
+        //         slot.markDirty();
+        //     }
+        // }
 
         return newStack;
     }

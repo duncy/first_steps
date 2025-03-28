@@ -1,0 +1,10 @@
+{
+  "type": "first_steps:kilning",
+  "category": "fuel_waste",
+  "cookingtime": 200,
+  "ingredient": "#minecraft:logs_that_burn",
+  "result": {
+    "count": 1,
+    "id": "minecraft:charcoal"
+  }
+}

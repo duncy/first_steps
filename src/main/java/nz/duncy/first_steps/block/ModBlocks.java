@@ -1,10 +1,12 @@
 package nz.duncy.first_steps.block;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 // import com.feintha.regedit.RegistryEditEvent;
 
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
@@ -48,84 +50,83 @@ public class ModBlocks {
 
         // ROCKS
         public static final Block STONE_ROCK = registerRockBlock("stone_rock",
-                        AbstractBlock.Settings.create().strength(0.0F, 0.0F)
+                        Settings.create().strength(0.0F, 0.0F)
                                         .pistonBehavior(PistonBehavior.DESTROY)
                                         .mapColor(MapColor.STONE_GRAY));
 
         public static Block FLINT_ROCK = registerRockBlock("flint_rock",
-                        AbstractBlock.Settings.copy(STONE_ROCK)
+                        Settings.copy(STONE_ROCK)
                                         .mapColor(MapColor.BLACK));
                                         // Items.FLINT);
 
         public static final Block BASALT_ROCK = registerRockBlock("basalt_rock",
-                        AbstractBlock.Settings.copy(STONE_ROCK));
+                        Settings.copy(STONE_ROCK));
 
         public static final Block OBSIDIAN_ROCK = registerRockBlock("obsidian_rock",
-                        AbstractBlock.Settings.copy(FLINT_ROCK));
+                        Settings.copy(FLINT_ROCK));
 
         public static final Block COPPER_ROCK = registerBlock(
                         "copper_rock",
                         OreRockBlock::new,
-                        AbstractBlock.Settings.copy(Blocks.STONE),
+                        Settings.copy(Blocks.STONE),
                         true
                 );
 
         // CRAFTING
         // KILN
         public static final Block KILN = registerBlock(
-		"kiln",
-		KilnBlock::new,
-		AbstractBlock.Settings.copy(Blocks.TERRACOTTA)
+                "kiln",
+                KilnBlock::new,
+                Settings.copy(Blocks.TERRACOTTA)
                         .luminance(Blocks.createLightLevelFromLitBlockState(13)),
-		true
+                true
         );
 
         // POTTERY
         public static final Block POTTERS_WHEEL = registerBlock(
-		"potters_wheel",
-		PottersWheelBlock::new,
-		AbstractBlock.Settings.copy(Blocks.TERRACOTTA),
-		true
+                "potters_wheel",
+                PottersWheelBlock::new,
+                Settings.copy(Blocks.TERRACOTTA),
+                true
         );
 
         // FIRED
-        public static final Block FIRED_CRUCIBLE = registerUniqueBlock("fired_crucible", 
-                AbstractBlock.Settings.create().strength(0.0F, 0.0F)
-                                        .pistonBehavior(PistonBehavior.DESTROY)
-                                        .mapColor(MapColor.TERRACOTTA_RED).nonOpaque()
-                                        .sounds(BlockSoundGroup.DECORATED_POT));
+        public static final Block FIRED_CRUCIBLE = registerCrucible(
+                "fired_crucible",
+                Settings.copy(Blocks.TERRACOTTA)
+        );
 
         // UNFIRED
         public static final Block UNFIRED_CRUCIBLE = registerBlock(
                 "unfired_crucible",
                 UnfiredCrucibleBlock::new,
-                AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly(),
+                Settings.copy(Blocks.CLAY).breakInstantly(),
                 true
         ); 
         public static final Block UNFIRED_FLOWER_POT = registerBlock("unfired_flower_pot",
-                        AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly());
+                        Settings.copy(Blocks.CLAY).breakInstantly());
         public static final Block UNFIRED_DECORATED_POT = registerBlock(
                                 "unfired_decorated_pot",
                                 UnfiredDecoratedPotBlock::new,
-                                AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly(),
+                                Settings.copy(Blocks.CLAY).breakInstantly(),
                                 true
         ); 
 
         // CLAY
         public static final Block CLAY = registerBlock(
-		"clay",
-		ClayBlock::new,
-		AbstractBlock.Settings.create()
-			.mapColor(MapColor.LIGHT_BLUE_GRAY)
-			.replaceable()
-			.notSolid()
-			.ticksRandomly()
-			.strength(0.1F)
-			.requiresTool()
-			.sounds(BlockSoundGroup.GRAVEL)
-			.blockVision((state, world, pos) -> (Integer)state.get(ClayBlock.CLAY_LAYERS) >= 4)
-			.pistonBehavior(PistonBehavior.DESTROY),
-		true
+                "clay",
+                ClayBlock::new,
+                Settings.create()
+                        .mapColor(MapColor.LIGHT_BLUE_GRAY)
+                        .replaceable()
+                        .notSolid()
+                        .ticksRandomly()
+                        .strength(0.1F)
+                        .requiresTool()
+                        .sounds(BlockSoundGroup.GRAVEL)
+                        .blockVision((state, world, pos) -> (Integer)state.get(ClayBlock.CLAY_LAYERS) >= 4)
+                        .pistonBehavior(PistonBehavior.DESTROY),
+                true
         );
 
 
@@ -140,24 +141,37 @@ public class ModBlocks {
         public static final Block SWORD_HEAD_MOLD = registerMoldBlock("sword_head_mold");
         
 
-        private static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {
+        private static Block registerBlock(String name, Function<Settings, Block> blockFactory, Settings settings, boolean shouldRegisterItem) {
                 RegistryKey<Block> blockKey = keyOfBlock(name);
 
                 Block block = blockFactory.apply(settings.registryKey(blockKey));
                 
                 if (shouldRegisterItem) {
-			// Items need to be registered with a different type of registry key, but the ID
-			// can be the same.
-			RegistryKey<Item> itemKey = keyOfItem(name);
+                        // Items need to be registered with a different type of registry key, but the ID
+                        // can be the same.
+                        RegistryKey<Item> itemKey = keyOfItem(name);
 
-			BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey));
-			Registry.register(Registries.ITEM, itemKey, blockItem);
-		}
+                        BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey));
+                        Registry.register(Registries.ITEM, itemKey, blockItem);
+                }
 
-		return Registry.register(Registries.BLOCK, blockKey, block);
+                return Registry.register(Registries.BLOCK, blockKey, block);
         }
+        
+        private static Block registerCrucible(String name, Settings settings) {
+                Block block = registerBlock(
+                        name,
+                        CrucibleBlock::new,
+                        settings,
+                        false
+                );
+                registerUniqueBlockItem(name, block);
 
-        private static Block registerBlock(String name, AbstractBlock.Settings settings) {
+                return block;
+        }
+                
+
+        private static Block registerBlock(String name, Settings settings) {
                 return registerBlock(
                         name,
                         Block::new,
@@ -166,7 +180,7 @@ public class ModBlocks {
                 );
         }
 
-        private static Block registerRockBlock(String name, AbstractBlock.Settings settings) {
+        private static Block registerRockBlock(String name, Settings settings) {
                 Block block =  registerBlock(
                         name,
                         RockBlock::new,
@@ -179,20 +193,6 @@ public class ModBlocks {
                 return block;
         }
 
-        
-
-        private static Block registerUniqueBlock(String name, AbstractBlock.Settings settings) {
-                Block block =  registerBlock(
-                        name,
-                        RockBlock::new,
-                        settings,
-                        false
-                );
-
-                registerUniqueBlockItem(name, block);
-
-                return block;
-        }
 
         // public static Block registerRockBlockWithExistingVanillaItem(String name, Block block, Item vanillaItem) {
         //         RegistryEditEvent.EVENT.register(manipulator -> {
@@ -228,7 +228,7 @@ public class ModBlocks {
                 return registerBlock(
                         name,
                         Block::new,
-                        AbstractBlock.Settings.create().sounds(BlockSoundGroup.STONE),
+                        Settings.create().sounds(BlockSoundGroup.STONE),
                         true
                 );
         }
@@ -238,7 +238,7 @@ public class ModBlocks {
                 return registerBlock(
                         name,
                         Block::new,
-                        AbstractBlock.Settings.create().sounds(BlockSoundGroup.DEEPSLATE),
+                        Settings.create().sounds(BlockSoundGroup.DEEPSLATE),
                         true
                 );
         }
@@ -247,7 +247,7 @@ public class ModBlocks {
                 return registerBlock(
                         name,
                         PillarBlock::new,
-                        AbstractBlock.Settings.create().sounds(BlockSoundGroup.BASALT),
+                        Settings.create().sounds(BlockSoundGroup.BASALT),
                         true
                 );
         }
@@ -256,7 +256,7 @@ public class ModBlocks {
                 return registerBlock(
                         name,
                         UnfiredMoldBlock::new,
-                        AbstractBlock.Settings.copy(Blocks.CLAY).breakInstantly(),
+                        Settings.copy(Blocks.CLAY).breakInstantly(),
                         true
                 ); 
         }
