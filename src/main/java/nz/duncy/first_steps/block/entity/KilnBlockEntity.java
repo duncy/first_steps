@@ -12,6 +12,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.item.FuelRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeEntry;
@@ -87,6 +88,8 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
 
         this.matchGetter = ServerRecipeManager.createCachedMatchGetter(ModRecipes.KILNING_TYPE);
 
+        this.currentFuel = Items.AIR;
+
         
         
     }
@@ -111,6 +114,7 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
 		this.litTotalTime = nbt.getShort("lit_total_time");
         this.temperature = nbt.getShort("temperature");
 		NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
+        this.currentFuel = Item.byRawId(nbt.getInt("current_fuel"));
 
 		for (String string : nbtCompound.getKeys()) {
 			this.recipesUsed.put(RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(string)), nbtCompound.getInt(string));
@@ -125,6 +129,7 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
 		nbt.putShort("lit_time_remaining", (short)this.litTimeRemaining);
 		nbt.putShort("lit_total_time", (short)this.litTotalTime);
         nbt.putShort("temperature", (short) this.temperature);
+        nbt.putInt("current_fuel", Item.getRawId(this.currentFuel));
 		Inventories.writeNbt(nbt, this.inventory, registries);
 		NbtCompound nbtCompound = new NbtCompound();
 		this.recipesUsed.forEach((recipeKey, count) -> nbtCompound.putInt(recipeKey.getValue().toString(), count));
@@ -151,7 +156,7 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
                 ++blockEntity.temperature;
             }
 
-            if (blockEntity.litTimeRemaining == 0) {
+            if (blockEntity.litTimeRemaining <= 0) {
                 // Burning is over, produce waste product
                 SingleStackRecipeInput singleStackRecipeInput = new SingleStackRecipeInput(new ItemStack(blockEntity.currentFuel));
                 RecipeEntry<KilningRecipe> recipeEntry = blockEntity.matchGetter.getFirstMatch(singleStackRecipeInput, world).orElse(null);
@@ -169,9 +174,9 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
             if (blockEntity.temperature > minTemperature) {
                 --blockEntity.temperature;
             }
-
             if (!fuelItemstack.isEmpty()) {
-                SingleStackRecipeInput singleStackRecipeInput = new SingleStackRecipeInput(blockEntity.inventory.get(KILN_FUEL_INPUT_SLOT));
+                
+                SingleStackRecipeInput singleStackRecipeInput = new SingleStackRecipeInput(fuelItemstack);
                 RecipeEntry<KilningRecipe> recipeEntry = blockEntity.matchGetter.getFirstMatch(singleStackRecipeInput, world).orElse(null);
 
                 int i = blockEntity.getMaxCountPerStack();
@@ -196,7 +201,6 @@ public class KilnBlockEntity extends BlockEntity implements NamedScreenHandlerFa
                 }
             }
         }
-
 
         if (burning != blockEntity.isBurning()) {
             dirty = true;
