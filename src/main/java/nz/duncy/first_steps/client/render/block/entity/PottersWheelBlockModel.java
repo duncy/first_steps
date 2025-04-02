@@ -1,4 +1,4 @@
-package nz.duncy.first_steps.client.render.entity.model;
+package nz.duncy.first_steps.client.render.block.entity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

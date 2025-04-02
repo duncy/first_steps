@@ -22,10 +22,16 @@ import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.item.custom.TinSourceItem;
 import nz.duncy.first_steps.item.custom.TongItem;
+import nz.duncy.first_steps.item.custom.BasaltSpearItem;
+import nz.duncy.first_steps.item.custom.BronzeSpearItem;
 import nz.duncy.first_steps.item.custom.CopperSourceItem;
+import nz.duncy.first_steps.item.custom.CopperSpearItem;
+import nz.duncy.first_steps.item.custom.FlintSpearItem;
 import nz.duncy.first_steps.item.custom.IronSourceItem;
+import nz.duncy.first_steps.item.custom.IronSpearItem;
 import nz.duncy.first_steps.item.custom.KnifeItem;
-import nz.duncy.first_steps.item.custom.SpearItem;
+import nz.duncy.first_steps.item.custom.ObsidianSpearItem;
+import nz.duncy.first_steps.item.custom.StoneSpearItem;
 
 public class ModItems {
     // Raw metals
@@ -139,13 +145,13 @@ public class ModItems {
     // public static final Item STEEL_PICKAXE = registerItem("steel_pickaxe", PickaxeItem(ModToolMaterials.STEEL, 1, -2.8F, Item.Settings()));
 
     // Spears
-    public static final Item STONE_SPEAR = registerItem("stone_spear", settings -> new SpearItem(ToolMaterial.STONE, 1.0F, settings));
-    public static final Item FLINT_SPEAR =  registerItem("flint_spear", settings -> new SpearItem(ModToolMaterials.FLINT, 1.0F, settings));
-    public static final Item BASALT_SPEAR =  registerItem("basalt_spear", settings -> new SpearItem(ModToolMaterials.BASALT, 1.0F, settings));
-    public static final Item OBSIDIAN_SPEAR =  registerItem("obsidian_spear", settings -> new SpearItem(ModToolMaterials.OBSIDIAN, 1.0F, settings));
-    public static final Item COPPER_SPEAR =  registerItem("copper_spear", settings -> new SpearItem(ModToolMaterials.COPPER, 1.0F, settings));
-    public static final Item BRONZE_SPEAR =  registerItem("bronze_spear", settings -> new SpearItem(ModToolMaterials.BRONZE, 1.0F, settings));
-    public static final Item IRON_SPEAR =  registerItem("iron_spear", settings -> new SpearItem(ToolMaterial.IRON, 1.0F, settings));
+    public static final Item STONE_SPEAR = registerItem("stone_spear", settings -> new StoneSpearItem(ToolMaterial.STONE, 1.0F, settings));
+    public static final Item FLINT_SPEAR =  registerItem("flint_spear", settings -> new FlintSpearItem(ModToolMaterials.FLINT, 1.0F, settings));
+    public static final Item BASALT_SPEAR =  registerItem("basalt_spear", settings -> new BasaltSpearItem(ModToolMaterials.BASALT, 1.0F, settings));
+    public static final Item OBSIDIAN_SPEAR =  registerItem("obsidian_spear", settings -> new ObsidianSpearItem(ModToolMaterials.OBSIDIAN, 1.0F, settings));
+    public static final Item COPPER_SPEAR =  registerItem("copper_spear", settings -> new CopperSpearItem(ModToolMaterials.COPPER, 1.0F, settings));
+    public static final Item BRONZE_SPEAR =  registerItem("bronze_spear", settings -> new BronzeSpearItem(ModToolMaterials.BRONZE, 1.0F, settings));
+    public static final Item IRON_SPEAR =  registerItem("iron_spear", settings -> new IronSpearItem(ToolMaterial.IRON, 1.0F, settings));
     // public static final Item STEEL_SPEAR =  registerItem("steel_spear", SpearItem(ModToolMaterials.STEEL, 3, Item.Settings()));
 
     // Knives

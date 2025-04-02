@@ -11,7 +11,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import nz.duncy.first_steps.block.entity.PottersWheelBlockEntity;
 import nz.duncy.first_steps.client.render.entity.model.ModEntityModelLayers;
-import nz.duncy.first_steps.client.render.entity.model.PottersWheelBlockModel;
 
 @Environment(EnvType.CLIENT)
 public class PottersWheelBlockEntityRenderer implements BlockEntityRenderer<PottersWheelBlockEntity> {

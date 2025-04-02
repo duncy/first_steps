@@ -28,18 +28,17 @@ import net.minecraft.entity.Entity;
 public class SpearEntity extends PersistentProjectileEntity {
     private static final TrackedData<Byte> LOYALTY = DataTracker.registerData(SpearEntity.class, TrackedDataHandlerRegistry.BYTE);
     private static final TrackedData<Boolean> ENCHANTED = DataTracker.registerData(SpearEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final ItemStack DEFAULT_STACK = new ItemStack(ModItems.BASALT_SPEAR);
     private boolean dealtDamage;
     public int returnTimer;
 
-    public SpearEntity(EntityType<SpearEntity> entityType, World world) {
-        super(entityType, world);
-    }
-
-    public SpearEntity(EntityType<SpearEntity> entityType, World world, LivingEntity owner, ItemStack stack) {
-        super(entityType, owner, world, stack, null);
+    public SpearEntity(EntityType<SpearEntity> entityType, ServerWorld world, LivingEntity owner, ItemStack stack) {
+        super(entityType, owner.getEyePos().getX(), owner.getEyePos().getY(), owner.getEyePos().getZ(), world, stack, stack);
         this.dataTracker.set(LOYALTY, this.getLoyalty(stack));
 		this.dataTracker.set(ENCHANTED, stack.hasGlint());
+    }
+
+    public SpearEntity(EntityType<SpearEntity> entityType, World world) {
+        super(entityType, world);
     }
 
     public SpearEntity(EntityType<SpearEntity> entityType, World world, double x, double y, double z, ItemStack stack) {
@@ -191,6 +190,6 @@ public class SpearEntity extends PersistentProjectileEntity {
 
     @Override
 	protected ItemStack getDefaultItemStack() {
-		return DEFAULT_STACK;
+        return null;
 	}
 }

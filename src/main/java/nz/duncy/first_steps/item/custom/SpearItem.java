@@ -8,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ProjectileItem;
@@ -69,14 +68,14 @@ public class SpearItem extends Item implements ProjectileItem {
 					if (world instanceof ServerWorld serverWorld) {
 						stack.damage(1, playerEntity);
 						if (f == 0.0F) {
-							TridentEntity tridentEntity = ProjectileEntity.spawnWithVelocity(TridentEntity::new, serverWorld, stack, playerEntity, 0.0F, 2.5F, 1.0F);
+                            SpearEntity spearEntity = spawnWithVelocity(serverWorld, stack, playerEntity);
 							if (playerEntity.isInCreativeMode()) {
-								tridentEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+								spearEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
 							} else {
 								playerEntity.getInventory().removeOne(stack);
 							}
 
-							world.playSoundFromEntity(null, tridentEntity, registryEntry.value(), SoundCategory.PLAYERS, 1.0F, 1.0F);
+							world.playSoundFromEntity(null, spearEntity, registryEntry.value(), SoundCategory.PLAYERS, 1.0F, 1.0F);
 							return true;
 						}
 					}
@@ -88,40 +87,45 @@ public class SpearItem extends Item implements ProjectileItem {
 		}
     }
 
+    public SpearEntity spawnWithVelocity(ServerWorld serverWorld, ItemStack stack, PlayerEntity playerEntity) {
+        return null; // ProjectileEntity.spawnWithVelocity(SpearEntity::new, , 0.0F, 2.5F, 1.0F);
+    }
+
     public SpearEntity getEntity(World world, Position pos, ItemStack stack, Direction direction) {
-        EntityType<SpearEntity> type;
+        return null;
+        // EntityType<SpearEntity> type;
 
-            switch (stack.getItem().toString()) {
-                case "stone_spear":
-                    type = ModItemEntities.STONE_SPEAR;
-                    break;
-                case "flint_spear":
-                    type = ModItemEntities.FLINT_SPEAR;
-                    break;
-                case "basalt_spear":
-                    type = ModItemEntities.BASALT_SPEAR;
-                    break;
-                case "obsidian_spear":
-                    type = ModItemEntities.OBSIDIAN_SPEAR;
-                    break;
-                case "copper_spear":
-                    type = ModItemEntities.COPPER_SPEAR;
-                    break;
-                case "bronze_spear":
-                    type = ModItemEntities.BRONZE_SPEAR;
-                    break;
-                case "iron_spear":
-                    type = ModItemEntities.IRON_SPEAR;
-                    break;
-                case "steel_spear":
-                    type = ModItemEntities.STEEL_SPEAR;
-                    break;
-                default:
-                    type = ModItemEntities.STONE_SPEAR;
-                    break;
-            }
+            // switch (stack.getItem().toString()) {
+            //     case "stone_spear":
+            //         type = ModItemEntities.STONE_SPEAR;
+            //         break;
+            //     case "flint_spear":
+            //         type = ModItemEntities.FLINT_SPEAR;
+            //         break;
+            //     case "basalt_spear":
+            //         type = ModItemEntities.BASALT_SPEAR;
+            //         break;
+            //     case "obsidian_spear":
+            //         type = ModItemEntities.OBSIDIAN_SPEAR;
+            //         break;
+            //     case "copper_spear":
+            //         type = ModItemEntities.COPPER_SPEAR;
+            //         break;
+            //     case "bronze_spear":
+            //         type = ModItemEntities.BRONZE_SPEAR;
+            //         break;
+            //     case "iron_spear":
+            //         type = ModItemEntities.IRON_SPEAR;
+            //         break;
+            //     case "steel_spear":
+            //         type = ModItemEntities.STEEL_SPEAR;
+            //         break;
+            //     default:
+            //         type = ModItemEntities.STONE_SPEAR;
+            //         break;
+            // }
 
-            return new SpearEntity(type, world, pos.getX(), pos.getY(), pos.getZ(), stack.copyWithCount(1));
+            // return new SpearEntity(type, world, pos.getX(), pos.getY(), pos.getZ(), stack.copyWithCount(1));
     }
 
     @Override

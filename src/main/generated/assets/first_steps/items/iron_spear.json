@@ -1,6 +1,37 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "first_steps:item/iron_spear"
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "first_steps:item/iron_spear"
+        },
+        "when": [
+          "gui",
+          "ground",
+          "fixed"
+        ]
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:condition",
+      "on_false": {
+        "type": "minecraft:special",
+        "base": "first_steps:item/spear_in_hand",
+        "model": {
+          "type": "first_steps:iron_spear"
+        }
+      },
+      "on_true": {
+        "type": "minecraft:special",
+        "base": "first_steps:item/spear_throwing",
+        "model": {
+          "type": "first_steps:iron_spear"
+        }
+      },
+      "property": "minecraft:using_item"
+    },
+    "property": "minecraft:display_context"
   }
 }

@@ -7,14 +7,28 @@ import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.BlockStateVariant;
 import net.minecraft.client.data.BlockStateVariantMap;
 import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.ItemModels;
 import net.minecraft.client.data.ModelIds;
 import net.minecraft.client.data.Models;
 import net.minecraft.client.data.TexturedModel;
 import net.minecraft.client.data.VariantSetting;
 import net.minecraft.client.data.VariantSettings;
 import net.minecraft.client.data.VariantsBlockStateSupplier;
+import net.minecraft.client.render.item.model.ItemModel;
+import net.minecraft.client.render.item.model.special.SpecialModelRenderer;
+import net.minecraft.client.render.item.model.special.TridentModelRenderer;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
+import nz.duncy.first_steps.client.render.item.model.special.BasaltSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.BronzeSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.CopperSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.FlintSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.IronSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.ObsidianSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.StoneSpearModelRenderer;
 import nz.duncy.first_steps.item.ModItems;
 import nz.duncy.first_steps.state.ModProperties;
 
@@ -159,35 +173,35 @@ public class ModModelProvider extends FabricModelProvider {
 
         // Stone tools
         itemModelGenerator.register(ModItems.STONE_KNIFE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.STONE_SPEAR, Models.GENERATED);
+        registerSpear(ModItems.STONE_SPEAR, itemModelGenerator, new StoneSpearModelRenderer.Unbaked());
 
         // Flint tools
         itemModelGenerator.register(ModItems.FLINT_HOE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.FLINT_SHOVEL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.FLINT_AXE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.FLINT_KNIFE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.FLINT_SPEAR, Models.GENERATED);
+        registerSpear(ModItems.FLINT_SPEAR, itemModelGenerator, new FlintSpearModelRenderer.Unbaked());
         
-        // Blackstone tools
+        // Basalt tools
         itemModelGenerator.register(ModItems.BASALT_HOE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.BASALT_SHOVEL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.BASALT_AXE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.BASALT_KNIFE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.BASALT_SPEAR, Models.GENERATED);
+        registerSpear(ModItems.BASALT_SPEAR, itemModelGenerator, new BasaltSpearModelRenderer.Unbaked());
 
         // Obsidian tools
         itemModelGenerator.register(ModItems.OBSIDIAN_HOE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.OBSIDIAN_SHOVEL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.OBSIDIAN_AXE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.OBSIDIAN_KNIFE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.OBSIDIAN_SPEAR, Models.GENERATED);
+        registerSpear(ModItems.OBSIDIAN_SPEAR, itemModelGenerator, new ObsidianSpearModelRenderer.Unbaked());
 
         // Copper tools
         itemModelGenerator.register(ModItems.COPPER_HOE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.COPPER_SHOVEL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.COPPER_AXE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.COPPER_KNIFE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.COPPER_SPEAR, Models.HANDHELD);
+        registerSpear(ModItems.COPPER_SPEAR, itemModelGenerator, new CopperSpearModelRenderer.Unbaked());
         itemModelGenerator.register(ModItems.COPPER_SWORD, Models.HANDHELD);
         itemModelGenerator.register(ModItems.COPPER_PICKAXE, Models.HANDHELD);
 
@@ -196,13 +210,13 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.BRONZE_SHOVEL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.BRONZE_AXE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.BRONZE_KNIFE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.BRONZE_SPEAR, Models.HANDHELD);
+        registerSpear(ModItems.BRONZE_SPEAR, itemModelGenerator, new BronzeSpearModelRenderer.Unbaked());
         itemModelGenerator.register(ModItems.BRONZE_SWORD, Models.HANDHELD);
         itemModelGenerator.register(ModItems.BRONZE_PICKAXE, Models.HANDHELD);
 
         // Iron tools
         itemModelGenerator.register(ModItems.IRON_KNIFE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.IRON_SPEAR, Models.HANDHELD);
+        registerSpear(ModItems.IRON_SPEAR, itemModelGenerator, new IronSpearModelRenderer.Unbaked());
 
         // Steel tools
         // itemModelGenerator.register(ModItems.STEEL_HOE, Models.HANDHELD);
@@ -260,4 +274,12 @@ public class ModModelProvider extends FabricModelProvider {
         // // Tongs
         itemModelGenerator.register(ModItems.WOODEN_TONGS, Models.GENERATED);
     }
+
+    private final void registerSpear(Item item, ItemModelGenerator itemModelGenerator, SpecialModelRenderer.Unbaked unbaked) {
+		ItemModel.Unbaked unbakedBase = ItemModels.basic(itemModelGenerator.upload(item, Models.GENERATED));
+		ItemModel.Unbaked unbakedHand = ItemModels.special(Identifier.of(FirstSteps.MOD_ID, "item/spear_in_hand"), unbaked);
+		ItemModel.Unbaked unbakedThrowing = ItemModels.special(Identifier.of(FirstSteps.MOD_ID, "item/spear_throwing"), unbaked);
+		ItemModel.Unbaked unbakedConditions = ItemModels.condition(ItemModels.usingItemProperty(), unbakedThrowing, unbakedHand);
+		itemModelGenerator.output.accept(item, ItemModelGenerator.createModelWithInHandVariant(unbakedBase, unbakedConditions));
+	}
 }

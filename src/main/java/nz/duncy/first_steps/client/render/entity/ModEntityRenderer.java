@@ -3,15 +3,8 @@ package nz.duncy.first_steps.client.render.entity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import nz.duncy.first_steps.client.render.item.BasaltSpearEntityRenderer;
-import nz.duncy.first_steps.client.render.item.BronzeSpearEntityRenderer;
-import nz.duncy.first_steps.client.render.item.CopperSpearEntityRenderer;
-import nz.duncy.first_steps.client.render.item.FlintSpearEntityRenderer;
-import nz.duncy.first_steps.client.render.item.IronSpearEntityRenderer;
-import nz.duncy.first_steps.client.render.item.ObsidianSpearEntityRenderer;
-import nz.duncy.first_steps.client.render.item.SteelSpearEntityRenderer;
-import nz.duncy.first_steps.client.render.item.StoneSpearEntityRenderer;
 import nz.duncy.first_steps.item.entity.ModItemEntities;
+import nz.duncy.first_steps.FirstSteps;
 
 @Environment(EnvType.CLIENT)
 public class ModEntityRenderer {
@@ -23,6 +16,5 @@ public class ModEntityRenderer {
         EntityRendererRegistry.register(ModItemEntities.COPPER_SPEAR, CopperSpearEntityRenderer::new);
         EntityRendererRegistry.register(ModItemEntities.BRONZE_SPEAR, BronzeSpearEntityRenderer::new);
         EntityRendererRegistry.register(ModItemEntities.IRON_SPEAR, IronSpearEntityRenderer::new);
-        EntityRendererRegistry.register(ModItemEntities.STEEL_SPEAR, SteelSpearEntityRenderer::new);
     }
 }
