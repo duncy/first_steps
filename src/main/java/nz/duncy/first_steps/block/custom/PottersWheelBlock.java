@@ -18,7 +18,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -70,67 +69,67 @@ public class PottersWheelBlock extends BlockWithEntity {
         return SHAPE;
     }
 
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient) {
-            return ActionResult.SUCCESS;
-        } else if (player.isSpectator()) {
-            return ActionResult.CONSUME;
-        } else {
-            // Get blockentity for potters wheel
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof PottersWheelBlockEntity) {
-            PottersWheelBlockEntity pottersWheelBlockEntity = (PottersWheelBlockEntity)blockEntity;
-            // Check if can use potters wheel, i.e if it is not already spinning.
-                if (!pottersWheelBlockEntity.isSpinning()) {
-                    pottersWheelBlockEntity.startSpinning();
-                    player.incrementStat(ModStats.POTTERS_WHEEL_SPINS);
-                    pottersWheelBlockEntity.markDirty();
-                    world.updateListeners(pottersWheelBlockEntity.getPos(), pottersWheelBlockEntity.getCachedState(), pottersWheelBlockEntity.getCachedState(), Block.NOTIFY_LISTENERS);
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (world instanceof ServerWorld
+			&& world.getBlockEntity(pos) instanceof PottersWheelBlockEntity pottersWheelBlockEntity
+			&& !pottersWheelBlockEntity.isSpinning()) {
+			
+            spinWheel(state, world, pos, player, pottersWheelBlockEntity, hit);
+		}
 
-                    // Check what is above wheel, check if it is pottery.
-                    BlockPos abovePos = pos.up();
-                    BlockState blockState = world.getBlockState(abovePos);
-                    if (blockState.getBlock() == ModBlocks.CLAY) {
-                        switch (blockState.get(ClayBlock.CLAY_LAYERS)) {
-                            case 1:
-                            world.setBlockState(abovePos, ModBlocks.UNFIRED_FLOWER_POT.getDefaultState());
-                            break;
+		return ActionResult.SUCCESS;
 
-                            case 2:
-                            break;
+    }
 
-                            case 3:
-                            world.setBlockState(abovePos, ModBlocks.UNFIRED_CRUCIBLE.getDefaultState());
-                            break;
+    private static void spinWheel(BlockState state, World world, BlockPos pos, PlayerEntity player, PottersWheelBlockEntity pottersWheelBlockEntity, BlockHitResult hit) {
+		pottersWheelBlockEntity.startSpinning();
+        player.incrementStat(ModStats.POTTERS_WHEEL_SPINS);
+        pottersWheelBlockEntity.markDirty();
+        world.updateListeners(pottersWheelBlockEntity.getPos(), pottersWheelBlockEntity.getCachedState(), pottersWheelBlockEntity.getCachedState(), Block.NOTIFY_LISTENERS);
 
-                            case 4:
-                            world.setBlockState(abovePos, ModBlocks.UNFIRED_DECORATED_POT.getDefaultState());
-                            break;
+        // Check what is above wheel, check if it is clay.
+        BlockPos abovePos = pos.up();
+        BlockState blockState = world.getBlockState(abovePos);
+        if (blockState.getBlock() == ModBlocks.CLAY) {
+            wheelClay(blockState, world, abovePos, pos, hit);
+        }
 
-                            default:
-                            break;
-                        }
+    }
 
-                        world.playSound(null, pos, SoundEvents.BLOCK_MUD_FALL, SoundCategory.BLOCKS, 1f, 1f);
+    private static void wheelClay(BlockState blockState, World world, BlockPos abovePos, BlockPos playerPos, BlockHitResult hit) {
+        if (blockState.getBlock() == ModBlocks.CLAY) {
+            switch (blockState.get(ClayBlock.CLAY_LAYERS)) {
+                case 1:
+                world.setBlockState(abovePos, ModBlocks.UNFIRED_FLOWER_POT.getDefaultState());
+                break;
 
-                        ServerWorld serverWorld = (ServerWorld) world;
-                        serverWorld.spawnParticles(ParticleTypes.POOF, true, true, hit.getPos().getX(), hit.getPos().getY(), hit.getPos().getZ(), 5, 0.0, 0.0, 0.0, 0.0);
-                    } else if (blockState.getBlock() == Blocks.CLAY) {
-                        world.setBlockState(abovePos, Blocks.DECORATED_POT.getDefaultState());
-                        
-                        world.playSound(null, pos, SoundEvents.BLOCK_MUD_HIT, SoundCategory.BLOCKS, 1f, 1f);
+                case 2:
+                break;
 
-                        ServerWorld serverWorld = (ServerWorld) world;
-                        serverWorld.spawnParticles(ParticleTypes.POOF, true, true, hit.getPos().getX(), hit.getPos().getY(), hit.getPos().getZ(), 5, 0.0, 0.0, 0.0, 0.0);
-                    }
+                case 3:
+                world.setBlockState(abovePos, ModBlocks.UNFIRED_CRUCIBLE.getDefaultState());
+                break;
 
-                    return ActionResult.SUCCESS;
-                }
-                    
-                return ActionResult.CONSUME;
-            } else {
-                return ActionResult.PASS;
+                case 4:
+                world.setBlockState(abovePos, ModBlocks.UNFIRED_DECORATED_POT.getDefaultState());
+                break;
+
+                default:
+                break;
             }
+
+            world.playSound(null, playerPos, SoundEvents.BLOCK_MUD_FALL, SoundCategory.BLOCKS, 1f, 1f);
+
+            ServerWorld serverWorld = (ServerWorld) world;
+            serverWorld.spawnParticles(ParticleTypes.POOF, true, true, hit.getPos().getX(), hit.getPos().getY(), hit.getPos().getZ(), 5, 0.0, 0.0, 0.0, 0.0);
+        } else if (blockState.getBlock() == Blocks.CLAY) {
+            world.setBlockState(abovePos, Blocks.DECORATED_POT.getDefaultState());
+            
+            world.playSound(null, playerPos, SoundEvents.BLOCK_MUD_HIT, SoundCategory.BLOCKS, 1f, 1f);
+
+            ServerWorld serverWorld = (ServerWorld) world;
+            serverWorld.spawnParticles(ParticleTypes.POOF, true, true, hit.getPos().getX(), hit.getPos().getY(), hit.getPos().getZ(), 5, 0.0, 0.0, 0.0, 0.0);
         }
     }
 
@@ -147,7 +146,6 @@ public class PottersWheelBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, ModBlockEntities.POTTERS_WHEEL_BLOCK_ENTITY,
-            (world1, pos, state1, blockEntity) -> PottersWheelBlockEntity.tick(world1, pos, state1, blockEntity));
+        return validateTicker(type, ModBlockEntities.POTTERS_WHEEL_BLOCK_ENTITY, PottersWheelBlockEntity::tick);
     }
 }

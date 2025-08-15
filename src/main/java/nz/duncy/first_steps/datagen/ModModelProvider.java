@@ -69,6 +69,9 @@ public class ModModelProvider extends FabricModelProvider {
 
         // CLAY
         registerClays(blockStateModelGenerator);
+
+        // POTTERS WHEEL
+        blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.POTTERS_WHEEL, Blocks.TERRACOTTA);
     }
 
     private void registerClays(BlockStateModelGenerator blockStateModelGenerator) {
