@@ -12,10 +12,13 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.recipe.StonecuttingRecipe;
+import net.minecraft.recipe.display.CuttingRecipeDisplay.Grouping;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import nz.duncy.first_steps.FirstSteps;
@@ -33,6 +36,7 @@ public class RockBlockEntity extends BlockEntity implements NamedScreenHandlerFa
     // private static final BitSet SPEAR_SHAPE = BitSet.valueOf(new long[] {0b1101110011000011100111110}); 
     protected final PropertyDelegate propertyDelegate;
     private int selection;
+    // private final ServerRecipeManager.MatchGetter<SingleStackRecipeInput, KnappingRecipe> matchGetter;
 
     public RockBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ROCK_BLOCK_ENTITY, pos, state);
@@ -61,6 +65,8 @@ public class RockBlockEntity extends BlockEntity implements NamedScreenHandlerFa
                 return 1;
             }
         };
+
+        // this.matchGetter = ServerRecipeManager.createCachedMatchGetter(ModRecipes.KNAPPING_TYPE);
     }
     
     // public Identifier getTextureId() {
@@ -346,13 +352,14 @@ public class RockBlockEntity extends BlockEntity implements NamedScreenHandlerFa
 
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new KnappingSelectionScreenHandler(syncId, playerInventory, this.propertyDelegate);
+        // SingleStackRecipeInput input = new SingleStackRecipeInput(new ItemStack(this.getCachedState().getBlock().asItem()));
+        // RecipeEntry<KnappingRecipe> recipe =  this.matchGetter.getFirstMatch(input, (ServerWorld) world).orElse(null);
+        Grouping<StonecuttingRecipe> recipes = ((ServerWorld) this.world).getRecipeManager().getStonecutterRecipes().filter(new ItemStack(this.getCachedState().getBlock().asItem()));
+        return new KnappingSelectionScreenHandler(syncId, playerInventory, this.propertyDelegate, recipes);
     }
 
     @Override
     public Text getDisplayName() {
         return Text.empty();
     }
-
-
 }

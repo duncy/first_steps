@@ -11,26 +11,23 @@ import nz.duncy.first_steps.block.ModBlocks;
 public class ModBlockEntities {
     public static final BlockEntityType<RockBlockEntity> ROCK_BLOCK_ENTITY = 
         Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(FirstSteps.MOD_ID, "rock_block_be"),
-            FabricBlockEntityTypeBuilder.create(RockBlockEntity::new,
-                ModBlocks.STONE_ROCK, ModBlocks.FLINT_ROCK, ModBlocks.BASALT_ROCK, ModBlocks.OBSIDIAN_ROCK).build());
+            FabricBlockEntityTypeBuilder.<RockBlockEntity>create(RockBlockEntity::new, ModBlocks.STONE_ROCK, ModBlocks.FLINT_ROCK, ModBlocks.BASALT_ROCK, ModBlocks.OBSIDIAN_ROCK).build());
 
     public static final BlockEntityType<KilnBlockEntity> KILN_BLOCK_ENTITY = 
         Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(FirstSteps.MOD_ID, "kiln_block_be"),
-            FabricBlockEntityTypeBuilder.create(KilnBlockEntity::new,
-                ModBlocks.KILN).build());
+            FabricBlockEntityTypeBuilder.<KilnBlockEntity>create(KilnBlockEntity::new, ModBlocks.KILN).build());
 
     public static final BlockEntityType<CrucibleBlockEntity> CRUCIBLE_BLOCK_ENTITY = 
         Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(FirstSteps.MOD_ID, "crucible_block_be"),
-            FabricBlockEntityTypeBuilder.create(CrucibleBlockEntity::new,
-                ModBlocks.FIRED_CRUCIBLE).build());
+            FabricBlockEntityTypeBuilder.<CrucibleBlockEntity>create(CrucibleBlockEntity::new, ModBlocks.FIRED_CRUCIBLE).build());
         
     public static final BlockEntityType<PottersWheelBlockEntity> POTTERS_WHEEL_BLOCK_ENTITY = 
         Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(FirstSteps.MOD_ID, "potters_wheel_block_be"),
-            FabricBlockEntityTypeBuilder.create(PottersWheelBlockEntity::new, ModBlocks.POTTERS_WHEEL).build());
+            FabricBlockEntityTypeBuilder.<PottersWheelBlockEntity>create(PottersWheelBlockEntity::new, ModBlocks.POTTERS_WHEEL).build());
 
     public static final BlockEntityType<UnfiredDecoratedPotBlockEntity> UNFIRED_DECORATED_POT_BLOCK_ENTITY = 
         Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(FirstSteps.MOD_ID, "unfired_decorated_pot_block_be"),
-            FabricBlockEntityTypeBuilder.create(UnfiredDecoratedPotBlockEntity::new, ModBlocks.UNFIRED_DECORATED_POT).build());
+            FabricBlockEntityTypeBuilder.<UnfiredDecoratedPotBlockEntity>create(UnfiredDecoratedPotBlockEntity::new, ModBlocks.UNFIRED_DECORATED_POT).build());
 
 
     public static void registerModBlockEntities() {
