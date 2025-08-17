@@ -1,6 +1,9 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "first_steps:block/unfired_decorated_pot"
+    "type": "minecraft:special",
+    "base": "first_steps:item/unfired_decorated_pot",
+    "model": {
+      "type": "first_steps:unfired_decorated_pot"
+    }
   }
 }

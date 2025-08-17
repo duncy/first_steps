@@ -1,17 +1,13 @@
 package nz.duncy.first_steps;
 
 import net.fabricmc.api.ClientModInitializer;
-// import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.item.model.special.SpecialModelTypes;
-import net.minecraft.client.render.item.model.special.TridentModelRenderer;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
 import nz.duncy.first_steps.client.render.block.entity.PottersWheelBlockEntityRenderer;
-// import nz.duncy.first_steps.client.render.block.entity.RockBlockEntityRenderer;
 import nz.duncy.first_steps.client.render.block.entity.UnfiredDecoratedPotBlockEntityRenderer;
-import nz.duncy.first_steps.client.render.entity.BasaltSpearEntityRenderer;
 import nz.duncy.first_steps.client.render.entity.ModEntityRenderer;
 import nz.duncy.first_steps.client.render.entity.model.ModEntityModelLayers;
 import nz.duncy.first_steps.client.render.item.model.special.BasaltSpearModelRenderer;
@@ -20,7 +16,9 @@ import nz.duncy.first_steps.client.render.item.model.special.CopperSpearModelRen
 import nz.duncy.first_steps.client.render.item.model.special.FlintSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.IronSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.ObsidianSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.PottersWheelModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.StoneSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.UnfiredDecoratedPotModelRenderer;
 import nz.duncy.first_steps.screen.CrucibleScreen;
 import nz.duncy.first_steps.screen.KilnScreen;
 import nz.duncy.first_steps.screen.KnappingSelectionScreen;
@@ -39,12 +37,11 @@ public class FirstStepsClient implements ClientModInitializer {
 
         // Register Entity Model Layers
         ModEntityModelLayers.registerEntityModelLayers();
-        
-        // Register Item Renderers
+
+        // Register Special Model Types
+        SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID,"unfired_decorated_pot"), UnfiredDecoratedPotModelRenderer.Unbaked.CODEC);
+        SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID,"potters_wheel"), PottersWheelModelRenderer.Unbaked.CODEC);
         // BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WOODEN_TONGS, new TongItemRenderer());
-        // BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.POTTERS_WHEEL.asItem(), new ModBuiltinModelItemRenderer());
-        // BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.UNFIRED_DECORATED_POT.asItem(), new ModBuiltinModelItemRenderer());
-        // BuiltinItemRendererRegistry.INSTANCE.register(ModItems.STONE_SPEAR, new ModBuiltinModelItemRenderer());
         SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID, "stone_spear"), StoneSpearModelRenderer.Unbaked.CODEC);
         SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID, "flint_spear"), FlintSpearModelRenderer.Unbaked.CODEC);
         SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID, "basalt_spear"), BasaltSpearModelRenderer.Unbaked.CODEC);
@@ -52,6 +49,8 @@ public class FirstStepsClient implements ClientModInitializer {
         SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID, "copper_spear"), CopperSpearModelRenderer.Unbaked.CODEC);
         SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID, "bronze_spear"), BronzeSpearModelRenderer.Unbaked.CODEC);
         SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID, "iron_spear"), IronSpearModelRenderer.Unbaked.CODEC);
+
+        FirstSteps.LOGGER.info("special model types: " + SpecialModelTypes.ID_MAPPER.toString());
 
         
 
