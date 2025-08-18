@@ -1,11 +1,10 @@
 package nz.duncy.first_steps.block;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
+
 
 // import com.feintha.regedit.RegistryEditEvent;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -28,6 +27,7 @@ import nz.duncy.first_steps.block.custom.OreRockBlock;
 import nz.duncy.first_steps.block.custom.RockBlock;
 import nz.duncy.first_steps.block.custom.UnfiredCrucibleBlock;
 import nz.duncy.first_steps.block.custom.UnfiredDecoratedPotBlock;
+import nz.duncy.first_steps.block.custom.UnfiredFlowerPotBlock;
 import nz.duncy.first_steps.block.custom.UnfiredMoldBlock;
 import nz.duncy.first_steps.item.custom.RockBlockItem;
 import nz.duncy.first_steps.block.custom.PottersWheelBlock;
@@ -103,8 +103,14 @@ public class ModBlocks {
                 Settings.copy(Blocks.CLAY).breakInstantly(),
                 true
         ); 
-        public static final Block UNFIRED_FLOWER_POT = registerBlock("unfired_flower_pot",
-                        Settings.copy(Blocks.CLAY).breakInstantly());
+
+        public static final Block UNFIRED_FLOWER_POT = registerBlock(
+                "unfired_flower_pot",
+                UnfiredFlowerPotBlock::new,
+                Settings.copy(Blocks.CLAY).breakInstantly(),
+                true)
+        ;
+
         public static final Block UNFIRED_DECORATED_POT = registerBlock(
                                 "unfired_decorated_pot",
                                 UnfiredDecoratedPotBlock::new,
