@@ -16,9 +16,7 @@ import net.minecraft.client.data.VariantSettings;
 import net.minecraft.client.data.VariantsBlockStateSupplier;
 import net.minecraft.client.render.item.model.ItemModel;
 import net.minecraft.client.render.item.model.special.SpecialModelRenderer;
-import net.minecraft.client.render.item.model.special.TridentModelRenderer;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
@@ -28,7 +26,9 @@ import nz.duncy.first_steps.client.render.item.model.special.CopperSpearModelRen
 import nz.duncy.first_steps.client.render.item.model.special.FlintSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.IronSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.ObsidianSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.PottersWheelModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.StoneSpearModelRenderer;
+import nz.duncy.first_steps.client.render.item.model.special.UnfiredDecoratedPotModelRenderer;
 import nz.duncy.first_steps.item.ModItems;
 import nz.duncy.first_steps.state.ModProperties;
 
@@ -64,14 +64,19 @@ public class ModModelProvider extends FabricModelProvider {
         // KILN
         blockStateModelGenerator.registerCooker(ModBlocks.KILN, TexturedModel.ORIENTABLE_WITH_BOTTOM);
 
-        // UNFIRED
+        // UNFIRED DECORATED POT
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.UNFIRED_DECORATED_POT, Blocks.CLAY);
+		blockStateModelGenerator.registerSpecialItemModel(ModBlocks.UNFIRED_DECORATED_POT, new UnfiredDecoratedPotModelRenderer.Unbaked());
+
+        // UNFIRED FLOWER POT
+        blockStateModelGenerator.registerSimpleState(ModBlocks.UNFIRED_FLOWER_POT);
 
         // CLAY
         registerClays(blockStateModelGenerator);
 
         // POTTERS WHEEL
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.POTTERS_WHEEL, Blocks.TERRACOTTA);
+        blockStateModelGenerator.registerSpecialItemModel(ModBlocks.POTTERS_WHEEL, new PottersWheelModelRenderer.Unbaked());
     }
 
     private void registerClays(BlockStateModelGenerator blockStateModelGenerator) {

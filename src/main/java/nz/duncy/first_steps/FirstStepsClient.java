@@ -1,6 +1,7 @@
 package nz.duncy.first_steps;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.item.model.special.SpecialModelTypes;
@@ -19,6 +20,7 @@ import nz.duncy.first_steps.client.render.item.model.special.ObsidianSpearModelR
 import nz.duncy.first_steps.client.render.item.model.special.PottersWheelModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.StoneSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.UnfiredDecoratedPotModelRenderer;
+import nz.duncy.first_steps.network.packet.KnappingRecipePayload;
 import nz.duncy.first_steps.screen.CrucibleScreen;
 import nz.duncy.first_steps.screen.KilnScreen;
 import nz.duncy.first_steps.screen.KnappingSelectionScreen;
@@ -50,14 +52,17 @@ public class FirstStepsClient implements ClientModInitializer {
         SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID, "bronze_spear"), BronzeSpearModelRenderer.Unbaked.CODEC);
         SpecialModelTypes.ID_MAPPER.put(Identifier.of(FirstSteps.MOD_ID, "iron_spear"), IronSpearModelRenderer.Unbaked.CODEC);
 
-        FirstSteps.LOGGER.info("special model types: " + SpecialModelTypes.ID_MAPPER.toString());
-
-        
-
-
         // Register Screen Handlers
         HandledScreens.register(ModScreenHandlers.KILN_SCREEN_HANDLER, KilnScreen::new);
         HandledScreens.register(ModScreenHandlers.CRUCIBLE_SCREEN_HANDLER, CrucibleScreen::new);
         HandledScreens.register(ModScreenHandlers.KNAPPING_SELECTION_SCREEN_HANDLER, KnappingSelectionScreen::new);
+
+        ClientPlayNetworking.registerGlobalReceiver(KnappingRecipePayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                if (context.client().currentScreen instanceof KnappingSelectionScreen screen) {
+                    screen.updateRecipes(context, payload.recipes());
+                }
+            });
+        });
     }
 }

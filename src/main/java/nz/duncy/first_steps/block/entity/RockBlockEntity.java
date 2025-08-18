@@ -14,15 +14,16 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.StonecuttingRecipe;
 import net.minecraft.recipe.display.CuttingRecipeDisplay.Grouping;
+import net.minecraft.recipe.display.SlotDisplayContexts;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.context.ContextParameterMap;
 import net.minecraft.util.math.BlockPos;
 import nz.duncy.first_steps.FirstSteps;
-import nz.duncy.first_steps.item.ModItems;
 import nz.duncy.first_steps.screen.KnappingSelectionScreenHandler;
 
 public class RockBlockEntity extends BlockEntity implements NamedScreenHandlerFactory {
@@ -278,32 +279,11 @@ public class RockBlockEntity extends BlockEntity implements NamedScreenHandlerFa
         }
     }
 
-    private void dropHoeHead() {
-        FirstSteps.LOGGER.info(getCachedState().getBlock().toString());
-        ItemStack itemStack = new ItemStack(ModItems.STONE_HEAD_SPEAR);
+    public void dropHead(Grouping<StonecuttingRecipe> recipes, int selection) {
+        ContextParameterMap contextParameterMap = SlotDisplayContexts.createParameters(world);
+        ItemStack itemStack = recipes.entries().get(selection).recipe().optionDisplay().getFirst(contextParameterMap).copy();
         world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
         destroyBlock(false);
-    }
-
-    public void dropHead() {
-        FirstSteps.LOGGER.info("Server drop method" + String.valueOf(this.selection));
-        switch (this.selection) {
-            case 0: // Hoe
-                dropHoeHead();
-                break;
-            case 1: // Shovel
-                break;
-            case 2: // Axe
-                break;
-            case 3: // Knife
-                break;
-            case 4: // Spear
-                break;
-            case 5: // Arrow
-                break;
-            default:
-                break;
-        }
     }
 
     // public void updateShape() {
@@ -355,7 +335,7 @@ public class RockBlockEntity extends BlockEntity implements NamedScreenHandlerFa
         // SingleStackRecipeInput input = new SingleStackRecipeInput(new ItemStack(this.getCachedState().getBlock().asItem()));
         // RecipeEntry<KnappingRecipe> recipe =  this.matchGetter.getFirstMatch(input, (ServerWorld) world).orElse(null);
         Grouping<StonecuttingRecipe> recipes = ((ServerWorld) this.world).getRecipeManager().getStonecutterRecipes().filter(new ItemStack(this.getCachedState().getBlock().asItem()));
-        return new KnappingSelectionScreenHandler(syncId, playerInventory, this.propertyDelegate, recipes);
+        return new KnappingSelectionScreenHandler(syncId, playerInventory, this.propertyDelegate, recipes, this);
     }
 
     @Override
