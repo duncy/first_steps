@@ -25,6 +25,7 @@ public class ModRecipes {
       new KilningRecipe.Serializer()
    );
 
+
    public static void registerRecipes() {
       FirstSteps.LOGGER.info("Registering ModRecipes for " + FirstSteps.MOD_ID);
       

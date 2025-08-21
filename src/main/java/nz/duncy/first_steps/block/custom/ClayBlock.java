@@ -1,7 +1,5 @@
 package nz.duncy.first_steps.block.custom;
 
-import java.util.List;
-
 import org.jetbrains.annotations.Nullable;
 
 import com.mojang.serialization.MapCodec;
@@ -10,23 +8,28 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.item.Item;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Property;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.state.ModProperties;
 
 public class ClayBlock extends Block {
@@ -73,9 +76,22 @@ public class ClayBlock extends Block {
         return !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
+    @Override
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (stack.getItem() == Items.CLAY_BALL) {
+            if (state.get(CLAY_LAYERS) < MAX_CLAY_LAYERS) {
+                world.setBlockState(pos, state.with(CLAY_LAYERS, Math.min(MAX_CLAY_LAYERS, state.get(CLAY_LAYERS) + 1)));
+                world.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_PLACE, SoundCategory.BLOCKS, 1f, 1f);
+                if (!player.getAbilities().creativeMode) stack.decrement(1);
+                return ActionResult.SUCCESS;
+            }
+        }
+        return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+	}
+
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         int i = (Integer)state.get(CLAY_LAYERS);
-        if (context.getStack().isOf(this.asItem()) && i < 4) {
+        if (context.getStack().isOf(this.asItem()) && i < MAX_CLAY_LAYERS) {
             if (context.canReplaceExisting()) {
                 return context.getSide() == Direction.UP;
             } else {
@@ -89,9 +105,10 @@ public class ClayBlock extends Block {
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos());
+        FirstSteps.LOGGER.info("Blockstate is of this: " + blockState);
         if (blockState.isOf(this)) {
             int i = (Integer)blockState.get(CLAY_LAYERS);
-            return (BlockState)blockState.with(CLAY_LAYERS, Math.min(4, i + 1));
+            return (BlockState)blockState.with(CLAY_LAYERS, Math.min(MAX_CLAY_LAYERS, i + 1));
         } else {
             return super.getPlacementState(ctx);
         }
@@ -99,12 +116,6 @@ public class ClayBlock extends Block {
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{CLAY_LAYERS});
-    }
-
-    @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
-        tooltip.add(Text.translatable("tooltip.first_steps.clay").formatted(Formatting.GRAY, Formatting.ITALIC));
-        super.appendTooltip(stack, context, tooltip, options);
     }
 
     static {

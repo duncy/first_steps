@@ -206,5 +206,8 @@
 
     "screen.first_steps.knapping.switcher": "Select a tool head",
     "screen.first_steps.knapping.select": "%s Select",
-    "screen.first_steps.knapping.press_enter": "[ LEFT MOUSE ]"
+    "screen.first_steps.knapping.press_enter": "[ LEFT MOUSE ]",
+
+    "stat.first_steps.interact_with_kiln": "Interactions with Kiln",
+    "stat.first_steps.potters_wheel_spins": "Potter's Wheel Spins"
 }

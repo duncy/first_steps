@@ -3,6 +3,7 @@ package nz.duncy.first_steps.datagen;
 import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import nz.duncy.first_steps.block.ModBlocks;
@@ -32,6 +33,13 @@ public class ModKnappingRecipes extends RecipeGenerator {
         generateToolHeadRecipe(exporter, ModBlocks.STONE_ROCK, ModItems.STONE_HEAD_KNIFE);
         generateToolHeadRecipe(exporter, ModBlocks.STONE_ROCK, ModItems.STONE_HEAD_SPEAR);
         generateToolHeadRecipe(exporter, ModBlocks.STONE_ROCK, ModItems.STONE_HEAD_ARROW);
+
+        generateToolHeadRecipe(exporter, Items.FLINT, ModItems.FLINT_HEAD_AXE);
+        generateToolHeadRecipe(exporter, Items.FLINT, ModItems.FLINT_HEAD_SHOVEL);
+        generateToolHeadRecipe(exporter, Items.FLINT, ModItems.FLINT_HEAD_HOE);
+        generateToolHeadRecipe(exporter, Items.FLINT, ModItems.FLINT_HEAD_KNIFE);
+        generateToolHeadRecipe(exporter, Items.FLINT, ModItems.FLINT_HEAD_SPEAR);
+        generateToolHeadRecipe(exporter, Items.FLINT, ModItems.FLINT_HEAD_ARROW);
 
         generateToolHeadRecipe(exporter, ModBlocks.FLINT_ROCK, ModItems.FLINT_HEAD_AXE);
         generateToolHeadRecipe(exporter, ModBlocks.FLINT_ROCK, ModItems.FLINT_HEAD_SHOVEL);

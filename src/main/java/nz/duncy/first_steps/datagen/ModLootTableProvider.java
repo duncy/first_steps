@@ -64,6 +64,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         
         addDrop(ModBlocks.KILN);
 
+        addDrop(ModBlocks.UNFIRED_FLOWER_POT);
+
         // nameableContainerDrops(ModBlocks.CLAY_FIRED_CRUCIBLE);
         addDrop(ModBlocks.FIRED_CRUCIBLE, crucibleDrops(ModBlocks.FIRED_CRUCIBLE));
         addDrop(ModBlocks.UNFIRED_CRUCIBLE);

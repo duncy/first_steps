@@ -106,7 +106,7 @@ public class ModItemGroups {
 
                     // Rock blocks
                     entries.add(ModBlocks.STONE_ROCK);
-                    entries.add(ModBlocks.FLINT_ROCK);
+                    // entries.add(ModBlocks.FLINT_ROCK);
                     entries.add(ModBlocks.BASALT_ROCK);
                     entries.add(ModBlocks.OBSIDIAN_ROCK);
 
@@ -124,7 +124,7 @@ public class ModItemGroups {
                     entries.add(ModBlocks.UNFIRED_DECORATED_POT);
 
                     // Clay
-                    entries.add(ModBlocks.CLAY);
+                    // entries.add(ModBlocks.CLAY);
                     
                     // Tools
                     // Stone tools

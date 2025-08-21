@@ -18,6 +18,7 @@ import nz.duncy.first_steps.network.packet.KnappingSelectionPayload;
 import nz.duncy.first_steps.recipe.ModRecipes;
 import nz.duncy.first_steps.screen.KnappingSelectionScreenHandler;
 import nz.duncy.first_steps.stat.ModStats;
+import nz.duncy.first_steps.util.events.ModEvents;
 import nz.duncy.first_steps.world.gen.ModWorldGeneration;
 import nz.duncy.first_steps.world.gen.feature.ModFeature;
 
@@ -37,6 +38,8 @@ public class FirstSteps implements ModInitializer {
         ModRecipes.registerRecipes();
         ModStats.registerStats();
         ModDataComponentTypes.registerDataComponentTypes();
+        ModEvents.registerModEvents();
+
         PayloadTypeRegistry.playS2C().register(KnappingRecipePayload.ID, KnappingRecipePayload.CODEC);
         PayloadTypeRegistry.playC2S().register(KnappingSelectionPayload.ID, KnappingSelectionPayload.CODEC);
 

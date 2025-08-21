@@ -13,23 +13,30 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import nz.duncy.first_steps.block.entity.RockBlockEntity;
+import nz.duncy.first_steps.item.custom.RockBlockItem;
 
 public class RockBlock extends Block implements BlockEntityProvider {
     private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 1, 12);
@@ -62,38 +69,17 @@ public class RockBlock extends Block implements BlockEntityProvider {
         return (BlockState)this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
-    // @Override
-    // public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-    //     if (hit.getType() == HitResult.Type.BLOCK) {
-    //         Item heldItem = player.getStackInHand(hand).getItem();
-    //         if (heldItem instanceof BlockItem) {
-    //             if (((BlockItem) heldItem).getBlock() instanceof RockBlock) {
-    //                 RockBlockEntity rockBlockEntity = (RockBlockEntity) world.getBlockEntity(pos); 
-    //                 if (!world.isClient) {
-    //                     // Get the coordinates of the clicked voxel within the block
-    //                     double hitX = hit.getPos().getX() - pos.getX() - 0.25;
-    //                     double hitZ = hit.getPos().getZ() - pos.getZ() - 0.25;
-    //                     int voxelPos = (int) (Math.floor(hitX / 0.0625) + (Math.floor(hitZ / 0.0625) * 8));
-    //                     if (!rockBlockEntity.getKnappedVoxels().get(voxelPos)) {
-    //                         if (rockBlockEntity.edgeVoxel(voxelPos)) {
-    //                             rockBlockEntity.knappVoxel(voxelPos);
-                            
-    //                             rockBlockEntity.markDirty();
-    //                             world.updateListeners(rockBlockEntity.getPos(), rockBlockEntity.getCachedState(), rockBlockEntity.getCachedState(), Block.NOTIFY_LISTENERS);
-    //                             world.playSound(null, pos, SoundEvents.BLOCK_STONE_HIT, SoundCategory.BLOCKS, 1f, 1f);
-                                
-    //                             ServerWorld serverWorld = (ServerWorld) world;
-    //                             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-    //                             serverWorld.spawnParticles(serverPlayer, ParticleTypes.DUST_PLUME, true, hit.getPos().getX(), hit.getPos().getY(), hit.getPos().getZ(), 1, 0.0, 0.0, 0.0, 0.0);
-    //                             return ActionResult.SUCCESS;
-    //                         }
-    //                     }
-    //                 }
-    //             }                    
-    //         }              
-    //     }              
-    //     return ActionResult.success(false);
-    // }
+    @Override
+    public ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (stack.getItem() instanceof RockBlockItem || stack.getItem() == Items.FLINT) {
+            if (!world.isClient) {
+                player.openHandledScreen((NamedScreenHandlerFactory) world.getBlockEntity(pos) );
+            }
+            return ActionResult.SUCCESS_SERVER; // Prevent block placement
+        }
+
+        return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
+    }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {

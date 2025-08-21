@@ -52,18 +52,22 @@ public class ModBlocks {
         public static final Block STONE_ROCK = registerRockBlock("stone_rock",
                         Settings.create().strength(0.0F, 0.0F)
                                         .pistonBehavior(PistonBehavior.DESTROY)
-                                        .mapColor(MapColor.STONE_GRAY));
+                                        .mapColor(MapColor.STONE_GRAY),
+                                        true);
 
         public static Block FLINT_ROCK = registerRockBlock("flint_rock",
                         Settings.copy(STONE_ROCK)
-                                        .mapColor(MapColor.BLACK));
+                                        .mapColor(MapColor.BLACK),
+                                        true);
                                         // Items.FLINT);
 
         public static final Block BASALT_ROCK = registerRockBlock("basalt_rock",
-                        Settings.copy(STONE_ROCK));
+                        Settings.copy(STONE_ROCK),
+                        true);
 
         public static final Block OBSIDIAN_ROCK = registerRockBlock("obsidian_rock",
-                        Settings.copy(FLINT_ROCK));
+                        Settings.copy(FLINT_ROCK),
+                        true);
 
         public static final Block COPPER_ROCK = registerBlock(
                         "copper_rock",
@@ -127,14 +131,12 @@ public class ModBlocks {
                         .replaceable()
                         .notSolid()
                         .ticksRandomly()
-                        .strength(0.1F)
-                        .requiresTool()
+                        .strength(0.6F)
                         .sounds(BlockSoundGroup.GRAVEL)
                         .blockVision((state, world, pos) -> (Integer)state.get(ClayBlock.CLAY_LAYERS) >= 4)
                         .pistonBehavior(PistonBehavior.DESTROY),
                 true
         );
-
 
         // CAST MOLDS
         public static final Block HOE_HEAD_MOLD = registerMoldBlock("hoe_head_mold");
@@ -175,18 +177,8 @@ public class ModBlocks {
 
                 return block;
         }
-                
 
-        private static Block registerBlock(String name, Settings settings) {
-                return registerBlock(
-                        name,
-                        Block::new,
-                        settings,
-                        true
-                );
-        }
-
-        private static Block registerRockBlock(String name, Settings settings) {
+        private static Block registerRockBlock(String name, Settings settings, boolean shouldRegisterItem) {
                 Block block =  registerBlock(
                         name,
                         RockBlock::new,
@@ -194,7 +186,9 @@ public class ModBlocks {
                         false
                 );
 
-                registerRockBlockItem(name, block);
+                if (shouldRegisterItem) {
+                        registerRockBlockItem(name, block);
+                }
 
                 return block;
         }
@@ -238,7 +232,6 @@ public class ModBlocks {
                         true
                 );
         }
-
 
         public static Block registerDeepslateOreBlock(String name) {
                 return registerBlock(

@@ -23,7 +23,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.context.ContextParameterMap;
 import net.minecraft.util.math.BlockPos;
-import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.screen.KnappingSelectionScreenHandler;
 
 public class RockBlockEntity extends BlockEntity implements NamedScreenHandlerFactory {
