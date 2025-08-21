@@ -30,6 +30,19 @@ public class ModToolRecipes extends RecipeGenerator {
            .offerTo(this.exporter);
     }
 
+    private void generateArrowRecipe(RecipeExporter exporter, Item head, Item tool) {
+       ShapedRecipeJsonBuilder.create(this.itemLookup, RecipeCategory.COMBAT, tool, 4)
+           .pattern("H")
+           .pattern("S")
+           .pattern("F")
+           .input('H', head)
+           .input('S', Items.STICK)
+           .input('F', Items.FEATHER)
+           .criterion(hasItem(head), conditionsFromItem(head))
+           .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+           .offerTo(this.exporter);
+    }
+
     @Override
     public void generate() {
         generateToolRecipe(this.exporter, ModItems.STONE_HEAD_AXE, Items.STONE_AXE);
@@ -37,35 +50,35 @@ public class ModToolRecipes extends RecipeGenerator {
         generateToolRecipe(this.exporter, ModItems.STONE_HEAD_HOE, Items.STONE_HOE);
         generateToolRecipe(this.exporter, ModItems.STONE_HEAD_KNIFE, ModItems.STONE_KNIFE);
         generateToolRecipe(this.exporter, ModItems.STONE_HEAD_SPEAR, ModItems.STONE_SPEAR);
-        generateToolRecipe(this.exporter, ModItems.STONE_HEAD_ARROW, ModItems.STONE_ARROW);
+        generateArrowRecipe(this.exporter, ModItems.STONE_HEAD_ARROW, ModItems.STONE_ARROW);
 
         generateToolRecipe(this.exporter, ModItems.FLINT_HEAD_AXE, ModItems.FLINT_AXE);
         generateToolRecipe(this.exporter, ModItems.FLINT_HEAD_SHOVEL, ModItems.FLINT_SHOVEL);
         generateToolRecipe(this.exporter, ModItems.FLINT_HEAD_HOE, ModItems.FLINT_HOE);
         generateToolRecipe(this.exporter, ModItems.FLINT_HEAD_KNIFE, ModItems.FLINT_KNIFE);
         generateToolRecipe(this.exporter, ModItems.FLINT_HEAD_SPEAR, ModItems.FLINT_SPEAR);
-        generateToolRecipe(this.exporter, ModItems.FLINT_HEAD_ARROW, ModItems.FLINT_ARROW);
+        generateArrowRecipe(this.exporter, ModItems.FLINT_HEAD_ARROW, ModItems.FLINT_ARROW);
 
         generateToolRecipe(this.exporter, ModItems.BASALT_HEAD_AXE, ModItems.BASALT_AXE);
         generateToolRecipe(this.exporter, ModItems.BASALT_HEAD_SHOVEL, ModItems.BASALT_SHOVEL);
         generateToolRecipe(this.exporter, ModItems.BASALT_HEAD_HOE, ModItems.BASALT_HOE);
         generateToolRecipe(this.exporter, ModItems.BASALT_HEAD_KNIFE, ModItems.BASALT_KNIFE);
         generateToolRecipe(this.exporter, ModItems.BASALT_HEAD_SPEAR, ModItems.BASALT_SPEAR);
-        generateToolRecipe(this.exporter, ModItems.BASALT_HEAD_ARROW, ModItems.BASALT_ARROW);
+        generateArrowRecipe(this.exporter, ModItems.BASALT_HEAD_ARROW, ModItems.BASALT_ARROW);
 
         generateToolRecipe(this.exporter, ModItems.OBSIDIAN_HEAD_AXE, ModItems.OBSIDIAN_AXE);
         generateToolRecipe(this.exporter, ModItems.OBSIDIAN_HEAD_SHOVEL, ModItems.OBSIDIAN_SHOVEL);
         generateToolRecipe(this.exporter, ModItems.OBSIDIAN_HEAD_HOE, ModItems.OBSIDIAN_HOE);
         generateToolRecipe(this.exporter, ModItems.OBSIDIAN_HEAD_KNIFE, ModItems.OBSIDIAN_KNIFE);
         generateToolRecipe(this.exporter, ModItems.OBSIDIAN_HEAD_SPEAR, ModItems.OBSIDIAN_SPEAR);
-        generateToolRecipe(this.exporter, ModItems.OBSIDIAN_HEAD_ARROW, ModItems.OBSIDIAN_ARROW);
+        generateArrowRecipe(this.exporter, ModItems.OBSIDIAN_HEAD_ARROW, ModItems.OBSIDIAN_ARROW);
 
         generateToolRecipe(this.exporter, ModItems.COPPER_HEAD_AXE, ModItems.COPPER_AXE);
         generateToolRecipe(this.exporter, ModItems.COPPER_HEAD_SHOVEL, ModItems.COPPER_SHOVEL);
         generateToolRecipe(this.exporter, ModItems.COPPER_HEAD_HOE, ModItems.COPPER_HOE);
         generateToolRecipe(this.exporter, ModItems.COPPER_HEAD_KNIFE, ModItems.COPPER_KNIFE);
         generateToolRecipe(this.exporter, ModItems.COPPER_HEAD_SPEAR, ModItems.COPPER_SPEAR);
-        generateToolRecipe(this.exporter, ModItems.COPPER_HEAD_ARROW, ModItems.COPPER_ARROW);
+        generateArrowRecipe(this.exporter, ModItems.COPPER_HEAD_ARROW, ModItems.COPPER_ARROW);
         generateToolRecipe(this.exporter, ModItems.COPPER_HEAD_SWORD, ModItems.COPPER_SWORD);
         generateToolRecipe(this.exporter, ModItems.COPPER_HEAD_PICKAXE, ModItems.COPPER_PICKAXE);
 
@@ -74,7 +87,7 @@ public class ModToolRecipes extends RecipeGenerator {
         generateToolRecipe(this.exporter, ModItems.BRONZE_HEAD_HOE, ModItems.BRONZE_HOE);
         generateToolRecipe(this.exporter, ModItems.BRONZE_HEAD_KNIFE, ModItems.BRONZE_KNIFE);
         generateToolRecipe(this.exporter, ModItems.BRONZE_HEAD_SPEAR, ModItems.BRONZE_SPEAR);
-        generateToolRecipe(this.exporter, ModItems.BRONZE_HEAD_ARROW, ModItems.BRONZE_ARROW);
+        generateArrowRecipe(this.exporter, ModItems.BRONZE_HEAD_ARROW, ModItems.BRONZE_ARROW);
         generateToolRecipe(this.exporter, ModItems.BRONZE_HEAD_SWORD, ModItems.BRONZE_SWORD);
         generateToolRecipe(this.exporter, ModItems.BRONZE_HEAD_PICKAXE, ModItems.BRONZE_PICKAXE);
 
@@ -83,7 +96,7 @@ public class ModToolRecipes extends RecipeGenerator {
         generateToolRecipe(this.exporter, ModItems.IRON_HEAD_HOE, Items.IRON_HOE);
         generateToolRecipe(this.exporter, ModItems.IRON_HEAD_KNIFE, ModItems.IRON_KNIFE);
         generateToolRecipe(this.exporter, ModItems.IRON_HEAD_SPEAR, ModItems.IRON_SPEAR);
-        generateToolRecipe(this.exporter, ModItems.IRON_HEAD_ARROW, ModItems.IRON_ARROW);
+        generateArrowRecipe(this.exporter, ModItems.IRON_HEAD_ARROW, Items.ARROW);
         generateToolRecipe(this.exporter, ModItems.IRON_HEAD_SWORD, Items.IRON_SWORD);
         generateToolRecipe(this.exporter, ModItems.IRON_HEAD_PICKAXE, Items.IRON_PICKAXE);
 

@@ -181,7 +181,7 @@ public class ModItems {
     public static final Item OBSIDIAN_ARROW = registerItem("obsidian_arrow", ArrowItem::new, new Item.Settings());
     public static final Item COPPER_ARROW = registerItem("copper_arrow", ArrowItem::new, new Item.Settings());
     public static final Item BRONZE_ARROW = registerItem("bronze_arrow", ArrowItem::new, new Item.Settings());
-    public static final Item IRON_ARROW = registerItem("iron_arrow", ArrowItem::new, new Item.Settings());
+    // public static final Item IRON_ARROW = registerItem("iron_arrow", ArrowItem::new, new Item.Settings());
     // public static final Item STEEL_ARROW = registerItem("steel_arrow", ArrowItem::new, new Item.Settings());
 
     // Tongs
@@ -326,7 +326,7 @@ public class ModItems {
         entries.add(OBSIDIAN_ARROW);
         entries.add(COPPER_ARROW);
         entries.add(BRONZE_ARROW);
-        entries.add(IRON_ARROW);
+        // entries.add(IRON_ARROW);
         // entries.add(STEEL_ARROW);
     }
 

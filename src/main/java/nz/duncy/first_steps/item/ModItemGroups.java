@@ -195,7 +195,7 @@ public class ModItemGroups {
                     entries.add(ModItems.OBSIDIAN_ARROW);
                     entries.add(ModItems.COPPER_ARROW);
                     entries.add(ModItems.BRONZE_ARROW);
-                    entries.add(ModItems.IRON_ARROW);
+                    // entries.add(ModItems.IRON_ARROW);
                     // entries.add(ModItems.STEEL_ARROW);
 
                     // Tongs

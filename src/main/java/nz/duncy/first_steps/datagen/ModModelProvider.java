@@ -258,7 +258,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.OBSIDIAN_ARROW, Models.GENERATED);
         itemModelGenerator.register(ModItems.COPPER_ARROW, Models.GENERATED);
         itemModelGenerator.register(ModItems.BRONZE_ARROW, Models.GENERATED);
-        itemModelGenerator.register(ModItems.IRON_ARROW, Models.GENERATED);
+        // itemModelGenerator.register(ModItems.IRON_ARROW, Models.GENERATED);
         // itemModelGenerator.register(ModItems.STEEL_ARROW, Models.GENERATED);
 
         // Fired pottery
