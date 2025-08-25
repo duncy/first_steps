@@ -16,12 +16,6 @@ public class ModKnappingRecipes extends RecipeGenerator {
     }
 
     private void generateToolHeadRecipe(RecipeExporter exporter, ItemConvertible ingredient, ItemConvertible result) {
-        // new KnappingRecipeJsonBuilder(RecipeCategory.MISC, result, ingredient, KnappingRecipe::new)
-        // .criterion("has_rock", this.conditionsFromTag(ItemTags.LOGS_THAT_BURN))
-        //    .offerTo(exporter);
-
-        
-        // exporter.offerStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, Blocks.STONE_STAIRS, Blocks.STONE);
         offerStonecuttingRecipe(RecipeCategory.MISC, result, ingredient);
     }
 

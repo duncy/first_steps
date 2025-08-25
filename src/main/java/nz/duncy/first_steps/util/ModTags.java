@@ -45,6 +45,8 @@ public class ModTags {
         public static final TagKey<Item> COPPER_TOOL_MATERIALS = createTag("copper_tool_materials");
         public static final TagKey<Item> BRONZE_TOOL_MATERIALS = createTag("bronze_tool_materials");
 
+        public static final TagKey<Item> TINDER = createTag("tinder");
+
         private static TagKey<Item> createTag(String name) {
            return TagKey.of(RegistryKeys.ITEM, Identifier.of(FirstSteps.MOD_ID, name));
         }

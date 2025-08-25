@@ -34,6 +34,14 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
             .add(ModItems.RAW_TIN)
             .add(ModItems.RAW_DEEPSLATE_COPPER)
             .add(ModItems.RAW_DEEPSLATE_IRON);
+
+        getOrCreateTagBuilder(ModTags.Items.TINDER)
+            .add(Items.SHORT_GRASS)
+            .add(Items.FERN)
+            .add(Items.WHEAT)
+            .add(Items.PAPER);
     }
+
+
     
 }
