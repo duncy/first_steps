@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": "first_steps:obsidian_head_knife",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "H",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "first_steps:obsidian_knife"
+  }
+}

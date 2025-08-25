@@ -7,7 +7,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.model.LoadedEntityModels;
 import net.minecraft.client.render.item.model.special.SpecialModelRenderer;
 import net.minecraft.util.Identifier;
-import nz.duncy.first_steps.client.render.entity.model.BasaltSpearEntityModel;
 import nz.duncy.first_steps.client.render.entity.model.ModEntityModelLayers;
 import nz.duncy.first_steps.client.render.entity.model.SpearEntityModel;
 import nz.duncy.first_steps.client.render.entity.model.StoneSpearEntityModel;

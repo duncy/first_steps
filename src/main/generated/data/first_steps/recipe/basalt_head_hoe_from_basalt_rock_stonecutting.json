@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "first_steps:basalt_rock",
+  "result": {
+    "count": 1,
+    "id": "first_steps:basalt_head_hoe"
+  }
+}

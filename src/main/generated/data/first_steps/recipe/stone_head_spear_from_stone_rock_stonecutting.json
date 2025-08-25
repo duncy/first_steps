@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "first_steps:stone_rock",
+  "result": {
+    "count": 1,
+    "id": "first_steps:stone_head_spear"
+  }
+}

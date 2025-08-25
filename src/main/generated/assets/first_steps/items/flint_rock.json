@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "first_steps:item/iron_arrow"
+    "model": "first_steps:block/flint_rock"
   }
 }

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:flint",
+  "result": {
+    "count": 1,
+    "id": "first_steps:flint_head_arrow"
+  }
+}

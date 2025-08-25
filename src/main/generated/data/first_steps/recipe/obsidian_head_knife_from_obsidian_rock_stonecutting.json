@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "first_steps:obsidian_rock",
+  "result": {
+    "count": 1,
+    "id": "first_steps:obsidian_head_knife"
+  }
+}

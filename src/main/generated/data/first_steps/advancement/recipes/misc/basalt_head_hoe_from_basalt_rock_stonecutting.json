@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_basalt_rock": {
+      "conditions": {
+        "items": [
+          {
+            "items": "first_steps:basalt_rock"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:basalt_head_hoe_from_basalt_rock_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_basalt_rock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:basalt_head_hoe_from_basalt_rock_stonecutting"
+    ]
+  }
+}

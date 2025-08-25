@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_obsidian_head_arrow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "first_steps:obsidian_head_arrow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:stick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "first_steps:obsidian_arrow"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_obsidian_head_arrow",
+      "has_stick"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "first_steps:obsidian_arrow"
+    ]
+  }
+}
