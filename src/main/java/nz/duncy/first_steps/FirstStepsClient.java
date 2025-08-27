@@ -7,6 +7,10 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.item.model.special.SpecialModelTypes;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
+import nz.duncy.first_steps.client.gui.screen.ingame.CrucibleScreen;
+import nz.duncy.first_steps.client.gui.screen.ingame.KilnScreen;
+import nz.duncy.first_steps.client.gui.screen.ingame.KnappingSelectionScreen;
+import nz.duncy.first_steps.client.gui.screen.ingame.MannequinScreen;
 import nz.duncy.first_steps.client.render.block.entity.PottersWheelBlockEntityRenderer;
 import nz.duncy.first_steps.client.render.block.entity.UnfiredDecoratedPotBlockEntityRenderer;
 import nz.duncy.first_steps.client.render.entity.ModEntityRenderer;
@@ -21,9 +25,6 @@ import nz.duncy.first_steps.client.render.item.model.special.PottersWheelModelRe
 import nz.duncy.first_steps.client.render.item.model.special.StoneSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.UnfiredDecoratedPotModelRenderer;
 import nz.duncy.first_steps.network.packet.KnappingRecipePayload;
-import nz.duncy.first_steps.screen.CrucibleScreen;
-import nz.duncy.first_steps.screen.KilnScreen;
-import nz.duncy.first_steps.screen.KnappingSelectionScreen;
 import nz.duncy.first_steps.screen.ModScreenHandlers;
 
 public class FirstStepsClient implements ClientModInitializer {
@@ -56,6 +57,7 @@ public class FirstStepsClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.KILN_SCREEN_HANDLER, KilnScreen::new);
         HandledScreens.register(ModScreenHandlers.CRUCIBLE_SCREEN_HANDLER, CrucibleScreen::new);
         HandledScreens.register(ModScreenHandlers.KNAPPING_SELECTION_SCREEN_HANDLER, KnappingSelectionScreen::new);
+        HandledScreens.register(ModScreenHandlers.MANNEQUIN_SCREEN_HANDLER, MannequinScreen::new);
 
         ClientPlayNetworking.registerGlobalReceiver(KnappingRecipePayload.ID, (payload, context) -> {
             context.client().execute(() -> {

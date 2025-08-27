@@ -21,8 +21,11 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.custom.ClayBlock;
+import nz.duncy.first_steps.block.custom.CottonCropBlock;
 import nz.duncy.first_steps.block.custom.CrucibleBlock;
+import nz.duncy.first_steps.block.custom.FlaxCropBlock;
 import nz.duncy.first_steps.block.custom.KilnBlock;
+import nz.duncy.first_steps.block.custom.MannequinBlock;
 import nz.duncy.first_steps.block.custom.OreRockBlock;
 import nz.duncy.first_steps.block.custom.RockBlock;
 import nz.duncy.first_steps.block.custom.UnfiredCrucibleBlock;
@@ -147,7 +150,37 @@ public class ModBlocks {
         public static final Block ARROW_HEAD_MOLD = registerMoldBlock("arrow_head_mold");
         public static final Block PICKAXE_HEAD_MOLD = registerMoldBlock("pickaxe_head_mold");
         public static final Block SWORD_HEAD_MOLD = registerMoldBlock("sword_head_mold");
-        
+
+        // ARMOURERS MANNEQUIN
+        public static final Block ARMOURERS_MANNEQUIN = registerBlock(
+                "armourers_mannequin",
+                MannequinBlock::new,
+                Settings.copy(Blocks.WHITE_WOOL),
+                true
+        );
+
+        // FORGE
+        public static final Block FORGE = registerBlock(
+                "forge",
+                Block::new,
+                Settings.copy(Blocks.COBBLESTONE),
+                true
+        );
+
+        // CROPS
+        public static final Block FLAX_CROP = registerBlock(
+                "flax_crop",
+                FlaxCropBlock::new,
+                Settings.create().noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.CROP).pistonBehavior(PistonBehavior.DESTROY).mapColor(MapColor.DARK_GREEN),
+                false
+        );
+
+        public static final Block COTTON_CROP = registerBlock(
+                "cotton_crop",
+                CottonCropBlock::new,
+                Settings.create().noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.CROP).pistonBehavior(PistonBehavior.DESTROY).mapColor(MapColor.DARK_GREEN),
+                false
+        );
 
         private static Block registerBlock(String name, Function<Settings, Block> blockFactory, Settings settings, boolean shouldRegisterItem) {
                 RegistryKey<Block> blockKey = keyOfBlock(name);

@@ -1,9 +1,10 @@
-package nz.duncy.first_steps.screen;
+package nz.duncy.first_steps.screen.slot;
 
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.slot.Slot;
+import nz.duncy.first_steps.screen.KilnScreenHandler;
 
 public class KilnFuelSlot extends Slot{
     private final KilnScreenHandler handler;

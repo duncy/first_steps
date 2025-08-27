@@ -2,14 +2,11 @@ package nz.duncy.first_steps.item;
 
 import java.util.function.Function;
 
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
@@ -20,6 +17,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.item.custom.TinSourceItem;
 import nz.duncy.first_steps.item.custom.TongItem;
 import nz.duncy.first_steps.item.custom.BasaltSpearItem;
@@ -36,84 +34,84 @@ import nz.duncy.first_steps.item.custom.StoneSpearItem;
 public class ModItems {
     // Raw metals
 
-    public static final Item RAW_TIN = registerItem("raw_tin", TinSourceItem::new, new Item.Settings());
-    public static final Item RAW_STONE_COPPER = registerItem("raw_stone_copper", CopperSourceItem::new, new Item.Settings());
-    public static final Item RAW_STONE_IRON = registerItem("raw_stone_iron", IronSourceItem::new, new Item.Settings());
-    public static final Item RAW_DEEPSLATE_COPPER = registerItem("raw_deepslate_copper", CopperSourceItem::new, new Item.Settings());
-    public static final Item RAW_DEEPSLATE_IRON = registerItem("raw_deepslate_iron", IronSourceItem::new, new Item.Settings());
-    // public static final Item RAW_MULLITE = registerItem("raw_mullite", MulliteSourceItem::new, new Item.Settings());
+    public static final Item RAW_TIN = registerItem("raw_tin", TinSourceItem::new);
+    public static final Item RAW_STONE_COPPER = registerItem("raw_stone_copper", CopperSourceItem::new);
+    public static final Item RAW_STONE_IRON = registerItem("raw_stone_iron", IronSourceItem::new);
+    public static final Item RAW_DEEPSLATE_COPPER = registerItem("raw_deepslate_copper", CopperSourceItem::new);
+    public static final Item RAW_DEEPSLATE_IRON = registerItem("raw_deepslate_iron", IronSourceItem::new);
+    // public static final Item RAW_MULLITE = registerItem("raw_mullite", MulliteSourceItem::new);
 
     // Tool heads
     // Hoe heads
-    public static final Item STONE_HEAD_HOE = registerItem("stone_head_hoe", Item::new, new Item.Settings()); 
-    public static final Item FLINT_HEAD_HOE = registerItem("flint_head_hoe", Item::new, new Item.Settings()); 
-    public static final Item BASALT_HEAD_HOE = registerItem("basalt_head_hoe", Item::new, new Item.Settings());
-    public static final Item OBSIDIAN_HEAD_HOE = registerItem("obsidian_head_hoe", Item::new, new Item.Settings()); 
-    public static final Item COPPER_HEAD_HOE = registerItem("copper_head_hoe", Item::new, new Item.Settings()); 
-    public static final Item BRONZE_HEAD_HOE = registerItem("bronze_head_hoe", Item::new, new Item.Settings());
-    public static final Item IRON_HEAD_HOE = registerItem("iron_head_hoe", Item::new, new Item.Settings());
-    // public static final Item STEEL_HEAD_HOE = registerItem("steel_head_hoe", Item::new, new Item.Settings());
+    public static final Item STONE_HEAD_HOE = registerItem("stone_head_hoe", Item::new); 
+    public static final Item FLINT_HEAD_HOE = registerItem("flint_head_hoe", Item::new); 
+    public static final Item BASALT_HEAD_HOE = registerItem("basalt_head_hoe", Item::new);
+    public static final Item OBSIDIAN_HEAD_HOE = registerItem("obsidian_head_hoe", Item::new); 
+    public static final Item COPPER_HEAD_HOE = registerItem("copper_head_hoe", Item::new); 
+    public static final Item BRONZE_HEAD_HOE = registerItem("bronze_head_hoe", Item::new);
+    public static final Item IRON_HEAD_HOE = registerItem("iron_head_hoe", Item::new);
+    // public static final Item STEEL_HEAD_HOE = registerItem("steel_head_hoe", Item::new);
 
     // Axe heads
-    public static final Item STONE_HEAD_AXE = registerItem("stone_head_axe", Item::new, new Item.Settings()); 
-    public static final Item FLINT_HEAD_AXE = registerItem("flint_head_axe", Item::new, new Item.Settings()); 
-    public static final Item BASALT_HEAD_AXE = registerItem("basalt_head_axe", Item::new, new Item.Settings());
-    public static final Item OBSIDIAN_HEAD_AXE = registerItem("obsidian_head_axe", Item::new, new Item.Settings()); 
-    public static final Item COPPER_HEAD_AXE = registerItem("copper_head_axe", Item::new, new Item.Settings()); 
-    public static final Item BRONZE_HEAD_AXE = registerItem("bronze_head_axe", Item::new, new Item.Settings());
-    public static final Item IRON_HEAD_AXE = registerItem("iron_head_axe", Item::new, new Item.Settings());
-    // public static final Item STEEL_HEAD_AXE = registerItem("steel_head_axe", Item::new, new Item.Settings());
+    public static final Item STONE_HEAD_AXE = registerItem("stone_head_axe", Item::new); 
+    public static final Item FLINT_HEAD_AXE = registerItem("flint_head_axe", Item::new); 
+    public static final Item BASALT_HEAD_AXE = registerItem("basalt_head_axe", Item::new);
+    public static final Item OBSIDIAN_HEAD_AXE = registerItem("obsidian_head_axe", Item::new); 
+    public static final Item COPPER_HEAD_AXE = registerItem("copper_head_axe", Item::new); 
+    public static final Item BRONZE_HEAD_AXE = registerItem("bronze_head_axe", Item::new);
+    public static final Item IRON_HEAD_AXE = registerItem("iron_head_axe", Item::new);
+    // public static final Item STEEL_HEAD_AXE = registerItem("steel_head_axe", Item::new);
     
     // Shovel heads
-    public static final Item STONE_HEAD_SHOVEL = registerItem("stone_head_shovel", Item::new, new Item.Settings()); 
-    public static final Item FLINT_HEAD_SHOVEL = registerItem("flint_head_shovel", Item::new, new Item.Settings());
-    public static final Item BASALT_HEAD_SHOVEL = registerItem("basalt_head_shovel", Item::new, new Item.Settings()); 
-    public static final Item OBSIDIAN_HEAD_SHOVEL = registerItem("obsidian_head_shovel", Item::new, new Item.Settings());
-    public static final Item COPPER_HEAD_SHOVEL = registerItem("copper_head_shovel", Item::new, new Item.Settings());
-    public static final Item BRONZE_HEAD_SHOVEL = registerItem("bronze_head_shovel", Item::new, new Item.Settings());
-    public static final Item IRON_HEAD_SHOVEL = registerItem("iron_head_shovel", Item::new, new Item.Settings());
-    // public static final Item STEEL_HEAD_SHOVEL = registerItem("steel_head_shovel", Item::new, new Item.Settings());
+    public static final Item STONE_HEAD_SHOVEL = registerItem("stone_head_shovel", Item::new); 
+    public static final Item FLINT_HEAD_SHOVEL = registerItem("flint_head_shovel", Item::new);
+    public static final Item BASALT_HEAD_SHOVEL = registerItem("basalt_head_shovel", Item::new); 
+    public static final Item OBSIDIAN_HEAD_SHOVEL = registerItem("obsidian_head_shovel", Item::new);
+    public static final Item COPPER_HEAD_SHOVEL = registerItem("copper_head_shovel", Item::new);
+    public static final Item BRONZE_HEAD_SHOVEL = registerItem("bronze_head_shovel", Item::new);
+    public static final Item IRON_HEAD_SHOVEL = registerItem("iron_head_shovel", Item::new);
+    // public static final Item STEEL_HEAD_SHOVEL = registerItem("steel_head_shovel", Item::new);
 
     // Knife heads
-    public static final Item STONE_HEAD_KNIFE = registerItem("stone_head_knife", Item::new, new Item.Settings());
-    public static final Item FLINT_HEAD_KNIFE = registerItem("flint_head_knife", Item::new, new Item.Settings());
-    public static final Item BASALT_HEAD_KNIFE = registerItem("basalt_head_knife", Item::new, new Item.Settings());
-    public static final Item OBSIDIAN_HEAD_KNIFE = registerItem("obsidian_head_knife", Item::new, new Item.Settings());
-    public static final Item COPPER_HEAD_KNIFE = registerItem("copper_head_knife", Item::new, new Item.Settings());
-    public static final Item BRONZE_HEAD_KNIFE = registerItem("bronze_head_knife", Item::new, new Item.Settings());
-    public static final Item IRON_HEAD_KNIFE = registerItem("iron_head_knife", Item::new, new Item.Settings());
-    // public static final Item STEEL_HEAD_KNIFE = registerItem("steel_head_knife", Item::new, new Item.Settings());
+    public static final Item STONE_HEAD_KNIFE = registerItem("stone_head_knife", Item::new);
+    public static final Item FLINT_HEAD_KNIFE = registerItem("flint_head_knife", Item::new);
+    public static final Item BASALT_HEAD_KNIFE = registerItem("basalt_head_knife", Item::new);
+    public static final Item OBSIDIAN_HEAD_KNIFE = registerItem("obsidian_head_knife", Item::new);
+    public static final Item COPPER_HEAD_KNIFE = registerItem("copper_head_knife", Item::new);
+    public static final Item BRONZE_HEAD_KNIFE = registerItem("bronze_head_knife", Item::new);
+    public static final Item IRON_HEAD_KNIFE = registerItem("iron_head_knife", Item::new);
+    // public static final Item STEEL_HEAD_KNIFE = registerItem("steel_head_knife", Item::new);
 
     // Spear heads
-    public static final Item STONE_HEAD_SPEAR = registerItem("stone_head_spear", Item::new, new Item.Settings());
-    public static final Item FLINT_HEAD_SPEAR = registerItem("flint_head_spear", Item::new, new Item.Settings());
-    public static final Item BASALT_HEAD_SPEAR = registerItem("basalt_head_spear", Item::new, new Item.Settings());
-    public static final Item OBSIDIAN_HEAD_SPEAR = registerItem("obsidian_head_spear", Item::new, new Item.Settings());
-    public static final Item COPPER_HEAD_SPEAR = registerItem("copper_head_spear", Item::new, new Item.Settings());
-    public static final Item BRONZE_HEAD_SPEAR = registerItem("bronze_head_spear", Item::new, new Item.Settings());
-    public static final Item IRON_HEAD_SPEAR = registerItem("iron_head_spear", Item::new, new Item.Settings());
-    // public static final Item STEEL_HEAD_SPEAR = registerItem("steel_head_spear", Item::new, new Item.Settings());
+    public static final Item STONE_HEAD_SPEAR = registerItem("stone_head_spear", Item::new);
+    public static final Item FLINT_HEAD_SPEAR = registerItem("flint_head_spear", Item::new);
+    public static final Item BASALT_HEAD_SPEAR = registerItem("basalt_head_spear", Item::new);
+    public static final Item OBSIDIAN_HEAD_SPEAR = registerItem("obsidian_head_spear", Item::new);
+    public static final Item COPPER_HEAD_SPEAR = registerItem("copper_head_spear", Item::new);
+    public static final Item BRONZE_HEAD_SPEAR = registerItem("bronze_head_spear", Item::new);
+    public static final Item IRON_HEAD_SPEAR = registerItem("iron_head_spear", Item::new);
+    // public static final Item STEEL_HEAD_SPEAR = registerItem("steel_head_spear", Item::new);
 
     // Arrow heads
-    public static final Item STONE_HEAD_ARROW = registerItem("stone_head_arrow", Item::new, new Item.Settings());
-    public static final Item FLINT_HEAD_ARROW = registerItem("flint_head_arrow", Item::new, new Item.Settings());
-    public static final Item BASALT_HEAD_ARROW = registerItem("basalt_head_arrow", Item::new, new Item.Settings());
-    public static final Item OBSIDIAN_HEAD_ARROW = registerItem("obsidian_head_arrow", Item::new, new Item.Settings());
-    public static final Item COPPER_HEAD_ARROW = registerItem("copper_head_arrow", Item::new, new Item.Settings());
-    public static final Item BRONZE_HEAD_ARROW = registerItem("bronze_head_arrow", Item::new, new Item.Settings());
-    public static final Item IRON_HEAD_ARROW = registerItem("iron_head_arrow", Item::new, new Item.Settings());
-    // public static final Item STEEL_HEAD_ARROW = registerItem("steel_heaHoeItemr_head_pickaxe", Item::new, new Item.Settings());
+    public static final Item STONE_HEAD_ARROW = registerItem("stone_head_arrow", Item::new);
+    public static final Item FLINT_HEAD_ARROW = registerItem("flint_head_arrow", Item::new);
+    public static final Item BASALT_HEAD_ARROW = registerItem("basalt_head_arrow", Item::new);
+    public static final Item OBSIDIAN_HEAD_ARROW = registerItem("obsidian_head_arrow", Item::new);
+    public static final Item COPPER_HEAD_ARROW = registerItem("copper_head_arrow", Item::new);
+    public static final Item BRONZE_HEAD_ARROW = registerItem("bronze_head_arrow", Item::new);
+    public static final Item IRON_HEAD_ARROW = registerItem("iron_head_arrow", Item::new);
+    // public static final Item STEEL_HEAD_ARROW = registerItem("steel_heaHoeItemr_head_pickaxe", Item::new);
 
     // Pickaxe heads
-    public static final Item COPPER_HEAD_PICKAXE = registerItem("copper_head_pickaxe", Item::new, new Item.Settings());
-    public static final Item BRONZE_HEAD_PICKAXE = registerItem("bronze_head_pickaxe", Item::new, new Item.Settings());
-    public static final Item IRON_HEAD_PICKAXE = registerItem("iron_head_pickaxe", Item::new, new Item.Settings());
-    // public static final Item STEEL_HEAD_PICKAXE = registerItem("steel_head_pickaxe", Item::new, new Item.Settings());
+    public static final Item COPPER_HEAD_PICKAXE = registerItem("copper_head_pickaxe", Item::new);
+    public static final Item BRONZE_HEAD_PICKAXE = registerItem("bronze_head_pickaxe", Item::new);
+    public static final Item IRON_HEAD_PICKAXE = registerItem("iron_head_pickaxe", Item::new);
+    // public static final Item STEEL_HEAD_PICKAXE = registerItem("steel_head_pickaxe", Item::new);
 
     // Sword heads
-    public static final Item COPPER_HEAD_SWORD = registerItem("copper_head_sword", Item::new, new Item.Settings());
-    public static final Item BRONZE_HEAD_SWORD = registerItem("bronze_head_sword", Item::new, new Item.Settings());
-    public static final Item IRON_HEAD_SWORD = registerItem("iron_head_sword", Item::new, new Item.Settings());
+    public static final Item COPPER_HEAD_SWORD = registerItem("copper_head_sword", Item::new);
+    public static final Item BRONZE_HEAD_SWORD = registerItem("bronze_head_sword", Item::new);
+    public static final Item IRON_HEAD_SWORD = registerItem("iron_head_sword", Item::new);
    
     // Hoes
     public static final Item FLINT_HOE = registerItem("flint_hoe", settings -> new HoeItem(ModToolMaterials.FLINT, -1.0F, -2.0F, settings)); 
@@ -170,165 +168,73 @@ public class ModItems {
     // public static final Item STEEL_SWORD = registerItem("steel_sword", SwordItem(ModToolMaterials.STEEL, 3, -2.4f, Item.Settings()));
 
     // Ingots
-    public static final Item TIN_INGOT = registerItem("tin_ingot", Item::new, new Item.Settings());
-    public static final Item BRONZE_INGOT = registerItem("bronze_ingot", Item::new, new Item.Settings());
-    // public static final Item STEEL_INGOT = registerItem("steel_ingot", Item::new, new Item.Settings());
+    public static final Item TIN_INGOT = registerItem("tin_ingot", Item::new);
+    public static final Item BRONZE_INGOT = registerItem("bronze_ingot", Item::new);
+    // public static final Item STEEL_INGOT = registerItem("steel_ingot", Item::new);
 
     // Arrows
-    public static final Item STONE_ARROW = registerItem("stone_arrow", ArrowItem::new, new Item.Settings());
-    public static final Item FLINT_ARROW = registerItem("flint_arrow", ArrowItem::new, new Item.Settings());
-    public static final Item BASALT_ARROW = registerItem("basalt_arrow", ArrowItem::new, new Item.Settings());
-    public static final Item OBSIDIAN_ARROW = registerItem("obsidian_arrow", ArrowItem::new, new Item.Settings());
-    public static final Item COPPER_ARROW = registerItem("copper_arrow", ArrowItem::new, new Item.Settings());
-    public static final Item BRONZE_ARROW = registerItem("bronze_arrow", ArrowItem::new, new Item.Settings());
-    // public static final Item IRON_ARROW = registerItem("iron_arrow", ArrowItem::new, new Item.Settings());
-    // public static final Item STEEL_ARROW = registerItem("steel_arrow", ArrowItem::new, new Item.Settings());
+    public static final Item STONE_ARROW = registerItem("stone_arrow", ArrowItem::new);
+    public static final Item FLINT_ARROW = registerItem("flint_arrow", ArrowItem::new);
+    public static final Item BASALT_ARROW = registerItem("basalt_arrow", ArrowItem::new);
+    public static final Item OBSIDIAN_ARROW = registerItem("obsidian_arrow", ArrowItem::new);
+    public static final Item COPPER_ARROW = registerItem("copper_arrow", ArrowItem::new);
+    public static final Item BRONZE_ARROW = registerItem("bronze_arrow", ArrowItem::new);
+    // public static final Item IRON_ARROW = registerItem("iron_arrow", ArrowItem::new);
+    // public static final Item STEEL_ARROW = registerItem("steel_arrow", ArrowItem::new);
 
     // Tongs
-    public static final Item WOODEN_TONGS = registerItem("wooden_tongs", TongItem::new, new Item.Settings());
+    public static final Item WOODEN_TONGS = registerItem("wooden_tongs", TongItem::new);
 
-    // Pure raw metal nuggets
-    public static final Item RAW_TIN_NUGGET = registerItem("raw_tin_nugget", TinSourceItem::new, new Item.Settings());
-    public static final Item RAW_COPPER_NUGGET = registerItem("raw_copper_nugget", CopperSourceItem::new, new Item.Settings());
-    public static final Item RAW_IRON_NUGGET = registerItem("raw_iron_nugget", IronSourceItem::new, new Item.Settings());
+    // Metal nuggets
+    public static final Item TIN_NUGGET = registerItem("tin_nugget", Item::new);
+    public static final Item BRONZE_NUGGET = registerItem("bronze_nugget", Item::new);
 
-    private static void addItemsToIngredientsTabItemGroup(FabricItemGroupEntries entries) {
-        entries.add(STONE_HEAD_HOE);
-        entries.add(FLINT_HEAD_HOE);
-        entries.add(BASALT_HEAD_HOE);
-        entries.add(OBSIDIAN_HEAD_HOE);
-        entries.add(COPPER_HEAD_HOE);
-        entries.add(BRONZE_HEAD_HOE);
-        entries.add(IRON_HEAD_HOE);
-        // entries.add(STEEL_HEAD_HOE);
+    // Seeds
+    public static final Item FLAX_SEEDS = registerItem("flax_seeds", setting -> new BlockItem(ModBlocks.FLAX_CROP, setting));
+    public static final Item COTTON_SEEDS = registerItem("cotton_seeds", setting -> new BlockItem(ModBlocks.COTTON_CROP, setting));
 
-        entries.add(STONE_HEAD_AXE);
-        entries.add(FLINT_HEAD_AXE);
-        entries.add(BASALT_HEAD_AXE);
-        entries.add(OBSIDIAN_HEAD_AXE);
-        entries.add(COPPER_HEAD_AXE);
-        entries.add(BRONZE_HEAD_AXE);
-        entries.add(IRON_HEAD_AXE);
-        // entries.add(STEEL_HEAD_AXE);
+    // Crops
+    public static final Item FLAX = registerItem("flax", Item::new);
+    public static final Item COTTON = registerItem("cotton", Item::new);
 
-        entries.add(STONE_HEAD_SHOVEL);
-        entries.add(FLINT_HEAD_SHOVEL);
-        entries.add(BASALT_HEAD_SHOVEL);
-        entries.add(OBSIDIAN_HEAD_SHOVEL);
-        entries.add(COPPER_HEAD_SHOVEL);
-        entries.add(BRONZE_HEAD_SHOVEL);
-        entries.add(IRON_HEAD_SHOVEL);
-        // entries.add(STEEL_HEAD_SHOVEL);
+    // Hammer TODO: create item type and metal variants
+    public static final Item HAMMER = registerItem("hammer", Item::new);
 
-        entries.add(STONE_HEAD_KNIFE);
-        entries.add(FLINT_HEAD_KNIFE);
-        entries.add(BASALT_HEAD_KNIFE);
-        entries.add(OBSIDIAN_HEAD_KNIFE);
-        entries.add(COPPER_HEAD_KNIFE);
-        entries.add(BRONZE_HEAD_KNIFE);
-        entries.add(IRON_HEAD_KNIFE);
-        // entries.add(STEEL_HEAD_KNIFE);
-        
-        entries.add(STONE_HEAD_SPEAR);
-        entries.add(FLINT_HEAD_SPEAR);
-        entries.add(BASALT_HEAD_SPEAR);
-        entries.add(OBSIDIAN_HEAD_SPEAR);
-        entries.add(COPPER_HEAD_SPEAR);
-        entries.add(BRONZE_HEAD_SPEAR);
-        entries.add(IRON_HEAD_SPEAR);
-        // entries.add(STEEL_HEAD_SPEAR);
+    // TODO add shear variants
 
-        entries.add(STONE_HEAD_ARROW);
-        entries.add(FLINT_HEAD_ARROW);
-        entries.add(BASALT_HEAD_ARROW);
-        entries.add(OBSIDIAN_HEAD_ARROW);
-        entries.add(COPPER_HEAD_ARROW);
-        entries.add(BRONZE_HEAD_ARROW);
-        entries.add(IRON_HEAD_ARROW);
-        // entries.add(STEEL_HEAD_ARROW);
+    public static final Item CLOTH = registerItem("cloth", Item::new);
 
-        entries.add(COPPER_HEAD_SWORD);
-        entries.add(BRONZE_HEAD_SWORD);
-        entries.add(IRON_HEAD_SWORD);
-        // entries.add(STEEL_HEAD_SWORD);
+    public static final Item PADDED_CLOTH = registerItem("padded_cloth", Item::new);
+    public static final Item LEATHER_STRIPS = registerItem("leather_strips", Item::new);
 
-        entries.add(COPPER_HEAD_PICKAXE);
-        entries.add(BRONZE_HEAD_PICKAXE);
-        entries.add(IRON_HEAD_PICKAXE);
-        // entries.add(STEEL_HEAD_PICKAXE);
+    public static final Item COPPER_RINGS = registerItem("copper_rings", Item::new);
+    public static final Item BRONZE_RINGS = registerItem("bronze_rings", Item::new);
+    public static final Item IRON_RINGS = registerItem("iron_rings", Item::new);
 
-        entries.add(TIN_INGOT);
-        entries.add(BRONZE_INGOT);
-        // entries.add(STEEL_INGOT);
-    }
+    public static final Item COPPER_BANDS = registerItem("copper_bands", Item::new);
+    public static final Item BRONZE_BANDS = registerItem("bronze_bands", Item::new);
+    public static final Item IRON_BANDS = registerItem("iron_bands", Item::new);
 
-    private static void addItemsToToolsTabItemGroup(FabricItemGroupEntries entries) {
+    // Armours
+    public static final Item GAMBESON = registerItem("gambeson", Item::new);
+    public static final Item LEATHER_JERKIN = registerItem("leather_jerkin", Item::new);
 
-        entries.add(FLINT_HOE);
-        entries.add(FLINT_SHOVEL);
-        entries.add(FLINT_AXE);
+    public static final Item LEATHER_LAMELLAR = registerItem("leather_lamellar", Item::new);
+    public static final Item COPPER_LAMELLAR = registerItem("copper_lamellar", Item::new);
+    public static final Item BRONZE_LAMELLAR = registerItem("bronze_lamellar", Item::new);
+    public static final Item IRON_LAMELLAR = registerItem("iron_lamellar", Item::new);
 
-        entries.add(BASALT_HOE);
-        entries.add(BASALT_SHOVEL);
-        entries.add(BASALT_AXE);
+    public static final Item COPPER_BRIGANDINE = registerItem("copper_brigandine", Item::new);
+    public static final Item BRONZE_BRIGANDINE = registerItem("bronze_brigandine", Item::new);
+    public static final Item IRON_BRIGANDINE = registerItem("iron_brigandine", Item::new);
 
-        entries.add(OBSIDIAN_HOE);
-        entries.add(OBSIDIAN_SHOVEL);
-        entries.add(OBSIDIAN_AXE);
+    public static final Item COPPER_LAMINAR = registerItem("copper_laminar", Item::new);
+    public static final Item BRONZE_LAMINAR = registerItem("bronze_laminar", Item::new);
+    public static final Item IRON_LAMINAR = registerItem("iron_laminar", Item::new);
 
-        entries.add(COPPER_HOE);
-        entries.add(COPPER_SHOVEL);
-        entries.add(COPPER_AXE);
-        entries.add(COPPER_PICKAXE);
+    public static final Item IRON_PLATE_HARNESS = registerItem("iron_plate_harness", Item::new);
 
-        entries.add(BRONZE_HOE);
-        entries.add(BRONZE_SHOVEL);
-        entries.add(BRONZE_AXE);
-        entries.add(BRONZE_PICKAXE);
-        
-        // entries.add(STEEL_HOE);
-        // entries.add(STEEL_SHOVEL);
-        // entries.add(STEEL_AXE);
-        // entries.add(STEEL_PICKAXE);
-    }
-
-    private static void addItemsToCombatTabItemGroup(FabricItemGroupEntries entries) {
-        entries.add(STONE_KNIFE);
-        entries.add(STONE_SPEAR);
-
-        entries.add(FLINT_KNIFE);
-        entries.add(FLINT_SPEAR);
-
-        entries.add(BASALT_KNIFE);
-        entries.add(BASALT_SPEAR);
-
-        entries.add(OBSIDIAN_KNIFE);
-        entries.add(OBSIDIAN_SPEAR);
-
-        entries.add(COPPER_KNIFE);
-        entries.add(COPPER_SPEAR);
-        entries.add(COPPER_SWORD);
-
-        entries.add(BRONZE_KNIFE);
-        entries.add(BRONZE_SPEAR);
-        entries.add(BRONZE_SWORD);
-
-        entries.add(IRON_KNIFE);
-        entries.add(IRON_SPEAR);
-
-        // entries.add(STEEL_KNIFE);
-        // entries.add(STEEL_SPEAR);
-        // entries.add(STEEL_SWORD);
-
-        entries.add(STONE_ARROW);
-        entries.add(FLINT_ARROW);
-        entries.add(BASALT_ARROW);
-        entries.add(OBSIDIAN_ARROW);
-        entries.add(COPPER_ARROW);
-        entries.add(BRONZE_ARROW);
-        // entries.add(IRON_ARROW);
-        // entries.add(STEEL_ARROW);
-    }
+    
 
     private static Item registerItem(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(FirstSteps.MOD_ID, name));
@@ -355,10 +261,6 @@ public class ModItems {
 
     public static void registerModItems() {
         FirstSteps.LOGGER.info("Registering mod items for " + FirstSteps.MOD_ID);
-
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsToIngredientsTabItemGroup);
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(ModItems::addItemsToToolsTabItemGroup);
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(ModItems::addItemsToCombatTabItemGroup);
     }
 }
 

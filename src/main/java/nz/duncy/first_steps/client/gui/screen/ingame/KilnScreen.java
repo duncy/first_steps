@@ -1,4 +1,4 @@
-package nz.duncy.first_steps.screen;
+package nz.duncy.first_steps.client.gui.screen.ingame;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -7,12 +7,12 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.screen.KilnScreenHandler;
 
-public class CrucibleScreen extends HandledScreen<CrucibleScreenHandler> {
-    private static final Identifier TEXTURE = Identifier.of(FirstSteps.MOD_ID, "textures/gui/crucible_gui.png");
-    private static final int backgroundHeight = 168;
+public class KilnScreen extends HandledScreen<KilnScreenHandler> {
+    private static final Identifier TEXTURE = Identifier.of(FirstSteps.MOD_ID, "textures/gui/kiln_gui.png");
 
-    public CrucibleScreen(CrucibleScreenHandler handler, PlayerInventory inventory, Text title) {
+    public KilnScreen(KilnScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 
@@ -20,9 +20,8 @@ public class CrucibleScreen extends HandledScreen<CrucibleScreenHandler> {
     protected void init() {
         super.init();
         // titleY = 1000;
-        this.playerInventoryTitleY += 1;
+        // playerInventoryTitleY = 1000;
         this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
-        this.titleY -= 1;
     }
 
     @Override
@@ -35,7 +34,7 @@ public class CrucibleScreen extends HandledScreen<CrucibleScreenHandler> {
 
         context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight, 256, 256);
 
-        renderSmeltProgress(context, x, y);
+        renderBurnProgress(context, x, y);
         renderTemperatureBar(context, x, y);
     }
 
@@ -46,21 +45,16 @@ public class CrucibleScreen extends HandledScreen<CrucibleScreenHandler> {
         context.drawText(this.textRenderer, temperatureBarTitle, this.backgroundWidth - 8 - this.textRenderer.getWidth(temperatureBarTitle), this.titleY, 4210752, false);
      }
 
-    private void renderSmeltProgress(DrawContext context, int x, int y) {
-        if (handler.isSmelting()) {
-            for (int i = 0; i < 9; i++) {
-                int smeltingProgress = handler.getSmeltingProgress(i);
-                context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, ((i % 3) * 22) + x + 20, y + (34 + ((int) Math.floor(i/3) * 18) - smeltingProgress), 246, 16 - smeltingProgress, 2, smeltingProgress, 256, 256);
-            }
-            
-            
+    private void renderBurnProgress(DrawContext context, int x, int y) {
+        if (handler.isCrafting()) {
+            int burningProgress = handler.getBurningProgress();
+            context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x + 80, y + (65 - burningProgress), 180, 14 - burningProgress, 14, burningProgress, 256, 256);
         }
     }
 
     private void renderTemperatureBar(DrawContext context, int x, int y) {
         int temperatureBarValue = handler.getTemperatureBarValue();
-        temperatureBarValue = 35;
-        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x + 149, y  + (71 - temperatureBarValue), 248, 55 - temperatureBarValue, 4, temperatureBarValue, 256, 256);
+        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, x + 149, y  + (71 - temperatureBarValue), 176, 55 - temperatureBarValue, 4, temperatureBarValue, 256, 256);
     }
 
     @Override

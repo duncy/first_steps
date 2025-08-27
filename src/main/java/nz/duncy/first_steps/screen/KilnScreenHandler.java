@@ -10,6 +10,9 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import nz.duncy.first_steps.screen.slot.KilnFuelSlot;
+import nz.duncy.first_steps.screen.slot.KilnOutputSlot;
+import nz.duncy.first_steps.screen.slot.KilnTopSlot;
 
 public class KilnScreenHandler extends ScreenHandler {
     private final Inventory inventory;
@@ -108,7 +111,7 @@ public class KilnScreenHandler extends ScreenHandler {
         }
     }
 
-    protected boolean isFuel(ItemStack itemStack) {
+    public boolean isFuel(ItemStack itemStack) {
         return MinecraftClient.getInstance().world.getFuelRegistry().isFuel(itemStack);
     }
 }

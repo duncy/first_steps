@@ -1,4 +1,4 @@
-package nz.duncy.first_steps.screen;
+package nz.duncy.first_steps.client.gui.screen;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.ItemStack;
+import nz.duncy.first_steps.client.gui.screen.ingame.KnappingSelectionScreen;
 
 @Environment(EnvType.CLIENT)
 public class ButtonWidget extends ClickableWidget {

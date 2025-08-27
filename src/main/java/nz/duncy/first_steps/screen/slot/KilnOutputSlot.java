@@ -1,4 +1,4 @@
-package nz.duncy.first_steps.screen;
+package nz.duncy.first_steps.screen.slot;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;

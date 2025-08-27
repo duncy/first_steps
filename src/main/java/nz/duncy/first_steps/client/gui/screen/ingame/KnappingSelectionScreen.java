@@ -1,4 +1,4 @@
-package nz.duncy.first_steps.screen;
+package nz.duncy.first_steps.client.gui.screen.ingame;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,11 +24,13 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.context.ContextParameterMap;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.client.gui.screen.ButtonWidget;
 import nz.duncy.first_steps.network.packet.KnappingSelectionPayload;
+import nz.duncy.first_steps.screen.KnappingSelectionScreenHandler;
 
 public class KnappingSelectionScreen extends HandledScreen<KnappingSelectionScreenHandler> {
-   static final Identifier SLOT_TEXTURE = Identifier.ofVanilla("gamemode_switcher/slot");
-   static final Identifier SELECTION_TEXTURE = Identifier.ofVanilla("gamemode_switcher/selection");
+   public static final Identifier SLOT_TEXTURE = Identifier.ofVanilla("gamemode_switcher/slot");
+   public static final Identifier SELECTION_TEXTURE = Identifier.ofVanilla("gamemode_switcher/selection");
    private static final Identifier TEXTURE = Identifier.of(FirstSteps.MOD_ID, "textures/gui/switcher.png");
    private int UI_WIDTH = 0;
    private static final Text SELECT_TEXT;

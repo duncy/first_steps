@@ -9,6 +9,7 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import nz.duncy.first_steps.screen.slot.CrucibleSlot;
 
 public class CrucibleScreenHandler extends ScreenHandler {
     private final Inventory inventory;
