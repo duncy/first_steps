@@ -1,4 +1,4 @@
-package nz.duncy.first_steps.item;
+package nz.duncy.first_steps.item.custom;
 
 import java.util.function.Function;
 
@@ -18,18 +18,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
-import nz.duncy.first_steps.item.custom.TinSourceItem;
-import nz.duncy.first_steps.item.custom.TongItem;
-import nz.duncy.first_steps.item.custom.BasaltSpearItem;
-import nz.duncy.first_steps.item.custom.BronzeSpearItem;
-import nz.duncy.first_steps.item.custom.CopperSourceItem;
-import nz.duncy.first_steps.item.custom.CopperSpearItem;
-import nz.duncy.first_steps.item.custom.FlintSpearItem;
-import nz.duncy.first_steps.item.custom.IronSourceItem;
-import nz.duncy.first_steps.item.custom.IronSpearItem;
-import nz.duncy.first_steps.item.custom.KnifeItem;
-import nz.duncy.first_steps.item.custom.ObsidianSpearItem;
-import nz.duncy.first_steps.item.custom.StoneSpearItem;
 
 public class ModItems {
     // Raw metals

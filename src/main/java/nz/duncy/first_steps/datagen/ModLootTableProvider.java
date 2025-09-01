@@ -34,7 +34,7 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.custom.ClayBlock;
 import nz.duncy.first_steps.block.custom.UnfiredDecoratedPotBlock;
-import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.item.custom.ModItems;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public ModLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {

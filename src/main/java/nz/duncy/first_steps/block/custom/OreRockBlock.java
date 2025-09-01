@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.item.custom.ModItems;
 
 public class OreRockBlock extends Block {
     private VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 1, 12);

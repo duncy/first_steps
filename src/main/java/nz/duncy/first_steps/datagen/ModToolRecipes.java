@@ -9,7 +9,7 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
-import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.item.custom.ModItems;
 
 public class ModToolRecipes extends RecipeGenerator {
     private final RegistryEntryLookup<Item> itemLookup;

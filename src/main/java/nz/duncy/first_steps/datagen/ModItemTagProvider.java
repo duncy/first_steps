@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
-import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.item.custom.ModItems;
 import nz.duncy.first_steps.util.ModTags;
 
 public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {

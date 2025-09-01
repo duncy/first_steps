@@ -6,7 +6,7 @@ import net.minecraft.block.CropBlock;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
-import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.item.custom.ModItems;
 
 public class CottonCropBlock extends CropBlock {
     public static final int MAX_AGE = 6;

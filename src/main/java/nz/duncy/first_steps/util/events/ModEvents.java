@@ -24,7 +24,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.custom.RockBlock;
-import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.item.custom.ModItems;
 
 public class ModEvents {
 

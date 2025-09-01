@@ -1,4 +1,4 @@
-package nz.duncy.first_steps.item;
+package nz.duncy.first_steps.item.custom;
 
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.registry.tag.BlockTags;

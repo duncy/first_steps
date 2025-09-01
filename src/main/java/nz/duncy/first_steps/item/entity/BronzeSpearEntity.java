@@ -5,7 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
-import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.item.custom.ModItems;
 
 public class BronzeSpearEntity extends SpearEntity {
     private static final ItemStack DEFAULT_STACK = new ItemStack(ModItems.BRONZE_SPEAR);

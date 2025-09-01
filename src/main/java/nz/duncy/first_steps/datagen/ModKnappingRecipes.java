@@ -7,7 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import nz.duncy.first_steps.block.ModBlocks;
-import nz.duncy.first_steps.item.ModItems;
+import nz.duncy.first_steps.item.custom.ModItems;
 
 public class ModKnappingRecipes extends RecipeGenerator {
 
