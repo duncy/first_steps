@@ -39,11 +39,12 @@ public class ModTags {
 
         public static final TagKey<Item> ORES = createTag("ores");
 
-        public static final TagKey<Item> FLINT_TOOL_MATERIALS = createTag("flint_tool_materials");
-        public static final TagKey<Item> BASALT_TOOL_MATERIALS = createTag("basalt_tool_materials");
-        public static final TagKey<Item> OBSIDIAN_TOOL_MATERIALS = createTag("obsidian_tool_materials");
-        public static final TagKey<Item> COPPER_TOOL_MATERIALS = createTag("copper_tool_materials");
-        public static final TagKey<Item> BRONZE_TOOL_MATERIALS = createTag("bronze_tool_materials");
+        public static final TagKey<Item> PADDED_CLOTH_REPAIR = createTag("padded_cloth_repair");
+        public static final TagKey<Item> FLINT_REPAIR = createTag("flint_repair");
+        public static final TagKey<Item> BASALT_REPAIR = createTag("basalt_repair");
+        public static final TagKey<Item> OBSIDIAN_REPAIR = createTag("obsidian_repair");
+        public static final TagKey<Item> COPPER_REPAIR = createTag("copper_repair");
+        public static final TagKey<Item> BRONZE_REPAIR = createTag("bronze_repair");
 
         public static final TagKey<Item> TINDER = createTag("tinder");
 

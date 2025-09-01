@@ -2,6 +2,7 @@ package nz.duncy.first_steps.item.custom;
 
 import java.util.function.Function;
 
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
@@ -11,6 +12,7 @@ import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -204,7 +206,8 @@ public class ModItems {
     public static final Item IRON_BANDS = registerItem("iron_bands", Item::new);
 
     // Armours
-    public static final Item GAMBESON = registerItem("gambeson", Item::new);
+    public static final Item GAMBESON = registerItem("gambeson", 
+        setting -> new ArmorItem(ModArmorMaterials.PADDED_CLOTH_ARMOR_MATERIAL, EquipmentType.CHESTPLATE, setting.maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(15))));
     public static final Item LEATHER_JERKIN = registerItem("leather_jerkin", Item::new);
 
     public static final Item LEATHER_LAMELLAR = registerItem("leather_lamellar", Item::new);

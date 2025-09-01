@@ -29,6 +29,7 @@ import nz.duncy.first_steps.client.render.item.model.special.ObsidianSpearModelR
 import nz.duncy.first_steps.client.render.item.model.special.PottersWheelModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.StoneSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.UnfiredDecoratedPotModelRenderer;
+import nz.duncy.first_steps.item.custom.ModArmorMaterials;
 import nz.duncy.first_steps.item.custom.ModItems;
 import nz.duncy.first_steps.state.ModProperties;
 
@@ -281,6 +282,8 @@ public class ModModelProvider extends FabricModelProvider {
 
         // // Tongs
         itemModelGenerator.register(ModItems.WOODEN_TONGS, Models.GENERATED);
+
+        itemModelGenerator.registerArmor(ModItems.GAMBESON, ModArmorMaterials.PADDED_CLOTH_KEY, "chestplate", false);
     }
 
     private final void registerSpear(Item item, ItemModelGenerator itemModelGenerator, SpecialModelRenderer.Unbaked unbaked) {
