@@ -11,8 +11,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.RecipePropertySet;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SmithingRecipe;
 import net.minecraft.recipe.input.SmithingRecipeInput;
@@ -23,13 +21,15 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
-import nz.duncy.first_steps.screen.slot.MannequinSlotsManager;
+import nz.duncy.first_steps.item.custom.MannequinItem;
+import nz.duncy.first_steps.screen.slot.MannequinSlot;
 
 public class MannequinScreenHandler extends ScreenHandler {
     protected final ScreenHandlerContext context;
 	protected final PlayerEntity player;
-	protected final Inventory input;
+	private final Inventory input;
     protected final CraftingResultInventory output = new CraftingResultInventory() {
 		@Override
 		public void markDirty() {
@@ -37,7 +37,7 @@ public class MannequinScreenHandler extends ScreenHandler {
 		}
 	};
     private final World world;
-	private final int slotCount;
+	private static final int SLOT_COUNT = 7;
 
     public MannequinScreenHandler(int syncId, PlayerInventory playerInventory) {
 		this(ModScreenHandlers.MANNEQUIN_SCREEN_HANDLER, syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -48,28 +48,23 @@ public class MannequinScreenHandler extends ScreenHandler {
         this.context = context;
 		this.player = playerInventory.player;
         this.world = this.player.getWorld();
-        MannequinSlotsManager mannequinSlotsManager = createMannequinSlotsManager(this.world.getRecipeManager());
-		this.input = this.createInputInventory(mannequinSlotsManager.getInputSlotCount());
-		this.slotCount = mannequinSlotsManager.getInputSlotCount();
-		this.addInputSlots(mannequinSlotsManager);
+		this.input = this.createInputInventory(SLOT_COUNT);
+        this.createSlots();
 		this.addPlayerSlots(playerInventory, 8, 84);
     }
 
-    private static MannequinSlotsManager createMannequinSlotsManager(RecipeManager recipeManager) {
-		RecipePropertySet recipePropertySet = recipeManager.getPropertySet(RecipePropertySet.SMITHING_BASE);
-		RecipePropertySet recipePropertySet2 = recipeManager.getPropertySet(RecipePropertySet.SMITHING_TEMPLATE);
-		RecipePropertySet recipePropertySet3 = recipeManager.getPropertySet(RecipePropertySet.SMITHING_ADDITION);
-		return MannequinSlotsManager.builder()
-			.input(0, 62, 18, recipePropertySet2::canUse)
-			.input(1, 80, 18, recipePropertySet::canUse)
-			.input(2, 98, 18, recipePropertySet3::canUse)
-			.input(3, 62,36, recipePropertySet2::canUse)
-			.input(4, 80, 36, recipePropertySet::canUse)
-			.input(5, 98, 36, recipePropertySet3::canUse)
-			.input(6, 62, 54, recipePropertySet2::canUse)
-			.input(7, 80, 54, recipePropertySet::canUse)
-			.input(8, 98, 54, recipePropertySet::canUse)
-			.build();
+	private void createSlots() {
+		for (int i = 0; i < SLOT_COUNT - 1; i++) {
+			this.addSlot(new MannequinSlot(this.input, i, (62 + (18 * (i % 3))), (18 + (18 * (int) Math.ceil(i/3))), null));
+		}
+
+		this.addSlot(new MannequinSlot(this.input, SLOT_COUNT - 1, (62 + (18 * (SLOT_COUNT % 3))), (18 + (18 * (int) Math.ceil(SLOT_COUNT/3))), null));
+
+		enableSlot(MannequinSlot.BASE_LAYER_SLOT_INDEX);		
+	}    
+
+	private void enableSlot(int index) {
+		((MannequinSlot) this.slots.get(index)).setEnabled();
 	}
 
     protected boolean canTakeOutput(PlayerEntity player, boolean present) {
@@ -88,17 +83,6 @@ public class MannequinScreenHandler extends ScreenHandler {
 	protected boolean canUse(BlockState state) {
         return state.isOf(ModBlocks.ARMOURERS_MANNEQUIN);
     }
-
-    private void addInputSlots(MannequinSlotsManager mannequinSlotsManager) {
-		for (final MannequinSlotsManager.MannequinSlot mannequinSlot : mannequinSlotsManager.getInputSlots()) {
-			this.addSlot(new Slot(this.input, mannequinSlot.slotId(), mannequinSlot.x(), mannequinSlot.y()) {
-				@Override
-				public boolean canInsert(ItemStack stack) {
-					return mannequinSlot.mayPlace().test(stack);
-				}
-			});
-		}
-	}
 
     private List<ItemStack> getInputStacks() {
 		return List.of(this.input.getStack(0), this.input.getStack(1), this.input.getStack(2));
@@ -152,7 +136,7 @@ public class MannequinScreenHandler extends ScreenHandler {
 			this.updateResult();
 		}
         if (this.world instanceof ServerWorld) {
-			boolean bl = this.getSlot(0).hasStack() && this.getSlot(1).hasStack() && this.getSlot(2).hasStack() && !this.getSlot(this.getInputSlotCount()).hasStack();
+			boolean bl = this.getSlot(0).hasStack() && this.getSlot(1).hasStack() && this.getSlot(2).hasStack() && !this.getSlot(SLOT_COUNT).hasStack();
 		}
 	}
 
@@ -168,49 +152,50 @@ public class MannequinScreenHandler extends ScreenHandler {
 	}
 
 	@Override
-	public ItemStack quickMove(PlayerEntity player, int slot) {
+	public ItemStack quickMove(PlayerEntity player, int slotIndex) {
+		FirstSteps.LOGGER.info(String.valueOf(slotIndex) + " " + this.slots.get(slotIndex).toString());
 		ItemStack itemStack = ItemStack.EMPTY;
-		Slot slot2 = this.slots.get(slot);
-		if (slot2 != null && slot2.hasStack()) {
-			ItemStack itemStack2 = slot2.getStack();
-			itemStack = itemStack2.copy();
+		Slot slot = this.slots.get(slotIndex);
+		if (slot != null && slot.hasStack()) {
+			ItemStack slotItemStack = slot.getStack();
+			itemStack = slotItemStack.copy();
 			int i = this.getPlayerInventoryStartIndex();
 			int j = this.getPlayerHotbarEndIndex();
-			if (slot == this.getInputSlotCount()) {
-				if (!this.insertItem(itemStack2, i, j, true)) {
+			if (slotIndex == getMannequinEndIndex()) {
+				if (!this.insertItem(slotItemStack, i, j, true)) {
 					return ItemStack.EMPTY;
 				}
 
-				slot2.onQuickTransfer(itemStack2, itemStack);
-			} else if (slot >= 0 && slot < this.getInputSlotCount()) {
-				if (!this.insertItem(itemStack2, i, j, false)) {
+				slot.onQuickTransfer(slotItemStack, itemStack);
+			} else if (slotIndex >= 0 && slotIndex < getMannequinEndIndex()) {
+				if (!this.insertItem(slotItemStack, i, j, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (this.isValidIngredient(itemStack2) && slot >= this.getPlayerInventoryStartIndex() && slot < this.getPlayerHotbarEndIndex()) {
-				if (!this.insertItem(itemStack2, 0, this.getInputSlotCount(), false)) {
+			} else if (this.isValidIngredient(slotItemStack) && slotIndex >= this.getPlayerInventoryStartIndex() && slotIndex < this.getPlayerHotbarEndIndex()) {
+				if (!this.insertItem(slotItemStack, 0, getMannequinEndIndex(), false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (slot >= this.getPlayerInventoryStartIndex() && slot < this.getPlayerInventoryEndIndex()) {
-				if (!this.insertItem(itemStack2, this.getPlayerHotbarStartIndex(), this.getPlayerHotbarEndIndex(), false)) {
+			} else if (slotIndex >= this.getPlayerInventoryStartIndex() && slotIndex < this.getPlayerInventoryEndIndex()) {
+				if (!this.insertItem(slotItemStack, this.getPlayerHotbarStartIndex(), this.getPlayerHotbarEndIndex(), false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (slot >= this.getPlayerHotbarStartIndex()
-				&& slot < this.getPlayerHotbarEndIndex()
-				&& !this.insertItem(itemStack2, this.getPlayerInventoryStartIndex(), this.getPlayerInventoryEndIndex(), false)) {
+			} else if (slotIndex >= this.getPlayerHotbarStartIndex()
+				&& slotIndex < this.getPlayerHotbarEndIndex()
+				&& !this.insertItem(slotItemStack, this.getPlayerInventoryStartIndex(), this.getPlayerInventoryEndIndex(), false)) {
 				return ItemStack.EMPTY;
 			}
 
-			if (itemStack2.isEmpty()) {
-				slot2.setStack(ItemStack.EMPTY);
+			if (slotItemStack.isEmpty()) {
+				slot.setStack(ItemStack.EMPTY);
 			} else {
-				slot2.markDirty();
+				slot.markDirty();
 			}
 
-			if (itemStack2.getCount() == itemStack.getCount()) {
+			if (slotItemStack.getCount() == itemStack.getCount()) {
 				return ItemStack.EMPTY;
 			}
 
-			slot2.onTakeItem(player, itemStack2);
+			slot.onTakeItem(player, slotItemStack);
 		}
 
 		return itemStack;
@@ -220,12 +205,12 @@ public class MannequinScreenHandler extends ScreenHandler {
 		return true;
 	}
 
-	private int getInputSlotCount() {
-		return this.slotCount;
+	private int getMannequinEndIndex() {
+		return SLOT_COUNT - 1;
 	}
 
 	private int getPlayerInventoryStartIndex() {
-		return this.getInputSlotCount() + 1;
+		return SLOT_COUNT;
 	}
 
 	private int getPlayerInventoryEndIndex() {

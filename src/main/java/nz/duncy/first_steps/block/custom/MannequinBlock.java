@@ -21,7 +21,7 @@ import nz.duncy.first_steps.stat.ModStats;
 
 public class MannequinBlock extends CraftingTableBlock {
     	public static final MapCodec<MannequinBlock> CODEC = createCodec(MannequinBlock::new);
-	private static final Text SCREEN_TITLE = Text.translatable(FirstSteps.MOD_ID + ".container.mannequin");
+	private static final Text SCREEN_TITLE = Text.translatable("container." + FirstSteps.MOD_ID + ".mannequin");
 
 	@Override
 	public MapCodec<MannequinBlock> getCodec() {
