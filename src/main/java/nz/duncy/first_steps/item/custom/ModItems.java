@@ -225,6 +225,14 @@ public class ModItems {
 
     public static final Item IRON_PLATE_HARNESS = registerItem("iron_plate_harness", Item::new);
 
+    public static final Item COPPER_HAUBERK = registerItem("copper_hauberk", Item::new);
+    public static final Item BRONZE_HAUBERK = registerItem("bronze_hauberk", Item::new);
+    public static final Item IRON_HAUBERK = registerItem("iron_hauberk", Item::new);
+    
+    public static final Item IRON_PAULDRON = registerItem("iron_pauldron", Item::new);
+    public static final Item IRON_GAUNTLET = registerItem("iron_gauntlet", Item::new);
+
+
     
 
     private static Item registerItem(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {

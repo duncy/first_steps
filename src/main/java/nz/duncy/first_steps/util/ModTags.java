@@ -48,6 +48,16 @@ public class ModTags {
 
         public static final TagKey<Item> TINDER = createTag("tinder");
 
+        public static final TagKey<Item> BASE_LAYER_ARMOR = createTag("base_layer_armor");
+        public static final TagKey<Item> MID_LAYER_ARMOR = createTag("mid_layer_armor");
+        public static final TagKey<Item> TOP_LAYER_ARMOR = createTag("top_layer_armor");
+        public static final TagKey<Item> SHOULDER_ARMOR = createTag("shoulder_armor");
+        public static final TagKey<Item> HAND_ARMOR = createTag("hand_armor");
+        public static final TagKey<Item> TABARD = createTag("tabard");
+
+        public static final TagKey<Item> HAND_SUPPORTING_ARMOR = createTag("hand_supporting_armor");
+        public static final TagKey<Item> SHOULDER_SUPPORTING_ARMOR = createTag("shoulder_supporting_armor");
+
         private static TagKey<Item> createTag(String name) {
            return TagKey.of(RegistryKeys.ITEM, Identifier.of(FirstSteps.MOD_ID, name));
         }

@@ -3,6 +3,7 @@ package nz.duncy.first_steps.item.custom;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
@@ -261,6 +262,13 @@ public class ModItemGroups {
                     entries.add(ModItems.TIN_NUGGET);
                     entries.add(ModItems.BRONZE_NUGGET);
 
+                    entries.add(ModItems.COPPER_HAUBERK);
+                    entries.add(ModItems.BRONZE_HAUBERK);
+                    entries.add(ModItems.IRON_HAUBERK);
+
+                    entries.add(ModItems.IRON_PAULDRON);
+                    entries.add(ModItems.IRON_GAUNTLET);
+
     }).build());
 
         private static void addItemsToIngredientsTabItemGroup(FabricItemGroupEntries entries) {
@@ -445,6 +453,13 @@ public class ModItemGroups {
         entries.add(ModItems.IRON_LAMINAR);
 
         entries.add(ModItems.IRON_PLATE_HARNESS);
+
+        entries.add(ModItems.COPPER_HAUBERK);
+        entries.add(ModItems.BRONZE_HAUBERK);
+        entries.add(ModItems.IRON_HAUBERK);
+
+        entries.add(ModItems.IRON_PAULDRON);
+        entries.add(ModItems.IRON_GAUNTLET);
         
     }
 

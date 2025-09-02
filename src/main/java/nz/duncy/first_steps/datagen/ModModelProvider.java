@@ -1,5 +1,8 @@
 package nz.duncy.first_steps.datagen;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Blocks;
@@ -10,13 +13,20 @@ import net.minecraft.client.data.ItemModelGenerator;
 import net.minecraft.client.data.ItemModels;
 import net.minecraft.client.data.ModelIds;
 import net.minecraft.client.data.Models;
+import net.minecraft.client.data.TextureMap;
 import net.minecraft.client.data.TexturedModel;
 import net.minecraft.client.data.VariantSetting;
 import net.minecraft.client.data.VariantSettings;
 import net.minecraft.client.data.VariantsBlockStateSupplier;
 import net.minecraft.client.render.item.model.ItemModel;
+import net.minecraft.client.render.item.model.SelectItemModel;
 import net.minecraft.client.render.item.model.special.SpecialModelRenderer;
+import net.minecraft.client.render.item.property.select.TrimMaterialProperty;
+import net.minecraft.client.render.item.tint.DyeTintSource;
 import net.minecraft.item.Item;
+import net.minecraft.item.equipment.EquipmentAsset;
+import net.minecraft.item.equipment.trim.ArmorTrimMaterial;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
@@ -283,7 +293,7 @@ public class ModModelProvider extends FabricModelProvider {
         // // Tongs
         itemModelGenerator.register(ModItems.WOODEN_TONGS, Models.GENERATED);
 
-        itemModelGenerator.registerArmor(ModItems.GAMBESON, ModArmorMaterials.PADDED_CLOTH_KEY, "chestplate", false);
+        registerArmorWithoutTrims(itemModelGenerator, ModItems.GAMBESON, ModArmorMaterials.PADDED_CLOTH_KEY, "chestplate", true);
     }
 
     private final void registerSpear(Item item, ItemModelGenerator itemModelGenerator, SpecialModelRenderer.Unbaked unbaked) {
@@ -292,5 +302,22 @@ public class ModModelProvider extends FabricModelProvider {
 		ItemModel.Unbaked unbakedThrowing = ItemModels.special(Identifier.of(FirstSteps.MOD_ID, "item/spear_throwing"), unbaked);
 		ItemModel.Unbaked unbakedConditions = ItemModels.condition(ItemModels.usingItemProperty(), unbakedThrowing, unbakedHand);
 		itemModelGenerator.output.accept(item, ItemModelGenerator.createModelWithInHandVariant(unbakedBase, unbakedConditions));
+	}
+
+    public final void registerArmorWithoutTrims(ItemModelGenerator itemModelGenerator, Item item, RegistryKey<EquipmentAsset> equipmentKey, String type, boolean dyeable) {
+		Identifier identifier = ModelIds.getItemModelId(item);
+		Identifier identifier2 = TextureMap.getId(item);
+		Identifier identifier3 = TextureMap.getSubId(item, "_overlay");
+
+		ItemModel.Unbaked unbaked;
+		if (dyeable) {
+			Models.GENERATED_TWO_LAYERS.upload(identifier, TextureMap.layered(identifier2, identifier3), itemModelGenerator.modelCollector);
+			unbaked = ItemModels.tinted(identifier, new DyeTintSource(-6265536));
+		} else {
+			Models.GENERATED.upload(identifier, TextureMap.layer0(identifier2), itemModelGenerator.modelCollector);
+			unbaked = ItemModels.basic(identifier);
+		}
+
+		itemModelGenerator.output.accept(item, unbaked);
 	}
 }

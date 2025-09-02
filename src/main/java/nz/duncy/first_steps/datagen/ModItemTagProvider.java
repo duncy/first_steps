@@ -40,8 +40,40 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
             .add(Items.FERN)
             .add(Items.WHEAT)
             .add(Items.PAPER);
-    }
 
+        getOrCreateTagBuilder(ModTags.Items.BASE_LAYER_ARMOR)
+            .add(ModItems.GAMBESON)
+            .add(ModItems.LEATHER_JERKIN);
 
-    
+        getOrCreateTagBuilder(ModTags.Items.TOP_LAYER_ARMOR)
+            .add(ModItems.LEATHER_LAMELLAR)
+            .add(ModItems.COPPER_LAMELLAR)
+            .add(ModItems.BRONZE_LAMELLAR)
+            .add(ModItems.IRON_LAMELLAR)
+            .add(ModItems.COPPER_BRIGANDINE)
+            .add(ModItems.BRONZE_BRIGANDINE)
+            .add(ModItems.IRON_BRIGANDINE)
+            .add(ModItems.COPPER_LAMINAR)
+            .add(ModItems.BRONZE_LAMINAR)
+            .add(ModItems.IRON_LAMINAR)
+            .add(ModItems.IRON_PLATE_HARNESS);
+
+        getOrCreateTagBuilder(ModTags.Items.SHOULDER_SUPPORTING_ARMOR)
+            .add(ModItems.COPPER_LAMINAR)
+            .add(ModItems.BRONZE_LAMINAR)
+            .add(ModItems.IRON_LAMINAR)
+            .add(ModItems.IRON_PLATE_HARNESS);
+
+        getOrCreateTagBuilder(ModTags.Items.HAND_SUPPORTING_ARMOR)
+            .add(ModItems.COPPER_BRIGANDINE)
+            .add(ModItems.BRONZE_BRIGANDINE)
+            .add(ModItems.IRON_BRIGANDINE)
+            .add(ModItems.IRON_PLATE_HARNESS);
+
+        getOrCreateTagBuilder(ModTags.Items.SHOULDER_ARMOR)
+            .add(ModItems.IRON_PAULDRON);
+
+        getOrCreateTagBuilder(ModTags.Items.HAND_ARMOR)
+            .add(ModItems.IRON_GAUNTLET);
+    }    
 }

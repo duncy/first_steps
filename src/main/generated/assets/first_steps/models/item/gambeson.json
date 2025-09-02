@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "first_steps:item/gambeson"
+    "layer0": "first_steps:item/gambeson",
+    "layer1": "first_steps:item/gambeson_overlay"
   }
 }

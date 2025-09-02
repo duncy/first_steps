@@ -2,12 +2,11 @@ package nz.duncy.first_steps.screen.slot;
 
 import net.minecraft.component.EnchantmentEffectComponentTypes;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -25,10 +24,12 @@ public class MannequinSlot extends Slot {
 	public final static int MID_LAYER_SLOT_INDEX = 6;
 
 	private boolean enabled = false;
+	private final TagKey<Item> expectedTagKey;
 
-	public MannequinSlot(Inventory inventory, int index, int x, int y, @Nullable Identifier backgroundSprite) {
+	public MannequinSlot(Inventory inventory, int index, int x, int y, TagKey<Item> expectedTagKey, @Nullable Identifier backgroundSprite) {
 		super(inventory, index, x, y);
 		this.backgroundSprite = backgroundSprite;
+		this.expectedTagKey = expectedTagKey;
 	}
 
 	@Override
@@ -48,7 +49,7 @@ public class MannequinSlot extends Slot {
 
 	@Override
 	public boolean canInsert(ItemStack stack) {
-		return isEnabled() && stack.isIn(ItemTags.CHEST_ARMOR);
+		return isEnabled() && stack.isIn(this.expectedTagKey);
 	}
 
 	@Nullable
