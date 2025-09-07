@@ -4,6 +4,7 @@ import net.minecraft.predicate.StatePredicate;
 import net.minecraft.predicate.StatePredicate.Builder;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.state.property.IntProperty;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -11,6 +12,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CropBlock;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
@@ -33,6 +35,8 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.custom.ClayBlock;
+import nz.duncy.first_steps.block.custom.CottonCropBlock;
+import nz.duncy.first_steps.block.custom.FlaxCropBlock;
 import nz.duncy.first_steps.block.custom.UnfiredDecoratedPotBlock;
 import nz.duncy.first_steps.item.custom.ModItems;
 
@@ -98,6 +102,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 							)
 					)
 		);
+
+        buildCropDrops(ModBlocks.FLAX_CROP, ModItems.FLAX, ModItems.FLAX_SEEDS, FlaxCropBlock.AGE, FlaxCropBlock.MAX_AGE);
+        buildCropDrops(ModBlocks.COTTON_CROP, ModItems.COTTON, ModItems.COTTON_SEEDS, CottonCropBlock.AGE, CottonCropBlock.MAX_AGE);
     }
 
     private LootTable.Builder rawOreDrops(Block block, Item item) {
@@ -155,6 +162,12 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         return LootTable.builder().pool(sherdPool).pool(clayPool).pool(potPool);
         
+    }
+
+    private void buildCropDrops(Block cropBlock, Item product, Item seeds, IntProperty age, int maxAge) {
+        BlockStatePropertyLootCondition.Builder builder = BlockStatePropertyLootCondition.builder(cropBlock)
+                .properties(StatePredicate.Builder.create().exactMatch(age, maxAge));
+        this.addDrop(cropBlock, this.cropDrops(cropBlock, product, seeds, builder));
     }
 
 }
