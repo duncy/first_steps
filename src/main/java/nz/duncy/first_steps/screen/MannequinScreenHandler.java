@@ -121,6 +121,8 @@ public class MannequinScreenHandler extends ScreenHandler {
 		if (inventory == this.input) {
 			// Check if base armor present, if so, enable mid and top layer slots if top layer not already present
 			if (inventory.getStack(MannequinSlot.BASE_LAYER_SLOT_INDEX).isIn(ModTags.Items.BASE_LAYER_ARMOR)) {
+				enableSlot(MannequinSlot.MID_LAYER_SLOT_INDEX);
+				enableSlot(MannequinSlot.TOP_LAYER_SLOT_INDEX);
 				if (inventory.getStack(MannequinSlot.TOP_LAYER_SLOT_INDEX).isIn(ModTags.Items.TOP_LAYER_ARMOR)) {
 					if (inventory.getStack(MannequinSlot.TOP_LAYER_SLOT_INDEX).isIn(ModTags.Items.SHOULDER_SUPPORTING_ARMOR)) {
 						enableSlot(MannequinSlot.LEFT_SHOULDER_SLOT_INDEX);
@@ -137,8 +139,6 @@ public class MannequinScreenHandler extends ScreenHandler {
 						disableSlot(MannequinSlot.RIGHT_HAND_SLOT_INDEX);
 					}
 				} else {
-					enableSlot(MannequinSlot.MID_LAYER_SLOT_INDEX);
-					enableSlot(MannequinSlot.TOP_LAYER_SLOT_INDEX);
 					disableSlot(MannequinSlot.LEFT_SHOULDER_SLOT_INDEX);
 					disableSlot(MannequinSlot.RIGHT_SHOULDER_SLOT_INDEX);
 					disableSlot(MannequinSlot.LEFT_HAND_SLOT_INDEX);
@@ -147,6 +147,10 @@ public class MannequinScreenHandler extends ScreenHandler {
 			} else {
 				disableSlot(MannequinSlot.MID_LAYER_SLOT_INDEX);
 				disableSlot(MannequinSlot.TOP_LAYER_SLOT_INDEX);
+				disableSlot(MannequinSlot.LEFT_SHOULDER_SLOT_INDEX);
+				disableSlot(MannequinSlot.RIGHT_SHOULDER_SLOT_INDEX);
+				disableSlot(MannequinSlot.LEFT_HAND_SLOT_INDEX);
+				disableSlot(MannequinSlot.RIGHT_HAND_SLOT_INDEX);
 			}
 		}
 	}

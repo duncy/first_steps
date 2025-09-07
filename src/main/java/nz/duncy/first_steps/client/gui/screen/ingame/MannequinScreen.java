@@ -105,37 +105,38 @@ public class MannequinScreen extends HandledScreen<MannequinScreenHandler> imple
 	private void renderSlotTooltip(DrawContext context, int mouseX, int mouseY) {
 		Optional<Text> optional = Optional.empty();
 		if (this.focusedSlot != null) {
-			ItemStack itemStack = this.handler.getSlot(MannequinSlot.BASE_LAYER_SLOT_INDEX).getStack();
+			// ItemStack itemStack = this.handler.getSlot(MannequinSlot.BASE_LAYER_SLOT_INDEX).getStack();
 			ItemStack itemStack2 = this.focusedSlot.getStack();
-			if (itemStack.isEmpty()) {
+			if (itemStack2.isEmpty()) {
 				switch (this.focusedSlot.id) {
 					case MannequinSlot.LEFT_SHOULDER_SLOT_INDEX -> {
 						optional = Optional.of(MISSING_SHOULDER_TOOLTIP);
+						break;
 					}
 					case MannequinSlot.TOP_LAYER_SLOT_INDEX -> {
 						optional = Optional.of(MISSING_TOP_LAYER_TOOLTIP);
+						break;
 					}
 					case MannequinSlot.RIGHT_SHOULDER_SLOT_INDEX -> {
 						optional = Optional.of(MISSING_SHOULDER_TOOLTIP);
+						break;
 					}
 					case MannequinSlot.LEFT_HAND_SLOT_INDEX -> {
 						optional = Optional.of(MISSING_HAND_TOOLTIP);
+						break;
 					}
 					case MannequinSlot.BASE_LAYER_SLOT_INDEX -> {
 						optional = Optional.of(MISSING_ARMOR_TOOLTIP);
+						break;
 					}
 					case MannequinSlot.RIGHT_HAND_SLOT_INDEX -> {
 						optional = Optional.of(MISSING_HAND_TOOLTIP);
+						break;
 					}
 					case MannequinSlot.MID_LAYER_SLOT_INDEX -> {
 						optional = Optional.of(MISSING_MID_LAYER_TOOLTIP);
+						break;
 					}
-				}
-			} else if (itemStack.getItem() instanceof nz.duncy.first_steps.item.custom.MannequinItem mannequinItem && itemStack2.isEmpty()) {
-				if (this.focusedSlot.id == MannequinSlot.TOP_LAYER_SLOT_INDEX) {
-					optional = Optional.of(mannequinItem.getBaseSlotDescription());
-				} else if (this.focusedSlot.id == MannequinSlot.RIGHT_SHOULDER_SLOT_INDEX) {
-					optional = Optional.of(mannequinItem.getAdditionsSlotDescription());
 				}
 			}
 		}

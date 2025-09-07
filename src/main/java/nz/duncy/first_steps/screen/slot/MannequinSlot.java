@@ -9,6 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.Identifier;
+import nz.duncy.first_steps.FirstSteps;
+
+import java.util.Optional;
+
 import org.jetbrains.annotations.Nullable;
 
 public class MannequinSlot extends Slot {
@@ -40,11 +44,25 @@ public class MannequinSlot extends Slot {
 	@Override
 	public boolean canTakeItems(PlayerEntity playerEntity) {
 		ItemStack itemStack = this.getStack();
-		return !itemStack.isEmpty()
-				&& !playerEntity.isCreative()
-				&& EnchantmentHelper.hasAnyEnchantmentsWith(itemStack, EnchantmentEffectComponentTypes.PREVENT_ARMOR_CHANGE)
-			? false
-			: super.canTakeItems(playerEntity);
+		boolean childSlotsFree = false;
+
+		if (!itemStack.isEmpty()) {
+			switch (this.getIndex()) {
+				case MannequinSlot.TOP_LAYER_SLOT_INDEX -> {
+					childSlotsFree = this.inventory.getStack(LEFT_SHOULDER_SLOT_INDEX).isEmpty()
+									&& this.inventory.getStack(RIGHT_SHOULDER_SLOT_INDEX).isEmpty()
+									&& this.inventory.getStack(LEFT_HAND_SLOT_INDEX).isEmpty()
+									&& this.inventory.getStack(RIGHT_HAND_SLOT_INDEX).isEmpty();
+					break;
+				}
+				default -> { 
+					childSlotsFree = true;
+					break;
+				}
+			}
+		}
+
+		return childSlotsFree;
 	}
 
 	@Override
