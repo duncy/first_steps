@@ -27,9 +27,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.equipment.EquipmentAsset;
 import net.minecraft.item.equipment.trim.ArmorTrimMaterial;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
+import nz.duncy.first_steps.block.custom.FlaxCropBlock;
 import nz.duncy.first_steps.client.render.item.model.special.BasaltSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.BronzeSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.CopperSpearModelRenderer;
@@ -88,6 +90,9 @@ public class ModModelProvider extends FabricModelProvider {
         // POTTERS WHEEL
         blockStateModelGenerator.registerBuiltinWithParticle(ModBlocks.POTTERS_WHEEL, Blocks.TERRACOTTA);
         blockStateModelGenerator.registerSpecialItemModel(ModBlocks.POTTERS_WHEEL, new PottersWheelModelRenderer.Unbaked());
+
+        // CROPS
+        blockStateModelGenerator.registerCrop(ModBlocks.FLAX_CROP, FlaxCropBlock.AGE, 0, 1, 2, 3, 4, 5, 6);
     }
 
     private void registerClays(BlockStateModelGenerator blockStateModelGenerator) {

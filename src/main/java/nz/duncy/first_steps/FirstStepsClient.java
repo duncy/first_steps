@@ -1,11 +1,14 @@
 package nz.duncy.first_steps;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.item.model.special.SpecialModelTypes;
 import net.minecraft.util.Identifier;
+import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
 import nz.duncy.first_steps.client.gui.screen.ingame.CrucibleScreen;
 import nz.duncy.first_steps.client.gui.screen.ingame.KilnScreen;
@@ -34,6 +37,9 @@ public class FirstStepsClient implements ClientModInitializer {
         // BlockEntityRendererFactories.register(ModBlockEntities.ROCK_BLOCK_ENTITY, RockBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.POTTERS_WHEEL_BLOCK_ENTITY, PottersWheelBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.UNFIRED_DECORATED_POT_BLOCK_ENTITY, UnfiredDecoratedPotBlockEntityRenderer::new);
+
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.FLAX_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.COTTON_CROP, RenderLayer.getCutout());
 
         // Register Entity Renderers
         ModEntityRenderer.registerModEntityRenderers();

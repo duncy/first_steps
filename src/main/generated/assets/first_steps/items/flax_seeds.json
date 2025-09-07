@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "first_steps:block/flax_crop"
+    "model": "first_steps:item/flax_seeds"
   }
 }
