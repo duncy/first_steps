@@ -9,7 +9,7 @@ import net.minecraft.state.property.IntProperty;
 import nz.duncy.first_steps.item.custom.ModItems;
 
 public class CottonCropBlock extends CropBlock {
-    public static final int MAX_AGE = 6;
+    public static final int MAX_AGE = 5;
     public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
 
     public CottonCropBlock(Settings settings) {

@@ -185,6 +185,8 @@
     "tooltip.first_steps.tongs.hint": "Use this to hold hot items!",
     "tooltip.first_steps.tongs.holding": "Holding %s",
 
+    "tooltip.first_steps.unfired_mold_block": "Cast metal into this to create tool heads!",
+
     "item.first_steps.clay": "Clay Ball",
 
     "tooltip.first_steps.clay": "Use this on a potter's wheel to shape pottery!",
@@ -216,7 +218,42 @@
     "screen.first_steps.knapping.press_enter": "[ LEFT MOUSE ]",
 
     "stat.first_steps.interact_with_kiln": "Interactions with Kiln",
-    "stat.first_steps.potters_wheel_spins": "Potter's Wheel Spins"
+    "stat.first_steps.potters_wheel_spins": "Potter's Wheel Spins",
 
-
+    "item.first_steps.flax_seeds": "Flax Seeds",
+    "item.first_steps.cotton_seeds": "Cotton Seeds",
+    "item.first_steps.flax": "Flax",
+    "item.first_steps.cotton": "Cotton",
+    "item.first_steps.armorers_mannequin": "Armorer's Mannequin",
+    "item.first_steps.forge": "Forge",
+    "item.first_steps.hammer": "Hammer",
+    "item.first_steps.gambeson": "Gambeson",
+    "item.first_steps.leather_jerkin": "Leather Jerkin",
+    "item.first_steps.leather_lamellar": "Leather Lamellar",
+    "item.first_steps.copper_lamellar": "Copper Lamellar",
+    "item.first_steps.bronze_lamellar": "Bronze Lamellar",
+    "item.first_steps.iron_lamellar": "Iron Lamellar",
+    "item.first_steps.copper_laminar": "Copper Laminar",
+    "item.first_steps.bronze_laminar": "Bronze Laminar",
+    "item.first_steps.iron_laminar": "Iron Laminar",
+    "item.first_steps.copper_brigandine": "Copper Brigandine",
+    "item.first_steps.bronze_brigandine": "Bronze Brigandine",
+    "item.first_steps.iron_brigandine": "Iron Brigandine",
+    "item.first_steps.iron_plate_harness": "Iron Plate Harness",
+    "item.first_steps.cloth": "Cloth",
+    "item.first_steps.padded_cloth": "Padded Cloth",
+    "item.first_steps.leather_strips": "Leather Strips",
+    "item.first_steps.copper_rings": "Copper Rings",
+    "item.first_steps.bronze_rings": "Bronze Rings",
+    "item.first_steps.iron_rings": "Iron Rings",
+    "item.first_steps.copper_bands": "Copper Bands",
+    "item.first_steps.bronze_bands": "Bronze Bands",
+    "item.first_steps.iron_bands": "Iron Bands",
+    "item.first_steps.tin_nugget": "Tin Nugget",
+    "item.first_steps.bronze_nugget": "Bronze Nugget",
+    "item.first_steps.copper_hauberk": "Copper Hauberk",
+    "item.first_steps.bronze_hauberk": "Bronze Hauberk",
+    "item.first_steps.iron_hauberk": "Iron Hauberk",
+    "item.first_steps.iron_pauldron": "Iron Pauldron",
+    "item.first_steps.iron_gauntlet": "Iron Gauntlet"
 }
