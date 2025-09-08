@@ -24,8 +24,8 @@ import nz.duncy.first_steps.block.custom.ClayBlock;
 import nz.duncy.first_steps.block.custom.CottonCropBlock;
 import nz.duncy.first_steps.block.custom.CrucibleBlock;
 import nz.duncy.first_steps.block.custom.FlaxCropBlock;
+import nz.duncy.first_steps.block.custom.FlintRockBlock;
 import nz.duncy.first_steps.block.custom.KilnBlock;
-import nz.duncy.first_steps.block.custom.MannequinBlock;
 import nz.duncy.first_steps.block.custom.OreRockBlock;
 import nz.duncy.first_steps.block.custom.RockBlock;
 import nz.duncy.first_steps.block.custom.UnfiredCrucibleBlock;
@@ -53,31 +53,33 @@ public class ModBlocks {
 
         // ROCKS
         public static final Block STONE_ROCK = registerRockBlock("stone_rock",
-                        Settings.create().strength(0.0F, 0.0F)
-                                        .pistonBehavior(PistonBehavior.DESTROY)
-                                        .mapColor(MapColor.STONE_GRAY),
-                                        true);
+                Settings.create().strength(0.0F, 0.0F)
+                        .pistonBehavior(PistonBehavior.DESTROY)
+                        .mapColor(MapColor.STONE_GRAY),
+                        true
+        );
 
-        public static Block FLINT_ROCK = registerRockBlock("flint_rock",
-                        Settings.copy(STONE_ROCK)
-                                        .mapColor(MapColor.BLACK),
-                                        true);
-                                        // Items.FLINT);
+        public static Block FLINT_ROCK = registerFlintRockBlock("flint_rock",
+                Settings.copy(STONE_ROCK)
+                        .mapColor(MapColor.BLACK)
+        );
 
         public static final Block BASALT_ROCK = registerRockBlock("basalt_rock",
-                        Settings.copy(STONE_ROCK),
-                        true);
+                Settings.copy(STONE_ROCK),
+                true
+        );
 
         public static final Block OBSIDIAN_ROCK = registerRockBlock("obsidian_rock",
-                        Settings.copy(FLINT_ROCK),
-                        true);
+                Settings.copy(FLINT_ROCK),
+                true
+        );
 
         public static final Block COPPER_ROCK = registerBlock(
-                        "copper_rock",
-                        OreRockBlock::new,
-                        Settings.copy(Blocks.STONE),
-                        true
-                );
+                "copper_rock",
+                OreRockBlock::new,
+                Settings.copy(Blocks.STONE),
+                true
+        );
 
         // CRAFTING
         // KILN
@@ -151,13 +153,13 @@ public class ModBlocks {
         public static final Block PICKAXE_HEAD_MOLD = registerMoldBlock("pickaxe_head_mold");
         public static final Block SWORD_HEAD_MOLD = registerMoldBlock("sword_head_mold");
 
-        // ARMOURERS MANNEQUIN
-        public static final Block ARMOURERS_MANNEQUIN = registerBlock(
-                "armourers_mannequin",
-                MannequinBlock::new,
-                Settings.copy(Blocks.WHITE_WOOL),
-                true
-        );
+        // // ARMOURERS MANNEQUIN
+        // public static final Block ARMOURERS_MANNEQUIN = registerBlock(
+        //         "armorers_mannequin",
+        //         MannequinBlock::new,
+        //         Settings.copy(Blocks.WHITE_WOOL),
+        //         true
+        // );
 
         // FORGE
         public static final Block FORGE = registerBlock(
@@ -207,6 +209,17 @@ public class ModBlocks {
                         false
                 );
                 registerUniqueBlockItem(name, block);
+
+                return block;
+        }
+
+        private static Block registerFlintRockBlock(String name, Settings settings) {
+                Block block =  registerBlock(
+                        name,
+                        FlintRockBlock::new,
+                        settings,
+                        true
+                );
 
                 return block;
         }
