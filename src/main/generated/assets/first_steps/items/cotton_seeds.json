@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "first_steps:block/cotton_crop"
+    "model": "first_steps:item/cotton_seeds"
   }
 }
