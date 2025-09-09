@@ -31,6 +31,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
+import nz.duncy.first_steps.block.custom.CottonCropBlock;
 import nz.duncy.first_steps.block.custom.FlaxCropBlock;
 import nz.duncy.first_steps.client.render.item.model.special.BasaltSpearModelRenderer;
 import nz.duncy.first_steps.client.render.item.model.special.BronzeSpearModelRenderer;
@@ -93,6 +94,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         // CROPS
         blockStateModelGenerator.registerCrop(ModBlocks.FLAX_CROP, FlaxCropBlock.AGE, 0, 1, 2, 3, 4, 5, 6);
+        blockStateModelGenerator.registerCrop(ModBlocks.COTTON_CROP, CottonCropBlock.AGE, 0, 1, 2, 3, 4, 5);
     }
 
     private void registerClays(BlockStateModelGenerator blockStateModelGenerator) {
@@ -295,8 +297,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModBlocks.SWORD_HEAD_MOLD.asItem(), Models.GENERATED);
 
 
-        // // Tongs
+        // Tongs
         itemModelGenerator.register(ModItems.WOODEN_TONGS, Models.GENERATED);
+
+        itemModelGenerator.register(ModItems.FLAX, Models.GENERATED);
+        itemModelGenerator.register(ModItems.COTTON, Models.GENERATED);
 
         registerArmorWithoutTrims(itemModelGenerator, ModItems.GAMBESON, ModArmorMaterials.PADDED_CLOTH_KEY, "chestplate", true);
     }

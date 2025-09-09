@@ -18,7 +18,7 @@ public class CottonCropBlock extends CropBlock {
 
     @Override
     public ItemConvertible getSeedsItem() {
-        return ModItems.FLAX_SEEDS;
+        return ModItems.COTTON_SEEDS;
     }
 
     @Override
