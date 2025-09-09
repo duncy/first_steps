@@ -1,4 +1,4 @@
-package nz.duncy.first_steps.item.entity;
+package nz.duncy.first_steps.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -11,8 +11,17 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.entity.decoration.ArmorersMannequinEntity;
+import nz.duncy.first_steps.item.entity.BasaltSpearEntity;
+import nz.duncy.first_steps.item.entity.BronzeSpearEntity;
+import nz.duncy.first_steps.item.entity.CopperSpearEntity;
+import nz.duncy.first_steps.item.entity.FlintSpearEntity;
+import nz.duncy.first_steps.item.entity.IronSpearEntity;
+import nz.duncy.first_steps.item.entity.ObsidianSpearEntity;
+import nz.duncy.first_steps.item.entity.SpearEntity;
+import nz.duncy.first_steps.item.entity.StoneSpearEntity;
 
-public class ModItemEntities {
+public class ModEntities {
     private static <T extends SpearEntity> EntityType<T> registerSpear(String id, EntityType.EntityFactory<T> factory) {
         return register(
             id, 
@@ -37,8 +46,9 @@ public class ModItemEntities {
     public static final EntityType<SpearEntity> COPPER_SPEAR = registerSpear("copper_spear", CopperSpearEntity::new);
     public static final EntityType<SpearEntity> BRONZE_SPEAR = registerSpear("bronze_spear", BronzeSpearEntity::new);
     public static final EntityType<SpearEntity> IRON_SPEAR = registerSpear("iron_spear", IronSpearEntity::new);
+    public static final EntityType<ArmorersMannequinEntity> ARMORERS_MANNEQUIN = register("armorers_mannequin", EntityType.Builder.<ArmorersMannequinEntity>create(ArmorersMannequinEntity::new, SpawnGroup.MISC).dimensions(0.5F, 1.975F).eyeHeight(1.7775F).maxTrackingRange(10));
 
     public static void registerModItemEntities() {
-        FirstSteps.LOGGER.info("Registering item entities for " + FirstSteps.MOD_ID);
+        FirstSteps.LOGGER.info("Registering entities for " + FirstSteps.MOD_ID);
     }
 }

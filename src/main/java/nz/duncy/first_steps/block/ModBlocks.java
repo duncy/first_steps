@@ -274,7 +274,7 @@ public class ModBlocks {
                 return registerBlock(
                         name,
                         Block::new,
-                        Settings.create().sounds(BlockSoundGroup.STONE),
+                        Settings.create().sounds(BlockSoundGroup.STONE).requiresTool().hardness(3.0f),
                         true
                 );
         }
@@ -283,7 +283,7 @@ public class ModBlocks {
                 return registerBlock(
                         name,
                         Block::new,
-                        Settings.create().sounds(BlockSoundGroup.DEEPSLATE),
+                        Settings.create().sounds(BlockSoundGroup.DEEPSLATE).requiresTool().hardness(3.5f),
                         true
                 );
         }
@@ -292,7 +292,7 @@ public class ModBlocks {
                 return registerBlock(
                         name,
                         PillarBlock::new,
-                        Settings.create().sounds(BlockSoundGroup.BASALT),
+                        Settings.create().sounds(BlockSoundGroup.BASALT).requiresTool(),
                         true
                 );
         }

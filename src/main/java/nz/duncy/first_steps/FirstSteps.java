@@ -10,9 +10,9 @@ import net.minecraft.screen.ScreenHandler;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.block.entity.ModBlockEntities;
 import nz.duncy.first_steps.component.ModDataComponentTypes;
+import nz.duncy.first_steps.entity.ModEntities;
 import nz.duncy.first_steps.item.custom.ModItemGroups;
 import nz.duncy.first_steps.item.custom.ModItems;
-import nz.duncy.first_steps.item.entity.ModItemEntities;
 import nz.duncy.first_steps.network.packet.KnappingRecipePayload;
 import nz.duncy.first_steps.network.packet.KnappingSelectionPayload;
 import nz.duncy.first_steps.recipe.ModRecipes;
@@ -30,7 +30,7 @@ public class FirstSteps implements ModInitializer {
 	@Override
 	public void onInitialize() {
         ModItems.registerModItems();
-        ModItemEntities.registerModItemEntities();
+        ModEntities.registerModItemEntities();
         ModBlocks.registerModBlocks();
         ModBlockEntities.registerModBlockEntities();
         ModItemGroups.registerItemGroups();

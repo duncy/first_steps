@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
-import nz.duncy.first_steps.item.entity.ModItemEntities;
+import nz.duncy.first_steps.entity.ModEntities;
 import nz.duncy.first_steps.item.entity.SpearEntity;
 
 public class SpearItem extends Item implements ProjectileItem {

@@ -175,6 +175,8 @@ public class ModItems {
     // Tongs
     public static final Item WOODEN_TONGS = registerItem("wooden_tongs", TongItem::new);
 
+    public static final Item ARMORERS_MANNEQUIN = registerItem("armorers_mannequin", ArmorersMannequinItem::new);
+
     // Metal nuggets
     public static final Item TIN_NUGGET = registerItem("tin_nugget", Item::new);
     public static final Item BRONZE_NUGGET = registerItem("bronze_nugget", Item::new);

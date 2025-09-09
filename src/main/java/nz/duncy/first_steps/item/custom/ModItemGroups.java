@@ -222,7 +222,7 @@ public class ModItemGroups {
                     entries.add(ModItems.FLAX);
                     entries.add(ModItems.COTTON);
 
-                    entries.add(ModBlocks.ARMOURERS_MANNEQUIN);
+                    entries.add(ModItems.ARMORERS_MANNEQUIN);
 
                     entries.add(ModBlocks.FORGE);
 
@@ -473,7 +473,7 @@ public class ModItemGroups {
         entries.add(ModBlocks.STONE_IRON_ORE);
         entries.add(ModBlocks.DEEPSLATE_COPPER_ORE);
         entries.add(ModBlocks.DEEPSLATE_IRON_ORE);
-        entries.add(ModBlocks.ARMOURERS_MANNEQUIN);
+        entries.add(ModItems.ARMORERS_MANNEQUIN);
         entries.add(ModBlocks.FORGE);
         entries.add(ModItems.FLAX_SEEDS);
         entries.add(ModItems.COTTON_SEEDS);
@@ -486,7 +486,7 @@ public class ModItemGroups {
         entries.add(ModBlocks.UNFIRED_DECORATED_POT);
         entries.add(ModBlocks.FIRED_CRUCIBLE);
         entries.add(ModBlocks.KILN);
-        entries.add(ModBlocks.ARMOURERS_MANNEQUIN);
+        entries.add(ModItems.ARMORERS_MANNEQUIN);
         entries.add(ModBlocks.FORGE);
     }
 

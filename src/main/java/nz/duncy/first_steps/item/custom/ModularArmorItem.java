@@ -13,7 +13,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 
-public class MannequinItem extends Item {
+public class ModularArmorItem extends Item {
 	private static final Formatting TITLE_FORMATTING = Formatting.GRAY;
 
 	private static final Text INGREDIENTS_TEXT = Text.translatable(Util.createTranslationKey("item", Identifier.ofVanilla("smithing_template.ingredients")))
@@ -28,7 +28,7 @@ public class MannequinItem extends Item {
 	public static final Identifier EMPTY_LEGGINGS_SLOT_TEXTURE = Identifier.ofVanilla("container/slot/leggings");
 	public static final Identifier EMPTY_BOOTS_SLOT_TEXTURE = Identifier.ofVanilla("container/slot/boots");
 	public static final Identifier EMPTY_OFF_HAND_SLOT_TEXTURE = Identifier.ofVanilla("container/slot/shield");
-	
+
 	private static final Map<EquipmentSlot, Identifier> EMPTY_ARMOR_SLOT_TEXTURES = Map.of(
 		EquipmentSlot.FEET,
 		EMPTY_BOOTS_SLOT_TEXTURE,
@@ -50,7 +50,7 @@ public class MannequinItem extends Item {
 	private final List<Identifier> emptyBaseSlotTextures;
 	private final List<Identifier> emptyAdditionsSlotTextures;
 
-	public MannequinItem(
+	public ModularArmorItem(
 		Text appliesToText,
 		Text ingredientsText,
 		Text baseSlotDescriptionText,

@@ -18,7 +18,6 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import nz.duncy.first_steps.item.custom.ModItems;
 
 import org.jetbrains.annotations.Nullable;
 
