@@ -70,10 +70,14 @@ public class MannequinSlot extends Slot {
 		return isEnabled() && stack.isIn(this.expectedTagKey);
 	}
 
-	@Nullable
 	@Override
 	public Identifier getBackgroundSprite() {
-		return this.backgroundSprite;
+		// if (this.isEnabled()) {
+		// 	return null;
+		// } else {
+			return this.backgroundSprite;
+		// }
+		
 	}
 
 	public void setEnabled() {

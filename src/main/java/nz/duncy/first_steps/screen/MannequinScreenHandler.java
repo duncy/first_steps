@@ -15,12 +15,15 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.WorldEvents;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.block.ModBlocks;
 import nz.duncy.first_steps.screen.slot.MannequinSlot;
 import nz.duncy.first_steps.util.ModTags;
 
 public class MannequinScreenHandler extends ScreenHandler {
+	private static final Identifier SLOT_BACKGROUND = Identifier.of(FirstSteps.MOD_ID, "container/slot");
     protected final ScreenHandlerContext context;
 	protected final PlayerEntity player;
 	private final Inventory input;
@@ -55,8 +58,14 @@ public class MannequinScreenHandler extends ScreenHandler {
     }
 
 	private void createSlots() {
-		for (int i = 0; i < SLOT_COUNT - 1; i++) {
-			this.addSlot(new MannequinSlot(this.input, i, (62 + (18 * (i % 3))), (18 + (18 * (int) Math.ceil(i/3))), slotExpectationOrder.get(i), null));
+		for (int i = 0; i < MannequinSlot.BASE_LAYER_SLOT_INDEX; i++) {
+			this.addSlot(new MannequinSlot(this.input, i, (62 + (18 * (i % 3))), (18 + (18 * (int) Math.ceil(i/3))), slotExpectationOrder.get(i), SLOT_BACKGROUND));
+		}
+
+		this.addSlot(new MannequinSlot(this.input, MannequinSlot.BASE_LAYER_SLOT_INDEX, (62 + (18 * (MannequinSlot.BASE_LAYER_SLOT_INDEX % 3))), (18 + (18 * (int) Math.ceil(MannequinSlot.BASE_LAYER_SLOT_INDEX/3))), slotExpectationOrder.get(MannequinSlot.BASE_LAYER_SLOT_INDEX), null));
+
+		for (int i = MannequinSlot.BASE_LAYER_SLOT_INDEX + 1; i < SLOT_COUNT - 1; i++) {
+			this.addSlot(new MannequinSlot(this.input, i, (62 + (18 * (i % 3))), (18 + (18 * (int) Math.ceil(i/3))), slotExpectationOrder.get(i), SLOT_BACKGROUND));
 		}
 
 		this.addSlot(new MannequinSlot(this.input, SLOT_COUNT - 1, (62 + (18 * (SLOT_COUNT % 3))), (18 + (18 * (int) Math.ceil(SLOT_COUNT/3))), slotExpectationOrder.get(SLOT_COUNT - 1), null));
@@ -86,7 +95,8 @@ public class MannequinScreenHandler extends ScreenHandler {
 	}
 
 	protected boolean canUse(BlockState state) {
-        return state.isOf(ModBlocks.ARMOURERS_MANNEQUIN);
+        // return state.isOf(ModBlocks.ARMOURERS_MANNEQUIN);
+		return true;
     }
 
     private List<ItemStack> getInputStacks() {

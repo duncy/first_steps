@@ -24,7 +24,7 @@ import net.minecraft.screen.ScreenHandlerListener;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
-import nz.duncy.first_steps.item.custom.MannequinItem;
+import nz.duncy.first_steps.item.custom.ModularArmorItem;
 import nz.duncy.first_steps.screen.MannequinScreenHandler;
 import nz.duncy.first_steps.screen.slot.MannequinSlot;
 
@@ -78,7 +78,7 @@ public class MannequinScreen extends HandledScreen<MannequinScreenHandler> imple
 	@Override
 	public void handledScreenTick() {
 		super.handledScreenTick();
-		this.BaseSlotIcon.updateTexture(MannequinItem.getBaseArmorEmptyBaseSlotTextures());
+		this.BaseSlotIcon.updateTexture(ModularArmorItem.getBaseArmorEmptyBaseSlotTextures());
 	}
 
 	@Override
