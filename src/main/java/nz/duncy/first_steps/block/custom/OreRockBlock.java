@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -36,7 +37,7 @@ public class OreRockBlock extends Block {
             if (hit.getType() == HitResult.Type.BLOCK) {
                 Item heldItem = player.getStackInHand(player.getActiveHand()).getItem();
                 if (heldItem instanceof BlockItem) {
-                    if (((BlockItem) heldItem).getBlock() instanceof RockBlock) {
+                    if (((BlockItem) heldItem).getBlock() instanceof RockBlock || heldItem == Items.FLINT) {
 
                         ItemStack itemStack = new ItemStack(ModItems.RAW_STONE_COPPER);
                         world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack));
