@@ -9,13 +9,14 @@ import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.client.render.entity.model.ArmorersMannequinEntityModel;
 import nz.duncy.first_steps.client.render.entity.model.ModEntityModelLayers;
 import nz.duncy.first_steps.client.render.entity.state.ArmorersMannequinEntityRenderState;
 import nz.duncy.first_steps.entity.decoration.ArmorersMannequinEntity;
 
 public class ArmorersMannequinEntityRenderer extends LivingEntityRenderer<ArmorersMannequinEntity, ArmorersMannequinEntityRenderState, ArmorersMannequinEntityModel> {
-    public static final Identifier TEXTURE = Identifier.ofVanilla("textures/entity/armorstand/wood.png");
+    public static final Identifier TEXTURE = Identifier.of(FirstSteps.MOD_ID, "textures/entity/armorers_mannequin.png");
 
     public ArmorersMannequinEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new ArmorersMannequinEntityModel(context.getPart(ModEntityModelLayers.ARMORERS_MANNEQUIN)), 0.0F);

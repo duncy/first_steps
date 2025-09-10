@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.Entity;
@@ -19,6 +20,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -28,22 +30,34 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EulerAngle;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.explosion.Explosion;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.entity.ModEntities;
 import nz.duncy.first_steps.item.custom.ModItems;
+import nz.duncy.first_steps.screen.MannequinScreenHandler;
+import nz.duncy.first_steps.screen.ModScreenHandlers;
+import nz.duncy.first_steps.stat.ModStats;
 
-public class ArmorersMannequinEntity extends LivingEntity {
+public class ArmorersMannequinEntity extends LivingEntity implements NamedScreenHandlerFactory {
     private static final Predicate<Entity> RIDEABLE_MINECART_PREDICATE = entity -> {
 		if (entity instanceof AbstractMinecartEntity abstractMinecartEntity && abstractMinecartEntity.isRideable()) {
 			return true;
@@ -55,10 +69,11 @@ public class ArmorersMannequinEntity extends LivingEntity {
 	public long lastHitTime;
     public static final EulerAngle HEAD_ROTATION = new EulerAngle(0.0F, 0.0F, 0.0F);
 	public static final EulerAngle BODY_ROTATION = new EulerAngle(0.0F, 0.0F, 0.0F);
-	public static final EulerAngle LEFT_ARM_ROTATION = new EulerAngle(-10.0F, 0.0F, -10.0F);
-	public static final EulerAngle RIGHT_ARM_ROTATION = new EulerAngle(-15.0F, 0.0F, 10.0F);
-	public static final EulerAngle LEFT_LEG_ROTATION = new EulerAngle(-1.0F, 0.0F, -1.0F);
+	public static final EulerAngle LEFT_ARM_ROTATION = new EulerAngle(0.0F, 0.0F, -10.0F);
+	public static final EulerAngle RIGHT_ARM_ROTATION = new EulerAngle(0.0F, 0.0F, 10.0F);
+	public static final EulerAngle LEFT_LEG_ROTATION = new EulerAngle(-1.0F, 0.0F, 1.0F);
 	public static final EulerAngle RIGHT_LEG_ROTATION = new EulerAngle(1.0F, 0.0F, 1.0F);
+    private static final Text SCREEN_TITLE = Text.translatable("container." + FirstSteps.MOD_ID + ".mannequin");
 
     public ArmorersMannequinEntity(EntityType<? extends ArmorersMannequinEntity> entityType, World world) {
         super(entityType, world);
@@ -172,7 +187,12 @@ public class ArmorersMannequinEntity extends LivingEntity {
 
 	@Override
 	public ActionResult interactAt(PlayerEntity player, Vec3d hitPos, Hand hand) {
-        return ActionResult.PASS;
+        if (!player.getWorld().isClient && player instanceof ServerPlayerEntity serverPlayer) {
+			serverPlayer.openHandledScreen(this);
+			serverPlayer.incrementStat(ModStats.INTERACT_WITH_MANNEQUIN);
+		}
+
+		return ActionResult.SUCCESS;
 	}
 
 	@Override
@@ -339,10 +359,6 @@ public class ArmorersMannequinEntity extends LivingEntity {
 		super.setInvisible(invisible);
 	}
 
-    private boolean isSlotDisabled(EquipmentSlot slot) {
-		return true;
-	}
-
 	@Override
 	public void kill(ServerWorld world) {
 		this.remove(Entity.RemovalReason.KILLED);
@@ -399,5 +415,14 @@ public class ArmorersMannequinEntity extends LivingEntity {
 	public boolean isPartOfGame() {
 		return !this.isInvisible();
 	}
-    
+
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+        return new MannequinScreenHandler(syncId, playerInventory);
+    } 
+
+    @Override
+    public Text getDisplayName() {
+        return SCREEN_TITLE;
+    }
 }

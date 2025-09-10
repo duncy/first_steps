@@ -12,7 +12,6 @@ import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.client.render.block.entity.PottersWheelBlockModel;
 import nz.duncy.first_steps.client.render.block.entity.UnfiredDecoratedPotBlockEntityRenderer;
-import nz.duncy.first_steps.client.render.entity.ArmorersMannequinEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class ModEntityModelLayers {

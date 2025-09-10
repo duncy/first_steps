@@ -24,72 +24,65 @@ public class ArmorersMannequinEntityModel extends BipedEntityModel<ArmorersManne
 	private final ModelPart rightBodyStick;
 	private final ModelPart leftBodyStick;
 	private final ModelPart shoulderStick;
-	private final ModelPart basePlate;
 
     public ArmorersMannequinEntityModel(ModelPart modelPart) {
 		super(modelPart);
-		this.rightBodyStick = modelPart.getChild("right_body_stick");
-		this.leftBodyStick = modelPart.getChild("left_body_stick");
-		this.shoulderStick = modelPart.getChild("shoulder_stick");
-		this.basePlate = modelPart.getChild("base_plate");
+		this.rightBodyStick = modelPart.getChild(RIGHT_BODY_STICK);
+		this.leftBodyStick = modelPart.getChild(LEFT_BODY_STICK);
+		this.shoulderStick = modelPart.getChild(SHOULDER_STICK);
 		this.hat.visible = false;
 	}
 
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = BipedEntityModel.getModelData(Dilation.NONE, 0.0F);
 		ModelPartData modelPartData = modelData.getRoot();
+
 		modelPartData.addChild(
-			EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -7.0F, -1.0F, 4.0F, 7.0F, 4.0F), ModelTransform.pivot(0.0F, 1.0F, 0.0F)
+			EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -9.0F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.pivot(0.0F, 1.0F, 0.0F)
 		);
-		modelPartData.addChild(EntityModelPartNames.BODY, ModelPartBuilder.create().uv(0, 26).cuboid(-6.0F, 0.0F, -1.5F, 12.0F, 6.0F, 6.0F), ModelTransform.NONE);
+
 		modelPartData.addChild(
-			EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(24, 0).cuboid(-2.0F, -2.0F, -1.0F, 4.0F, 12.0F, 4.0F), ModelTransform.pivot(-5.0F, 2.0F, 0.0F)
+            EntityModelPartNames.BODY, ModelPartBuilder.create().uv(0, 26).cuboid(-4.0F, 0.0F, -2.0F, 8.0F, 6.0F, 4.0F), ModelTransform.NONE
+        );
+
+		modelPartData.addChild(
+			EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(24, 0).cuboid(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), ModelTransform.pivot(-5.0F, 2.0F, 0.0F)
 		);
+
 		modelPartData.addChild(
 			EntityModelPartNames.LEFT_ARM,
-			ModelPartBuilder.create().uv(32, 16).mirrored().cuboid(0.0F, -2.0F, -1.0F, 4.0F, 12.0F, 4.0F),
+			ModelPartBuilder.create().uv(32, 16).mirrored().cuboid(0.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F),
 			ModelTransform.pivot(5.0F, 2.0F, 0.0F)
 		);
+
 		modelPartData.addChild(
-			EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(8, 0).cuboid(-1.0F, 0.0F, -1.0F, 4.0F, 11.0F, 4.0F), ModelTransform.pivot(-1.9F, 12.0F, 0.0F)
+			EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(8, 0).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 11.0F, 4.0F), ModelTransform.pivot(-1.9F, 12.0F, 0.0F)
 		);
+
 		modelPartData.addChild(
 			EntityModelPartNames.LEFT_LEG,
-			ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-1.0F, 0.0F, -1.0F, 4.0F, 11.0F, 4.0F),
+			ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 11.0F, 4.0F),
 			ModelTransform.pivot(1.9F, 12.0F, 0.0F)
 		);
-		modelPartData.addChild("right_body_stick", ModelPartBuilder.create().uv(16, 0).cuboid(-3.0F, 3.0F, -1.0F, 2.0F, 7.0F, 2.0F), ModelTransform.NONE);
-		modelPartData.addChild("left_body_stick", ModelPartBuilder.create().uv(48, 16).cuboid(1.0F, 3.0F, -1.0F, 2.0F, 7.0F, 2.0F), ModelTransform.NONE);
-		modelPartData.addChild("shoulder_stick", ModelPartBuilder.create().uv(0, 48).cuboid(-4.0F, 10.0F, -1.0F, 8.0F, 2.0F, 2.0F), ModelTransform.NONE);
+
 		modelPartData.addChild(
-			"base_plate", ModelPartBuilder.create().uv(0, 32).cuboid(-6.0F, 11.0F, -6.0F, 12.0F, 1.0F, 12.0F), ModelTransform.pivot(0.0F, 12.0F, 0.0F)
-		);
+            RIGHT_BODY_STICK, ModelPartBuilder.create().uv(16, 0).cuboid(-3.0F, 3.0F, -1.0F, 2.0F, 7.0F, 2.0F), ModelTransform.NONE
+            );
+
+		modelPartData.addChild(
+            LEFT_BODY_STICK, ModelPartBuilder.create().uv(48, 16).cuboid(1.0F, 3.0F, -1.0F, 2.0F, 7.0F, 2.0F), ModelTransform.NONE
+        );
+
+		modelPartData.addChild(
+            SHOULDER_STICK, ModelPartBuilder.create().uv(0, 48).cuboid(-4.0F, 10.0F, -1.0F, 8.0F, 2.0F, 2.0F), ModelTransform.NONE
+        );
+
+		// modelPartData.addChild(
+		// 	BASE_PLATE, ModelPartBuilder.create().uv(0, 32).cuboid(-6.0F, 11.0F, -6.0F, 12.0F, 1.0F, 12.0F), 
+        //     ModelTransform.pivot(0.0F, 12.0F, 0.0F)
+		// );
 		return TexturedModelData.of(modelData, 64, 64);
 	}
-
-    // public static TexturedModelData getTexturedModelData(Dilation dilation) {
-	// 	ModelData modelData = BipedEntityModel.getModelData(dilation, 0.0F);
-	// 	ModelPartData modelPartData = modelData.getRoot();
-	// 	ModelPartData modelPartData2 = modelPartData.addChild(
-	// 		EntityModelPartNames.HEAD,
-	// 		ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation),
-	// 		ModelTransform.pivot(0.0F, 1.0F, 0.0F)
-	// 	);
-	// 	modelPartData2.addChild(
-	// 		EntityModelPartNames.HAT, ModelPartBuilder.create().uv(32, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, dilation.add(0.5F)), ModelTransform.NONE
-	// 	);
-	// 	modelPartData.addChild(
-	// 		EntityModelPartNames.RIGHT_LEG,
-	// 		ModelPartBuilder.create().uv(0, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation.add(-0.1F)),
-	// 		ModelTransform.pivot(-1.9F, 11.0F, 0.0F)
-	// 	);
-	// 	modelPartData.addChild(
-	// 		EntityModelPartNames.LEFT_LEG,
-	// 		ModelPartBuilder.create().uv(0, 16).mirrored().cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, dilation.add(-0.1F)),
-	// 		ModelTransform.pivot(1.9F, 11.0F, 0.0F)
-	// 	);
-	// 	return TexturedModelData.of(modelData, 64, 32);
-	// }
 
 	@Override
 	public void setAngles(ArmorersMannequinEntityRenderState armorersMannequinEntityRenderState) {
@@ -119,9 +112,6 @@ public class ArmorersMannequinEntityModel extends BipedEntityModel<ArmorersManne
 		this.rightLeg.pitch = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.rightLegRotation.getPitch();
 		this.rightLeg.yaw = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.rightLegRotation.getYaw();
 		this.rightLeg.roll = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.rightLegRotation.getRoll();
-
-		this.basePlate.yaw = (float) (Math.PI / 180.0) * -armorersMannequinEntityRenderState.yaw;
-        this.basePlate.visible = armorersMannequinEntityRenderState.showBasePlate;
 		
 		this.rightBodyStick.pitch = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getPitch();
 		this.rightBodyStick.yaw = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getYaw();

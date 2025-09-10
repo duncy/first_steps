@@ -24,6 +24,7 @@ import net.minecraft.screen.ScreenHandlerListener;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.entity.decoration.ArmorersMannequinEntity;
 import nz.duncy.first_steps.item.custom.ModularArmorItem;
 import nz.duncy.first_steps.screen.MannequinScreenHandler;
 import nz.duncy.first_steps.screen.slot.MannequinSlot;
@@ -40,10 +41,10 @@ public class MannequinScreen extends HandledScreen<MannequinScreenHandler> imple
 
 	private final CyclingSlotIcon BaseSlotIcon = new CyclingSlotIcon(MannequinSlot.BASE_LAYER_SLOT_INDEX);
 
-	private static final Quaternionf ARMOR_STAND_ROTATION = new Quaternionf().rotationXYZ(0.43633232F, 0.0F, (float) Math.PI);
-	private static final Vector3f ARMOR_STAND_VECTOR = new Vector3f();
+	private static final Quaternionf ARMORERS_MANNEQUIN_ROTATION = new Quaternionf().rotationXYZ(0.43633232F, 0.0F, (float) Math.PI);
+	private static final Vector3f ARMORERS_MANNEQUIN_VECTOR = new Vector3f();
 	@Nullable
-	private ArmorStandEntity armorStand;
+	private ArmorersMannequinEntity armorersMannequinEntity;
 
 
 	public MannequinScreen(MannequinScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -51,13 +52,11 @@ public class MannequinScreen extends HandledScreen<MannequinScreenHandler> imple
 	}
 
 	protected void setup() {
-		this.armorStand = new ArmorStandEntity(this.client.world, 0.0, 0.0, 0.0);
-		this.armorStand.setHideBasePlate(true);
-		this.armorStand.setShowArms(true);
-		this.armorStand.bodyYaw = 210.0F;
-		this.armorStand.setPitch(25.0F);
-		this.armorStand.headYaw = this.armorStand.getYaw();
-		this.armorStand.prevHeadYaw = this.armorStand.getYaw();
+		this.armorersMannequinEntity = new ArmorersMannequinEntity(this.client.world, 0.0, 0.0, 0.0);
+		this.armorersMannequinEntity.bodyYaw = 210.0F;
+		this.armorersMannequinEntity.setPitch(25.0F);
+		this.armorersMannequinEntity.headYaw = this.armorersMannequinEntity.getYaw();
+		this.armorersMannequinEntity.prevHeadYaw = this.armorersMannequinEntity.getYaw();
 		this.equipArmorStand(this.handler.getSlot(MannequinSlot.BASE_LAYER_SLOT_INDEX).getStack());
 	}
 
@@ -89,15 +88,15 @@ public class MannequinScreen extends HandledScreen<MannequinScreenHandler> imple
 	}
 
 	private void equipArmorStand(ItemStack stack) {
-		if (this.armorStand != null) {
+		if (this.armorersMannequinEntity != null) {
 			for (EquipmentSlot equipmentSlot : EquipmentSlot.VALUES) {
-				this.armorStand.equipStack(equipmentSlot, ItemStack.EMPTY);
+				this.armorersMannequinEntity.equipStack(equipmentSlot, ItemStack.EMPTY);
 			}
 
 			if (!stack.isEmpty()) {
 				EquippableComponent equippableComponent = stack.get(DataComponentTypes.EQUIPPABLE);
 				EquipmentSlot equipmentSlot = equippableComponent != null ? equippableComponent.slot() : EquipmentSlot.OFFHAND;
-				this.armorStand.equipStack(equipmentSlot, stack.copy());
+				this.armorersMannequinEntity.equipStack(equipmentSlot, stack.copy());
 			}
 		}
 	}
@@ -164,6 +163,6 @@ public class MannequinScreen extends HandledScreen<MannequinScreenHandler> imple
 		context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, this.x, this.y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256);
 		this.BaseSlotIcon.render(this.handler, context, delta, this.x, this.y);
 
-		InventoryScreen.drawEntity(context, (float)(this.x + 141), (float)(this.y + 66), 25.0F, ARMOR_STAND_VECTOR, ARMOR_STAND_ROTATION, null, this.armorStand);
+		InventoryScreen.drawEntity(context, (float)(this.x + 141), (float)(this.y + 66), 25.0F, ARMORERS_MANNEQUIN_VECTOR, ARMORERS_MANNEQUIN_ROTATION, null, this.armorersMannequinEntity);
 	}
 }
