@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.client.render.block.entity.PottersWheelBlockModel;
 import nz.duncy.first_steps.client.render.block.entity.UnfiredDecoratedPotBlockEntityRenderer;
+import nz.duncy.first_steps.client.render.entity.ArmorersMannequinEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class ModEntityModelLayers {
@@ -28,6 +29,7 @@ public class ModEntityModelLayers {
     public static final EntityModelLayer POTTERS_WHEEL = registerMain("potters_wheel");
     public static final EntityModelLayer UNFIRED_DECORATED_POT_BASE = registerMain("unfired_decorated_pot_base");
     public static final EntityModelLayer UNFIRED_DECORATED_POT_SIDES = registerMain("unfired_decorated_pot_sides");
+    public static final EntityModelLayer ARMORERS_MANNEQUIN = registerMain("armorers_mannequin");
 
 
     private static EntityModelLayer registerMain(String id) {
@@ -57,5 +59,6 @@ public class ModEntityModelLayers {
         EntityModelLayerRegistry.registerModelLayer(ModEntityModelLayers.POTTERS_WHEEL, PottersWheelBlockModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModEntityModelLayers.UNFIRED_DECORATED_POT_BASE, UnfiredDecoratedPotBlockEntityRenderer::getTopBottomNeckTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(ModEntityModelLayers.UNFIRED_DECORATED_POT_SIDES, UnfiredDecoratedPotBlockEntityRenderer::getSidesTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModEntityModelLayers.ARMORERS_MANNEQUIN, ArmorersMannequinEntityModel::getTexturedModelData);
     }
 }

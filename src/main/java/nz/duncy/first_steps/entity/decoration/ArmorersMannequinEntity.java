@@ -41,6 +41,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.explosion.Explosion;
 import nz.duncy.first_steps.entity.ModEntities;
+import nz.duncy.first_steps.item.custom.ModItems;
 
 public class ArmorersMannequinEntity extends LivingEntity {
     private static final Predicate<Entity> RIDEABLE_MINECART_PREDICATE = entity -> {
@@ -68,6 +69,10 @@ public class ArmorersMannequinEntity extends LivingEntity {
 		this.setPosition(x, y, z);
 	}
 
+    public static DefaultAttributeContainer.Builder createArmorersMannequinAttributes() {
+		return createLivingAttributes().add(EntityAttributes.STEP_HEIGHT, 0.0);
+	}
+
     @Override
     public Iterable<ItemStack> getArmorItems() {
         return List.of();
@@ -86,10 +91,6 @@ public class ArmorersMannequinEntity extends LivingEntity {
     public Arm getMainArm() {
         return Arm.RIGHT;
     }
-
-    	public static DefaultAttributeContainer.Builder createArmorStandAttributes() {
-		return createLivingAttributes().add(EntityAttributes.STEP_HEIGHT, 0.0);
-	}
 
 	@Override
 	public void calculateDimensions() {
@@ -286,7 +287,7 @@ public class ArmorersMannequinEntity extends LivingEntity {
 	}
 
 	private void breakAndDropItem(ServerWorld world, DamageSource damageSource) {
-		ItemStack itemStack = new ItemStack(Items.ARMOR_STAND);
+		ItemStack itemStack = new ItemStack(ModItems.ARMORERS_MANNEQUIN);
 		itemStack.set(DataComponentTypes.CUSTOM_NAME, this.getCustomName());
 		Block.dropStack(this.getWorld(), this.getBlockPos(), itemStack);
 		this.onBreak(world, damageSource);
@@ -391,7 +392,7 @@ public class ArmorersMannequinEntity extends LivingEntity {
 
 	@Override
 	public ItemStack getPickBlockStack() {
-		return new ItemStack(Items.ARMOR_STAND);
+		return new ItemStack(ModItems.ARMORERS_MANNEQUIN);
 	}
 
 	@Override

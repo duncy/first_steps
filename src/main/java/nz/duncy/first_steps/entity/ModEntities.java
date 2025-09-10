@@ -1,10 +1,9 @@
 package nz.duncy.first_steps.entity;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.vehicle.BoatEntity;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -50,5 +49,8 @@ public class ModEntities {
 
     public static void registerModItemEntities() {
         FirstSteps.LOGGER.info("Registering entities for " + FirstSteps.MOD_ID);
+
+        // Register entity attributes
+        FabricDefaultAttributeRegistry.register(ARMORERS_MANNEQUIN, ArmorersMannequinEntity.createArmorersMannequinAttributes());
     }
 }

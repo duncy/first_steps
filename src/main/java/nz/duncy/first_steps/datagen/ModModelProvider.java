@@ -303,6 +303,10 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.FLAX, Models.GENERATED);
         itemModelGenerator.register(ModItems.COTTON, Models.GENERATED);
 
+        itemModelGenerator.register(ModItems.CLOTH, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PADDED_CLOTH, Models.GENERATED);
+        itemModelGenerator.register(ModItems.LEATHER_STRIP, Models.GENERATED);
+
         registerArmorWithoutTrims(itemModelGenerator, ModItems.GAMBESON, ModArmorMaterials.PADDED_CLOTH_KEY, "chestplate", true);
     }
 
