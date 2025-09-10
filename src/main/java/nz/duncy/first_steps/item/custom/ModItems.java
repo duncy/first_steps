@@ -197,7 +197,7 @@ public class ModItems {
     public static final Item CLOTH = registerItem("cloth", Item::new);
 
     public static final Item PADDED_CLOTH = registerItem("padded_cloth", Item::new);
-    public static final Item LEATHER_STRIPS = registerItem("leather_strips", Item::new);
+    public static final Item LEATHER_STRIP = registerItem("leather_strip", Item::new);
 
     public static final Item COPPER_RINGS = registerItem("copper_rings", Item::new);
     public static final Item BRONZE_RINGS = registerItem("bronze_rings", Item::new);

@@ -249,7 +249,7 @@ public class ModItemGroups {
                     entries.add(ModItems.CLOTH);
 
                     entries.add(ModItems.PADDED_CLOTH);
-                    entries.add(ModItems.LEATHER_STRIPS);
+                    entries.add(ModItems.LEATHER_STRIP);
 
                     entries.add(ModItems.COPPER_RINGS);
                     entries.add(ModItems.BRONZE_RINGS);
@@ -343,7 +343,7 @@ public class ModItemGroups {
         entries.add(ModItems.CLOTH);
 
         entries.add(ModItems.PADDED_CLOTH);
-        entries.add(ModItems.LEATHER_STRIPS);
+        entries.add(ModItems.LEATHER_STRIP);
 
         entries.add(ModItems.COPPER_RINGS);
         entries.add(ModItems.BRONZE_RINGS);
