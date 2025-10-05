@@ -17,19 +17,22 @@ import nz.duncy.first_steps.client.render.entity.state.ArmorersMannequinEntityRe
 
 @Environment(EnvType.CLIENT)
 public class ArmorersMannequinEntityModel extends BipedEntityModel<ArmorersMannequinEntityRenderState> {
+    private static final String SHOULDER_STICK = "shoulder_stick";
     private static final String RIGHT_BODY_STICK = "right_body_stick";
 	private static final String LEFT_BODY_STICK = "left_body_stick";
-	private static final String SHOULDER_STICK = "shoulder_stick";
+	private static final String WAIST_STICK = "waist_stick";
 	private static final String BASE_PLATE = "base_plate";
+    private final ModelPart shoulderStick;
 	private final ModelPart rightBodyStick;
 	private final ModelPart leftBodyStick;
-	private final ModelPart shoulderStick;
+	private final ModelPart waistStick;
 
     public ArmorersMannequinEntityModel(ModelPart modelPart) {
 		super(modelPart);
+        this.shoulderStick = modelPart.getChild(SHOULDER_STICK);
 		this.rightBodyStick = modelPart.getChild(RIGHT_BODY_STICK);
 		this.leftBodyStick = modelPart.getChild(LEFT_BODY_STICK);
-		this.shoulderStick = modelPart.getChild(SHOULDER_STICK);
+		this.waistStick = modelPart.getChild(WAIST_STICK);
 		this.hat.visible = false;
 	}
 
@@ -38,15 +41,21 @@ public class ArmorersMannequinEntityModel extends BipedEntityModel<ArmorersManne
 		ModelPartData modelPartData = modelData.getRoot();
 
 		modelPartData.addChild(
-			EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -9.0F, -4.0F, 8.0F, 8.0F, 8.0F), ModelTransform.pivot(0.0F, 1.0F, 0.0F)
+			EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(32, 47).cuboid(-4.0F, -9.0F, -4.0F, 8.0F, 8.0F, 8.0F), 
+            ModelTransform.pivot(0.0F, 1.0F, 0.0F)
 		);
 
-		modelPartData.addChild(
-            EntityModelPartNames.BODY, ModelPartBuilder.create().uv(0, 26).cuboid(-4.0F, 0.0F, -2.0F, 8.0F, 6.0F, 4.0F), ModelTransform.NONE
+        modelPartData.addChild(
+            SHOULDER_STICK, ModelPartBuilder.create().uv(0, 26).cuboid(-6.0F, 0.0F, -1.5F, 12.0F, 3.0F, 3.0F), ModelTransform.NONE
         );
 
 		modelPartData.addChild(
-			EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(24, 0).cuboid(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), ModelTransform.pivot(-5.0F, 2.0F, 0.0F)
+            EntityModelPartNames.BODY, ModelPartBuilder.create().uv(32, 0).cuboid(-4.0F, 0.0F, -2.0F, 8.0F, 6.0F, 4.0F), ModelTransform.NONE
+        );
+
+		modelPartData.addChild(
+			EntityModelPartNames.RIGHT_ARM, ModelPartBuilder.create().uv(32, 16).cuboid(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F), 
+            ModelTransform.pivot(-5.0F, 2.0F, 0.0F)
 		);
 
 		modelPartData.addChild(
@@ -56,12 +65,12 @@ public class ArmorersMannequinEntityModel extends BipedEntityModel<ArmorersManne
 		);
 
 		modelPartData.addChild(
-			EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(8, 0).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 11.0F, 4.0F), ModelTransform.pivot(-1.9F, 12.0F, 0.0F)
+			EntityModelPartNames.RIGHT_LEG, ModelPartBuilder.create().uv(32, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 11.0F, 4.0F), ModelTransform.pivot(-1.9F, 12.0F, 0.0F)
 		);
 
 		modelPartData.addChild(
 			EntityModelPartNames.LEFT_LEG,
-			ModelPartBuilder.create().uv(40, 16).mirrored().cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 11.0F, 4.0F),
+			ModelPartBuilder.create().uv(32, 16).mirrored().cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 11.0F, 4.0F),
 			ModelTransform.pivot(1.9F, 12.0F, 0.0F)
 		);
 
@@ -70,17 +79,17 @@ public class ArmorersMannequinEntityModel extends BipedEntityModel<ArmorersManne
             );
 
 		modelPartData.addChild(
-            LEFT_BODY_STICK, ModelPartBuilder.create().uv(48, 16).cuboid(1.0F, 3.0F, -1.0F, 2.0F, 7.0F, 2.0F), ModelTransform.NONE
+            LEFT_BODY_STICK, ModelPartBuilder.create().uv(16, 0).mirrored().cuboid(1.0F, 3.0F, -1.0F, 2.0F, 7.0F, 2.0F), ModelTransform.NONE
         );
 
 		modelPartData.addChild(
-            SHOULDER_STICK, ModelPartBuilder.create().uv(0, 48).cuboid(-4.0F, 10.0F, -1.0F, 8.0F, 2.0F, 2.0F), ModelTransform.NONE
+            WAIST_STICK, ModelPartBuilder.create().uv(0, 48).cuboid(-4.0F, 10.0F, -2.0F, 8.0F, 2.0F, 4.0F), ModelTransform.NONE
         );
 
-		// modelPartData.addChild(
-		// 	BASE_PLATE, ModelPartBuilder.create().uv(0, 32).cuboid(-6.0F, 11.0F, -6.0F, 12.0F, 1.0F, 12.0F), 
-        //     ModelTransform.pivot(0.0F, 12.0F, 0.0F)
-		// );
+		modelPartData.addChild(
+			BASE_PLATE, ModelPartBuilder.create().uv(0, 32).cuboid(-6.0F, 11.0F, -6.0F, 12.0F, 1.0F, 12.0F), 
+            ModelTransform.pivot(0.0F, 12.0F, 0.0F)
+		);
 		return TexturedModelData.of(modelData, 64, 64);
 	}
 
@@ -121,9 +130,9 @@ public class ArmorersMannequinEntityModel extends BipedEntityModel<ArmorersManne
 		this.leftBodyStick.yaw = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getYaw();
 		this.leftBodyStick.roll = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getRoll();
 
-		this.shoulderStick.pitch = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getPitch();
-		this.shoulderStick.yaw = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getYaw();
-		this.shoulderStick.roll = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getRoll();
+		this.waistStick.pitch = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getPitch();
+		this.waistStick.yaw = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getYaw();
+		this.waistStick.roll = (float) (Math.PI / 180.0) * armorersMannequinEntityRenderState.bodyRotation.getRoll();
 	}
 
 	@Override

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "leather_strip",
+  "ingredients": [
+    "first_steps:stone_knife",
+    "minecraft:leather"
+  ],
+  "result": {
+    "count": 1,
+    "id": "first_steps:leather_strip"
+  }
+}

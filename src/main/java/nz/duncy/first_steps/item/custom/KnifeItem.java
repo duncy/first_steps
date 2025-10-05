@@ -29,4 +29,11 @@ public class KnifeItem extends Item {
 	public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		stack.damage(1, attacker, EquipmentSlot.MAINHAND);
 	}
+
+    @Override
+    public ItemStack getRecipeRemainder(ItemStack stack) {
+        ItemStack damaged = stack.copy();
+        damaged.setDamage(damaged.getDamage() + 1);
+        return damaged;
+	}
 }

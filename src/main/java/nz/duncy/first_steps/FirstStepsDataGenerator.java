@@ -4,12 +4,12 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
-import nz.duncy.first_steps.datagen.ModBlockTagProvider;
-import nz.duncy.first_steps.datagen.ModItemTagProvider;
-import nz.duncy.first_steps.datagen.ModLootTableProvider;
-import nz.duncy.first_steps.datagen.ModModelProvider;
-import nz.duncy.first_steps.datagen.ModRecipeProvider;
-import nz.duncy.first_steps.datagen.ModWorldGenerator;
+import nz.duncy.first_steps.data.ModBlockTagProvider;
+import nz.duncy.first_steps.data.ModItemTagProvider;
+import nz.duncy.first_steps.data.ModLootTableProvider;
+import nz.duncy.first_steps.data.ModModelProvider;
+import nz.duncy.first_steps.data.ModWorldGenerator;
+import nz.duncy.first_steps.data.recipe.ModRecipeProvider;
 import nz.duncy.first_steps.world.ModConfiguredFeatures;
 import nz.duncy.first_steps.world.ModPlacedFeatures;
 

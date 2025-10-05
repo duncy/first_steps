@@ -228,8 +228,27 @@ public class ModItemGroups {
 
                     entries.add(ModItems.HAMMER);
 
+                    entries.add(ModItems.ARMING_CAP);
                     entries.add(ModItems.GAMBESON);
+                    entries.add(ModItems.CLOTH_CHAUSSES);
+                    entries.add(ModItems.TURNSHOES);
+                    
                     entries.add(ModItems.LEATHER_JERKIN);
+
+                    entries.add(ModItems.COPPER_CHAINMAIL_COIF);
+                    entries.add(ModItems.COPPER_CHAINMAIL_HAUBERK);
+                    entries.add(ModItems.COPPER_CHAINMAIL_CHAUSESS);
+                    entries.add(ModItems.COPPER_CHAINMAIL_FOOTINGS);
+                    
+                    entries.add(ModItems.BRONZE_CHAINMAIL_COIF);
+                    entries.add(ModItems.BRONZE_CHAINMAIL_HAUBERK);
+                    entries.add(ModItems.BRONZE_CHAINMAIL_CHAUSESS);
+                    entries.add(ModItems.BRONZE_CHAINMAIL_FOOTINGS);
+
+                    entries.add(ModItems.IRON_CHAINMAIL_COIF);
+                    entries.add(ModItems.IRON_CHAINMAIL_HAUBERK);
+                    entries.add(ModItems.IRON_CHAINMAIL_CHAUSESS);
+                    entries.add(ModItems.IRON_CHAINMAIL_FOOTINGS);
 
                     entries.add(ModItems.LEATHER_LAMELLAR);
                     entries.add(ModItems.COPPER_LAMELLAR);
@@ -260,6 +279,7 @@ public class ModItemGroups {
                     entries.add(ModItems.IRON_BANDS);
 
                     entries.add(ModItems.TIN_NUGGET);
+                    entries.add(ModItems.COPPER_NUGGET);
                     entries.add(ModItems.BRONZE_NUGGET);
 
                     entries.add(ModItems.COPPER_HAUBERK);
@@ -363,6 +383,7 @@ public class ModItemGroups {
         entries.add(ModItems.RAW_DEEPSLATE_IRON);
 
         entries.add(ModItems.TIN_NUGGET);
+        entries.add(ModItems.COPPER_NUGGET);
         entries.add(ModItems.BRONZE_NUGGET);
     }
 
@@ -436,8 +457,27 @@ public class ModItemGroups {
         // entries.add(ModItems.IRON_ARROW);
         // entries.add(ModItems.STEEL_ARROW);
 
+        entries.add(ModItems.ARMING_CAP);
         entries.add(ModItems.GAMBESON);
+        entries.add(ModItems.CLOTH_CHAUSSES);
+        entries.add(ModItems.TURNSHOES);
+
         entries.add(ModItems.LEATHER_JERKIN);
+
+        entries.add(ModItems.COPPER_CHAINMAIL_COIF);
+        entries.add(ModItems.COPPER_CHAINMAIL_HAUBERK);
+        entries.add(ModItems.COPPER_CHAINMAIL_CHAUSESS);
+        entries.add(ModItems.COPPER_CHAINMAIL_FOOTINGS);
+        
+        entries.add(ModItems.BRONZE_CHAINMAIL_COIF);
+        entries.add(ModItems.BRONZE_CHAINMAIL_HAUBERK);
+        entries.add(ModItems.BRONZE_CHAINMAIL_CHAUSESS);
+        entries.add(ModItems.BRONZE_CHAINMAIL_FOOTINGS);
+
+        entries.add(ModItems.IRON_CHAINMAIL_COIF);
+        entries.add(ModItems.IRON_CHAINMAIL_HAUBERK);
+        entries.add(ModItems.IRON_CHAINMAIL_CHAUSESS);
+        entries.add(ModItems.IRON_CHAINMAIL_FOOTINGS);
 
         entries.add(ModItems.LEATHER_LAMELLAR);
         entries.add(ModItems.COPPER_LAMELLAR);

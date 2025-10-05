@@ -1,5 +1,7 @@
 package nz.duncy.first_steps.recipe;
 
+import net.minecraft.recipe.AbstractCookingRecipe;
+import net.minecraft.recipe.CampfireCookingRecipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.Registries;
@@ -25,10 +27,8 @@ public class ModRecipes {
       new KilningRecipe.Serializer()
    );
 
-
    public static void registerRecipes() {
       FirstSteps.LOGGER.info("Registering ModRecipes for " + FirstSteps.MOD_ID);
-      
    }
 
 }

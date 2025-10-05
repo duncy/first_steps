@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "first_steps:cloth",
+    "P": "#minecraft:planks",
+    "W": "#minecraft:wool"
+  },
+  "pattern": [
+    "WCC",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:white_bed"
+  }
+}

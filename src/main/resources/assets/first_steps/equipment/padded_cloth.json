@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "first_steps:padded_cloth"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "first_steps:padded_cloth"
+      }
+    ]
+  }
+}

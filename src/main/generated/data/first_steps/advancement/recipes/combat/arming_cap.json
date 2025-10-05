@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cloth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "first_steps:cloth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_padded_cloth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "first_steps:padded_cloth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "first_steps:arming_cap"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_padded_cloth",
+      "has_cloth"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "first_steps:arming_cap"
+    ]
+  }
+}

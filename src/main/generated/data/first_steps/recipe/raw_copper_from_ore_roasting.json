@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "misc",
+  "cookingtime": 1200,
+  "experience": 0.35,
+  "ingredient": "first_steps:raw_deepslate_copper",
+  "result": {
+    "id": "minecraft:raw_copper"
+  }
+}

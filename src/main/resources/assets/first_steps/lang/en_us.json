@@ -222,38 +222,73 @@
 
     "item.first_steps.flax_seeds": "Flax Seeds",
     "item.first_steps.cotton_seeds": "Cotton Seeds",
+
     "item.first_steps.flax": "Flax",
     "item.first_steps.cotton": "Cotton",
+
     "item.first_steps.armorers_mannequin": "Armorer's Mannequin",
+
     "item.first_steps.forge": "Forge",
+
     "item.first_steps.hammer": "Hammer",
+
+    "item.first_steps.arming_cap": "Arming Cap",
     "item.first_steps.gambeson": "Gambeson",
+    "item.first_steps.cloth_chausses": "Cloth Chausses",
+    "item.first_steps.turnshoes": "Turnshoes",
+
+    "item.first_steps.copper_chainmail_coif": "Copper Chainmail Coif",
+    "item.first_steps.copper_chainmail_hauberk": "Copper Chainmail Hauberk",
+    "item.first_steps.copper_chainmail_chausses": "Copper Chainmail Chausses",
+    "item.first_steps.copper_chainmail_footings": "Copper Chainmail Footings",
+
+    "item.first_steps.bronze_chainmail_coif": "Bronze Chainmail Coif",
+    "item.first_steps.bronze_chainmail_hauberk": "Bronze Chainmail Hauberk",
+    "item.first_steps.bronze_chainmail_chausses": "Bronze Chainmail Chausses",
+    "item.first_steps.bronze_chainmail_footings": "Bronze Chainmail Footings",
+
+    "item.first_steps.iron_chainmail_coif": "Iron Chainmail Coif",
+    "item.first_steps.iron_chainmail_hauberk": "Iron Chainmail Hauberk",
+    "item.first_steps.iron_chainmail_chausses": "Iron Chainmail Chausses",
+    "item.first_steps.iron_chainmail_footings": "Iron Chainmail Footings",
+
     "item.first_steps.leather_jerkin": "Leather Jerkin",
+
     "item.first_steps.leather_lamellar": "Leather Lamellar",
     "item.first_steps.copper_lamellar": "Copper Lamellar",
     "item.first_steps.bronze_lamellar": "Bronze Lamellar",
     "item.first_steps.iron_lamellar": "Iron Lamellar",
+
     "item.first_steps.copper_laminar": "Copper Laminar",
     "item.first_steps.bronze_laminar": "Bronze Laminar",
     "item.first_steps.iron_laminar": "Iron Laminar",
+
     "item.first_steps.copper_brigandine": "Copper Brigandine",
     "item.first_steps.bronze_brigandine": "Bronze Brigandine",
     "item.first_steps.iron_brigandine": "Iron Brigandine",
+
     "item.first_steps.iron_plate_harness": "Iron Plate Harness",
+
     "item.first_steps.cloth": "Cloth",
     "item.first_steps.padded_cloth": "Padded Cloth",
     "item.first_steps.leather_strip": "Leather Strip",
+
     "item.first_steps.copper_rings": "Copper Rings",
     "item.first_steps.bronze_rings": "Bronze Rings",
     "item.first_steps.iron_rings": "Iron Rings",
+
     "item.first_steps.copper_bands": "Copper Bands",
     "item.first_steps.bronze_bands": "Bronze Bands",
     "item.first_steps.iron_bands": "Iron Bands",
+
     "item.first_steps.tin_nugget": "Tin Nugget",
     "item.first_steps.bronze_nugget": "Bronze Nugget",
+
     "item.first_steps.copper_hauberk": "Copper Hauberk",
     "item.first_steps.bronze_hauberk": "Bronze Hauberk",
     "item.first_steps.iron_hauberk": "Iron Hauberk",
+
     "item.first_steps.iron_pauldron": "Iron Pauldron",
+    
     "item.first_steps.iron_gauntlet": "Iron Gauntlet"
 }

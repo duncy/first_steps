@@ -1,6 +1,9 @@
 {
   "values": [
+    "first_steps:arming_cap",
     "first_steps:gambeson",
+    "first_steps:cloth_chausses",
+    "first_steps:turnshoes",
     "first_steps:leather_jerkin"
   ]
 }

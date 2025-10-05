@@ -12,6 +12,7 @@ import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -179,6 +180,7 @@ public class ModItems {
 
     // Metal nuggets
     public static final Item TIN_NUGGET = registerItem("tin_nugget", Item::new);
+    public static final Item COPPER_NUGGET = registerItem("copper_nugget", Item::new);
     public static final Item BRONZE_NUGGET = registerItem("bronze_nugget", Item::new);
 
     // Seeds
@@ -207,11 +209,41 @@ public class ModItems {
     public static final Item BRONZE_BANDS = registerItem("bronze_bands", Item::new);
     public static final Item IRON_BANDS = registerItem("iron_bands", Item::new);
 
-    // Armours
+    // Base Armours
+    // Cloth
+    public static final Item ARMING_CAP = registerItem("arming_cap", 
+        setting -> new ArmorItem(ModArmorMaterials.PADDED_CLOTH_ARMOR_MATERIAL, EquipmentType.HELMET, setting.maxDamage(EquipmentType.HELMET.getMaxDamage(15))));
+
     public static final Item GAMBESON = registerItem("gambeson", 
         setting -> new ArmorItem(ModArmorMaterials.PADDED_CLOTH_ARMOR_MATERIAL, EquipmentType.CHESTPLATE, setting.maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(15))));
+        
+    public static final Item CLOTH_CHAUSSES = registerItem("cloth_chausses", 
+        setting -> new ArmorItem(ModArmorMaterials.PADDED_CLOTH_ARMOR_MATERIAL, EquipmentType.LEGGINGS, setting.maxDamage(EquipmentType.LEGGINGS.getMaxDamage(15))));
+
+    public static final Item TURNSHOES = registerItem("turnshoes", 
+        setting -> new ArmorItem(ArmorMaterials.LEATHER, EquipmentType.BOOTS, setting.maxDamage(EquipmentType.BOOTS.getMaxDamage(15))));
+
+    // Leather
     public static final Item LEATHER_JERKIN = registerItem("leather_jerkin", Item::new);
 
+    // Mid Layer Armours
+    public static final Item COPPER_CHAINMAIL_COIF = registerItem("copper_chainmail_coif", Item::new);
+    public static final Item BRONZE_CHAINMAIL_COIF = registerItem("bronze_chainmail_coif", Item::new);
+    public static final Item IRON_CHAINMAIL_COIF = registerItem("iron_chainmail_coif", Item::new);
+
+    public static final Item COPPER_CHAINMAIL_HAUBERK = registerItem("copper_chainmail_hauberk", Item::new);
+    public static final Item BRONZE_CHAINMAIL_HAUBERK = registerItem("bronze_chainmail_hauberk", Item::new);
+    public static final Item IRON_CHAINMAIL_HAUBERK = registerItem("iron_chainmail_hauberk", Item::new);
+
+    public static final Item COPPER_CHAINMAIL_CHAUSESS = registerItem("copper_chainmail_chausses", Item::new);
+    public static final Item BRONZE_CHAINMAIL_CHAUSESS = registerItem("bronze_chainmail_chausses", Item::new);
+    public static final Item IRON_CHAINMAIL_CHAUSESS = registerItem("iron_chainmail_chausses", Item::new);
+
+    public static final Item COPPER_CHAINMAIL_FOOTINGS = registerItem("copper_chainmail_footings", Item::new);
+    public static final Item BRONZE_CHAINMAIL_FOOTINGS = registerItem("bronze_chainmail_footings", Item::new);
+    public static final Item IRON_CHAINMAIL_FOOTINGS = registerItem("iron_chainmail_footings", Item::new);
+
+    // Top Layer Armours
     public static final Item LEATHER_LAMELLAR = registerItem("leather_lamellar", Item::new);
     public static final Item COPPER_LAMELLAR = registerItem("copper_lamellar", Item::new);
     public static final Item BRONZE_LAMELLAR = registerItem("bronze_lamellar", Item::new);
