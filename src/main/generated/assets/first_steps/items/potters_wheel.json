@@ -1,9 +1,0 @@
-{
-  "model": {
-    "type": "minecraft:special",
-    "base": "first_steps:item/potters_wheel",
-    "model": {
-      "type": "first_steps:potters_wheel"
-    }
-  }
-}

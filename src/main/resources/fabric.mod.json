@@ -3,38 +3,39 @@
 	"id": "first_steps",
 	"version": "${version}",
 	"name": "First Steps",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "A progression overhaul mod inspired by Vintage Story.",
 	"authors": [
-		"Me!"
+		"duncy"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/project/first_steps",
+		"sources": "https://github.com/duncy/first_steps"
 	},
-	"license": "CC0-1.0",
+	"license": "LGPL-3.0",
 	"icon": "assets/first_steps/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"nz.duncy.first_steps.FirstSteps"
 		],
-        "client": [
-            "nz.duncy.first_steps.FirstStepsClient"
-        ],
+		"client": [
+			"nz.duncy.first_steps.FirstStepsClient"
+		],
 		"fabric-datagen": [
 			"nz.duncy.first_steps.FirstStepsDataGenerator"
 		]
 	},
 	"mixins": [
-		"first_steps.mixins.json"
+		"first_steps.mixins.json",
+		{
+			"config": "first_steps.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
-		"fabricloader": ">=0.16.9",
-		"minecraft": "~1.21.4",
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
 		"java": ">=21",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }

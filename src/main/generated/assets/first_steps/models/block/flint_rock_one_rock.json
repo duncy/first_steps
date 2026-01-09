@@ -1,0 +1,7 @@
+{
+  "parent": "first_steps:block/template_rock",
+  "textures": {
+    "all": "first_steps:block/flint_rock",
+    "particle": "first_steps:block/flint_rock"
+  }
+}

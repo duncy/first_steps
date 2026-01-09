@@ -10,28 +10,16 @@
         "when": [
           "gui",
           "ground",
-          "fixed"
+          "fixed",
+          "on_shelf"
         ]
       }
     ],
     "fallback": {
-      "type": "minecraft:condition",
-      "on_false": {
-        "type": "minecraft:special",
-        "base": "first_steps:item/spear_in_hand",
-        "model": {
-          "type": "first_steps:basalt_spear"
-        }
-      },
-      "on_true": {
-        "type": "minecraft:special",
-        "base": "first_steps:item/spear_throwing",
-        "model": {
-          "type": "first_steps:basalt_spear"
-        }
-      },
-      "property": "minecraft:using_item"
+      "type": "minecraft:model",
+      "model": "first_steps:item/basalt_spear_in_hand"
     },
     "property": "minecraft:display_context"
-  }
+  },
+  "swap_animation_scale": 1.95
 }

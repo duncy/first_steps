@@ -3,13 +3,12 @@
 	"package": "nz.duncy.first_steps.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-        "OreFeatureMixin",
-		"CampfireBlockMixin"
+		"ExampleMixin"
 	],
-    "client": [
-		"BakedModelManagerMixin"
-    ],
 	"injectors": {
 		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
 	}
 }

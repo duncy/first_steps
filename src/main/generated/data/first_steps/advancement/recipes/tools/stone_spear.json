@@ -1,16 +1,6 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stick": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:stick"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_stone_head_spear": {
       "conditions": {
         "items": [
@@ -31,8 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_stone_head_spear",
-      "has_stick"
+      "has_stone_head_spear"
     ]
   ],
   "rewards": {

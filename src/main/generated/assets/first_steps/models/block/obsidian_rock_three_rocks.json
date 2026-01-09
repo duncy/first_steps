@@ -1,0 +1,7 @@
+{
+  "parent": "first_steps:block/template_three_rocks",
+  "textures": {
+    "all": "minecraft:block/obsidian",
+    "particle": "minecraft:block/obsidian"
+  }
+}

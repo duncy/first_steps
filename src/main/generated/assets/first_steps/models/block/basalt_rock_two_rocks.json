@@ -1,0 +1,7 @@
+{
+  "parent": "first_steps:block/template_two_rocks",
+  "textures": {
+    "all": "minecraft:block/smooth_basalt",
+    "particle": "minecraft:block/smooth_basalt"
+  }
+}

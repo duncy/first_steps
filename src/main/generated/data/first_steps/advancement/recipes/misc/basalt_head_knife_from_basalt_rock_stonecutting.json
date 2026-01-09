@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:basalt_head_knife_from_basalt_rock_stonecutting"
+        "recipe": "first_steps:basalt_head_knife_from_basalt_rock_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:basalt_head_knife_from_basalt_rock_stonecutting"
+      "first_steps:basalt_head_knife_from_basalt_rock_stonecutting"
     ]
   }
 }

@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
+  "group": "first_steps",
   "key": {
     "H": "first_steps:stone_head_spear",
     "S": "minecraft:stick"
@@ -11,6 +12,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "first_steps:stone_spear"
+    "id": "minecraft:stone_spear"
   }
 }

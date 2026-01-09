@@ -1,98 +1,41 @@
 {
-    "item.first_steps.stone_tin_ore": "Cassiterite Ore",
-    "item.first_steps.stone_copper_ore": "Malachite Ore",
-    "item.first_steps.stone_iron_ore": "Hematite Ore",
-    "item.first_steps.deepslate_copper_ore": "Chalcopyrite Ore",
-    "item.first_steps.deepslate_iron_ore": "Magnetite Ore",
-    "item.first_steps.basalt_mullite_ore": "Sillimanite Deposit",
-
-    "item.first_steps.raw_tin": "Raw Cassiterite",
-    "item.first_steps.raw_stone_copper": "Raw Malachite",
-    "item.first_steps.raw_stone_iron": "Raw Hematite",
-    "item.first_steps.raw_deepslate_copper": "Raw Chalcopyrite",
-    "item.first_steps.raw_deepslate_iron": "Raw Magnetite",
-    "item.first_steps.raw_mullite": "Sillimanite",
-
-    "item.first_steps.raw_tin_block": "Raw Cassiterite Block",
-    "item.first_steps.raw_stone_copper_block": "Raw Malachite Block",
-    "item.first_steps.raw_stone_iron_block": "Raw Hematite Block",
-    "item.first_steps.raw_deepslate_copper_block": "Raw Chalcopyrite Block",
-    "item.first_steps.raw_deepslate_iron_block": "Raw Magnetite Block",
-    "item.first_steps.raw_mullite_block": "Sillimanite Block",
+    "screen.first_steps.knapping.switcher": "Select a tool head",
+    "screen.first_steps.knapping.select": "%s Select",
+    "screen.first_steps.knapping.press_enter": "[ LEFT MOUSE ]",
 
     "item.first_steps.stone_head_hoe": "Stone Hoe Head",
     "item.first_steps.flint_head_hoe": "Flint Hoe Head",
     "item.first_steps.basalt_head_hoe": "Basalt Hoe Head",
     "item.first_steps.obsidian_head_hoe": "Obsidian Hoe Head",
-    "item.first_steps.copper_head_hoe": "Copper Hoe Head",
-    "item.first_steps.bronze_head_hoe": "Bronze Hoe Head",
-    "item.first_steps.iron_head_hoe": "Iron Hoe Head",
-    "item.first_steps.steel_head_hoe": "Steel Hoe Head",
 
     "item.first_steps.stone_head_axe": "Stone Axe Head",
     "item.first_steps.flint_head_axe": "Flint Axe Head",
     "item.first_steps.basalt_head_axe": "Basalt Axe Head",
     "item.first_steps.obsidian_head_axe": "Obsidian Axe Head",
-    "item.first_steps.copper_head_axe": "Copper Axe Head",
-    "item.first_steps.bronze_head_axe": "Bronze Axe Head",
-    "item.first_steps.iron_head_axe": "Iron Axe Head",
-    "item.first_steps.steel_head_axe": "Steel Axe Head",
-    
+
     "item.first_steps.stone_head_shovel": "Stone Shovel Head",
     "item.first_steps.flint_head_shovel": "Flint Shovel Head",
     "item.first_steps.basalt_head_shovel": "Basalt Shovel Head",
     "item.first_steps.obsidian_head_shovel": "Obsidian Shovel Head",
-    "item.first_steps.copper_head_shovel": "Copper Shovel Head",
-    "item.first_steps.bronze_head_shovel": "Bronze Shovel Head",
-    "item.first_steps.iron_head_shovel": "Iron Shovel Head",
-    "item.first_steps.steel_head_shovel": "Steel Shovel Head",
 
     "item.first_steps.stone_head_knife": "Stone Knife Blade",
     "item.first_steps.flint_head_knife": "Flint Knife Blade",
     "item.first_steps.basalt_head_knife": "Basalt Knife Blade",
     "item.first_steps.obsidian_head_knife": "Obsidian Knife Blade",
-    "item.first_steps.copper_head_knife": "Copper Knife Blade",
-    "item.first_steps.bronze_head_knife": "Bronze Knife Blade",
-    "item.first_steps.iron_head_knife": "Iron Knife Blade",
-    "item.first_steps.steel_head_knife": "Steel Knife Blade",
-    
+
     "item.first_steps.stone_head_spear": "Stone Spear Head",
     "item.first_steps.flint_head_spear": "Flint Spear Head",
     "item.first_steps.basalt_head_spear": "Basalt Spear Head",
     "item.first_steps.obsidian_head_spear": "Obsidian Spear Head",
-    "item.first_steps.copper_head_spear": "Copper Spear Head",
-    "item.first_steps.bronze_head_spear": "Bronze Spear Head",
-    "item.first_steps.iron_head_spear": "Iron Spear Head",
-    "item.first_steps.steel_head_spear": "Steel Spear Head",
-
-    "item.first_steps.copper_head_sword": "Copper Sword Head",
-    "item.first_steps.bronze_head_sword": "Bronze Sword Head",
-    "item.first_steps.iron_head_sword": "Iron Sword Head",
-    "item.first_steps.steel_head_sword": "Steel Sword Head",
-
-    "item.first_steps.copper_head_pickaxe": "Copper Pickaxe Head",
-    "item.first_steps.bronze_head_pickaxe": "Bronze Pickaxe Head",
-    "item.first_steps.iron_head_pickaxe": "Iron Pickaxe Head",
-    "item.first_steps.steel_head_pickaxe": "Steel Pickaxe Head",
-
-    "item.first_steps.stone_head_arrow": "Stone Arrow Head",
-    "item.first_steps.flint_head_arrow": "Flint Arrow Head",
-    "item.first_steps.basalt_head_arrow": "Basalt Arrow Head",
-    "item.first_steps.obsidian_head_arrow": "Obsidian Arrow Head",
-    "item.first_steps.copper_head_arrow": "Copper Arrow Head",
-    "item.first_steps.bronze_head_arrow": "Bronze Arrow Head",
-    "item.first_steps.iron_head_arrow": "Iron Arrow Head",
-    "item.first_steps.steel_head_arrow": "Steel Arrow Head",
 
     "item.first_steps.stone_knife": "Stone Knife",
-    "item.first_steps.stone_spear": "Stone Spear",
 
     "item.first_steps.flint_hoe": "Flint Hoe",
     "item.first_steps.flint_shovel": "Flint Shovel",
     "item.first_steps.flint_axe": "Flint Axe",
     "item.first_steps.flint_knife": "Flint Knife", 
     "item.first_steps.flint_spear": "Flint Spear",
-    
+
     "item.first_steps.basalt_hoe": "Basalt Hoe",
     "item.first_steps.basalt_shovel": "Basalt Shovel",
     "item.first_steps.basalt_axe": "Basalt Axe",
@@ -105,190 +48,12 @@
     "item.first_steps.obsidian_knife": "Obsidian Knife", 
     "item.first_steps.obsidian_spear": "Obsidian Spear",
 
-    "item.first_steps.copper_hoe": "Copper Hoe",
-    "item.first_steps.copper_shovel": "Copper Shovel",
-    "item.first_steps.copper_axe": "Copper Axe",
-    "item.first_steps.copper_knife": "Copper Knife", 
-    "item.first_steps.copper_spear": "Copper Spear",
-    "item.first_steps.copper_sword": "Copper Sword", 
-    "item.first_steps.copper_pickaxe": "Copper Pickaxe",
+    "block.first_steps.stone_rock": "Rock",
+    "block.first_steps.flint_rock": "Flint",
+    "block.first_steps.basalt_rock": "Basalt",
+    "block.first_steps.obsidian_rock": "Obsidian",
 
-    "item.first_steps.bronze_hoe": "Bronze Hoe",
-    "item.first_steps.bronze_shovel": "Bronze Shovel",
-    "item.first_steps.bronze_axe": "Bronze Axe",
-    "item.first_steps.bronze_knife": "Bronze Knife", 
-    "item.first_steps.bronze_spear": "Bronze Spear",
-    "item.first_steps.bronze_sword": "Bronze Sword", 
-    "item.first_steps.bronze_pickaxe": "Bronze Pickaxe",
-
-    "item.first_steps.iron_knife": "Iron Knife", 
-    "item.first_steps.iron_spear": "Iron Spear",
-
-    "item.first_steps.steel_hoe": "Steel Hoe",
-    "item.first_steps.steel_shovel": "Steel Shovel",
-    "item.first_steps.steel_axe": "Steel Axe",
-    "item.first_steps.steel_knife": "Steel Knife", 
-    "item.first_steps.steel_spear": "Steel Spear",
-    "item.first_steps.steel_sword": "Steel Sword", 
-    "item.first_steps.steel_pickaxe": "Steel Pickaxe",
-
-    "item.first_steps.stone_rock": "Rock",
-    "item.first_steps.flint_rock": "Flint",
-    "item.first_steps.basalt_rock": "Basalt",
-    "item.first_steps.obsidian_rock": "Obsidian",
-
-    "container.first_steps.kiln": "Kiln",
-    "item.first_steps.kiln": "Kiln",
-
-    "item.first_steps.unfired_flower_pot": "Clay Flower Pot",
-    "item.first_steps.unfired_crucible": "Clay Crucible",
-    "item.first_steps.unfired_decorated_pot": "Clay Decorated Pot",
-
-    "container.first_steps.fired_crucible": "Ceramic Crucible",
-    "item.first_steps.fired_crucible": "Ceramic Crucible",
-
-    "tooltip.first_steps.crucible.temperature": "Temperature: %d°C",
-    "tooltip.first_steps.crucible.itemCount": "%s x%s",
-    "tooltip.first_steps.crucible.more": "and %s more...",
-    
     "tooltip.first_steps.rock_block": "Use this with rocks on the ground to create tool heads!",
-    "tooltip.first_steps.ore_rock_block": "Use a rock with this to free the ore within!",
 
-    "tooltip.first_steps.tin_source": "Impure source of tin, you should roast this in fire",
-    "tooltip.first_steps.copper_source": "Impure source of copper, you should roast this in fire",
-    "tooltip.first_steps.iron_source": "Impure source of iron, you should roast this in fire",
-    "tooltip.first_steps.mullite_source": "Source of sillimanite",
-
-    "container.first_steps.mannequin": "Armorer's Mannequin",
-    "container.first_steps.mannequin.missing_armor": "Add a base armor",
-	"container.first_steps.mannequin.missing_shoulder": "Add a shoulder armor",
-	"container.first_steps.mannequin.missing_hand": "Add a hand armor",
-	"container.first_steps.mannequin.missing_mid_layer": "Add a mid layer armor",
-	"container.first_steps.mannequin.missing_top_layer": "Add a top layer armor",
-
-    "item.first_steps.stone_arrow": "Stone Arrow",
-    "item.first_steps.flint_arrow": "Flint Arrow",
-    "item.first_steps.basalt_arrow": "Basalt Arrow",
-    "item.first_steps.obsidian_arrow": "Obsidian Arrow",
-    "item.first_steps.copper_arrow": "Copper Arrow",
-    "item.first_steps.bronze_arrow": "Bronze Arrow",
-    "item.first_steps.iron_arrow": "Iron Arrow",
-    "item.first_steps.steel_arrow": "Steel Arrow",
-
-    "item.first_steps.tin_ingot": "Tin Ingot",
-    "item.first_steps.bronze_ingot": "Bronze Ingot",
-    "item.first_steps.steel_ingot": "Steel Ingot",
-
-
-    "item.first_steps.wooden_tongs": "Wooden Tongs",
-
-    "tooltip.first_steps.tongs.hint": "Use this to hold hot items!",
-    "tooltip.first_steps.tongs.holding": "Holding %s",
-
-    "tooltip.first_steps.unfired_mold_block": "Cast metal into this to create tool heads!",
-
-    "item.first_steps.clay": "Clay Ball",
-
-    "tooltip.first_steps.clay": "Use this on a potter's wheel to shape pottery!",
-
-    "item.first_steps.potters_wheel": "Potter's Wheel",
-
-    "itemgroup.first_steps": "First Steps",
-
-    "item.first_steps.hoe_head_mold": "Hoe Head Mold",
-    "item.first_steps.axe_head_mold": "Axe Head Mold",
-    "item.first_steps.shovel_head_mold": "Shovel Head Mold",
-    "item.first_steps.knife_head_mold": "Knife Head Mold",
-    "item.first_steps.spear_head_mold": "Spear Head Mold",
-    "item.first_steps.arrow_head_mold": "Arrow Head Mold",
-    "item.first_steps.pickaxe_head_mold": "Pickaxe Head Mold",
-    "item.first_steps.sword_head_mold": "Sword Blade Mold",
-
-    "screen.first_steps.knapping.hoe_head": "Hoe Head",
-    "screen.first_steps.knapping.shovel_head": "Shovel Head",
-    "screen.first_steps.knapping.axe_head": "Axe Head",
-    "screen.first_steps.knapping.knife_head": "Knife Head",
-    "screen.first_steps.knapping.spear_head": "Spear Head",
-    "screen.first_steps.knapping.sword_head": "Sword Head",
-    "screen.first_steps.knapping.pickaxe_head": "Pickaxe Head",
-    "screen.first_steps.knapping.arrow_head": "Arrow Head",
-
-    "screen.first_steps.knapping.switcher": "Select a tool head",
-    "screen.first_steps.knapping.select": "%s Select",
-    "screen.first_steps.knapping.press_enter": "[ LEFT MOUSE ]",
-
-    "stat.first_steps.interact_with_kiln": "Interactions with Kiln",
-    "stat.first_steps.potters_wheel_spins": "Potter's Wheel Spins",
-
-    "item.first_steps.flax_seeds": "Flax Seeds",
-    "item.first_steps.cotton_seeds": "Cotton Seeds",
-
-    "item.first_steps.flax": "Flax",
-    "item.first_steps.cotton": "Cotton",
-
-    "item.first_steps.armorers_mannequin": "Armorer's Mannequin",
-
-    "item.first_steps.forge": "Forge",
-
-    "item.first_steps.hammer": "Hammer",
-
-    "item.first_steps.arming_cap": "Arming Cap",
-    "item.first_steps.gambeson": "Gambeson",
-    "item.first_steps.cloth_chausses": "Cloth Chausses",
-    "item.first_steps.turnshoes": "Turnshoes",
-
-    "item.first_steps.copper_chainmail_coif": "Copper Chainmail Coif",
-    "item.first_steps.copper_chainmail_hauberk": "Copper Chainmail Hauberk",
-    "item.first_steps.copper_chainmail_chausses": "Copper Chainmail Chausses",
-    "item.first_steps.copper_chainmail_footings": "Copper Chainmail Footings",
-
-    "item.first_steps.bronze_chainmail_coif": "Bronze Chainmail Coif",
-    "item.first_steps.bronze_chainmail_hauberk": "Bronze Chainmail Hauberk",
-    "item.first_steps.bronze_chainmail_chausses": "Bronze Chainmail Chausses",
-    "item.first_steps.bronze_chainmail_footings": "Bronze Chainmail Footings",
-
-    "item.first_steps.iron_chainmail_coif": "Iron Chainmail Coif",
-    "item.first_steps.iron_chainmail_hauberk": "Iron Chainmail Hauberk",
-    "item.first_steps.iron_chainmail_chausses": "Iron Chainmail Chausses",
-    "item.first_steps.iron_chainmail_footings": "Iron Chainmail Footings",
-
-    "item.first_steps.leather_jerkin": "Leather Jerkin",
-
-    "item.first_steps.leather_lamellar": "Leather Lamellar",
-    "item.first_steps.copper_lamellar": "Copper Lamellar",
-    "item.first_steps.bronze_lamellar": "Bronze Lamellar",
-    "item.first_steps.iron_lamellar": "Iron Lamellar",
-
-    "item.first_steps.copper_laminar": "Copper Laminar",
-    "item.first_steps.bronze_laminar": "Bronze Laminar",
-    "item.first_steps.iron_laminar": "Iron Laminar",
-
-    "item.first_steps.copper_brigandine": "Copper Brigandine",
-    "item.first_steps.bronze_brigandine": "Bronze Brigandine",
-    "item.first_steps.iron_brigandine": "Iron Brigandine",
-
-    "item.first_steps.iron_plate_harness": "Iron Plate Harness",
-
-    "item.first_steps.cloth": "Cloth",
-    "item.first_steps.padded_cloth": "Padded Cloth",
-    "item.first_steps.leather_strip": "Leather Strip",
-
-    "item.first_steps.copper_rings": "Copper Rings",
-    "item.first_steps.bronze_rings": "Bronze Rings",
-    "item.first_steps.iron_rings": "Iron Rings",
-
-    "item.first_steps.copper_bands": "Copper Bands",
-    "item.first_steps.bronze_bands": "Bronze Bands",
-    "item.first_steps.iron_bands": "Iron Bands",
-
-    "item.first_steps.tin_nugget": "Tin Nugget",
-    "item.first_steps.bronze_nugget": "Bronze Nugget",
-
-    "item.first_steps.copper_hauberk": "Copper Hauberk",
-    "item.first_steps.bronze_hauberk": "Bronze Hauberk",
-    "item.first_steps.iron_hauberk": "Iron Hauberk",
-
-    "item.first_steps.iron_pauldron": "Iron Pauldron",
-    
-    "item.first_steps.iron_gauntlet": "Iron Gauntlet"
+    "itemGroup.first_steps": "First Steps"
 }

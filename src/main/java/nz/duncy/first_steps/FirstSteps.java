@@ -1,55 +1,56 @@
 package nz.duncy.first_steps;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.screen.ScreenHandler;
-import nz.duncy.first_steps.block.ModBlocks;
-import nz.duncy.first_steps.block.entity.ModBlockEntities;
-import nz.duncy.first_steps.component.ModDataComponentTypes;
-import nz.duncy.first_steps.entity.ModEntities;
-import nz.duncy.first_steps.item.custom.ModItemGroups;
-import nz.duncy.first_steps.item.custom.ModItems;
-import nz.duncy.first_steps.network.packet.KnappingRecipePayload;
-import nz.duncy.first_steps.network.packet.KnappingSelectionPayload;
-import nz.duncy.first_steps.recipe.ModRecipes;
-import nz.duncy.first_steps.screen.KnappingSelectionScreenHandler;
-import nz.duncy.first_steps.screen.ModScreenHandlers;
-import nz.duncy.first_steps.stat.ModStats;
-import nz.duncy.first_steps.util.events.ModEvents;
-import nz.duncy.first_steps.world.gen.ModWorldGeneration;
-import nz.duncy.first_steps.world.gen.feature.ModFeature;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import nz.duncy.first_steps.events.ModEvents;
+import nz.duncy.first_steps.network.protocol.common.custom.KnappingRecipePacketPayload;
+import nz.duncy.first_steps.network.protocol.common.custom.KnappingSelectionPacketPayload;
+import nz.duncy.first_steps.stats.ModStats;
+import nz.duncy.first_steps.world.inventory.KnappingMenu;
+import nz.duncy.first_steps.world.inventory.ModMenuType;
+import nz.duncy.first_steps.world.item.ModItems;
+import nz.duncy.first_steps.world.level.block.ModBlocks;
+import nz.duncy.first_steps.world.level.block.state.properties.ModBlockStateProperties;
+import nz.duncy.first_steps.world.level.levelgen.ModWorldGeneration;
+// import nz.duncy.first_steps.world.level.levelgen.feature.ModFeature;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FirstSteps implements ModInitializer {
-    public static final String MOD_ID = "first_steps";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final String MOD_ID = "first_steps";
+
+	// This logger is used to write text to the console and the log file.
+	// It is considered best practice to use your mod id as the logger's name.
+	// That way, it's clear which mod wrote info, warnings, and errors.
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
-        ModItems.registerModItems();
-        ModEntities.registerModItemEntities();
-        ModBlocks.registerModBlocks();
-        ModBlockEntities.registerModBlockEntities();
-        ModItemGroups.registerItemGroups();
-        ModFeature.registerFeatures();
-        ModWorldGeneration.generateModWorldGen();
-        ModRecipes.registerRecipes();
-        ModStats.registerStats();
-        ModDataComponentTypes.registerDataComponentTypes();
-        ModEvents.registerModEvents();
-        ModScreenHandlers.registerScreenHandlers();
+		// This code runs as soon as Minecraft is in a mod-load-ready state.
+		// However, some things (like resources) may still be uninitialized.
+		// Proceed with mild caution.
 
-        PayloadTypeRegistry.playS2C().register(KnappingRecipePayload.ID, KnappingRecipePayload.CODEC);
-        PayloadTypeRegistry.playC2S().register(KnappingSelectionPayload.ID, KnappingSelectionPayload.CODEC);
+		ModItems.initialize();
+		ModBlockStateProperties.initialize();
+		ModBlocks.initialize();
+        ModWorldGeneration.initialize();
+        ModStats.initialize();
+        ModEvents.initialize();
+        ModMenuType.initialize();
 
-        ServerPlayNetworking.registerGlobalReceiver(KnappingSelectionPayload.ID, (payload, context) -> {
-            ScreenHandler screenHandler = context.player().currentScreenHandler;
-            if (screenHandler instanceof KnappingSelectionScreenHandler) {
-                ((KnappingSelectionScreenHandler) screenHandler).dropHead(payload.selection(), context.player());
+        PayloadTypeRegistry.playS2C().register(KnappingRecipePacketPayload.TYPE, KnappingRecipePacketPayload.CODEC);
+        PayloadTypeRegistry.playC2S().register(KnappingSelectionPacketPayload.TYPE, KnappingSelectionPacketPayload.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(KnappingSelectionPacketPayload.TYPE, (payload, context) -> {
+            AbstractContainerMenu containerMenu = context.player().containerMenu;
+            if (containerMenu instanceof KnappingMenu) {
+                ((KnappingMenu) containerMenu).dropHead(payload.selection(), context.player());
             }
 	    });
-    }
+
+		LOGGER.info("Finished initialisation of " + MOD_ID + ", have fun! :^)");
+	}
 }

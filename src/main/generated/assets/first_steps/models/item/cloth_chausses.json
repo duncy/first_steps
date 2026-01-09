@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "first_steps:item/cloth_chausses",
-    "layer1": "first_steps:item/cloth_chausses_overlay"
-  }
-}

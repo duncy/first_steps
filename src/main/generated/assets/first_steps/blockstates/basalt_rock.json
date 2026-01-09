@@ -1,0 +1,72 @@
+{
+  "variants": {
+    "rocks=1": [
+      {
+        "model": "first_steps:block/basalt_rock_one_rock"
+      },
+      {
+        "model": "first_steps:block/basalt_rock_one_rock",
+        "y": 90
+      },
+      {
+        "model": "first_steps:block/basalt_rock_one_rock",
+        "y": 180
+      },
+      {
+        "model": "first_steps:block/basalt_rock_one_rock",
+        "y": 270
+      }
+    ],
+    "rocks=2": [
+      {
+        "model": "first_steps:block/basalt_rock_two_rocks"
+      },
+      {
+        "model": "first_steps:block/basalt_rock_two_rocks",
+        "y": 90
+      },
+      {
+        "model": "first_steps:block/basalt_rock_two_rocks",
+        "y": 180
+      },
+      {
+        "model": "first_steps:block/basalt_rock_two_rocks",
+        "y": 270
+      }
+    ],
+    "rocks=3": [
+      {
+        "model": "first_steps:block/basalt_rock_three_rocks"
+      },
+      {
+        "model": "first_steps:block/basalt_rock_three_rocks",
+        "y": 90
+      },
+      {
+        "model": "first_steps:block/basalt_rock_three_rocks",
+        "y": 180
+      },
+      {
+        "model": "first_steps:block/basalt_rock_three_rocks",
+        "y": 270
+      }
+    ],
+    "rocks=4": [
+      {
+        "model": "first_steps:block/basalt_rock_four_rocks"
+      },
+      {
+        "model": "first_steps:block/basalt_rock_four_rocks",
+        "y": 90
+      },
+      {
+        "model": "first_steps:block/basalt_rock_four_rocks",
+        "y": 180
+      },
+      {
+        "model": "first_steps:block/basalt_rock_four_rocks",
+        "y": 270
+      }
+    ]
+  }
+}

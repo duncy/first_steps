@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
+  "group": "first_steps",
   "key": {
     "H": "first_steps:flint_head_shovel",
     "S": "minecraft:stick"
