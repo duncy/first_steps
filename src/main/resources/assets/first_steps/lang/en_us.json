@@ -53,7 +53,7 @@
     "block.first_steps.basalt_rock": "Basalt",
     "block.first_steps.obsidian_rock": "Obsidian",
 
-    "tooltip.first_steps.rock_block": "Use this with rocks on the ground to create tool heads!",
+    "tooltip.first_steps.rock_block": "Use this on rocks on the ground to knap tool heads.",
 
     "itemGroup.first_steps": "First Steps"
 }

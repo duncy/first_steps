@@ -7,12 +7,10 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-// import net.minecraft.core.Registry;
-// import net.minecraft.core.Holder.Reference;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionResult;
@@ -21,9 +19,10 @@ import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -73,15 +72,31 @@ public class ModEvents {
 
         LootTableEvents.MODIFY.register((key, tableBuilder, source, provider) -> {
             // Reference<Registry<Item>> itemLookup = provider.getOrThrow(Registries.ITEM);
-            ResourceKey<LootTable> bushItemKey = ResourceKey.create(Registries.LOOT_TABLE, Identifier.withDefaultNamespace("blocks/bush"));
+            Identifier locationID = key.identifier();
+            String path = locationID.getPath();
 
-            if (key.equals(bushItemKey)) {
-                tableBuilder.pool(LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1))
-                    .add(LootItem.lootTableItem(Items.STICK))
-                    .when(LootItemRandomChanceCondition.randomChance(0.25f))
-                    .build()
-                );
+            if (path.startsWith("blocks/")) {
+                Identifier blockID = Identifier.withDefaultNamespace(path.substring(7));
+                Block block = BuiltInRegistries.BLOCK.getOptional(blockID).orElse(null);
+
+                if (block != null) {
+                    BlockState blockState = block.defaultBlockState();
+                    if (blockState.is(BlockTags.LEAVES)) {
+                        tableBuilder.pool(LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1))
+                            .add(LootItem.lootTableItem(Items.STICK))
+                            .when(LootItemRandomChanceCondition.randomChance(0.25f))
+                            .build()
+                        );
+                    } else if (blockState.is(Blocks.BUSH)) {
+                        tableBuilder.pool(LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1))
+                            .add(LootItem.lootTableItem(Items.STICK))
+                            .when(LootItemRandomChanceCondition.randomChance(0.75f))
+                            .build()
+                        );
+                    }
+                }
             }
         });
 
