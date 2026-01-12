@@ -119,6 +119,16 @@ public class RockBlock extends Block {
         return canSupportCenter(levelReader, blockPos.below(), Direction.UP);
     }
 
+    @Override
+    public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean bl) {
+        Item item = asItem();
+        if (item == Items.AIR) {
+            item = Items.FLINT;
+        }
+
+        return new ItemStack(item);
+    }
+
     static {
         ROCKS = ModBlockStateProperties.ROCKS;
         SHAPE_ONE = Block.box(4.0, 0, 4.0, 12.0, 1, 12.0);

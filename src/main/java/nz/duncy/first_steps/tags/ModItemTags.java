@@ -17,7 +17,7 @@ public class ModItemTags {
     public static final TagKey<Item> OBSIDIAN_REPAIR = createTag("obsidian_repair");
     // public static final TagKey<Item> BRONZE_REPAIR = createTag("bronze_repair");
 
-    // public static final TagKey<Item> TINDER = createTag("tinder");
+    public static final TagKey<Item> TINDER = createTag("tinder");
 
     // public static final TagKey<Item> BASE_LAYER_ARMOR = createTag("base_layer_armor");
     // public static final TagKey<Item> MID_LAYER_ARMOR = createTag("mid_layer_armor");

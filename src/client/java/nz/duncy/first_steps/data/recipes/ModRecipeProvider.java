@@ -8,9 +8,12 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.tags.ModItemTags;
 import nz.duncy.first_steps.world.item.ModItems;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 
@@ -32,6 +35,18 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             public void buildRecipes() {
                 buildStonecutterToolHeadRecipes();
                 buildToolRecipes();
+                vanillaReplacementRecipes();
+            }
+
+            private void vanillaReplacementRecipes() {
+                shaped(RecipeCategory.DECORATIONS, Blocks.CAMPFIRE)
+                .pattern("LL")
+                .pattern("TT")
+                .define('L', ItemTags.LOGS)
+                .define('T', ModItemTags.TINDER)
+                .unlockedBy("has_logs", has(ItemTags.LOGS))
+                .unlockedBy("has_tinder", has(ModItemTags.TINDER))
+                .save(output);
             }
 
             private void buildToolRecipes() {
@@ -58,6 +73,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 buildToolRecipe(ModItems.OBSIDIAN_SHOVEL, ModItems.OBSIDIAN_HEAD_SHOVEL);
                 buildToolRecipe(ModItems.OBSIDIAN_HOE, ModItems.OBSIDIAN_HEAD_HOE);
                 buildToolRecipe(ModItems.OBSIDIAN_SPEAR, ModItems.OBSIDIAN_HEAD_SPEAR);
+
+                shaped(RecipeCategory.TOOLS, ModItems.FIRESTARTER, 1)
+                .pattern(" S")
+                .pattern("ST")
+                .define('T', ModItemTags.TINDER)
+                .define('S', Items.STICK)
+                .group(FirstSteps.MOD_ID + "_firestarter")
+                .unlockedBy(getHasName(Items.STICK), has(Items.STICK))
+                .unlockedBy("has_tinder", has(ModItemTags.TINDER))
+                .save(output);
             }
 
             public void buildToolRecipe(Item tool, Item toolHead) {
@@ -66,7 +91,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("S")
                 .define('H', toolHead)
                 .define('S', Items.STICK)
-                .group(FirstSteps.MOD_ID)
                 .unlockedBy(getHasName(toolHead), has(toolHead))
                 .save(output);
             }

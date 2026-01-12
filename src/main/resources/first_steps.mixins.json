@@ -3,7 +3,7 @@
 	"package": "nz.duncy.first_steps.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"CampfireBlockMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

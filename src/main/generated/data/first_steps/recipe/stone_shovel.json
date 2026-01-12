@@ -1,7 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "group": "first_steps",
   "key": {
     "H": "first_steps:stone_head_shovel",
     "S": "minecraft:stick"

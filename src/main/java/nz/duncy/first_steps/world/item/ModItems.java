@@ -153,10 +153,14 @@ public class ModItems {
     // Swords
     // public static final Item BRONZE_SWORD = registerItem("bronze_sword", (new Item.Properties()).sword(ModToolMaterial.BRONZE, 3.0F, -2.4F));
 
+    // Firestarter
+    public static final Item FIRESTARTER = registerItem("firestarter", FireStarterItem::new, (new Item.Properties()).durability(16));
+
     // Blocks
     public static final Item STONE_ROCK = Items.registerBlock(ModBlocks.STONE_ROCK, RockBlockItem::new);
     public static final Item BASALT_ROCK = Items.registerBlock(ModBlocks.BASALT_ROCK, RockBlockItem::new);
     public static final Item OBSIDIAN_ROCK = Items.registerBlock(ModBlocks.OBSIDIAN_ROCK, RockBlockItem::new);
+
 
     public static Item registerItem(String string) {
         return Items.registerItem(moddedItemId(string), Item::new, new Item.Properties());
@@ -292,6 +296,10 @@ public class ModItems {
             // Iron tools
             // itemGroup.accept(ModItems.IRON_KNIFE);
 
+            // Firestarter
+            itemGroup.accept(FIRESTARTER);
+
+            // Blocks
             // Rocks
             itemGroup.accept(ModBlocks.STONE_ROCK);
             itemGroup.accept(ModBlocks.BASALT_ROCK);

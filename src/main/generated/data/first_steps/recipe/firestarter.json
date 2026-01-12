@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "first_steps_firestarter",
+  "key": {
+    "S": "minecraft:stick",
+    "T": "#first_steps:tinder"
+  },
+  "pattern": [
+    " S",
+    "ST"
+  ],
+  "result": {
+    "count": 1,
+    "id": "first_steps:firestarter"
+  }
+}

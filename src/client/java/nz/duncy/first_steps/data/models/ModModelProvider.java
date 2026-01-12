@@ -153,6 +153,9 @@ public class ModModelProvider extends FabricModelProvider {
 
         // Iron tools
         // itemModelGenerator.generateFlatItem(ModItems.IRON_KNIFE, ModelTemplates.FLAT_HANDHELD_ITEM);
+
+        // Firestarter
+        itemModelGenerator.generateFlatItem(ModItems.FIRESTARTER, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
     @Override
