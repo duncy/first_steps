@@ -65,7 +65,18 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy("has_logs", has(ItemTags.LOGS))
                 .unlockedBy("has_tinder", has(ModItemTags.TINDER))
                 .save(output);
+
+                shaped(RecipeCategory.DECORATIONS, Blocks.SOUL_CAMPFIRE)
+                .pattern("LL")
+                .pattern("SS")
+                .define('L', ItemTags.LOGS)
+                .define('S', ItemTags.SOUL_FIRE_BASE_BLOCKS)
+                .unlockedBy("has_logs", has(ItemTags.LOGS))
+                .unlockedBy("has_soul_fire_base_blocks", has(ItemTags.SOUL_FIRE_BASE_BLOCKS))
+                .save(output);
             }
+
+            
 
             private void buildToolRecipes() {
                 buildToolRecipe(Items.STONE_AXE, ModItems.STONE_HEAD_AXE);

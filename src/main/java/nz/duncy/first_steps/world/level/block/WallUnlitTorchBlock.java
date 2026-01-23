@@ -6,9 +6,18 @@ import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
@@ -16,10 +25,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -32,6 +43,24 @@ public class WallUnlitTorchBlock extends UnlitTorchBlock {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
+
+    protected InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        Item item = itemStack.getItem();
+        if (item == Items.FLINT_AND_STEEL) {
+            level.playSound(null, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+            BlockState newBlockState = Blocks.WALL_TORCH.defaultBlockState().setValue(WallTorchBlock.FACING, level.getBlockState(blockPos).getValue(WallUnlitTorchBlock.FACING));
+            level.setBlock(blockPos, newBlockState, UPDATE_ALL);
+            itemStack.hurtAndBreak(1, player, interactionHand.asEquipmentSlot());
+            return InteractionResult.SUCCESS;
+        } else if (item == Items.FIRE_CHARGE) {
+            level.playSound(null, blockPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+            BlockState newBlockState = Blocks.WALL_TORCH.defaultBlockState().setValue(WallTorchBlock.FACING, level.getBlockState(blockPos).getValue(WallUnlitTorchBlock.FACING));
+            level.setBlock(blockPos, newBlockState, UPDATE_ALL);
+            itemStack.consume(1, player);
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
+    }  
 
     protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return getShape(blockState);

@@ -19,6 +19,8 @@ public class ModItemTags {
 
     public static final TagKey<Item> TINDER = createTag("tinder");
 
+    public static final TagKey<Item> KNIVES = createTag("knives");
+
     // public static final TagKey<Item> BASE_LAYER_ARMOR = createTag("base_layer_armor");
     // public static final TagKey<Item> MID_LAYER_ARMOR = createTag("mid_layer_armor");
     // public static final TagKey<Item> TOP_LAYER_ARMOR = createTag("top_layer_armor");

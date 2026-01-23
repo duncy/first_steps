@@ -41,11 +41,32 @@ public class ModItemTagProvider extends ItemTagProvider {
             .add(ModItems.BASALT_SHOVEL)
             .add(ModItems.OBSIDIAN_SHOVEL);
 
-            valueLookupBuilder(ItemTags.HOES)
+        valueLookupBuilder(ItemTags.HOES)
             .add(ModItems.FLINT_HOE)
             .add(ModItems.BASALT_HOE)
             .add(ModItems.OBSIDIAN_HOE);
 
+        valueLookupBuilder(ItemTags.SPEARS)
+            .add(ModItems.FLINT_SPEAR)
+            .add(ModItems.BASALT_SPEAR)
+            .add(ModItems.OBSIDIAN_SPEAR);
+
+        valueLookupBuilder(ModItemTags.KNIVES)
+            .add(ModItems.STONE_KNIFE)
+            .add(ModItems.FLINT_KNIFE)
+            .add(ModItems.BASALT_KNIFE)
+            .add(ModItems.OBSIDIAN_KNIFE);
+
+        valueLookupBuilder(ItemTags.MELEE_WEAPON_ENCHANTABLE)
+            .addTag(ModItemTags.KNIVES);
+
+        valueLookupBuilder(ItemTags.BREAKS_DECORATED_POTS)
+            .addTag(ModItemTags.KNIVES);
+
+        valueLookupBuilder(ItemTags.DURABILITY_ENCHANTABLE)
+            .addTag(ModItemTags.KNIVES);
     }
+
+
     
 }
