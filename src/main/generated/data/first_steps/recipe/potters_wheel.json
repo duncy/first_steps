@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "first_steps_potters_wheel",
+  "key": {
+    "B": "minecraft:brick",
+    "H": "first_steps:potters_wheel_head",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    " H ",
+    "SSS",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "first_steps:potters_wheel"
+  }
+}

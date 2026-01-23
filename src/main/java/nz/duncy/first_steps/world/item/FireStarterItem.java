@@ -12,12 +12,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.block.CandleCakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
+import nz.duncy.first_steps.world.level.block.UnlitTorchBlock;
 
 public class FireStarterItem extends Item {
     private static final float IGNITE_CHANCE = 0.25f;
@@ -33,6 +36,20 @@ public class FireStarterItem extends Item {
         BlockState blockState = level.getBlockState(blockPos);
 
         if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
+            if (blockState.getBlock() instanceof UnlitTorchBlock) {
+                if (!level.isClientSide()) {
+                    if (level.random.nextFloat() < IGNITE_CHANCE ) {
+                        BlockState placeBlockState = Blocks.TORCH.defaultBlockState();
+                        level.playSound(null, blockPos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                        level.setBlock(blockPos, placeBlockState, Block.UPDATE_ALL);
+                    } else {
+                        level.playSound(null, blockPos, SoundEvents.GRASS_STEP, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+                    }
+                    useOnContext.getItemInHand().hurtAndBreak(1, player, useOnContext.getHand().asEquipmentSlot());
+                }
+                return InteractionResult.SUCCESS;
+            }
+
             BlockPos placeBlockPos = blockPos.relative(useOnContext.getClickedFace());
             if (BaseFireBlock.canBePlacedAt(level, placeBlockPos, useOnContext.getHorizontalDirection())) {
                 ItemStack itemStack = useOnContext.getItemInHand();

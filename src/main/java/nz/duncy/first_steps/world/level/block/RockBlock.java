@@ -105,8 +105,8 @@ public class RockBlock extends Block {
         return new SimpleMenuProvider((i, inventory, player) -> {
             Item item = asItem();
             if (item == Items.AIR) item = Items.FLINT;
-            SingleInputSet<StonecutterRecipe> recipes = ((ServerLevel) player.level()).recipeAccess().stonecutterRecipes().selectByInput(new ItemStack(item));
-            return new KnappingMenu(i, inventory, recipes, blockPos);
+                SingleInputSet<StonecutterRecipe> recipes = ((ServerLevel) player.level()).recipeAccess().stonecutterRecipes().selectByInput(new ItemStack(item));
+                return new KnappingMenu(i, inventory, recipes, blockPos);
         }, Component.empty());
     }
 

@@ -12,6 +12,10 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import nz.duncy.first_steps.data.models.model.ModModelTemplates;
+import nz.duncy.first_steps.renderer.special.DecoratedJarSpecialRenderer;
+import nz.duncy.first_steps.renderer.special.PottersWheelSpecialRenderer;
+import nz.duncy.first_steps.renderer.special.UnfiredDecoratedJarSpecialRenderer;
+import nz.duncy.first_steps.renderer.special.UnfiredDecoratedPotSpecialRenderer;
 import nz.duncy.first_steps.world.item.ModItems;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 import nz.duncy.first_steps.world.level.block.state.properties.ModBlockStateProperties;
@@ -27,7 +31,15 @@ public class ModModelProvider extends FabricModelProvider {
         createRock(blockStateModelGenerator, ModBlocks.FLINT_ROCK);
         createRock(blockStateModelGenerator, ModBlocks.BASALT_ROCK, Blocks.SMOOTH_BASALT);
         createRock(blockStateModelGenerator, ModBlocks.OBSIDIAN_ROCK, Blocks.OBSIDIAN);
-
+        blockStateModelGenerator.createParticleOnlyBlock(ModBlocks.DECORATED_JAR, Blocks.TERRACOTTA);
+        blockStateModelGenerator.generateSimpleSpecialItemModel(ModBlocks.DECORATED_JAR, new DecoratedJarSpecialRenderer.Unbaked());
+        blockStateModelGenerator.createParticleOnlyBlock(ModBlocks.UNFIRED_DECORATED_POT, Blocks.CLAY);
+        blockStateModelGenerator.generateSimpleSpecialItemModel(ModBlocks.UNFIRED_DECORATED_POT, new UnfiredDecoratedPotSpecialRenderer.Unbaked());
+        blockStateModelGenerator.createParticleOnlyBlock(ModBlocks.UNFIRED_DECORATED_JAR, Blocks.CLAY);
+        blockStateModelGenerator.generateSimpleSpecialItemModel(ModBlocks.UNFIRED_DECORATED_JAR, new UnfiredDecoratedJarSpecialRenderer.Unbaked());
+        blockStateModelGenerator.createParticleOnlyBlock(ModBlocks.POTTERS_WHEEL, Blocks.OAK_LOG);
+        blockStateModelGenerator.generateSimpleSpecialItemModel(ModBlocks.POTTERS_WHEEL, new PottersWheelSpecialRenderer.Unbaked());
+        blockStateModelGenerator.createNormalTorch(ModBlocks.UNLIT_TORCH, ModBlocks.WALL_UNLIT_TORCH);
     }
 
     public final void createRock(BlockModelGenerators blockStateModelGenerator, Block block) {
@@ -156,6 +168,13 @@ public class ModModelProvider extends FabricModelProvider {
 
         // Firestarter
         itemModelGenerator.generateFlatItem(ModItems.FIRESTARTER, ModelTemplates.FLAT_HANDHELD_ITEM);
+
+        itemModelGenerator.generateFlatItem(ModItems.POTTERS_WHEEL_HEAD, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_POTTERS_WHEEL_HEAD, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_BRICK, ModelTemplates.FLAT_ITEM);
+
+        // itemModelGenerator.generate
+
     }
 
     @Override

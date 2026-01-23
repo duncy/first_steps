@@ -8,13 +8,21 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
+import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.tags.ModItemTags;
 import nz.duncy.first_steps.world.item.ModItems;
+import nz.duncy.first_steps.world.item.crafting.PottersWheelRecipe;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
@@ -34,8 +42,18 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 			@Override
             public void buildRecipes() {
                 buildStonecutterToolHeadRecipes();
+                buildPottersWheelRecipes();
                 buildToolRecipes();
                 vanillaReplacementRecipes();
+
+                shaped(RecipeCategory.DECORATIONS, ModBlocks.UNLIT_TORCH)
+                .pattern("T")
+                .pattern("S")
+                .define('S', Items.STICK)
+                .define('T', ModItemTags.TINDER)
+                .unlockedBy("has_logs", has(Items.STICK))
+                .unlockedBy("has_tinder", has(ModItemTags.TINDER))
+                .save(output);
             }
 
             private void vanillaReplacementRecipes() {
@@ -93,6 +111,64 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .define('S', Items.STICK)
                 .unlockedBy(getHasName(toolHead), has(toolHead))
                 .save(output);
+            }
+
+            public void pottersWheelResultFromBase(RecipeCategory recipeCategory, ItemLike result, ItemLike ingredient) {
+                SingleItemRecipeBuilder singleItemRecipeBuilder = new SingleItemRecipeBuilder(recipeCategory, PottersWheelRecipe::new, Ingredient.of(ingredient), result, 1)
+                    .unlockedBy(getHasName(ingredient), has(ingredient));
+                String conversionRecipeName = getConversionRecipeName(result, ingredient);
+                singleItemRecipeBuilder.save(this.output, conversionRecipeName + "_potters_wheel");
+            }
+
+            public final <T extends AbstractCookingRecipe> void potteryBakingRecipe(int cookingTime, ItemLike input, ItemLike result, float experience) {
+                SimpleCookingRecipeBuilder builder = SimpleCookingRecipeBuilder.generic(
+                    Ingredient.of(input), 
+                    RecipeCategory.MISC, 
+                    result, 
+                    experience, 
+                    cookingTime, 
+                    RecipeSerializer.CAMPFIRE_COOKING_RECIPE, 
+                    CampfireCookingRecipe::new
+                ).unlockedBy(
+                    getHasName(input), 
+                    this.has(input)
+                );
+                builder.save(this.output, getItemName(result) + "_from_baking");
+             }
+
+            public void buildPottersWheelRecipes() {
+                pottersWheelResultFromBase(RecipeCategory.DECORATIONS, ModBlocks.UNFIRED_DECORATED_JAR, Blocks.CLAY);
+                pottersWheelResultFromBase(RecipeCategory.DECORATIONS, ModBlocks.UNFIRED_DECORATED_POT, Blocks.CLAY);
+
+                shaped(RecipeCategory.DECORATIONS, ModBlocks.POTTERS_WHEEL, 1)
+                .pattern(" H ")
+                .pattern("SSS")
+                .pattern("SBS")
+                .define('H', ModItems.POTTERS_WHEEL_HEAD)
+                .define('S', Items.STICK)
+                .define('B', Items.BRICK)
+                .group(FirstSteps.MOD_ID + "_potters_wheel")
+                .unlockedBy(getHasName(Items.STICK), has(Items.STICK))
+                .unlockedBy(getHasName(Items.BRICK), has(Items.BRICK))
+                .unlockedBy(getHasName(ModItems.POTTERS_WHEEL_HEAD), has(ModItems.POTTERS_WHEEL_HEAD))
+                .save(output);
+                
+                shaped(RecipeCategory.DECORATIONS, ModItems.UNFIRED_POTTERS_WHEEL_HEAD, 1)
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .group(FirstSteps.MOD_ID + "_unfired_potters_wheel_head")
+                .unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL))
+                .save(output);
+
+                shaped(RecipeCategory.DECORATIONS, ModItems.UNFIRED_BRICK, 1)
+                .pattern("C")
+                .define('C', Items.CLAY_BALL)
+                .group(FirstSteps.MOD_ID + "_unfired_bricks")
+                .unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL))
+                .save(output);
+
+                potteryBakingRecipe(600, ModItems.UNFIRED_BRICK, Items.BRICK, 0.35F);
+                potteryBakingRecipe(600, ModItems.UNFIRED_POTTERS_WHEEL_HEAD, ModItems.POTTERS_WHEEL_HEAD, 0.35F);
             }
 
 			public void buildStonecutterToolHeadRecipes() {

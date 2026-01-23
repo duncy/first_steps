@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "first_steps:potters_wheel_head_from_baking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unfired_potters_wheel_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": "first_steps:unfired_potters_wheel_head"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_unfired_potters_wheel_head"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "first_steps:potters_wheel_head_from_baking"
+    ]
+  }
+}

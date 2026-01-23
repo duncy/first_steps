@@ -1,7 +1,6 @@
 {
     "screen.first_steps.knapping.switcher": "Select a tool head",
-    "screen.first_steps.knapping.select": "%s Select",
-    "screen.first_steps.knapping.press_enter": "[ LEFT MOUSE ]",
+    "screen.first_steps.potters_wheel.switcher": "Select a pottery shape",
 
     "item.first_steps.stone_head_hoe": "Stone Hoe Head",
     "item.first_steps.flint_head_hoe": "Flint Hoe Head",
@@ -50,11 +49,21 @@
 
     "item.first_steps.firestarter": "Firestarter",
 
-
+    "item.first_steps.potters_wheel_head": "Potters Wheel Head",
+    "item.first_steps.unfired_potters_wheel_head": "Unfired Potters Wheel Head",
+    "item.first_steps.unfired_brick": "Unfired Brick",
+    
     "block.first_steps.stone_rock": "Rock",
     "block.first_steps.flint_rock": "Flint",
     "block.first_steps.basalt_rock": "Basalt",
     "block.first_steps.obsidian_rock": "Obsidian",
+    "block.first_steps.decorated_jar": "Decorated Jar",
+    "block.first_steps.unfired_decorated_jar": "Unfired Decorated Jar",
+    "block.first_steps.unfired_decorated_pot": "Unfired Decorated Pot",
+    "block.first_steps.potters_wheel": "Potter's Wheel",
+    "block.first_steps.unlit_torch": "Unlit Torch",
+
+    "container.first_steps.decorated_jar": "Decorated Jar",
 
     "tooltip.first_steps.rock_block": "Use this on rocks on the ground to knap tool heads.",
 

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": "first_steps:unfired_potters_wheel_head",
+  "result": {
+    "id": "first_steps:potters_wheel_head"
+  }
+}

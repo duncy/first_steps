@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "first_steps_unfired_potters_wheel_head",
+  "key": {
+    "C": "minecraft:clay_ball"
+  },
+  "pattern": [
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "first_steps:unfired_potters_wheel_head"
+  }
+}

@@ -1,8 +1,9 @@
 {
 	"required": true,
-	"package": "nz.duncy.first_steps.mixin.client",
+	"package": "nz.duncy.first_steps.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
+        "AtlasManagerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

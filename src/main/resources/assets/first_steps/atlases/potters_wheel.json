@@ -1,0 +1,10 @@
+{
+    "sources": [
+      {
+        "type": "minecraft:directory",
+        "prefix": "entity/potters_wheel/",
+        "source": "entity/potters_wheel"
+      }
+    ]
+  }
+  

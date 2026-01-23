@@ -1,0 +1,8 @@
+{
+  "type": "first_steps:potters_wheel",
+  "ingredient": "minecraft:clay",
+  "result": {
+    "count": 1,
+    "id": "first_steps:unfired_decorated_pot"
+  }
+}

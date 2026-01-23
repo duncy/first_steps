@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "minecraft:stick",
+    "T": "#first_steps:tinder"
+  },
+  "pattern": [
+    "T",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "first_steps:unlit_torch"
+  }
+}

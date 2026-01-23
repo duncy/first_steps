@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+      "T": "minecraft:torch",
+      "C": "minecraft:copper_nugget"
+    },
+    "pattern": [
+      "C",
+      "T"
+    ],
+    "result": {
+      "count": 1,
+      "id": "minecraft:copper_torch"
+    }
+  }

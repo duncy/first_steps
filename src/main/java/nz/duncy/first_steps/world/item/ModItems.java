@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -27,67 +28,67 @@ public class ModItems {
     // Tool heads
     // Hoe heads
     public static final Item STONE_HEAD_HOE = registerItem("stone_head_hoe"); 
-    public static final Item FLINT_HEAD_HOE = registerItem("flint_head_hoe", Item::new); 
-    public static final Item BASALT_HEAD_HOE = registerItem("basalt_head_hoe", Item::new);
-    public static final Item OBSIDIAN_HEAD_HOE = registerItem("obsidian_head_hoe", Item::new); 
-    // public static final Item COPPER_HEAD_HOE = registerItem("copper_head_hoe", Item::new); 
-    // public static final Item BRONZE_HEAD_HOE = registerItem("bronze_head_hoe", Item::new);
-    // public static final Item IRON_HEAD_HOE = registerItem("iron_head_hoe", Item::new);
+    public static final Item FLINT_HEAD_HOE = registerItem("flint_head_hoe");
+    public static final Item BASALT_HEAD_HOE = registerItem("basalt_head_hoe");
+    public static final Item OBSIDIAN_HEAD_HOE = registerItem("obsidian_head_hoe");
+    // public static final Item COPPER_HEAD_HOE = registerItem("copper_head_hoe");
+    // public static final Item BRONZE_HEAD_HOE = registerItem("bronze_head_hoe");
+    // public static final Item IRON_HEAD_HOE = registerItem("iron_head_hoe");
 
     // Axe heads
-    public static final Item STONE_HEAD_AXE = registerItem("stone_head_axe", Item::new); 
-    public static final Item FLINT_HEAD_AXE = registerItem("flint_head_axe", Item::new); 
-    public static final Item BASALT_HEAD_AXE = registerItem("basalt_head_axe", Item::new);
-    public static final Item OBSIDIAN_HEAD_AXE = registerItem("obsidian_head_axe", Item::new); 
-    // public static final Item COPPER_HEAD_AXE = registerItem("copper_head_axe", Item::new); 
-    // public static final Item BRONZE_HEAD_AXE = registerItem("bronze_head_axe", Item::new);
-    // public static final Item IRON_HEAD_AXE = registerItem("iron_head_axe", Item::new);
+    public static final Item STONE_HEAD_AXE = registerItem("stone_head_axe");
+    public static final Item FLINT_HEAD_AXE = registerItem("flint_head_axe");
+    public static final Item BASALT_HEAD_AXE = registerItem("basalt_head_axe");
+    public static final Item OBSIDIAN_HEAD_AXE = registerItem("obsidian_head_axe");
+    // public static final Item COPPER_HEAD_AXE = registerItem("copper_head_axe");
+    // public static final Item BRONZE_HEAD_AXE = registerItem("bronze_head_axe");
+    // public static final Item IRON_HEAD_AXE = registerItem("iron_head_axe");
 
     // Shovel heads
-    public static final Item STONE_HEAD_SHOVEL = registerItem("stone_head_shovel", Item::new); 
-    public static final Item FLINT_HEAD_SHOVEL = registerItem("flint_head_shovel", Item::new);
-    public static final Item BASALT_HEAD_SHOVEL = registerItem("basalt_head_shovel", Item::new); 
-    public static final Item OBSIDIAN_HEAD_SHOVEL = registerItem("obsidian_head_shovel", Item::new);
-    // public static final Item COPPER_HEAD_SHOVEL = registerItem("copper_head_shovel", Item::new);
-    // public static final Item BRONZE_HEAD_SHOVEL = registerItem("bronze_head_shovel", Item::new);
-    // public static final Item IRON_HEAD_SHOVEL = registerItem("iron_head_shovel", Item::new);
+    public static final Item STONE_HEAD_SHOVEL = registerItem("stone_head_shovel");
+    public static final Item FLINT_HEAD_SHOVEL = registerItem("flint_head_shovel");
+    public static final Item BASALT_HEAD_SHOVEL = registerItem("basalt_head_shovel");
+    public static final Item OBSIDIAN_HEAD_SHOVEL = registerItem("obsidian_head_shovel");
+    // public static final Item COPPER_HEAD_SHOVEL = registerItem("copper_head_shovel");
+    // public static final Item BRONZE_HEAD_SHOVEL = registerItem("bronze_head_shovel");
+    // public static final Item IRON_HEAD_SHOVEL = registerItem("iron_head_shovel");
 
     // Knife heads
-    public static final Item STONE_HEAD_KNIFE = registerItem("stone_head_knife", Item::new);
-    public static final Item FLINT_HEAD_KNIFE = registerItem("flint_head_knife", Item::new);
-    public static final Item BASALT_HEAD_KNIFE = registerItem("basalt_head_knife", Item::new);
-    public static final Item OBSIDIAN_HEAD_KNIFE = registerItem("obsidian_head_knife", Item::new);
-    // public static final Item COPPER_HEAD_KNIFE = registerItem("copper_head_knife", Item::new);
-    // public static final Item BRONZE_HEAD_KNIFE = registerItem("bronze_head_knife", Item::new);
-    // public static final Item IRON_HEAD_KNIFE = registerItem("iron_head_knife", Item::new);
+    public static final Item STONE_HEAD_KNIFE = registerItem("stone_head_knife");
+    public static final Item FLINT_HEAD_KNIFE = registerItem("flint_head_knife");
+    public static final Item BASALT_HEAD_KNIFE = registerItem("basalt_head_knife");
+    public static final Item OBSIDIAN_HEAD_KNIFE = registerItem("obsidian_head_knife");
+    // public static final Item COPPER_HEAD_KNIFE = registerItem("copper_head_knife");
+    // public static final Item BRONZE_HEAD_KNIFE = registerItem("bronze_head_knife");
+    // public static final Item IRON_HEAD_KNIFE = registerItem("iron_head_knife");
 
     // Spear heads
-    public static final Item STONE_HEAD_SPEAR = registerItem("stone_head_spear", Item::new);
-    public static final Item FLINT_HEAD_SPEAR = registerItem("flint_head_spear", Item::new);
-    public static final Item BASALT_HEAD_SPEAR = registerItem("basalt_head_spear", Item::new);
-    public static final Item OBSIDIAN_HEAD_SPEAR = registerItem("obsidian_head_spear", Item::new);
-    // public static final Item COPPER_HEAD_SPEAR = registerItem("copper_head_spear", Item::new);
-    public static final Item BRONZE_HEAD_SPEAR = registerItem("bronze_head_spear", Item::new);
-    // public static final Item IRON_HEAD_SPEAR = registerItem("iron_head_spear", Item::new);
+    public static final Item STONE_HEAD_SPEAR = registerItem("stone_head_spear");
+    public static final Item FLINT_HEAD_SPEAR = registerItem("flint_head_spear");
+    public static final Item BASALT_HEAD_SPEAR = registerItem("basalt_head_spear");
+    public static final Item OBSIDIAN_HEAD_SPEAR = registerItem("obsidian_head_spear");
+    // public static final Item COPPER_HEAD_SPEAR = registerItem("copper_head_spear");
+    public static final Item BRONZE_HEAD_SPEAR = registerItem("bronze_head_spear");
+    // public static final Item IRON_HEAD_SPEAR = registerItem("iron_head_spear");
 
     // Arrow heads
-    // public static final Item STONE_HEAD_ARROW = registerItem("stone_head_arrow", Item::new);
-    // public static final Item FLINT_HEAD_ARROW = registerItem("flint_head_arrow", Item::new);
-    // public static final Item BASALT_HEAD_ARROW = registerItem("basalt_head_arrow", Item::new);
-    // public static final Item OBSIDIAN_HEAD_ARROW = registerItem("obsidian_head_arrow", Item::new);
-    // public static final Item COPPER_HEAD_ARROW = registerItem("copper_head_arrow", Item::new);
-    // public static final Item BRONZE_HEAD_ARROW = registerItem("bronze_head_arrow", Item::new);
-    // public static final Item IRON_HEAD_ARROW = registerItem("iron_head_arrow", Item::new);
+    // public static final Item STONE_HEAD_ARROW = registerItem("stone_head_arrow");
+    // public static final Item FLINT_HEAD_ARROW = registerItem("flint_head_arrow");
+    // public static final Item BASALT_HEAD_ARROW = registerItem("basalt_head_arrow");
+    // public static final Item OBSIDIAN_HEAD_ARROW = registerItem("obsidian_head_arrow");
+    // public static final Item COPPER_HEAD_ARROW = registerItem("copper_head_arrow");
+    // public static final Item BRONZE_HEAD_ARROW = registerItem("bronze_head_arrow");
+    // public static final Item IRON_HEAD_ARROW = registerItem("iron_head_arrow");
 
     // Pickaxe heads
-    // public static final Item COPPER_HEAD_PICKAXE = registerItem("copper_head_pickaxe", Item::new);
-    // public static final Item BRONZE_HEAD_PICKAXE = registerItem("bronze_head_pickaxe", Item::new);
-    // public static final Item IRON_HEAD_PICKAXE = registerItem("iron_head_pickaxe", Item::new);
+    // public static final Item COPPER_HEAD_PICKAXE = registerItem("copper_head_pickaxe");
+    // public static final Item BRONZE_HEAD_PICKAXE = registerItem("bronze_head_pickaxe");
+    // public static final Item IRON_HEAD_PICKAXE = registerItem("iron_head_pickaxe");
 
     // Sword heads
-    // public static final Item COPPER_HEAD_SWORD = registerItem("copper_head_sword", Item::new);
-    // public static final Item BRONZE_HEAD_SWORD = registerItem("bronze_head_sword", Item::new);
-    // public static final Item IRON_HEAD_SWORD = registerItem("iron_head_sword", Item::new);
+    // public static final Item COPPER_HEAD_SWORD = registerItem("copper_head_sword");
+    // public static final Item BRONZE_HEAD_SWORD = registerItem("bronze_head_sword");
+    // public static final Item IRON_HEAD_SWORD = registerItem("iron_head_sword");
 
     // Tools
     // Hoes
@@ -156,11 +157,25 @@ public class ModItems {
     // Firestarter
     public static final Item FIRESTARTER = registerItem("firestarter", FireStarterItem::new, (new Item.Properties()).durability(16));
 
+    public static final Item POTTERS_WHEEL_HEAD = registerItem("potters_wheel_head");
+    public static final Item UNFIRED_POTTERS_WHEEL_HEAD = registerItem("unfired_potters_wheel_head");
+    public static final Item UNFIRED_BRICK = registerItem("unfired_brick");
+
     // Blocks
     public static final Item STONE_ROCK = Items.registerBlock(ModBlocks.STONE_ROCK, RockBlockItem::new);
     public static final Item BASALT_ROCK = Items.registerBlock(ModBlocks.BASALT_ROCK, RockBlockItem::new);
     public static final Item OBSIDIAN_ROCK = Items.registerBlock(ModBlocks.OBSIDIAN_ROCK, RockBlockItem::new);
 
+    public static final Item DECORATED_JAR = Items.registerBlock(ModBlocks.DECORATED_JAR);
+
+    public static final Item UNFIRED_DECORATED_POT = Items.registerBlock(ModBlocks.UNFIRED_DECORATED_POT);
+    public static final Item UNFIRED_DECORATED_JAR = Items.registerBlock(ModBlocks.UNFIRED_DECORATED_JAR);
+
+    public static final Item POTTERS_WHEEL = Items.registerBlock(ModBlocks.POTTERS_WHEEL);
+
+    public static final Item UNLIT_TORCH = Items.registerBlock(ModBlocks.UNLIT_TORCH, (block, properties) -> {
+        return new UnlitTorchBlockItem(block, ModBlocks.WALL_UNLIT_TORCH, Direction.DOWN, properties);
+    });
 
     public static Item registerItem(String string) {
         return Items.registerItem(moddedItemId(string), Item::new, new Item.Properties());
@@ -299,11 +314,22 @@ public class ModItems {
             // Firestarter
             itemGroup.accept(FIRESTARTER);
 
+            itemGroup.accept(POTTERS_WHEEL_HEAD);
+            itemGroup.accept(UNFIRED_POTTERS_WHEEL_HEAD);
+            itemGroup.accept(UNFIRED_BRICK);
+
             // Blocks
             // Rocks
             itemGroup.accept(ModBlocks.STONE_ROCK);
             itemGroup.accept(ModBlocks.BASALT_ROCK);
             itemGroup.accept(ModBlocks.OBSIDIAN_ROCK);
+
+            itemGroup.accept(ModBlocks.DECORATED_JAR);
+            itemGroup.accept(ModBlocks.UNFIRED_DECORATED_POT);
+            itemGroup.accept(ModBlocks.UNFIRED_DECORATED_JAR);
+            itemGroup.accept(ModBlocks.POTTERS_WHEEL);
+
+            itemGroup.accept(ModBlocks.UNLIT_TORCH);
         });
     }
 }

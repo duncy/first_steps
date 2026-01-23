@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+      "T": "minecraft:torch",
+      "R": "minecraft:redstone_dust"
+    },
+    "pattern": [
+      "R",
+      "T"
+    ],
+    "result": {
+      "count": 1,
+      "id": "minecraft:redstone_dust"
+    }
+  }

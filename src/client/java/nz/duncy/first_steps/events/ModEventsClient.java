@@ -17,5 +17,6 @@ public class ModEventsClient {
                 component.add(1, Component.translatable("tooltip.first_steps.rock_block").withStyle(ChatFormatting.GRAY));
             }
         });
+
     }
 }

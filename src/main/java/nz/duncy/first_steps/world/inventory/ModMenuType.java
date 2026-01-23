@@ -12,6 +12,10 @@ public class ModMenuType {
     public static final MenuType<KnappingMenu> KNAPPING_SELECTION_MENU = 
         register("knapping_selection", KnappingMenu::new);
 
+    public static final MenuType<PottersWheelMenu> POTTERS_WHEEL_SELECTION_MENU = 
+        register("potters_wheel", PottersWheelMenu::new);
+
+
     private static <T extends AbstractContainerMenu> MenuType<T> register(String string, MenuSupplier<T> menuSupplier) {
         return Registry.register(BuiltInRegistries.MENU, string, new MenuType<T>(menuSupplier, FeatureFlags.VANILLA_SET));
     }

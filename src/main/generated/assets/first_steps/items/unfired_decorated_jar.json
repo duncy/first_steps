@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "first_steps:item/unfired_decorated_jar",
+    "model": {
+      "type": "first_steps:unfired_decorated_jar"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "sources": [
+      {
+        "type": "minecraft:directory",
+        "prefix": "entity/unfired_decorated_jar/",
+        "source": "entity/unfired_decorated_jar"
+      }
+    ]
+  }
+  
