@@ -143,10 +143,10 @@ public class ModItems {
     // public static final Item BRONZE_SPEAR = registerItem("bronze_spear", (new Item.Properties()).spear(ModToolMaterial.BRONZE, 0.80F, 0.82F, 0.65F, 3.0F, 9.0F, 7.25F, 5.1F, 11.5F, 4.6F));
 
     // Knives
-    public static final Item STONE_KNIFE = registerItem("stone_knife", (new Item.Properties()).sword(ToolMaterial.STONE, -0.5F, 0.5F));
-    public static final Item FLINT_KNIFE = registerItem("flint_knife", (new Item.Properties()).sword(ModToolMaterial.FLINT, -0.5F, 0.5F));
-    public static final Item BASALT_KNIFE = registerItem("basalt_knife", (new Item.Properties()).sword(ModToolMaterial.BASALT, -0.5F, 0.5F));
-    public static final Item OBSIDIAN_KNIFE = registerItem("obsidian_knife", (new Item.Properties()).sword(ModToolMaterial.OBSIDIAN, -0.5F, 0.5F));
+    public static final Item STONE_KNIFE = registerItem("stone_knife", (new Item.Properties()).sword(ToolMaterial.STONE, -0.5F, 1.5F));
+    public static final Item FLINT_KNIFE = registerItem("flint_knife", (new Item.Properties()).sword(ModToolMaterial.FLINT, -0.5F, 1.5F));
+    public static final Item BASALT_KNIFE = registerItem("basalt_knife", (new Item.Properties()).sword(ModToolMaterial.BASALT, -0.5F, 1.5F));
+    public static final Item OBSIDIAN_KNIFE = registerItem("obsidian_knife", (new Item.Properties()).sword(ModToolMaterial.OBSIDIAN, -0.5F, 1.5F));
     // public static final Item COPPER_KNIFE = registerItem("copper_knife", (new Item.Properties()).sword(ToolMaterial.COPPER, -0.5F, 1.0F));
     // public static final Item BRONZE_KNIFE = registerItem("bronze_knife", (new Item.Properties()).sword(ModToolMaterial.BRONZE, 0.0F, 1.5F));
     // public static final Item IRON_KNIFE = registerItem("iron_knife", (new Item.Properties()).sword(ToolMaterial.IRON, 0.0F, 1.5F)); 
