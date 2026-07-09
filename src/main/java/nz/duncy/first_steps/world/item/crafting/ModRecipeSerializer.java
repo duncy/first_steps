@@ -9,6 +9,8 @@ import nz.duncy.first_steps.FirstSteps;
 
 public interface ModRecipeSerializer {
     RecipeSerializer<PottersWheelRecipe> POTTERS_WHEEL = register("potters_wheel", new PottersWheelRecipe.Serializer());
+    RecipeSerializer<CrucibleRecipe> CRUCIBLE = register("crucible", new CrucibleRecipe.Serializer());
+    RecipeSerializer<KilnRecipe> KILN = register("kiln", new KilnRecipe.Serializer());
 
     static <S extends RecipeSerializer<T>, T extends Recipe<?>> S register(String string, S recipeSerializer) {
         return Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, string), recipeSerializer);

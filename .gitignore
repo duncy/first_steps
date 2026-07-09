@@ -47,5 +47,7 @@ src/main/generated/.cache/
 *.kra
 *.kra~
 
+*copy.png
+
 # backups
 *.backup

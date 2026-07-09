@@ -14,13 +14,14 @@ import nz.duncy.first_steps.world.inventory.KnappingMenu;
 import nz.duncy.first_steps.world.inventory.ModMenuType;
 import nz.duncy.first_steps.world.inventory.PottersWheelMenu;
 import nz.duncy.first_steps.world.item.ModItems;
+import nz.duncy.first_steps.world.item.component.ModDataComponents;
 import nz.duncy.first_steps.world.item.crafting.ModRecipeBookCategories;
 import nz.duncy.first_steps.world.item.crafting.ModRecipeSerializer;
 import nz.duncy.first_steps.world.item.crafting.ModRecipeType;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 import nz.duncy.first_steps.world.level.block.entity.ModBlockEntityType;
 import nz.duncy.first_steps.world.level.block.state.properties.ModBlockStateProperties;
-import nz.duncy.first_steps.world.level.levelgen.ModWorldGeneration;
+import nz.duncy.first_steps.world.level.levelgen.ModBiomeModifications;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,11 +40,12 @@ public class FirstSteps implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
+        ModDataComponents.initialize();
 		ModItems.initialize();
 		ModBlockStateProperties.initialize();
 		ModBlocks.initialize();
         ModBlockEntityType.initialize();
-        ModWorldGeneration.initialize();
+        ModBiomeModifications.initialize();
         ModStats.initialize();
         ModEvents.initialize();
         ModMenuType.initialize();

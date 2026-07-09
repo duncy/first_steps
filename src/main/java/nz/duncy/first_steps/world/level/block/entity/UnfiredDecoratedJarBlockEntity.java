@@ -29,7 +29,7 @@ public class UnfiredDecoratedJarBlockEntity extends UnfiredDecoratedBlockEntity 
 	}
 
     @Override
-    public void firePot(Level level, BlockPos blockPos, BlockState blockState) {
+    public void fire(Level level, BlockPos blockPos, BlockState blockState) {
         BlockState firedBlockState = ModBlocks.DECORATED_JAR.defaultBlockState().setValue(DecoratedJarBlock.HORIZONTAL_FACING, blockState.getValue(UnfiredDecoratedJarBlock.HORIZONTAL_FACING));
         
         CompoundTag tag = this.saveWithoutMetadata(level.registryAccess());

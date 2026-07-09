@@ -1,0 +1,8 @@
+{
+  "type": "first_steps:crucible",
+  "ingredient": "first_steps:bronze_block",
+  "result": {
+    "count": 1,
+    "id": "first_steps:raw_bronze_block"
+  }
+}

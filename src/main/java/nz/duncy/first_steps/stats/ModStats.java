@@ -9,6 +9,7 @@ import nz.duncy.first_steps.FirstSteps;
 
 public class ModStats {
     public static Identifier ROCKS_KNAPPED = makeCustomStat("rocks_knapped", StatFormatter.DEFAULT);
+    public static Identifier DECORATED_JAR_OPENED = makeCustomStat("decorated_jar_opened", StatFormatter.DEFAULT);
 
     private static Identifier makeCustomStat(String string, StatFormatter statFormatter) {
         Identifier identifier = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, string);

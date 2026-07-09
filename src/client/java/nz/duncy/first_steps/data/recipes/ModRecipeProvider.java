@@ -2,6 +2,8 @@ package nz.duncy.first_steps.data.recipes;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.jspecify.annotations.NonNull;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup.Provider;
@@ -22,6 +24,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.tags.ModItemTags;
 import nz.duncy.first_steps.world.item.ModItems;
+import nz.duncy.first_steps.world.item.crafting.CrucibleRecipe;
 import nz.duncy.first_steps.world.item.crafting.PottersWheelRecipe;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 
@@ -32,12 +35,12 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return FirstSteps.MOD_ID + " Recipes";
     }
 
     @Override
-    protected RecipeProvider createRecipeProvider(Provider registryLookup, RecipeOutput exporter) {
+    protected @NonNull RecipeProvider createRecipeProvider(@NonNull Provider registryLookup, @NonNull RecipeOutput exporter) {
         return new RecipeProvider(registryLookup, exporter) {
 			@Override
             public void buildRecipes() {
@@ -54,6 +57,86 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy("has_logs", has(Items.STICK))
                 .unlockedBy("has_tinder", has(ModItemTags.TINDER))
                 .save(output);
+
+                SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_STONE_COPPER), RecipeCategory.MISC, Items.COPPER_NUGGET, 0.1F, 100).unlockedBy(getHasName(ModItems.RAW_STONE_COPPER), this.has(ModItems.RAW_STONE_COPPER)).save(this.output, getRoastingName(Items.COPPER_NUGGET, ModItems.RAW_STONE_COPPER));
+
+                SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_STONE_IRON), RecipeCategory.MISC, Items.IRON_NUGGET, 0.1F, 100).unlockedBy(getHasName(ModItems.RAW_STONE_IRON), this.has(ModItems.RAW_STONE_COPPER)).save(this.output, getRoastingName(Items.IRON_NUGGET, ModItems.RAW_STONE_IRON));
+
+                SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_STONE_COPPER), RecipeCategory.MISC, Items.RAW_COPPER, 0.1F, 100).unlockedBy(getHasName(ModItems.RAW_STONE_COPPER), this.has(ModItems.RAW_STONE_COPPER)).save(this.output, getRoastingName(Items.RAW_COPPER, ModItems.RAW_STONE_COPPER));
+
+                SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_STONE_IRON), RecipeCategory.MISC, Items.RAW_IRON, 0.1F, 100).unlockedBy(getHasName(ModItems.RAW_STONE_IRON), this.has(ModItems.RAW_STONE_COPPER)).save(this.output, getRoastingName(Items.RAW_IRON, ModItems.RAW_STONE_IRON));
+
+                SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_DEEPSLATE_COPPER), RecipeCategory.MISC, Items.RAW_COPPER, 0.1F, 100).unlockedBy(getHasName(ModItems.RAW_DEEPSLATE_COPPER), this.has(ModItems.RAW_STONE_COPPER)).save(this.output, getRoastingName(Items.RAW_COPPER, ModItems.RAW_DEEPSLATE_COPPER));
+
+                SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ModItems.RAW_DEEPSLATE_IRON), RecipeCategory.MISC, Items.RAW_IRON, 0.1F, 100).unlockedBy(getHasName(ModItems.RAW_DEEPSLATE_IRON), this.has(ModItems.RAW_STONE_COPPER)).save(this.output, getRoastingName(Items.RAW_IRON, ModItems.RAW_DEEPSLATE_IRON));
+
+                buildBlockRecipes(ModItems.RAW_STONE_TIN, ModItems.RAW_STONE_TIN_BLOCK);
+                buildBlockRecipes(ModItems.RAW_STONE_COPPER, ModItems.RAW_STONE_COPPER_BLOCK);
+                buildBlockRecipes(ModItems.RAW_STONE_IRON, ModItems.RAW_STONE_IRON_BLOCK);
+                
+                crucibleResultFromBase(RecipeCategory.MISC, ModItems.RAW_BRONZE_BLOCK, ModItems.BRONZE_BLOCK);
+
+                buildUnfiredCasingRecipes();
+                buildWaxPatternRecipes();
+            }
+
+            private void buildWaxPatternRecipes() {
+                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_HOE)
+                .pattern("WW")
+                .define('W', ModItemTags.WAX)
+                .unlockedBy("has_wax", has(ModItemTags.WAX))
+                .save(output);
+                
+                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_SHOVEL)
+                .pattern("W")
+                .define('W', ModItemTags.WAX)
+                .unlockedBy("has_wax", has(ModItemTags.WAX))
+                .save(output);
+
+                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_AXE)
+                .pattern("WW")
+                .pattern("W ")
+                .define('W', ModItemTags.WAX)
+                .unlockedBy("has_wax", has(ModItemTags.WAX))
+                .save(output);
+
+                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_KNIFE)
+                .pattern(" W")
+                .pattern("W ")
+                .define('W', ModItemTags.WAX)
+                .unlockedBy("has_wax", has(ModItemTags.WAX))
+                .save(output);
+
+                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_SPEAR)
+                .pattern("WW")
+                .pattern(" W")
+                .define('W', ModItemTags.WAX)
+                .unlockedBy("has_wax", has(ModItemTags.WAX))
+                .save(output);
+
+                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_PICKAXE)
+                .pattern("WWW")
+                .define('W', ModItemTags.WAX)
+                .unlockedBy("has_wax", has(ModItemTags.WAX))
+                .save(output);
+
+                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_SWORD)
+                .pattern("W")
+                .pattern("W")
+                .pattern("W")
+                .define('W', ModItemTags.WAX)
+                .unlockedBy("has_wax", has(ModItemTags.WAX))
+                .save(output);
+            }
+
+            private void buildUnfiredCasingRecipes() {
+                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_HOE_BLOCK, ModItems.PATTERN_HEAD_HOE);
+                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_SHOVEL_BLOCK, ModItems.PATTERN_HEAD_SHOVEL);
+                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_AXE_BLOCK, ModItems.PATTERN_HEAD_AXE);
+                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_KNIFE_BLOCK, ModItems.PATTERN_HEAD_KNIFE);
+                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_SPEAR_BLOCK, ModItems.PATTERN_HEAD_SPEAR);
+                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_PICKAXE_BLOCK, ModItems.PATTERN_HEAD_PICKAXE);
+                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_SWORD_BLOCK, ModItems.PATTERN_HEAD_SWORD);
             }
 
             private void vanillaReplacementRecipes() {
@@ -76,7 +159,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .save(output);
             }
 
-            
+            private String getRoastingName(ItemLike result, ItemLike ingredient) {
+                return getItemName(result) + "_from_roasting_" + getItemName(ingredient);
+            }
 
             private void buildToolRecipes() {
                 buildToolRecipe(Items.STONE_AXE, ModItems.STONE_HEAD_AXE);
@@ -103,6 +188,30 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 buildToolRecipe(ModItems.OBSIDIAN_HOE, ModItems.OBSIDIAN_HEAD_HOE);
                 buildToolRecipe(ModItems.OBSIDIAN_SPEAR, ModItems.OBSIDIAN_HEAD_SPEAR);
 
+                buildToolRecipe(Items.COPPER_AXE, ModItems.COPPER_HEAD_AXE);
+                buildToolRecipe(ModItems.COPPER_KNIFE, ModItems.COPPER_HEAD_KNIFE);
+                buildToolRecipe(Items.COPPER_SHOVEL, ModItems.COPPER_HEAD_SHOVEL);
+                buildToolRecipe(Items.COPPER_HOE, ModItems.COPPER_HEAD_HOE);
+                buildToolRecipe(Items.COPPER_SPEAR, ModItems.COPPER_HEAD_SPEAR);
+                buildToolRecipe(Items.COPPER_SWORD, ModItems.COPPER_HEAD_SWORD);
+                buildToolRecipe(Items.COPPER_PICKAXE, ModItems.COPPER_HEAD_PICKAXE);
+
+                buildToolRecipe(ModItems.BRONZE_AXE, ModItems.BRONZE_HEAD_AXE);
+                buildToolRecipe(ModItems.BRONZE_KNIFE, ModItems.BRONZE_HEAD_KNIFE);
+                buildToolRecipe(ModItems.BRONZE_SHOVEL, ModItems.BRONZE_HEAD_SHOVEL);
+                buildToolRecipe(ModItems.BRONZE_HOE, ModItems.BRONZE_HEAD_HOE);
+                buildToolRecipe(ModItems.BRONZE_SPEAR, ModItems.BRONZE_HEAD_SPEAR);
+                buildToolRecipe(ModItems.BRONZE_SWORD, ModItems.BRONZE_HEAD_SWORD);
+                buildToolRecipe(ModItems.BRONZE_PICKAXE, ModItems.BRONZE_HEAD_PICKAXE);
+
+                buildToolRecipe(Items.IRON_AXE, ModItems.IRON_HEAD_AXE);
+                buildToolRecipe(ModItems.IRON_KNIFE, ModItems.IRON_HEAD_KNIFE);
+                buildToolRecipe(Items.IRON_SHOVEL, ModItems.IRON_HEAD_SHOVEL);
+                buildToolRecipe(Items.IRON_HOE, ModItems.IRON_HEAD_HOE);
+                buildToolRecipe(Items.IRON_SPEAR, ModItems.IRON_HEAD_SPEAR);
+                buildToolRecipe(Items.IRON_SWORD, ModItems.IRON_HEAD_SWORD);
+                buildToolRecipe(Items.IRON_PICKAXE, ModItems.IRON_HEAD_PICKAXE);
+
                 shaped(RecipeCategory.TOOLS, ModItems.FIRESTARTER, 1)
                 .pattern(" S")
                 .pattern("ST")
@@ -124,11 +233,35 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .save(output);
             }
 
+            public void buildUnfiredCasingRecipe(Item casing, Item pattern) {
+                shaped(RecipeCategory.MISC, casing, 1)
+                .pattern("CCC")
+                .pattern("CPC")
+                .pattern("CCC")
+                .define('P', pattern)
+                .define('C', Items.CLAY_BALL)
+                .unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL))
+                .unlockedBy(getHasName(pattern), has(pattern))
+                .save(output);
+            }
+
+            public void buildBlockRecipes(Item item, Item block) {
+                this.nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, item, RecipeCategory.BUILDING_BLOCKS, block, getItemName(item) + "_from_" + getItemName(block), getItemName(item));
+                // this.nineBlockStorageRecipesWithCustomPacking(RecipeCategory.MISC, nugget, RecipeCategory.MISC, item, getItemName(item) + "_from_" + getItemName(nugget), getItemName(item));
+            }
+            
             public void pottersWheelResultFromBase(RecipeCategory recipeCategory, ItemLike result, ItemLike ingredient) {
                 SingleItemRecipeBuilder singleItemRecipeBuilder = new SingleItemRecipeBuilder(recipeCategory, PottersWheelRecipe::new, Ingredient.of(ingredient), result, 1)
                     .unlockedBy(getHasName(ingredient), has(ingredient));
                 String conversionRecipeName = getConversionRecipeName(result, ingredient);
                 singleItemRecipeBuilder.save(this.output, conversionRecipeName + "_potters_wheel");
+            }
+
+            public void crucibleResultFromBase(RecipeCategory recipeCategory, ItemLike result, ItemLike ingredient) {
+                SingleItemRecipeBuilder singleItemRecipeBuilder = new SingleItemRecipeBuilder(recipeCategory, CrucibleRecipe::new, Ingredient.of(ingredient), result, 1)
+                    .unlockedBy(getHasName(ingredient), has(ingredient));
+                String conversionRecipeName = getConversionRecipeName(result, ingredient);
+                singleItemRecipeBuilder.save(this.output, conversionRecipeName + "_crucible");
             }
 
             public final <T extends AbstractCookingRecipe> void potteryBakingRecipe(int cookingTime, ItemLike input, ItemLike result, float experience) {
@@ -150,6 +283,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             public void buildPottersWheelRecipes() {
                 pottersWheelResultFromBase(RecipeCategory.DECORATIONS, ModBlocks.UNFIRED_DECORATED_JAR, Blocks.CLAY);
                 pottersWheelResultFromBase(RecipeCategory.DECORATIONS, ModBlocks.UNFIRED_DECORATED_POT, Blocks.CLAY);
+                pottersWheelResultFromBase(RecipeCategory.DECORATIONS, ModBlocks.UNFIRED_CRUCIBLE, Blocks.CLAY);
+                pottersWheelResultFromBase(RecipeCategory.DECORATIONS, ModBlocks.UNFIRED_FLOWER_POT, Blocks.CLAY);
+                pottersWheelResultFromBase(RecipeCategory.DECORATIONS, ModBlocks.UNFIRED_INGOT_CAST, Blocks.CLAY);
 
                 shaped(RecipeCategory.DECORATIONS, ModBlocks.POTTERS_WHEEL, 1)
                 .pattern(" H ")

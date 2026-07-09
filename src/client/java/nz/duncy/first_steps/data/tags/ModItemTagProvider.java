@@ -2,6 +2,8 @@ package nz.duncy.first_steps.data.tags;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.jspecify.annotations.NonNull;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider.ItemTagProvider;
 import net.minecraft.core.HolderLookup.Provider;
@@ -9,7 +11,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import nz.duncy.first_steps.tags.ModItemTags;
 import nz.duncy.first_steps.world.item.ModItems;
-import nz.duncy.first_steps.world.level.block.ModBlocks;
 
 public class ModItemTagProvider extends ItemTagProvider {
 
@@ -18,12 +19,12 @@ public class ModItemTagProvider extends ItemTagProvider {
     }
 
     @Override
-    protected void addTags(Provider wrapperLookup) {
+    protected void addTags(@NonNull Provider wrapperLookup) {
         valueLookupBuilder(ModItemTags.IS_ROCK)
-            .add(ModBlocks.STONE_ROCK.asItem())
+            .add(ModItems.STONE_ROCK)
             .add(Items.FLINT)
-            .add(ModBlocks.BASALT_ROCK.asItem())
-            .add(ModBlocks.OBSIDIAN_ROCK.asItem());
+            .add(ModItems.BASALT_ROCK)
+            .add(ModItems.OBSIDIAN_ROCK);
 
         valueLookupBuilder(ModItemTags.TINDER)
             .add(Items.DRY_SHORT_GRASS)
@@ -65,8 +66,85 @@ public class ModItemTagProvider extends ItemTagProvider {
 
         valueLookupBuilder(ItemTags.DURABILITY_ENCHANTABLE)
             .addTag(ModItemTags.KNIVES);
+
+        valueLookupBuilder(ModItemTags.NINE_INGOTS_EQUIVALENT)
+            .add(Items.RAW_COPPER_BLOCK)
+            .add(Items.RAW_IRON_BLOCK)
+            .add(Items.RAW_GOLD_BLOCK)
+            .add(ModItems.RAW_BRONZE_BLOCK)
+            .add(ModItems.TIN_BLOCK)
+            .add(ModItems.RAW_TIN_BLOCK)
+            .add(ModItems.BRONZE_BLOCK)
+            .add(Items.COPPER_BLOCK)
+            .add(Items.IRON_BLOCK)
+            .add(Items.GOLD_BLOCK)
+            .add(Items.NETHERITE_BLOCK);
+
+        valueLookupBuilder(ModItemTags.ONE_INGOT_EQUIVALENT)
+            .add(Items.RAW_COPPER)
+            .add(Items.RAW_IRON)
+            .add(Items.RAW_GOLD)
+            .add(Items.COPPER_INGOT)
+            .add(Items.IRON_INGOT)
+            .add(Items.GOLD_INGOT)
+            .add(ModItems.RAW_BRONZE)
+            .add(ModItems.RAW_TIN)
+            .add(ModItems.BRONZE_INGOT)
+            .add(ModItems.TIN_INGOT)
+            .add(Items.NETHERITE_INGOT);
+
+        valueLookupBuilder(ModItemTags.ONE_NINTH_INGOT_EQUIVALENT)
+            .add(ModItems.TIN_NUGGET)
+            .add(Items.COPPER_NUGGET)
+            .add(ModItems.BRONZE_NUGGET)
+            .add(Items.IRON_NUGGET)
+            .add(Items.GOLD_NUGGET);
+
+        valueLookupBuilder(ModItemTags.TIN_SOURCE)
+            .add(ModItems.TIN_NUGGET)
+            .add(ModItems.TIN_INGOT)
+            .add(ModItems.RAW_TIN)
+            .add(ModItems.TIN_BLOCK)
+            .add(ModItems.RAW_TIN_BLOCK);
+
+        valueLookupBuilder(ModItemTags.COPPER_SOURCE)
+            .add(Items.RAW_COPPER_BLOCK)
+            .add(Items.COPPER_BLOCK)
+            .add(Items.RAW_COPPER)
+            .add(Items.COPPER_INGOT)
+            .add(Items.COPPER_NUGGET);
+
+        valueLookupBuilder(ModItemTags.BRONZE_SOURCE)
+            .add(ModItems.BRONZE_INGOT)
+            .add(ModItems.BRONZE_NUGGET)
+            .add(ModItems.RAW_BRONZE_BLOCK)
+            .add(ModItems.RAW_BRONZE)
+            .add(ModItems.BRONZE_BLOCK);
+
+        valueLookupBuilder(ModItemTags.IRON_SOURCE)
+            .add(Items.RAW_IRON_BLOCK)
+            .add(Items.IRON_BLOCK)
+            .add(Items.RAW_IRON)
+            .add(Items.IRON_INGOT)
+            .add(Items.IRON_NUGGET);
+
+        valueLookupBuilder(ModItemTags.GOLD_SOURCE)
+            .add(Items.RAW_GOLD_BLOCK)
+            .add(Items.GOLD_BLOCK)
+            .add(Items.RAW_GOLD)
+            .add(Items.GOLD_INGOT)
+            .add(Items.GOLD_NUGGET);
+
+        valueLookupBuilder(ModItemTags.CRUCIBLE_ACCEPTS)
+            .addTag(ModItemTags.TIN_SOURCE)
+            .addTag(ModItemTags.COPPER_SOURCE)
+            .addTag(ModItemTags.BRONZE_SOURCE)
+            .addTag(ModItemTags.IRON_SOURCE)
+            .addTag(ModItemTags.GOLD_SOURCE);
+
+        valueLookupBuilder(ModItemTags.WAX)
+            .add(Items.HONEYCOMB)
+            .add(ModItems.TALLOW);
+
     }
-
-
-    
 }

@@ -1,0 +1,32 @@
+package nz.duncy.first_steps.world.level.block.entity;
+
+import java.util.Map;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import nz.duncy.first_steps.world.level.block.ModBlocks;
+
+public class UnfiredCasingBlockEntity extends UnfiredBlockEntity {
+    private static final Map<Block, Block> FIRED_BLOCK_MAP = Map.of(
+        ModBlocks.UNFIRED_CASING_HOE, ModBlocks.CASING_HOE,
+        ModBlocks.UNFIRED_CASING_SHOVEL, ModBlocks.CASING_SHOVEL,
+        ModBlocks.UNFIRED_CASING_AXE, ModBlocks.CASING_AXE,
+        ModBlocks.UNFIRED_CASING_KNIFE, ModBlocks.CASING_KNIFE,
+        ModBlocks.UNFIRED_CASING_SPEAR, ModBlocks.CASING_SPEAR,
+        ModBlocks.UNFIRED_CASING_PICKAXE, ModBlocks.CASING_PICKAXE,
+        ModBlocks.UNFIRED_CASING_SWORD, ModBlocks.CASING_SWORD
+    );
+
+    public UnfiredCasingBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(ModBlockEntityType.UNFIRED_CASING, blockPos, blockState);
+    }
+
+    @Override
+    public void fire(Level level, BlockPos blockPos, BlockState blockState) {
+        BlockState firedBlockState = FIRED_BLOCK_MAP.get(blockState.getBlock()).defaultBlockState();
+        level.setBlock(blockPos, firedBlockState, Block.UPDATE_ALL);
+    }
+    
+}

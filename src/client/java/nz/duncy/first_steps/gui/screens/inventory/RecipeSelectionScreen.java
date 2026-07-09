@@ -3,6 +3,7 @@ package nz.duncy.first_steps.gui.screens.inventory;
 import java.util.Iterator;
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
 import org.lwjgl.glfw.GLFW;
 
 import com.google.common.collect.Lists;
@@ -45,7 +46,7 @@ public abstract class RecipeSelectionScreen<T extends SingleItemRecipe, M extend
     }
 
     @Override
-    public boolean mouseClicked(MouseButtonEvent mouseButtonEvent, boolean bl) {
+    public boolean mouseClicked(@NonNull MouseButtonEvent mouseButtonEvent, boolean bl) {
         if (mouseButtonEvent.button() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
             int index = mouseIsOnButton(mouseButtonEvent.x(), mouseButtonEvent.y());
             if (index >= 0) {

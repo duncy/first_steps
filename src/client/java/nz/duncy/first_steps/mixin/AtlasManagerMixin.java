@@ -22,9 +22,10 @@ public class AtlasManagerMixin {
     @Inject(method="<clinit>", at = @At("TAIL"))
     private static void customAtlas(CallbackInfo callbackInfo) {
         KNOWN_ATLASES = new ArrayList<AtlasManager.AtlasConfig>(KNOWN_ATLASES);
-        KNOWN_ATLASES.add(new AtlasManager.AtlasConfig(ModSheets.DECORATED_JAR_SHEET, ModSheets.DECORATED_JAR_ID, false));
-        KNOWN_ATLASES.add(new AtlasManager.AtlasConfig(ModSheets.UNFIRED_DECORATED_POT_SHEET, ModSheets.UNFIRED_DECORATED_POT_ID, false));
-        KNOWN_ATLASES.add(new AtlasManager.AtlasConfig(ModSheets.UNFIRED_DECORATED_JAR_SHEET, ModSheets.UNFIRED_DECORATED_JAR_ID, false));
-        KNOWN_ATLASES.add(new AtlasManager.AtlasConfig(ModSheets.POTTERS_WHEEL_SHEET, ModSheets.POTTERS_WHEEL_ID, false));
+        KNOWN_ATLASES.add(new AtlasManager.AtlasConfig(ModSheets.DECORATED_JAR_SHEET, ModSheets.DECORATED_JAR_SHEET, false));
+        KNOWN_ATLASES.add(new AtlasManager.AtlasConfig(ModSheets.UNFIRED_DECORATED_POT_SHEET, ModSheets.UNFIRED_DECORATED_POT_SHEET, false));
+        KNOWN_ATLASES.add(new AtlasManager.AtlasConfig(ModSheets.UNFIRED_DECORATED_JAR_SHEET, ModSheets.UNFIRED_DECORATED_JAR_SHEET, false));
+        KNOWN_ATLASES.add(new AtlasManager.AtlasConfig(ModSheets.POTTERS_WHEEL_SHEET, ModSheets.POTTERS_WHEEL_SHEET, false));
+        KNOWN_ATLASES.add(new AtlasManager.AtlasConfig(ModSheets.METAL_FLOW_SHEET, ModSheets.METAL_FLOW_SHEET, false));
     }
 }

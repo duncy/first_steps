@@ -8,12 +8,19 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.RecipeDisplay.Type;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.world.item.crafting.display.CrucibleRecipeDisplay;
+import nz.duncy.first_steps.world.item.crafting.display.KilnRecipeDisplay;
 import nz.duncy.first_steps.world.item.crafting.display.PottersWheelRecipeDisplay;
 
 public interface ModRecipeType {
-    RecipeType<PottersWheelRecipe> POTTERS_WHEEL = register("potters_wheel");
+    RecipeType<PottersWheelRecipe> POTTERS_WHEEL_RECIPE = register("potters_wheel");
+    Type<?> POTTERS_WHEEL_RECIPE_DISPLAY = register(PottersWheelRecipeDisplay.TYPE, "potters_wheel");
 
-    Type<?> TYPE = register(PottersWheelRecipeDisplay.TYPE, "potters_wheel");
+    RecipeType<CrucibleRecipe> CRUCIBLE_RECIPE = register("crucible");
+    Type<?> CRUCIBLE_RECIPE_DISPLAY = register(CrucibleRecipeDisplay.TYPE, "crucible");
+
+    RecipeType<KilnRecipe> KILN_RECIPE = register("kiln");
+    Type<?> KILN_RECIPE_DISPLAY = register(KilnRecipeDisplay.TYPE, "klin");
 
     static <T extends Recipe<?>> RecipeType<T> register(String string) {
         return Registry.register(

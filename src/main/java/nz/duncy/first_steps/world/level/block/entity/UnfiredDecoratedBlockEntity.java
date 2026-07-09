@@ -8,31 +8,22 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.PotDecorations;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import nz.duncy.first_steps.world.level.block.state.properties.ModBlockStateProperties;
 
-public abstract class UnfiredDecoratedBlockEntity extends BlockEntity {
+public abstract class UnfiredDecoratedBlockEntity extends UnfiredBlockEntity {
     public static final String TAG_SHERDS = "sherds";
     private PotDecorations decorations;
-    private static final int FIRING_TIME = 1024;
 
     public UnfiredDecoratedBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
@@ -111,58 +102,5 @@ public abstract class UnfiredDecoratedBlockEntity extends BlockEntity {
         return this.saveCustomOnly(provider);
     }
 
-    private int getFiringProgress() {
-        return this.getBlockState().getValue(ModBlockStateProperties.FIRING_PROGRESS);
-    }
-
-    private void setFiringProgress(int value) {
-        BlockState updatedBlockState = this.getBlockState().setValue(ModBlockStateProperties.FIRING_PROGRESS, value);
-        BlockPos blockPos = getBlockPos();
-        if (value % 16 == 0) {
-            level.addParticle(ParticleTypes.SMOKE, blockPos.getX() + 0.5, blockPos.getY() + 1.35, blockPos.getZ() + 0.5, 0.0, 0.05, 0.0);
-        }
-        level.setBlock(this.getBlockPos(), updatedBlockState, Block.UPDATE_ALL);
-    }
-
-    private void incrementFiringProgress() {
-        setFiringProgress(getFiringProgress() + 1);
-    }
-
-    public void recheckFiringProgress(Level level, BlockPos blockPos) {
-        BlockState blockState = this.getBlockState();
-        if (blockState.getValue(BlockStateProperties.WATERLOGGED)) {
-            setFiringProgress(0);
-        } else {
-            if (level.dimension() == Level.NETHER) {
-                incrementFiringProgress();
-            } else {
-                for (Direction direction : Direction.values()) {
-                    BlockPos relativeBlockPos = blockPos.relative(direction);
-                    BlockState relativeBlockState = level.getBlockState(relativeBlockPos);
-                    if (
-                        relativeBlockState.is(Blocks.FIRE) || 
-                        relativeBlockState.is(Blocks.SOUL_FIRE) ||
-                        relativeBlockState.is(Blocks.MAGMA_BLOCK) ||
-                        relativeBlockState.getFluidState().is(FluidTags.LAVA) 
-                    ) {
-                        incrementFiringProgress();
-                        break;
-                    } else if (relativeBlockState.is(Blocks.CAMPFIRE) || relativeBlockState.is(Blocks.SOUL_CAMPFIRE)) {
-                        if (relativeBlockState.getValue(CampfireBlock.LIT)) {
-                            incrementFiringProgress();
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (getFiringProgress() >= FIRING_TIME) {
-                this.firePot(level, blockPos, blockState);
-            }
-        }
-    }
-
     public abstract ItemStack createUnfiredDecoratedItem(PotDecorations potDecorations);
-
-    public abstract void firePot(Level level, BlockPos blockPos, BlockState blockState);
 }

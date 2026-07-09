@@ -32,7 +32,7 @@ public class PottersWheelRecipe extends SingleItemRecipe {
 
     @Override
     public RecipeType<? extends SingleItemRecipe> getType() {
-        return ModRecipeType.POTTERS_WHEEL;
+        return ModRecipeType.POTTERS_WHEEL_RECIPE;
     }
 
     @Override

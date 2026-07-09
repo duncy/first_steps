@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(CampfireBlock.class)
 public class CampfireBlockMixin {
 	@Inject(at = @At("RETURN"), method = "getStateForPlacement", cancellable = true)
-	private void injected(CallbackInfoReturnable<BlockState> cir) {
+	private void firstSteps$injected(CallbackInfoReturnable<BlockState> cir) {
         cir.setReturnValue(cir.getReturnValue().setValue(CampfireBlock.LIT, false));
 	}
 }

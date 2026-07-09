@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:raw_copper_block",
+    "minecraft:raw_iron_block",
+    "minecraft:raw_gold_block",
+    "first_steps:raw_bronze_block",
+    "first_steps:tin_block",
+    "first_steps:raw_tin_block",
+    "first_steps:bronze_block",
+    "minecraft:copper_block",
+    "minecraft:iron_block",
+    "minecraft:gold_block",
+    "minecraft:netherite_block"
+  ]
+}

@@ -67,7 +67,7 @@ public class PottersWheelBlock extends BaseEntityBlock {
     }
 
     private SingleInputSet<PottersWheelRecipe> getRecipes(Level level) {
-        Collection<RecipeHolder<PottersWheelRecipe>> all = ((ServerLevel) level).recipeAccess().getAllOfType(ModRecipeType.POTTERS_WHEEL);
+        Collection<RecipeHolder<PottersWheelRecipe>> all = ((ServerLevel) level).recipeAccess().getAllOfType(ModRecipeType.POTTERS_WHEEL_RECIPE);
         List<SelectableRecipe.SingleInputEntry<PottersWheelRecipe>> list = new ArrayList<>();
 
         for (RecipeHolder<PottersWheelRecipe> recipeHolder : all) {

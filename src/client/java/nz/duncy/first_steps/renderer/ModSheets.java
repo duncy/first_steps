@@ -30,12 +30,11 @@ public class ModSheets {
 
     public static final Identifier POTTERS_WHEEL_SHEET = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "potters_wheel");
     public static final MaterialMapper POTTERS_WHEEL_MAPPER = new MaterialMapper(POTTERS_WHEEL_SHEET, "entity/potters_wheel");
-    public static final Material POTTERS_WHEEL = POTTERS_WHEEL_MAPPER.apply(Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "potters_wheel"));
+    public static final Material POTTERS_WHEEL = POTTERS_WHEEL_MAPPER.apply(POTTERS_WHEEL_SHEET);
 
-    public static final Identifier DECORATED_JAR_ID = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "decorated_jar");
-    public static final Identifier UNFIRED_DECORATED_POT_ID = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "unfired_decorated_pot");
-    public static final Identifier UNFIRED_DECORATED_JAR_ID = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "unfired_decorated_jar");
-    public static final Identifier POTTERS_WHEEL_ID = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "potters_wheel");
+    public static final Identifier METAL_FLOW_SHEET = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "metal_flow");
+    public static final MaterialMapper METAL_FLOW_MAPPER = new MaterialMapper(METAL_FLOW_SHEET, "gui/container");
+    public static final Material METAL_FLOW = METAL_FLOW_MAPPER.apply(METAL_FLOW_SHEET);
 
     public static Identifier getUnfiredDecoratedPotTextureID(Identifier key) {
         return Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, key.getPath());

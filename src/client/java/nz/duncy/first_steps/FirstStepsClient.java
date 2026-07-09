@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.special.SpecialModelRenderers;
 import net.minecraft.resources.Identifier;
 import nz.duncy.first_steps.events.ModEventsClient;
+import nz.duncy.first_steps.gui.screens.inventory.CrucibleScreen;
+import nz.duncy.first_steps.gui.screens.inventory.KilnScreen;
 import nz.duncy.first_steps.gui.screens.inventory.KnappingScreen;
 import nz.duncy.first_steps.gui.screens.inventory.PottersWheelScreen;
 import nz.duncy.first_steps.model.geom.ModModelLayers;
@@ -46,6 +48,8 @@ public class FirstStepsClient implements ClientModInitializer {
 
         MenuScreens.register(ModMenuType.KNAPPING_SELECTION_MENU, KnappingScreen::new);
         MenuScreens.register(ModMenuType.POTTERS_WHEEL_SELECTION_MENU, PottersWheelScreen::new);
+        MenuScreens.register(ModMenuType.CRUCIBLE_MENU, CrucibleScreen::new);
+        MenuScreens.register(ModMenuType.KILN_MENU, KilnScreen::new);
 
         ClientPlayNetworking.registerGlobalReceiver(KnappingRecipePacketPayload.TYPE, (payload, context) -> {
             context.client().execute(() -> {

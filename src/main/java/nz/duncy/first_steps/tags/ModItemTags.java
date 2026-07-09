@@ -15,11 +15,26 @@ public class ModItemTags {
     public static final TagKey<Item> FLINT_REPAIR = createTag("flint_repair");
     public static final TagKey<Item> BASALT_REPAIR = createTag("basalt_repair");
     public static final TagKey<Item> OBSIDIAN_REPAIR = createTag("obsidian_repair");
-    // public static final TagKey<Item> BRONZE_REPAIR = createTag("bronze_repair");
+    public static final TagKey<Item> BRONZE_REPAIR = createTag("bronze_repair");
 
     public static final TagKey<Item> TINDER = createTag("tinder");
 
     public static final TagKey<Item> KNIVES = createTag("knives");
+
+    public static final TagKey<Item> NINE_INGOTS_EQUIVALENT = createTag("nine_ingots_equivalent");
+    public static final TagKey<Item> ONE_INGOT_EQUIVALENT = createTag("one_ingot_equivalent");
+    public static final TagKey<Item> ONE_NINTH_INGOT_EQUIVALENT = createTag("one_ninth_ingot_equivalent");
+
+    public static final TagKey<Item> TIN_SOURCE = createTag("tin_source");
+    public static final TagKey<Item> COPPER_SOURCE = createTag("copper_source");
+    public static final TagKey<Item> BRONZE_SOURCE = createTag("bronze_source");
+    public static final TagKey<Item> IRON_SOURCE = createTag("iron_source");
+    public static final TagKey<Item> GOLD_SOURCE = createTag("gold_source");
+    public static final TagKey<Item> NETHERITE_SOURCE = createTag("netherite_source");
+
+    public static final TagKey<Item> CRUCIBLE_ACCEPTS = createTag("crucible_accepts");
+
+    public static final TagKey<Item> WAX = createTag("wax");
 
     // public static final TagKey<Item> BASE_LAYER_ARMOR = createTag("base_layer_armor");
     // public static final TagKey<Item> MID_LAYER_ARMOR = createTag("mid_layer_armor");

@@ -1,0 +1,8 @@
+{
+    "sources": [
+      {
+        "type": "single",
+        "resource": "first_steps:gui/container/metal_flow"
+      }
+    ]
+  }

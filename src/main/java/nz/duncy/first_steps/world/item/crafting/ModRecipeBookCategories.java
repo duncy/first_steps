@@ -8,6 +8,8 @@ import nz.duncy.first_steps.FirstSteps;
 
 public class ModRecipeBookCategories {
     public static final RecipeBookCategory POTTERS_WHEEL = register("potters_wheel");
+    public static final RecipeBookCategory CRUCIBLE = register("crucible");
+    public static final RecipeBookCategory KILN = register("kiln");
 
     private static RecipeBookCategory register(String string) {
            return Registry.register(BuiltInRegistries.RECIPE_BOOK_CATEGORY, Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, string), new RecipeBookCategory());

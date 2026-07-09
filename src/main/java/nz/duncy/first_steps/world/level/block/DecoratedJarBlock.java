@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.stats.Stats;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
@@ -45,6 +44,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import nz.duncy.first_steps.stats.ModStats;
 import nz.duncy.first_steps.world.level.block.entity.DecoratedJarBlockEntity;
 
 import java.util.Iterator;
@@ -53,8 +53,8 @@ import java.util.List;
 import org.jspecify.annotations.Nullable;
 
 public class DecoratedJarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
-    public static final MapCodec<DecoratedJarBlock> CODEC = simpleCodec(DecoratedJarBlock::new);
-    public static final Identifier SHERDS_DYNAMIC_DROP_ID = Identifier.withDefaultNamespace("sherds");
+    public static final MapCodec<DecoratedJarBlock> CODEC;
+    public static final Identifier SHERDS_DYNAMIC_DROP_ID;
     public static final EnumProperty<Direction> HORIZONTAL_FACING;
     public static final BooleanProperty CRACKED;
     public static final BooleanProperty WATERLOGGED;
@@ -83,7 +83,7 @@ public class DecoratedJarBlock extends BaseEntityBlock implements SimpleWaterlog
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
             if (blockEntity instanceof DecoratedJarBlockEntity decoratedJarBlockEntity) {
                 player.openMenu(decoratedJarBlockEntity);
-                player.awardStat(Stats.OPEN_BARREL);
+                player.awardStat(ModStats.DECORATED_JAR_OPENED);
                 PiglinAi.angerNearbyPiglins(serverLevel, player, true);
             }
         }
@@ -193,6 +193,8 @@ public class DecoratedJarBlock extends BaseEntityBlock implements SimpleWaterlog
     }
 
     static {
+        CODEC = simpleCodec(DecoratedJarBlock::new);
+        SHERDS_DYNAMIC_DROP_ID = Identifier.withDefaultNamespace("sherds");
         HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
         CRACKED = BlockStateProperties.CRACKED;
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
