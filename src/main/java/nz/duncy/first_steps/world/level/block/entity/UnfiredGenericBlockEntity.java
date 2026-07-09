@@ -5,11 +5,15 @@ import java.util.Map;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 
-public class UnfiredCasingBlockEntity extends UnfiredBlockEntity {
+public class UnfiredGenericBlockEntity extends UnfiredBlockEntity {
     private static final Map<Block, Block> FIRED_BLOCK_MAP = Map.of(
+        ModBlocks.UNFIRED_FLOWER_POT, Blocks.FLOWER_POT,
+        ModBlocks.UNFIRED_CRUCIBLE, ModBlocks.CRUCIBLE,
+        ModBlocks.UNFIRED_INGOT_CAST, ModBlocks.INGOT_CAST,
         ModBlocks.UNFIRED_CASING_HOE, ModBlocks.CASING_HOE,
         ModBlocks.UNFIRED_CASING_SHOVEL, ModBlocks.CASING_SHOVEL,
         ModBlocks.UNFIRED_CASING_AXE, ModBlocks.CASING_AXE,
@@ -19,8 +23,8 @@ public class UnfiredCasingBlockEntity extends UnfiredBlockEntity {
         ModBlocks.UNFIRED_CASING_SWORD, ModBlocks.CASING_SWORD
     );
 
-    public UnfiredCasingBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntityType.UNFIRED_CASING, blockPos, blockState);
+    public UnfiredGenericBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(ModBlockEntityType.UNFIRED_GENERIC_BLOCK, blockPos, blockState);
     }
 
     @Override

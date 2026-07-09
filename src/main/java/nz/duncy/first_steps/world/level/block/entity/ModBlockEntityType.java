@@ -15,11 +15,12 @@ public class ModBlockEntityType {
     public static final BlockEntityType<CrucibleBlockEntity> CRUCIBLE = register("crucible", CrucibleBlockEntity::new, ModBlocks.CRUCIBLE);
     public static final BlockEntityType<UnfiredDecoratedPotBlockEntity> UNFIRED_DECORATED_POT = register("unfired_decorated_pot", UnfiredDecoratedPotBlockEntity::new, ModBlocks.UNFIRED_DECORATED_POT);
     public static final BlockEntityType<UnfiredDecoratedJarBlockEntity> UNFIRED_DECORATED_JAR = register("unfired_decorated_jar", UnfiredDecoratedJarBlockEntity::new, ModBlocks.UNFIRED_DECORATED_JAR);
-    public static final BlockEntityType<UnfiredFlowerPotBlockEntity> UNFIRED_FLOWER_POT = register("unfired_flower_pot", UnfiredFlowerPotBlockEntity::new, ModBlocks.UNFIRED_FLOWER_POT);
-    public static final BlockEntityType<UnfiredCrucibleBlockEntity> UNFIRED_CRUCIBLE = register("unfired_crucible", UnfiredCrucibleBlockEntity::new, ModBlocks.UNFIRED_CRUCIBLE);
-    public static final BlockEntityType<UnfiredCasingBlockEntity> UNFIRED_CASING = register(
-        "unfired_casing", 
-        UnfiredCasingBlockEntity::new, 
+    public static final BlockEntityType<UnfiredGenericBlockEntity> UNFIRED_GENERIC_BLOCK = register(
+        "unfired_generic_block", 
+        UnfiredGenericBlockEntity::new,
+        ModBlocks.UNFIRED_FLOWER_POT,
+        ModBlocks.UNFIRED_CRUCIBLE,
+        ModBlocks.UNFIRED_INGOT_CAST,
         ModBlocks.UNFIRED_CASING_HOE, 
         ModBlocks.UNFIRED_CASING_SHOVEL,
         ModBlocks.UNFIRED_CASING_AXE,

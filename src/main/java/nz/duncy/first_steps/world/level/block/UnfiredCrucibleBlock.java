@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import nz.duncy.first_steps.world.level.block.entity.ModBlockEntityType;
-import nz.duncy.first_steps.world.level.block.entity.UnfiredCrucibleBlockEntity;
+import nz.duncy.first_steps.world.level.block.entity.UnfiredGenericBlockEntity;
 
 public class UnfiredCrucibleBlock extends UnfiredBlock {
     public static final MapCodec<UnfiredCrucibleBlock> CODEC;
@@ -33,12 +33,12 @@ public class UnfiredCrucibleBlock extends UnfiredBlock {
 
     @Override
     public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntityType.UNFIRED_CRUCIBLE, this::tick);
+        return createTickerHelper(type, ModBlockEntityType.UNFIRED_GENERIC_BLOCK, this::tick);
     }
 
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new UnfiredCrucibleBlockEntity(blockPos, blockState);
+        return new UnfiredGenericBlockEntity(blockPos, blockState);
     }
 
     @Override
