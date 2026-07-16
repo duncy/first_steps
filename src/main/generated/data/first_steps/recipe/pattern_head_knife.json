@@ -5,8 +5,8 @@
     "W": "#first_steps:wax"
   },
   "pattern": [
-    "W ",
-    " W"
+    " W",
+    "W "
   ],
   "result": {
     "count": 1,

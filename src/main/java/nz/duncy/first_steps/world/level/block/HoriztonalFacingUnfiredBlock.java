@@ -18,10 +18,10 @@ import nz.duncy.first_steps.world.level.block.entity.UnfiredBlockEntity;
 import nz.duncy.first_steps.world.level.block.entity.UnfiredGenericBlockEntity;
 import nz.duncy.first_steps.world.level.block.state.properties.ModBlockStateProperties;
 
-public abstract class UnfiredBlock extends WaterloggedCrackedEntityBlock {
+public abstract class HoriztonalFacingUnfiredBlock extends HorizontalFacingWaterloggedCrackedEntityBlock {
     public static final IntegerProperty FIRING_PROGRESS;
 
-    protected UnfiredBlock(Properties properties) {
+    protected HoriztonalFacingUnfiredBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(FIRING_PROGRESS, 0));
     }

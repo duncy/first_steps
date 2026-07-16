@@ -2,8 +2,7 @@
   "ambientocclusion": false,
   "textures": {
     "particle": "block/clay",
-    "flowerpot": "block/clay",
-    "dirt": "block/dirt"
+    "clay": "block/clay"
   },
   "elements": [
     {
@@ -25,7 +24,7 @@
             6,
             11
           ],
-          "texture": "#flowerpot",
+          "texture": "#clay",
           "cullface": "down"
         },
         "up": {
@@ -35,7 +34,7 @@
             6,
             11
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "north": {
           "uv": [
@@ -44,7 +43,7 @@
             11,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "south": {
           "uv": [
@@ -53,7 +52,7 @@
             6,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "west": {
           "uv": [
@@ -62,7 +61,7 @@
             11,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "east": {
           "uv": [
@@ -71,7 +70,7 @@
             11,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         }
       }
     },
@@ -94,7 +93,7 @@
             11,
             11
           ],
-          "texture": "#flowerpot",
+          "texture": "#clay",
           "cullface": "down"
         },
         "up": {
@@ -104,7 +103,7 @@
             11,
             11
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "north": {
           "uv": [
@@ -113,7 +112,7 @@
             6,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "south": {
           "uv": [
@@ -122,7 +121,7 @@
             11,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "west": {
           "uv": [
@@ -131,7 +130,7 @@
             11,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "east": {
           "uv": [
@@ -140,7 +139,7 @@
             11,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         }
       }
     },
@@ -163,7 +162,7 @@
             10,
             11
           ],
-          "texture": "#flowerpot",
+          "texture": "#clay",
           "cullface": "down"
         },
         "up": {
@@ -173,7 +172,7 @@
             10,
             6
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "north": {
           "uv": [
@@ -182,7 +181,7 @@
             10,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "south": {
           "uv": [
@@ -191,7 +190,7 @@
             10,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         }
       }
     },
@@ -214,7 +213,7 @@
             10,
             6
           ],
-          "texture": "#flowerpot",
+          "texture": "#clay",
           "cullface": "down"
         },
         "up": {
@@ -224,7 +223,7 @@
             10,
             11
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "north": {
           "uv": [
@@ -233,7 +232,7 @@
             10,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         },
         "south": {
           "uv": [
@@ -242,7 +241,7 @@
             10,
             16
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         }
       }
     },
@@ -265,7 +264,7 @@
             10,
             16
           ],
-          "texture": "#flowerpot",
+          "texture": "#clay",
           "cullface": "down"
         },
         "up": {
@@ -275,7 +274,7 @@
             10,
             10
           ],
-          "texture": "#flowerpot"
+          "texture": "#clay"
         }
       }
     }

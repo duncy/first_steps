@@ -13,6 +13,7 @@ import nz.duncy.first_steps.world.level.block.ModBlocks;
 public class ModBlockEntityType {
     public static final BlockEntityType<DecoratedJarBlockEntity> DECORATED_JAR = register("decorated_jar", DecoratedJarBlockEntity::new, ModBlocks.DECORATED_JAR);
     public static final BlockEntityType<CrucibleBlockEntity> CRUCIBLE = register("crucible", CrucibleBlockEntity::new, ModBlocks.CRUCIBLE);
+    public static final BlockEntityType<IngotCastBlockEntity> INGOT_CAST = register("ingot_cast", IngotCastBlockEntity::new, ModBlocks.INGOT_CAST);
     public static final BlockEntityType<UnfiredDecoratedPotBlockEntity> UNFIRED_DECORATED_POT = register("unfired_decorated_pot", UnfiredDecoratedPotBlockEntity::new, ModBlocks.UNFIRED_DECORATED_POT);
     public static final BlockEntityType<UnfiredDecoratedJarBlockEntity> UNFIRED_DECORATED_JAR = register("unfired_decorated_jar", UnfiredDecoratedJarBlockEntity::new, ModBlocks.UNFIRED_DECORATED_JAR);
     public static final BlockEntityType<UnfiredGenericBlockEntity> UNFIRED_GENERIC_BLOCK = register(

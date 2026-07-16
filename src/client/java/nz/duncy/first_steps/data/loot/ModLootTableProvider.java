@@ -51,6 +51,16 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         add(ModBlocks.DECORATED_JAR, this::createDecoratedJarTable);
         add(ModBlocks.UNFIRED_DECORATED_POT, this::createUnfiredDecoratedTable);
         add(ModBlocks.UNFIRED_DECORATED_JAR, this::createUnfiredDecoratedTable);
+        dropSelf(ModBlocks.UNFIRED_FLOWER_POT);
+        dropSelf(ModBlocks.UNFIRED_CRUCIBLE);
+        dropSelf(ModBlocks.UNFIRED_INGOT_CAST);
+        dropSelf(ModBlocks.UNFIRED_CASING_HOE);
+        dropSelf(ModBlocks.UNFIRED_CASING_SHOVEL);
+        dropSelf(ModBlocks.UNFIRED_CASING_AXE);
+        dropSelf(ModBlocks.UNFIRED_CASING_KNIFE);
+        dropSelf(ModBlocks.UNFIRED_CASING_SPEAR);
+        dropSelf(ModBlocks.UNFIRED_CASING_PICKAXE);
+        dropSelf(ModBlocks.UNFIRED_CASING_SWORD);
 
         dropSelf(ModBlocks.POTTERS_WHEEL);
 
@@ -70,7 +80,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         dropSelf(ModBlocks.RAW_DEEPSLATE_IRON);
 
         add(ModBlocks.CRUCIBLE, createShulkerBoxDrop(ModBlocks.CRUCIBLE));
+        dropSelf(ModBlocks.INGOT_CAST);
     }
+
+    
 
     private LootTable.Builder createDecoratedJarTable(Block block) {
         LootPoolSingletonContainer.Builder<?> entrySherds = DynamicLoot.dynamicEntry(DecoratedJarBlock.SHERDS_DYNAMIC_DROP_ID);

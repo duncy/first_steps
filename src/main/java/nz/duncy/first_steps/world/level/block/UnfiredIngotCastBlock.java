@@ -1,46 +1,34 @@
 package nz.duncy.first_steps.world.level.block;
 
-import org.jspecify.annotations.Nullable;
+import java.util.Map;
 
+import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import nz.duncy.first_steps.world.level.block.entity.ModBlockEntityType;
-import nz.duncy.first_steps.world.level.block.entity.UnfiredGenericBlockEntity;
 
-public class UnfiredIngotCastBlock extends UnfiredBlock {
+public class UnfiredIngotCastBlock extends HoriztonalFacingUnfiredBlock {
     public static final MapCodec<UnfiredIngotCastBlock> CODEC;
-    private static final VoxelShape SHAPE;
+    private static final VoxelShape SHAPE_EAST_WEST;
+    private static final VoxelShape SHAPE_NORTH_SOUTH;
+    private static final Map<Direction, VoxelShape> SHAPES;
 
     protected UnfiredIngotCastBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(CRACKED, false));
     }
 
     protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return SHAPE;
+        return SHAPES.get(blockState.getValue(HORIZONTAL_FACING));
     }
-
-    @Override
-    public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntityType.UNFIRED_GENERIC_BLOCK, this::tick);
-    }
-
-    @Override
-    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new UnfiredGenericBlockEntity(blockPos, blockState);
-    }
-
+    
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
@@ -48,6 +36,25 @@ public class UnfiredIngotCastBlock extends UnfiredBlock {
 
     static {
         CODEC = simpleCodec(UnfiredIngotCastBlock::new);
-        SHAPE = Block.box(5, 0, 5, 11, 6, 11);
+        SHAPE_EAST_WEST = Shapes.or(
+            Block.box(2.0, 0.0, 4.0, 4.0, 3.0, 12.0),
+            Block.box(12.0, 0.0, 4.0, 14.0, 3.0, 12.0),
+            Block.box(4.0, 0.0, 4.0, 12.0, 3.0, 6.0),
+            Block.box(4.0, 0.0, 10.0, 12.0, 3.0, 12.0),
+            Block.box(4.0, 0.0, 6.0, 12.0, 1.0, 10.0)
+        );
+        SHAPE_NORTH_SOUTH = Shapes.or(
+            Block.box(4.0, 0.0, 2.0, 12.0, 3.0, 4.0),
+            Block.box(4.0, 0.0, 12.0, 12.0, 3.0, 14.0),
+            Block.box(4.0, 0.0, 4.0, 6.0, 3.0, 12.0),
+            Block.box(10.0, 0.0, 4.0, 12.0, 3.0, 12.0),
+            Block.box(6.0, 0.0, 4.0, 10.0, 1.0, 12.0)
+        );
+        SHAPES = ImmutableMap.of(
+            Direction.NORTH, SHAPE_NORTH_SOUTH,
+            Direction.SOUTH, SHAPE_NORTH_SOUTH,
+            Direction.EAST, SHAPE_EAST_WEST,
+            Direction.WEST, SHAPE_EAST_WEST
+        );
     }
 }

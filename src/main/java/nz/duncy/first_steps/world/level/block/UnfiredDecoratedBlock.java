@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
@@ -15,37 +14,25 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.PotDecorations;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import nz.duncy.first_steps.world.level.block.entity.UnfiredDecoratedBlockEntity;
 
-public abstract class UnfiredDecoratedBlock extends UnfiredBlock {
+public abstract class UnfiredDecoratedBlock extends HoriztonalFacingUnfiredBlock {
     public static final Identifier SHERDS_DYNAMIC_DROP_ID;
-    public static final EnumProperty<Direction> HORIZONTAL_FACING;
 
 
     public UnfiredDecoratedBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(HORIZONTAL_FACING, Direction.NORTH));
-    }
-
-    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return this.defaultBlockState().setValue(HORIZONTAL_FACING, blockPlaceContext.getHorizontalDirection());
     }
 
     protected InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
@@ -196,11 +183,6 @@ public abstract class UnfiredDecoratedBlock extends UnfiredBlock {
         }
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(HORIZONTAL_FACING);
-    }
-
     protected void affectNeighborsAfterRemoval(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, boolean bl) {
         Containers.updateNeighboursAfterDestroy(blockState, serverLevel, blockPos);
     }
@@ -235,16 +217,7 @@ public abstract class UnfiredDecoratedBlock extends UnfiredBlock {
         }
     }
 
-    protected BlockState rotate(BlockState blockState, Rotation rotation) {
-        return (BlockState)blockState.setValue(HORIZONTAL_FACING, rotation.rotate((Direction)blockState.getValue(HORIZONTAL_FACING)));
-    }
-
-    protected BlockState mirror(BlockState blockState, Mirror mirror) {
-        return blockState.rotate(mirror.getRotation((Direction)blockState.getValue(HORIZONTAL_FACING)));
-    }
-
     static {
         SHERDS_DYNAMIC_DROP_ID = Identifier.withDefaultNamespace("sherds");
-        HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
     }
 }

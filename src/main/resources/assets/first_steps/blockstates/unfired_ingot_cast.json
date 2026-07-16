@@ -1,0 +1,8 @@
+{
+"variants": {
+    "facing=north": { "model": "first_steps:block/unfired_ingot_cast", "y": 90 },
+    "facing=east":  { "model": "first_steps:block/unfired_ingot_cast" },
+    "facing=south": { "model": "first_steps:block/unfired_ingot_cast", "y": 270 },
+    "facing=west":  { "model": "first_steps:block/unfired_ingot_cast", "y": 180 }
+  }
+}

@@ -20,7 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ToolMaterial;
-import net.minecraft.world.level.material.PushReaction;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 

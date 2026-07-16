@@ -220,6 +220,22 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_SWORD, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_PICKAXE, ModelTemplates.FLAT_ITEM);
 
+        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_HOE_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_AXE_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_SHOVEL_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_SPEAR_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_KNIFE_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_SWORD_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_PICKAXE_BLOCK, ModelTemplates.FLAT_ITEM);
+
+        itemModelGenerator.generateFlatItem(ModItems.CASING_HOE_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CASING_AXE_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CASING_SHOVEL_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CASING_SPEAR_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CASING_KNIFE_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CASING_SWORD_BLOCK, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CASING_PICKAXE_BLOCK, ModelTemplates.FLAT_ITEM);
+
         itemModelGenerator.generateFlatItem(ModItems.WOODEN_TONGS, ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.ANIMAL_FAT, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.TALLOW, ModelTemplates.FLAT_ITEM);
