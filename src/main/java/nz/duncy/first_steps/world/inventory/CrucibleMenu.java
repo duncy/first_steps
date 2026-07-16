@@ -9,7 +9,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import nz.duncy.first_steps.world.item.Metal;
+import nz.duncy.first_steps.metallurgy.Metal;
 
 public class CrucibleMenu extends AbstractContainerMenu {
     private static final int CONTAINER_SIZE = 9;

@@ -1,4 +1,4 @@
-package nz.duncy.first_steps.world.item;
+package nz.duncy.first_steps.metallurgy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import nz.duncy.first_steps.tags.ModItemTags;
+import nz.duncy.first_steps.world.item.ModItems;
 
 public enum Metal {
     TIN("tooltip.first_steps.crucible.tin", 0xFFFFF9e9, ChatFormatting.WHITE, ModItems.RAW_TIN, ModItemTags.TIN_SOURCE),

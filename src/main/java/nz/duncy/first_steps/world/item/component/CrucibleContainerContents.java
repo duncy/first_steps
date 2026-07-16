@@ -17,8 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.component.TooltipProvider;
+import nz.duncy.first_steps.metallurgy.Metal;
 import nz.duncy.first_steps.tags.ModItemTags;
-import nz.duncy.first_steps.world.item.Metal;
 
 public record CrucibleContainerContents(int temperature, ItemContainerContents inventory) implements TooltipProvider {
     public static final Codec<CrucibleContainerContents> CODEC = RecordCodecBuilder.create(instance -> 

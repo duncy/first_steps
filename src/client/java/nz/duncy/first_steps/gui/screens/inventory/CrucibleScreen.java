@@ -13,9 +13,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.metallurgy.Metal;
 import nz.duncy.first_steps.renderer.ModSheets;
 import nz.duncy.first_steps.world.inventory.CrucibleMenu;
-import nz.duncy.first_steps.world.item.Metal;
 
 public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
     // TODO: Create temperature bar screen type to be used for this and kiln. as well as a whole parent BE. It needs it.

@@ -13,7 +13,7 @@ public class CrucibleSlot extends Slot {
 
     public boolean mayPlace(ItemStack itemStack) {
         if (container instanceof CrucibleBlockEntity сrucibleBlockEntity) {
-            return !сrucibleBlockEntity.wouldThisOverfill(itemStack) && itemStack.is(ModItemTags.CRUCIBLE_ACCEPTS);
+            return !сrucibleBlockEntity.metalStorage.wouldThisOverfill(itemStack) && itemStack.is(ModItemTags.CRUCIBLE_ACCEPTS);
         } else {
             return false;
         }

@@ -28,6 +28,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePrope
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import nz.duncy.first_steps.world.item.ModItems;
+import nz.duncy.first_steps.world.item.component.ModDataComponents;
 import nz.duncy.first_steps.world.level.block.DecoratedJarBlock;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 import nz.duncy.first_steps.world.level.block.RockBlock;
@@ -79,10 +80,29 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         dropSelf(ModBlocks.RAW_DEEPSLATE_COPPER);
         dropSelf(ModBlocks.RAW_DEEPSLATE_IRON);
 
-        add(ModBlocks.CRUCIBLE, createShulkerBoxDrop(ModBlocks.CRUCIBLE));
+        add(ModBlocks.CRUCIBLE, createCrucibleDrop(ModBlocks.CRUCIBLE));
         dropSelf(ModBlocks.INGOT_CAST);
     }
 
+    public LootTable.Builder createCrucibleDrop(Block block) {
+		return LootTable.lootTable()
+			.withPool(
+				this.applyExplosionCondition(
+					block,
+					LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1.0F))
+						.add(
+							LootItem.lootTableItem(block)
+								.apply(
+									CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
+										.include(DataComponents.CUSTOM_NAME)
+										.include(ModDataComponents.CRUCIBLE_CONTAINER_CONTENTS)
+										.include(DataComponents.LOCK)
+								)
+						)
+				)
+			);
+	}
     
 
     private LootTable.Builder createDecoratedJarTable(Block block) {
