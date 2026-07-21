@@ -9,7 +9,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -25,6 +24,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.metallurgy.Metal;
 import nz.duncy.first_steps.metallurgy.MetalStorage;
+import nz.duncy.first_steps.metallurgy.TemperatureStorage;
 import nz.duncy.first_steps.world.inventory.CrucibleMenu;
 import nz.duncy.first_steps.world.item.component.CrucibleContainerContents;
 import nz.duncy.first_steps.world.item.component.ModDataComponents;
@@ -35,11 +35,13 @@ public class CrucibleBlockEntity extends RandomizableContainerBlockEntity implem
     private NonNullList<ItemStack> itemStacks;
     protected final ContainerData data;
     public MetalStorage metalStorage;
+    public TemperatureStorage temperatureStorage;
 
     public CrucibleBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityType.CRUCIBLE, blockPos, blockState);
         this.itemStacks = NonNullList.withSize(9, ItemStack.EMPTY);
         this.metalStorage = new MetalStorage();
+        this.temperatureStorage = new TemperatureStorage();
 
         this.data = new ContainerData() {
             @Override
@@ -47,7 +49,7 @@ public class CrucibleBlockEntity extends RandomizableContainerBlockEntity implem
                 if (index < Metal.values().length) {
                     return metalStorage.getMetalByIndex(index);
                 }
-                return metalStorage.getTemperature();
+                return temperatureStorage.getTemperature();
             }
 
             @Override
@@ -148,7 +150,7 @@ public class CrucibleBlockEntity extends RandomizableContainerBlockEntity implem
         
         CrucibleContainerContents crucibleContainerContents = dataComponentGetter.get(ModDataComponents.CRUCIBLE_CONTAINER_CONTENTS);
         if (crucibleContainerContents != null) {
-            metalStorage.setTemperature(crucibleContainerContents.temperature());
+            temperatureStorage.setTemperature(crucibleContainerContents.temperature());
             ItemContainerContents inventory = crucibleContainerContents.inventory();
             if (inventory != null) {
                 inventory.copyInto(this.itemStacks);
@@ -160,7 +162,7 @@ public class CrucibleBlockEntity extends RandomizableContainerBlockEntity implem
     @Override
     protected void collectImplicitComponents(DataComponentMap.Builder builder) {
         builder.set(ModDataComponents.CRUCIBLE_CONTAINER_CONTENTS, new CrucibleContainerContents(
-            this.metalStorage.getTemperature(),
+            temperatureStorage.getTemperature(),
             ItemContainerContents.fromItems(this.itemStacks)
         ));
     }

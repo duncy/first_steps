@@ -20,6 +20,21 @@
                 "minecraft:lock"
               ],
               "source": "block_entity"
+            },
+            {
+              "components": {
+                "minecraft:item_model": "first_steps:crucible_lit"
+              },
+              "conditions": [
+                {
+                  "block": "first_steps:crucible",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "lit": "true"
+                  }
+                }
+              ],
+              "function": "minecraft:set_components"
             }
           ],
           "name": "first_steps:crucible"

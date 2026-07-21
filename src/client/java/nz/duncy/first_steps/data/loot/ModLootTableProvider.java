@@ -9,11 +9,14 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
@@ -22,11 +25,13 @@ import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.world.item.ModItems;
 import nz.duncy.first_steps.world.item.component.ModDataComponents;
 import nz.duncy.first_steps.world.level.block.DecoratedJarBlock;
@@ -99,6 +104,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 										.include(ModDataComponents.CRUCIBLE_CONTAINER_CONTENTS)
 										.include(DataComponents.LOCK)
 								)
+                                .apply(SetComponentsFunction.setComponent(DataComponents.ITEM_MODEL, Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "crucible_lit")
+                                ).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.LIT, true))))
 						)
 				)
 			);

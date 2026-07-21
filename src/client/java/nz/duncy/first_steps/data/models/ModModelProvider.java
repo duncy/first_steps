@@ -206,7 +206,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.TIN_INGOT, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.BRONZE_INGOT, ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.CRUCIBLE, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.CRUCIBLE, ModelTemplates.FLAT_ITEM);        
         itemModelGenerator.generateFlatItem(ModItems.INGOT_CAST, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.UNFIRED_FLOWER_POT, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CRUCIBLE, ModelTemplates.FLAT_ITEM);
