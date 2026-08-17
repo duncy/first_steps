@@ -24,12 +24,12 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.tags.ModItemTags;
 import nz.duncy.first_steps.world.item.ModItems;
+import nz.duncy.first_steps.world.item.crafting.AnvilRecipe;
 import nz.duncy.first_steps.world.item.crafting.CrucibleRecipe;
 import nz.duncy.first_steps.world.item.crafting.PottersWheelRecipe;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
-
     public ModRecipeProvider(FabricDataOutput output, CompletableFuture<Provider> registriesFuture) {
         super(output, registriesFuture);
     }
@@ -46,6 +46,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             public void buildRecipes() {
                 buildStonecutterToolHeadRecipes();
                 buildPottersWheelRecipes();
+                buildAnvilRecipes();
                 buildToolRecipes();
                 vanillaReplacementRecipes();
 
@@ -54,7 +55,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("S")
                 .define('S', Items.STICK)
                 .define('T', ModItemTags.TINDER)
-                .unlockedBy("has_logs", has(Items.STICK))
+                .unlockedBy("has_stick", has(Items.STICK))
                 .unlockedBy("has_tinder", has(ModItemTags.TINDER))
                 .save(output);
 
@@ -76,68 +77,74 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 
                 crucibleResultFromBase(RecipeCategory.MISC, ModItems.RAW_BRONZE_BLOCK, ModItems.BRONZE_BLOCK);
 
-                buildUnfiredCasingRecipes();
-                buildWaxPatternRecipes();
+                DurabilityLossShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.WOOD_PILE_BlOCK, 4)
+                .requires(tag(ItemTags.LOGS))
+                .requires(tag(ItemTags.AXES))
+                .unlockedBy("has_log", has(ItemTags.LOGS))
+                .unlockedBy("has_axe", has(ItemTags.AXES))
+                .save(output);
+                // buildUnfiredCasingRecipes();
+                // buildWaxPatternRecipes();
             }
 
-            private void buildWaxPatternRecipes() {
-                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_HOE)
-                .pattern("WW")
-                .define('W', ModItemTags.WAX)
-                .unlockedBy("has_wax", has(ModItemTags.WAX))
-                .save(output);
+            // private void buildWaxPatternRecipes() {
+            //     shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_HOE)
+            //     .pattern("WW")
+            //     .define('W', ModItemTags.WAX)
+            //     .unlockedBy("has_wax", has(ModItemTags.WAX))
+            //     .save(output);
                 
-                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_SHOVEL)
-                .pattern("W")
-                .define('W', ModItemTags.WAX)
-                .unlockedBy("has_wax", has(ModItemTags.WAX))
-                .save(output);
+            //     shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_SHOVEL)
+            //     .pattern("W")
+            //     .define('W', ModItemTags.WAX)
+            //     .unlockedBy("has_wax", has(ModItemTags.WAX))
+            //     .save(output);
 
-                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_AXE)
-                .pattern("WW")
-                .pattern("W ")
-                .define('W', ModItemTags.WAX)
-                .unlockedBy("has_wax", has(ModItemTags.WAX))
-                .save(output);
+            //     shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_AXE)
+            //     .pattern("WW")
+            //     .pattern("W ")
+            //     .define('W', ModItemTags.WAX)
+            //     .unlockedBy("has_wax", has(ModItemTags.WAX))
+            //     .save(output);
 
-                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_KNIFE)
-                .pattern(" W")
-                .pattern("W ")
-                .define('W', ModItemTags.WAX)
-                .unlockedBy("has_wax", has(ModItemTags.WAX))
-                .save(output);
+            //     shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_KNIFE)
+            //     .pattern(" W")
+            //     .pattern("W ")
+            //     .define('W', ModItemTags.WAX)
+            //     .unlockedBy("has_wax", has(ModItemTags.WAX))
+            //     .save(output);
 
-                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_SPEAR)
-                .pattern("WW")
-                .pattern(" W")
-                .define('W', ModItemTags.WAX)
-                .unlockedBy("has_wax", has(ModItemTags.WAX))
-                .save(output);
+            //     shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_SPEAR)
+            //     .pattern("WW")
+            //     .pattern(" W")
+            //     .define('W', ModItemTags.WAX)
+            //     .unlockedBy("has_wax", has(ModItemTags.WAX))
+            //     .save(output);
 
-                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_PICKAXE)
-                .pattern("WWW")
-                .define('W', ModItemTags.WAX)
-                .unlockedBy("has_wax", has(ModItemTags.WAX))
-                .save(output);
+            //     shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_PICKAXE)
+            //     .pattern("WWW")
+            //     .define('W', ModItemTags.WAX)
+            //     .unlockedBy("has_wax", has(ModItemTags.WAX))
+            //     .save(output);
 
-                shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_SWORD)
-                .pattern("W")
-                .pattern("W")
-                .pattern("W")
-                .define('W', ModItemTags.WAX)
-                .unlockedBy("has_wax", has(ModItemTags.WAX))
-                .save(output);
-            }
+            //     shaped(RecipeCategory.MISC, ModItems.PATTERN_HEAD_SWORD)
+            //     .pattern("W")
+            //     .pattern("W")
+            //     .pattern("W")
+            //     .define('W', ModItemTags.WAX)
+            //     .unlockedBy("has_wax", has(ModItemTags.WAX))
+            //     .save(output);
+            // }
 
-            private void buildUnfiredCasingRecipes() {
-                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_HOE_BLOCK, ModItems.PATTERN_HEAD_HOE);
-                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_SHOVEL_BLOCK, ModItems.PATTERN_HEAD_SHOVEL);
-                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_AXE_BLOCK, ModItems.PATTERN_HEAD_AXE);
-                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_KNIFE_BLOCK, ModItems.PATTERN_HEAD_KNIFE);
-                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_SPEAR_BLOCK, ModItems.PATTERN_HEAD_SPEAR);
-                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_PICKAXE_BLOCK, ModItems.PATTERN_HEAD_PICKAXE);
-                buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_SWORD_BLOCK, ModItems.PATTERN_HEAD_SWORD);
-            }
+            // private void buildUnfiredCasingRecipes() {
+            //     buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_HOE_BLOCK, ModItems.PATTERN_HEAD_HOE);
+            //     buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_SHOVEL_BLOCK, ModItems.PATTERN_HEAD_SHOVEL);
+            //     buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_AXE_BLOCK, ModItems.PATTERN_HEAD_AXE);
+            //     buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_KNIFE_BLOCK, ModItems.PATTERN_HEAD_KNIFE);
+            //     buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_SPEAR_BLOCK, ModItems.PATTERN_HEAD_SPEAR);
+            //     buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_PICKAXE_BLOCK, ModItems.PATTERN_HEAD_PICKAXE);
+            //     buildUnfiredCasingRecipe(ModItems.UNFIRED_CASING_SWORD_BLOCK, ModItems.PATTERN_HEAD_SWORD);
+            // }
 
             private void vanillaReplacementRecipes() {
                 shaped(RecipeCategory.DECORATIONS, Blocks.CAMPFIRE)
@@ -233,17 +240,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .save(output);
             }
 
-            public void buildUnfiredCasingRecipe(Item casing, Item pattern) {
-                shaped(RecipeCategory.MISC, casing, 1)
-                .pattern("CCC")
-                .pattern("CPC")
-                .pattern("CCC")
-                .define('P', pattern)
-                .define('C', Items.CLAY_BALL)
-                .unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL))
-                .unlockedBy(getHasName(pattern), has(pattern))
-                .save(output);
-            }
+            // public void buildUnfiredCasingRecipe(Item casing, Item pattern) {
+            //     shaped(RecipeCategory.MISC, casing, 1)
+            //     .pattern("CCC")
+            //     .pattern("CPC")
+            //     .pattern("CCC")
+            //     .define('P', pattern)
+            //     .define('C', Items.CLAY_BALL)
+            //     .unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL))
+            //     .unlockedBy(getHasName(pattern), has(pattern))
+            //     .save(output);
+            // }
 
             public void buildBlockRecipes(Item item, Item block) {
                 this.nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, item, RecipeCategory.BUILDING_BLOCKS, block, getItemName(item) + "_from_" + getItemName(block), getItemName(item));
@@ -255,6 +262,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                     .unlockedBy(getHasName(ingredient), has(ingredient));
                 String conversionRecipeName = getConversionRecipeName(result, ingredient);
                 singleItemRecipeBuilder.save(this.output, conversionRecipeName + "_potters_wheel");
+            }
+
+            public void anvilResultFromBase(RecipeCategory recipeCategory, ItemLike result, ItemLike ingredient) {
+                SingleItemRecipeBuilder singleItemRecipeBuilder = new SingleItemRecipeBuilder(recipeCategory, AnvilRecipe::new, Ingredient.of(ingredient), result, 1)
+                    .unlockedBy(getHasName(ingredient), has(ingredient));
+                String conversionRecipeName = getConversionRecipeName(result, ingredient);
+                singleItemRecipeBuilder.save(this.output, conversionRecipeName + "_anvil");
             }
 
             public void crucibleResultFromBase(RecipeCategory recipeCategory, ItemLike result, ItemLike ingredient) {
@@ -278,7 +292,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                     this.has(input)
                 );
                 builder.save(this.output, getItemName(result) + "_from_baking");
-             }
+            }
+
+            public void buildAnvilRecipes() {
+                anvilResultFromBase(RecipeCategory.DECORATIONS, ModItems.IRON_HEAD_HOE, Items.IRON_INGOT);
+            }
 
             public void buildPottersWheelRecipes() {
                 pottersWheelResultFromBase(RecipeCategory.DECORATIONS, ModBlocks.UNFIRED_DECORATED_JAR, Blocks.CLAY);
@@ -347,6 +365,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 stonecutterResultFromBase(RecipeCategory.MISC, ModItems.OBSIDIAN_HEAD_SPEAR, ModBlocks.OBSIDIAN_ROCK);
                 // stonecutterResultFromBase(RecipeCategory.MISC, ModItems.OBSIDIAN_HEAD_ARROW, ModBlocks.OBSIDIAN_ROCK);
 			}
+
+
 		};
     }
     

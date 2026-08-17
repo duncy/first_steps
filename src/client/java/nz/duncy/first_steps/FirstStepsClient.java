@@ -2,20 +2,25 @@ package nz.duncy.first_steps;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.special.SpecialModelRenderers;
 import net.minecraft.resources.Identifier;
 import nz.duncy.first_steps.events.ModEventsClient;
+import nz.duncy.first_steps.gui.screens.inventory.AnvilScreen;
 import nz.duncy.first_steps.gui.screens.inventory.CrucibleScreen;
 import nz.duncy.first_steps.gui.screens.inventory.KilnScreen;
 import nz.duncy.first_steps.gui.screens.inventory.KnappingScreen;
 import nz.duncy.first_steps.gui.screens.inventory.PottersWheelScreen;
+import nz.duncy.first_steps.metallurgy.Metal;
 import nz.duncy.first_steps.model.geom.ModModelLayers;
+import nz.duncy.first_steps.network.cache.ClientAnvilState;
 import nz.duncy.first_steps.network.cache.ClientKnappingState;
 import nz.duncy.first_steps.network.cache.ClientPottersWheelState;
+import nz.duncy.first_steps.network.protocol.common.custom.AnvilRecipePacketPayload;
 import nz.duncy.first_steps.network.protocol.common.custom.KnappingRecipePacketPayload;
-import nz.duncy.first_steps.network.protocol.common.custom.PottersWheelRecipePayload;
+import nz.duncy.first_steps.network.protocol.common.custom.PottersWheelRecipePacketPayload;
 import nz.duncy.first_steps.renderer.blockentity.DecoratedJarRenderer;
 import nz.duncy.first_steps.renderer.blockentity.PottersWheelRenderer;
 import nz.duncy.first_steps.renderer.blockentity.UnfiredDecoratedJarRenderer;
@@ -25,6 +30,8 @@ import nz.duncy.first_steps.renderer.special.PottersWheelSpecialRenderer;
 import nz.duncy.first_steps.renderer.special.UnfiredDecoratedJarSpecialRenderer;
 import nz.duncy.first_steps.renderer.special.UnfiredDecoratedPotSpecialRenderer;
 import nz.duncy.first_steps.world.inventory.ModMenuType;
+import nz.duncy.first_steps.world.level.block.IngotCastBlock;
+import nz.duncy.first_steps.world.level.block.ModBlocks;
 import nz.duncy.first_steps.world.level.block.entity.ModBlockEntityType;
 
 public class FirstStepsClient implements ClientModInitializer {
@@ -50,6 +57,7 @@ public class FirstStepsClient implements ClientModInitializer {
         MenuScreens.register(ModMenuType.POTTERS_WHEEL_SELECTION_MENU, PottersWheelScreen::new);
         MenuScreens.register(ModMenuType.CRUCIBLE_MENU, CrucibleScreen::new);
         MenuScreens.register(ModMenuType.KILN_MENU, KilnScreen::new);
+        MenuScreens.register(ModMenuType.ANVIL_SELECTION_MENU, AnvilScreen::new);
 
         ClientPlayNetworking.registerGlobalReceiver(KnappingRecipePacketPayload.TYPE, (payload, context) -> {
             context.client().execute(() -> {
@@ -63,7 +71,7 @@ public class FirstStepsClient implements ClientModInitializer {
             });
         });
 
-        ClientPlayNetworking.registerGlobalReceiver(PottersWheelRecipePayload.TYPE, (payload, context) -> {
+        ClientPlayNetworking.registerGlobalReceiver(PottersWheelRecipePacketPayload.TYPE, (payload, context) -> {
             context.client().execute(() -> {
                 if (context.client().screen != null) {
                     if (context.client().screen instanceof PottersWheelScreen screen) {
@@ -74,6 +82,32 @@ public class FirstStepsClient implements ClientModInitializer {
                 ClientPottersWheelState.pendingRecipes = payload.recipes();
             });
         });
+
+        ClientPlayNetworking.registerGlobalReceiver(AnvilRecipePacketPayload.TYPE, (payload, context) -> {
+            context.client().execute(() -> {
+                if (context.client().screen != null) {
+                    if (context.client().screen instanceof AnvilScreen screen) {
+                        screen.updateRecipes(payload.recipes());
+                    }
+                }
+                
+                ClientAnvilState.pendingRecipes = payload.recipes();
+            });
+        });
+
+        ColorProviderRegistry.BLOCK.register(
+            (state, level, pos, tintIndex) -> {
+                if (tintIndex == 0) {
+                    Metal metal = state.getValue(IngotCastBlock.METAL);
+
+                    if (metal != Metal.NONE) {
+                        return metal.getColor() & 0xFFFFFF;
+                    }
+                }
+
+                return 0xFFFFFF;
+            }, ModBlocks.INGOT_CAST
+        );
 
         FirstSteps.LOGGER.info("Finished client initialisation of " + FirstSteps.MOD_ID + ", have fun! :^)");
 	}

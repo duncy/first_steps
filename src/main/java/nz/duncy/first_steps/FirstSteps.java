@@ -3,13 +3,17 @@ package nz.duncy.first_steps;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import nz.duncy.first_steps.events.ModEvents;
+import nz.duncy.first_steps.network.protocol.common.custom.AnvilRecipePacketPayload;
+import nz.duncy.first_steps.network.protocol.common.custom.AnvilSelectionPacketPayload;
 import nz.duncy.first_steps.network.protocol.common.custom.KnappingRecipePacketPayload;
 import nz.duncy.first_steps.network.protocol.common.custom.KnappingSelectionPacketPayload;
-import nz.duncy.first_steps.network.protocol.common.custom.PottersWheelRecipePayload;
+import nz.duncy.first_steps.network.protocol.common.custom.PottersWheelRecipePacketPayload;
 import nz.duncy.first_steps.network.protocol.common.custom.PottersWheelSelectionPacketPayload;
 import nz.duncy.first_steps.stats.ModStats;
+import nz.duncy.first_steps.world.inventory.AnvilMenu;
 import nz.duncy.first_steps.world.inventory.KnappingMenu;
 import nz.duncy.first_steps.world.inventory.ModMenuType;
 import nz.duncy.first_steps.world.inventory.PottersWheelMenu;
@@ -55,8 +59,10 @@ public class FirstSteps implements ModInitializer {
 
         PayloadTypeRegistry.playS2C().register(KnappingRecipePacketPayload.TYPE, KnappingRecipePacketPayload.CODEC);
         PayloadTypeRegistry.playC2S().register(KnappingSelectionPacketPayload.TYPE, KnappingSelectionPacketPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(PottersWheelRecipePayload.TYPE, PottersWheelRecipePayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(PottersWheelRecipePacketPayload.TYPE, PottersWheelRecipePacketPayload.CODEC);
         PayloadTypeRegistry.playC2S().register(PottersWheelSelectionPacketPayload.TYPE, PottersWheelSelectionPacketPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(AnvilRecipePacketPayload.TYPE, AnvilRecipePacketPayload.CODEC);
+        PayloadTypeRegistry.playC2S().register(AnvilSelectionPacketPayload.TYPE, AnvilSelectionPacketPayload.CODEC);
 
         ServerPlayNetworking.registerGlobalReceiver(KnappingSelectionPacketPayload.TYPE, (payload, context) -> {
             AbstractContainerMenu containerMenu = context.player().containerMenu;
@@ -71,6 +77,15 @@ public class FirstSteps implements ModInitializer {
                 pottersWheelMenu.shapeClay(payload.selection(), context.player());
             }
 	    });
+
+        ServerPlayNetworking.registerGlobalReceiver(AnvilSelectionPacketPayload.TYPE, (payload, context) -> {
+            AbstractContainerMenu containerMenu = context.player().containerMenu;
+            if (containerMenu instanceof AnvilMenu anvilMenu) {
+                LOGGER.info(payload.selection() + " " + context.player());
+            }
+	    });
+
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.WOOD_PILE, 5, 20);
 
 		LOGGER.info("Finished main initialisation of " + MOD_ID + ", have fun! :^)");
 	}

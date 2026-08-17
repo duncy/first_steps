@@ -1,8 +1,12 @@
 package nz.duncy.first_steps.events;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.advancements.criterion.ItemPredicate;
@@ -11,16 +15,26 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SelectableRecipe;
+import net.minecraft.world.item.crafting.SelectableRecipe.SingleInputSet;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,7 +45,11 @@ import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.phys.BlockHitResult;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.tags.ModItemTags;
+import nz.duncy.first_steps.world.inventory.AnvilMenu;
 import nz.duncy.first_steps.world.item.ModItems;
+import nz.duncy.first_steps.world.item.crafting.AnvilRecipe;
+import nz.duncy.first_steps.world.item.crafting.ModRecipeType;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 import nz.duncy.first_steps.world.level.block.RockBlock;
 
@@ -122,16 +140,16 @@ public class ModEvents {
             }
         });
 
-        ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+        ServerEntityEvents.ENTITY_LOAD.register((entity, level) -> {
             if (entity instanceof Zombie zombie) {
                 if (zombie.getMainHandItem().isEmpty() && !zombie.isBaby()) {
-                    DifficultyInstance difficultyInstance = world.getCurrentDifficultyAt(zombie.blockPosition());
+                    DifficultyInstance difficultyInstance = level.getCurrentDifficultyAt(zombie.blockPosition());
 
                     float effectiveDifficulty = difficultyInstance.getEffectiveDifficulty();
 
                     float equipChance = Math.min(0.15f + effectiveDifficulty * 0.05f, 0.5f);
 
-                    if (world.random.nextFloat() < equipChance) {
+                    if (level.random.nextFloat() < equipChance) {
                         List<WeaponEntry> pool = null;
 
                         if (effectiveDifficulty >= 4.0f) {
@@ -141,7 +159,7 @@ public class ModEvents {
                         }
 
                         if (pool != null) {
-                            WeaponEntry chosen = weightedPick(world.random, pool);
+                            WeaponEntry chosen = weightedPick(level.random, pool);
 
                             ItemStack weapon = new ItemStack(chosen.item());
 
@@ -153,20 +171,20 @@ public class ModEvents {
             }
         });
 
-        UseItemCallback.EVENT.register((player, world, hand) -> {
+        UseItemCallback.EVENT.register((player, level, hand) -> {
             ItemStack itemStack = player.getItemInHand(hand);
                 if (itemStack.is(Items.FLINT)) {
                     BlockHitResult hit = (BlockHitResult) player.pick(5.0, 0f, false);
                     BlockPos pos = hit.getBlockPos();
                     Direction face = hit.getDirection();
                     BlockPos placePos = pos.relative(face);
-                    BlockState placePosBlockState = world.getBlockState(placePos);
+                    BlockState placePosBlockState = level.getBlockState(placePos);
                     BlockState blockState = ModBlocks.FLINT_ROCK.defaultBlockState();
 
-                    if (blockState.canSurvive(world, placePos) && placePosBlockState.canBeReplaced()) {
-                        if (!world.isClientSide()) {
-                            world.setBlock(placePos, blockState, 3);
-                            world.playSound(
+                    if (blockState.canSurvive(level, placePos) && placePosBlockState.canBeReplaced()) {
+                        if (!level.isClientSide()) {
+                            level.setBlock(placePos, blockState, 3);
+                            level.playSound(
                                 null,
                                 placePos,
                                 blockState.getSoundType().getPlaceSound(),
@@ -179,14 +197,14 @@ public class ModEvents {
                         }
                         return InteractionResult.SUCCESS;
                     } else {
-                        BlockState posBlockState = world.getBlockState(pos);
+                        BlockState posBlockState = level.getBlockState(pos);
                         if (posBlockState.getBlock() == ModBlocks.FLINT_ROCK) {
                             int rocks = posBlockState.getValue(RockBlock.ROCKS);
 
                             if (rocks < RockBlock.MAX_ROCKS) {
-                                if (!world.isClientSide()) {
-                                    world.setBlock(pos, posBlockState.setValue(RockBlock.ROCKS, rocks + 1), 3);
-                                    world.playSound(
+                                if (!level.isClientSide()) {
+                                    level.setBlock(pos, posBlockState.setValue(RockBlock.ROCKS, rocks + 1), 3);
+                                    level.playSound(
                                         null,
                                         pos,
                                         posBlockState.getSoundType().getPlaceSound(),
@@ -203,9 +221,9 @@ public class ModEvents {
                             int rocks = placePosBlockState.getValue(RockBlock.ROCKS);
 
                             if (rocks < RockBlock.MAX_ROCKS) {
-                                if (!world.isClientSide()) {
-                                    world.setBlock(placePos, placePosBlockState.setValue(RockBlock.ROCKS, rocks + 1), 3);
-                                    world.playSound(
+                                if (!level.isClientSide()) {
+                                    level.setBlock(placePos, placePosBlockState.setValue(RockBlock.ROCKS, rocks + 1), 3);
+                                    level.playSound(
                                         null,
                                         placePos,
                                         placePosBlockState.getSoundType().getPlaceSound(),
@@ -223,5 +241,56 @@ public class ModEvents {
                 }
             return InteractionResult.PASS;
         });
+
+        UseBlockCallback.EVENT.register((player, level, hand, hitResult) -> {
+            ItemStack itemStack = player.getItemInHand(hand);
+
+            if (itemStack.is(ModItemTags.ONE_INGOT_EQUIVALENT)) {
+                BlockPos pos = hitResult.getBlockPos();
+                BlockState blockState = level.getBlockState(pos);
+
+                if (blockState.is(BlockTags.ANVIL)) {
+                    if (!level.isClientSide()) {
+                    
+                        SingleInputSet<AnvilRecipe> recipes = getAnvilRecipes(level).selectByInput(itemStack);
+
+                        FirstSteps.LOGGER.info("anvil with ingot equivalent has " + recipes.size() + " recipes");
+
+                        if (recipes.size() > 0) {
+                            player.openMenu(getAnvilMenuProvider(blockState, level, pos, recipes));
+                        }
+                    }
+                    return InteractionResult.SUCCESS_SERVER;
+                }
+            }
+
+            return InteractionResult.PASS;
+        });
+    }
+
+
+    private static SingleInputSet<AnvilRecipe> getAnvilRecipes(Level level) {
+        Collection<RecipeHolder<AnvilRecipe>> all = ((ServerLevel) level).recipeAccess().getAllOfType(ModRecipeType.ANVIL_RECIPE);
+        List<SelectableRecipe.SingleInputEntry<AnvilRecipe>> list = new ArrayList<>();
+    
+        for (RecipeHolder<AnvilRecipe> recipeHolder : all) {
+            AnvilRecipe recipe = recipeHolder.value();
+    
+            SlotDisplay slotDisplay = recipe.resultDisplay();
+    
+            Optional<RecipeHolder<AnvilRecipe>> optional = Optional.of(recipeHolder);
+    
+            SelectableRecipe<AnvilRecipe> selectableRecipe = new SelectableRecipe<AnvilRecipe>(slotDisplay, optional);
+    
+            list.add(new SelectableRecipe.SingleInputEntry<AnvilRecipe>(recipe.input(), selectableRecipe));
+        }
+    
+        return new SingleInputSet<AnvilRecipe>(list);
+    }
+    
+    protected static MenuProvider getAnvilMenuProvider(BlockState blockState, Level level, BlockPos blockPos, SingleInputSet<AnvilRecipe> recipes) {
+        return new SimpleMenuProvider((i, inventory, player) -> {
+            return new AnvilMenu(i, inventory, recipes, blockPos);  
+        }, Component.empty());
     }
 }

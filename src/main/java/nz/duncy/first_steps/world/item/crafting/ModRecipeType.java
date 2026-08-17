@@ -8,6 +8,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.RecipeDisplay.Type;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.world.item.crafting.display.AnvilRecipeDisplay;
 import nz.duncy.first_steps.world.item.crafting.display.CrucibleRecipeDisplay;
 import nz.duncy.first_steps.world.item.crafting.display.KilnRecipeDisplay;
 import nz.duncy.first_steps.world.item.crafting.display.PottersWheelRecipeDisplay;
@@ -21,6 +22,9 @@ public interface ModRecipeType {
 
     RecipeType<KilnRecipe> KILN_RECIPE = register("kiln");
     Type<?> KILN_RECIPE_DISPLAY = register(KilnRecipeDisplay.TYPE, "klin");
+
+    RecipeType<AnvilRecipe> ANVIL_RECIPE = register("anvil");
+    Type<?> ANVIL_RECIPE_DISPLAY = register(AnvilRecipeDisplay.TYPE, "anvil");
 
     static <T extends Recipe<?>> RecipeType<T> register(String string) {
         return Registry.register(

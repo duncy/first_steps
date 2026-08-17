@@ -2,30 +2,40 @@ package nz.duncy.first_steps.world.item.crafting;
 
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
+import net.minecraft.world.level.Level;
 
-public class DurabilityLossShapelessRecipe extends ShapelessRecipe {
+public class DurabilityLossShapelessRecipe implements CraftingRecipe {
     final String group;
 	final CraftingBookCategory category;
 	final ItemStack result;
 	final List<Ingredient> ingredients;
+    @Nullable
+	private PlacementInfo placementInfo;
 
 	public DurabilityLossShapelessRecipe(String group, CraftingBookCategory category, ItemStack result, List<Ingredient> ingredients) {
-        super(group, category, result, ingredients);
 		this.group = group;
 		this.category = category;
 		this.result = result;
@@ -58,9 +68,50 @@ public class DurabilityLossShapelessRecipe extends ShapelessRecipe {
 		return remainingItems;
 	}
 
-    public RecipeSerializer getSerializer() {
+    public RecipeSerializer<DurabilityLossShapelessRecipe> getSerializer() {
         return ModRecipeSerializer.DURABILITY_LOSS_SHAPELESS; 
     }
+
+    @Override
+    public boolean matches(CraftingInput recipeInput, Level level) {
+        if (recipeInput.ingredientCount() != this.ingredients.size()) {
+			return false;
+		} else {
+			return recipeInput.size() == 1 && this.ingredients.size() == 1
+				? ((Ingredient)this.ingredients.getFirst()).test(recipeInput.getItem(0))
+				: recipeInput.stackedContents().canCraft(this, null);
+		}
+    }
+
+    @Override
+    public ItemStack assemble(CraftingInput recipeInput, Provider provider) {
+        return this.result.copy();
+    }
+
+    @Override
+    public PlacementInfo placementInfo() {
+        if (this.placementInfo == null) {
+			this.placementInfo = PlacementInfo.create(this.ingredients);
+		}
+
+		return this.placementInfo;
+    }
+
+    @Override
+    public CraftingBookCategory category() {
+        return this.category;
+    }
+
+    @Override
+	public List<RecipeDisplay> display() {
+		return List.of(
+			new ShapelessCraftingRecipeDisplay(
+				this.ingredients.stream().map(Ingredient::display).toList(),
+				new SlotDisplay.ItemStackSlotDisplay(this.result),
+				new SlotDisplay.ItemSlotDisplay(Items.CRAFTING_TABLE)
+			)
+		);
+	}
 
     public static class Serializer implements RecipeSerializer<DurabilityLossShapelessRecipe> {
 		private static final MapCodec<DurabilityLossShapelessRecipe> CODEC = RecordCodecBuilder.mapCodec(
@@ -94,4 +145,6 @@ public class DurabilityLossShapelessRecipe extends ShapelessRecipe {
 			return STREAM_CODEC;
 		}
 	}
+
+
 }

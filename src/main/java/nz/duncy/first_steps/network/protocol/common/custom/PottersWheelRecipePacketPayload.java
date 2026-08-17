@@ -8,13 +8,13 @@ import net.minecraft.world.item.crafting.SelectableRecipe.SingleInputSet;
 import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.world.item.crafting.PottersWheelRecipe;
 
-public record PottersWheelRecipePayload(SingleInputSet<PottersWheelRecipe> recipes) implements CustomPacketPayload {
+public record PottersWheelRecipePacketPayload(SingleInputSet<PottersWheelRecipe> recipes) implements CustomPacketPayload {
     public static final Identifier RECIPE_SYNC_PACKET_ID = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "potters_wheel_recipe_sync");
-    public static final CustomPacketPayload.Type<PottersWheelRecipePayload> TYPE = new CustomPacketPayload.Type<>(RECIPE_SYNC_PACKET_ID);
-    public static final StreamCodec<RegistryFriendlyByteBuf, PottersWheelRecipePayload> CODEC = StreamCodec.composite(SingleInputSet.noRecipeCodec(), PottersWheelRecipePayload::recipes, PottersWheelRecipePayload::new);
+    public static final CustomPacketPayload.Type<PottersWheelRecipePacketPayload> TYPE = new CustomPacketPayload.Type<>(RECIPE_SYNC_PACKET_ID);
+    public static final StreamCodec<RegistryFriendlyByteBuf, PottersWheelRecipePacketPayload> CODEC = StreamCodec.composite(SingleInputSet.noRecipeCodec(), PottersWheelRecipePacketPayload::recipes, PottersWheelRecipePacketPayload::new);
     
     @Override
-    public Type<PottersWheelRecipePayload> type() {
+    public Type<PottersWheelRecipePacketPayload> type() {
         return TYPE;
     }
     
