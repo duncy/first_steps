@@ -36,6 +36,6 @@ public class AnvilScreen extends RecipeSelectionScreen<AnvilRecipe, AnvilMenu> {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("screen." + FirstSteps.MOD_ID + ".anvil.switcher");
+        return Component.translatable("screen." + FirstSteps.MOD_ID + ".tool_head.switcher");
     }
 }

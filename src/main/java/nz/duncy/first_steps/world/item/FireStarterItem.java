@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import nz.duncy.first_steps.world.level.block.UnlitTorchBlock;
 import nz.duncy.first_steps.world.level.block.WallUnlitTorchBlock;
+import nz.duncy.first_steps.world.level.block.WoodPileBlock;
 
 public class FireStarterItem extends Item {
     private static final float IGNITE_CHANCE = 0.25f;
@@ -37,7 +38,12 @@ public class FireStarterItem extends Item {
         BlockPos blockPos = useOnContext.getClickedPos();
         BlockState blockState = level.getBlockState(blockPos);
 
-        if (!CampfireBlock.canLight(blockState) && !CandleBlock.canLight(blockState) && !CandleCakeBlock.canLight(blockState)) {
+        if (
+            !CampfireBlock.canLight(blockState) 
+            && !CandleBlock.canLight(blockState) 
+            && !CandleCakeBlock.canLight(blockState)
+            && !WoodPileBlock.canLight(blockState))
+        {
             if (blockState.getBlock() instanceof UnlitTorchBlock unlitTorchBlock) {
                 if (!level.isClientSide()) {
                     if (level.random.nextFloat() < IGNITE_CHANCE ) {

@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:copper_ingot",
+    "minecraft:iron_ingot",
+    "minecraft:gold_ingot",
+    "first_steps:bronze_ingot",
+    "first_steps:tin_ingot",
+    "minecraft:netherite_ingot"
+  ]
+}

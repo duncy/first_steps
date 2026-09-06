@@ -1,0 +1,8 @@
+{
+  "type": "first_steps:anvil",
+  "ingredient": "minecraft:iron_ingot",
+  "result": {
+    "count": 1,
+    "id": "first_steps:iron_head_pickaxe"
+  }
+}

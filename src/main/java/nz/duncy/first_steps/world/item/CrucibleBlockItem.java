@@ -49,11 +49,12 @@ public class CrucibleBlockItem extends BlockItem {
                         contents.inventory().copyInto(inventoryStacks);
                         metalStorage.buildCapacity(inventoryStacks);
 
-                        blockEntity.pour(metalStorage);
-
-                        world.playSound(null, pos, SoundEvents.BUCKET_EMPTY_LAVA, SoundSource.BLOCKS, 1f, 1f);
-
-                        return InteractionResult.SUCCESS_SERVER;
+                        if (blockEntity.pour(metalStorage) == true) {
+                            world.playSound(null, pos, SoundEvents.BUCKET_EMPTY_LAVA, SoundSource.BLOCKS, 1f, 1f);
+                            return InteractionResult.SUCCESS_SERVER;
+                        } else {
+                            return InteractionResult.PASS;
+                        }
                     }
                 }
             }

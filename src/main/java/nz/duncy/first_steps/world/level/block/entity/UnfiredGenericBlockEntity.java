@@ -15,14 +15,14 @@ import nz.duncy.first_steps.world.level.block.ModBlocks;
 public class UnfiredGenericBlockEntity extends UnfiredBlockEntity {
     private static final Map<Block, Block> FIRED_BLOCK_MAP = ImmutableMap.of(
         ModBlocks.UNFIRED_FLOWER_POT, Blocks.FLOWER_POT,
-        ModBlocks.UNFIRED_CRUCIBLE, ModBlocks.CRUCIBLE,
-        ModBlocks.UNFIRED_CASING_HOE, ModBlocks.CASING_HOE,
-        ModBlocks.UNFIRED_CASING_SHOVEL, ModBlocks.CASING_SHOVEL,
-        ModBlocks.UNFIRED_CASING_AXE, ModBlocks.CASING_AXE,
-        ModBlocks.UNFIRED_CASING_KNIFE, ModBlocks.CASING_KNIFE,
-        ModBlocks.UNFIRED_CASING_SPEAR, ModBlocks.CASING_SPEAR,
-        ModBlocks.UNFIRED_CASING_PICKAXE, ModBlocks.CASING_PICKAXE,
-        ModBlocks.UNFIRED_CASING_SWORD, ModBlocks.CASING_SWORD
+        ModBlocks.UNFIRED_CRUCIBLE, ModBlocks.CRUCIBLE
+        // ModBlocks.UNFIRED_CASING_HOE, ModBlocks.CASING_HOE,
+        // ModBlocks.UNFIRED_CASING_SHOVEL, ModBlocks.CASING_SHOVEL,
+        // ModBlocks.UNFIRED_CASING_AXE, ModBlocks.CASING_AXE,
+        // ModBlocks.UNFIRED_CASING_KNIFE, ModBlocks.CASING_KNIFE,
+        // ModBlocks.UNFIRED_CASING_SPEAR, ModBlocks.CASING_SPEAR,
+        // ModBlocks.UNFIRED_CASING_PICKAXE, ModBlocks.CASING_PICKAXE,
+        // ModBlocks.UNFIRED_CASING_SWORD, ModBlocks.CASING_SWORD
     );
 
     private static final Map<Block, Block> HORIZONTAL_FIRED_BLOCK_MAP = ImmutableMap.of(
@@ -35,11 +35,11 @@ public class UnfiredGenericBlockEntity extends UnfiredBlockEntity {
 
     @Override
     public void fire(Level level, BlockPos blockPos, BlockState blockState) {
-        Block firedBlock = blockState.getBlock();
+        Block block = blockState.getBlock();
         BlockState firedBlockState;
 
-        if (FIRED_BLOCK_MAP.containsKey(firedBlock)) {
-            firedBlockState = firedBlock.defaultBlockState();
+        if (FIRED_BLOCK_MAP.containsKey(block)) {
+            firedBlockState =  FIRED_BLOCK_MAP.get(blockState.getBlock()).defaultBlockState();
         } else {
             firedBlockState = HORIZONTAL_FIRED_BLOCK_MAP.get(blockState.getBlock()).defaultBlockState()
             .setValue(

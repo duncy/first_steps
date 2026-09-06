@@ -161,10 +161,10 @@ public class CrucibleScreen extends AbstractContainerScreen<CrucibleMenu> {
                     guiGraphics.setTooltipForNextFrame(
                         this.font, 
                         Metal.getAlloyTooltipComponents(index, amount), 
-                        new ItemStack(Metal.byIndex(index).getItemIcon()).getTooltipImage(), 
+                        new ItemStack(Metal.byIndex(index).getRawItem()).getTooltipImage(), 
                         mouseX, 
                         mouseY, 
-                        new ItemStack(Metal.byIndex(index).getItemIcon()).get(DataComponents.TOOLTIP_STYLE)
+                        new ItemStack(Metal.byIndex(index).getRawItem()).get(DataComponents.TOOLTIP_STYLE)
                     );
                     break;
                 }

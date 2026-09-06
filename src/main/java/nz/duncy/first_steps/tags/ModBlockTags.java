@@ -12,7 +12,13 @@ public class ModBlockTags {
 
 	    public static final TagKey<Block> INCORRECT_FOR_BRONZE_TOOL = 
             createTag("incorrect_for_bronze_tool");
-	
+
+        public static final TagKey<Block> WOOD_PILES = 
+            createTag("wood_piles");
+
+        public static final TagKey<Block> MINEABLE_WITH_HAMMER = 
+            createTag("mineable_with_hammer");
+    
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, name));

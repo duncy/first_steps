@@ -1,6 +1,7 @@
 package nz.duncy.first_steps.metallurgy;
 
 import java.util.EnumMap;
+import java.util.Optional;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
@@ -8,10 +9,37 @@ import nz.duncy.first_steps.tags.ModItemTags;
 
 public class MetalStorage {
     private final EnumMap<Metal, Integer> capacity = new EnumMap<>(Metal.class);
-    private int temperature = 20;
 
-    public MetalStorage() {
+    public void sendMetal(MetalStorage targetMetalStorage) {
+        
+        for (Metal metal : this.capacity.keySet()) {
+            int amount = this.capacity.get(metal);
+            int remainder = targetMetalStorage.recieveMetal(metal, amount);
+            sumMetalAmount(metal, remainder - amount);
+            break;
+        }
+    }
 
+    public int recieveMetal(Metal metal, int amount) {
+        int remainder = 0;
+
+        if (this.capacity.containsKey(metal) || this.capacity.isEmpty()) {
+            if (wouldThisOverfill(amount)) {
+                remainder = this.getTotalFillage() + amount % 81;
+            }
+
+            sumMetalAmount(metal, amount - remainder);
+        }
+
+        return remainder;
+    }
+
+    private void sumMetalAmount(Metal metal, int amount) {
+        if (this.capacity.getOrDefault(metal, 0) - amount == 0 ) {
+            this.capacity.remove(metal);
+        } else {
+            this.capacity.merge(metal, amount, Integer::sum);
+        }
     }
 
     public int getMetalByIndex(int index) {
@@ -23,36 +51,19 @@ public class MetalStorage {
     }
 
     public boolean wouldThisOverfill(ItemStack newItemStack) {
-        return this.getTotalFillage() + getItemAmount(newItemStack) > 81;
-    }
-    
-    public int getTemperature() {
-        return this.temperature;
+        return wouldThisOverfill(getItemAmount(newItemStack));
     }
 
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
-    }
-
-    public int[] getMetalAmounts() {
-        return this.capacity.values().stream().mapToInt(Integer::intValue).toArray();
-    }
-
-    public void setMetalAmounts(int[] metalAmounts) {
-        for (int index = 0; index < metalAmounts.length; index++) {
-            int amount = metalAmounts[index];
-            Metal metal = Metal.byIndex(index);
-
-            if (amount > 0) {
-                this.capacity.put(metal, metalAmounts[index]);
-            } else {
-                this.capacity.remove(metal);
-            } 
-        }
+    public boolean wouldThisOverfill(int amount) {
+        return this.getTotalFillage() + amount > 81;
     }
 
     public void addItemAmount(ItemStack itemStack) {
         updateCapacity(itemStack, getItemAmount(itemStack));
+    }
+
+    public Optional<Metal> getMetal() {
+        return this.capacity.keySet().stream().findFirst();
     }
 
     public int getItemAmount(ItemStack itemStack) {
@@ -67,8 +78,9 @@ public class MetalStorage {
     private void updateCapacity(ItemStack itemStack, int itemAmount) {
         if (itemAmount != 0){
             for (Metal metal : Metal.values()) {
+                if (metal == Metal.NONE) continue;
                 if (itemStack.is(metal.getItemTag())) {
-                    this.capacity.merge(metal, itemAmount, Integer::sum);
+                    sumMetalAmount(metal, itemAmount);
                     break;
                 }
             }

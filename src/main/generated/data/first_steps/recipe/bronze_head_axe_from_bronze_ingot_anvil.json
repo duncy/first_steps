@@ -1,0 +1,8 @@
+{
+  "type": "first_steps:anvil",
+  "ingredient": "first_steps:bronze_ingot",
+  "result": {
+    "count": 1,
+    "id": "first_steps:bronze_head_axe"
+  }
+}

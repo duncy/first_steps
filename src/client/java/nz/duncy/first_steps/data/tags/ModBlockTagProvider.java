@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider.BlockTagPro
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import nz.duncy.first_steps.tags.ModBlockTags;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 
 public class ModBlockTagProvider extends BlockTagProvider {
@@ -45,6 +46,12 @@ public class ModBlockTagProvider extends BlockTagProvider {
             .add(ModBlocks.RAW_STONE_IRON)
             .add(ModBlocks.RAW_DEEPSLATE_COPPER)
             .add(ModBlocks.RAW_DEEPSLATE_IRON);
+
+        valueLookupBuilder(ModBlockTags.WOOD_PILES)
+            .add(ModBlocks.WOOD_PILE);
+
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
+            .addTag(ModBlockTags.WOOD_PILES);
     }
     
 }

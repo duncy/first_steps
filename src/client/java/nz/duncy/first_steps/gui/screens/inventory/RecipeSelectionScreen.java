@@ -26,8 +26,8 @@ import nz.duncy.first_steps.FirstSteps;
 import nz.duncy.first_steps.world.inventory.RecipeSelectionMenu;
 
 public abstract class RecipeSelectionScreen<T extends SingleItemRecipe, M extends RecipeSelectionMenu<T, M>> extends AbstractContainerScreen<M> {
-    static final Identifier SLOT_SPRITE = Identifier.withDefaultNamespace("gamemode_switcher/slot");
-    static final Identifier SELECTION_SPRITE = Identifier.withDefaultNamespace("gamemode_switcher/selection");
+    private static final Identifier SLOT_SPRITE = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "textures/gui/container/slot.png");
+    private static final Identifier SELECTION_SPRITE = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "textures/gui/container/selection.png");
     private static final Identifier RECIPE_SWITCHER_SPRITE = Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "textures/gui/container/recipe_switcher.png");
     private ItemStack currentlyHovered;
     SingleInputSet<T> recipes = SingleInputSet.empty();
@@ -156,11 +156,11 @@ public abstract class RecipeSelectionScreen<T extends SingleItemRecipe, M extend
         }
 
         private void drawSlot(GuiGraphics guiGraphics) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, RecipeSelectionScreen.SLOT_SPRITE, this.getX(), this.getY(), 26, 26);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_SPRITE, this.getX(), this.getY(), 0.0F, 0.0F, 26, 26, 26, 26);
         }
 
         private void drawSelection(GuiGraphics guiGraphics) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, RecipeSelectionScreen.SELECTION_SPRITE, this.getX(), this.getY(), 26, 26);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SELECTION_SPRITE, this.getX(), this.getY(), 0.0F, 0.0F, 26, 26, 26, 26);
         }
     }
     

@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -21,6 +22,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ToolMaterial;
 import nz.duncy.first_steps.FirstSteps;
+import nz.duncy.first_steps.tags.ModBlockTags;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 
 public class ModItems {
@@ -181,13 +183,17 @@ public class ModItems {
     public static final Item ANIMAL_FAT = registerItem("animal_fat");
     public static final Item TALLOW = registerItem("tallow");
 
-    public static final Item PATTERN_HEAD_HOE = registerItem("pattern_head_hoe");
-    public static final Item PATTERN_HEAD_SHOVEL = registerItem("pattern_head_shovel");
-    public static final Item PATTERN_HEAD_AXE = registerItem("pattern_head_axe");
-    public static final Item PATTERN_HEAD_KNIFE = registerItem("pattern_head_knife");
-    public static final Item PATTERN_HEAD_SPEAR = registerItem("pattern_head_spear");
-    public static final Item PATTERN_HEAD_PICKAXE = registerItem("pattern_head_pickaxe");
-    public static final Item PATTERN_HEAD_SWORD = registerItem("pattern_head_sword");
+    public static final Item COPPER_SMITHING_HAMMER = registerItem("copper_smithing_hammer", (new Item.Properties()).tool(ToolMaterial.COPPER, ModBlockTags.MINEABLE_WITH_HAMMER, -2.0F, -2.0F, 0.0F));
+    public static final Item BRONZE_SMITHING_HAMMER = registerItem("bronze_smithing_hammer", (new Item.Properties()).tool(ModToolMaterial.BRONZE, ModBlockTags.MINEABLE_WITH_HAMMER, -2.0F, -2.0F, 0.0F));
+    public static final Item IRON_SMITHING_HAMMER = registerItem("iron_smithing_hammer", (new Item.Properties()).tool(ToolMaterial.IRON, ModBlockTags.MINEABLE_WITH_HAMMER, -2.0F, -2.0F, 0.0F));
+
+    // public static final Item PATTERN_HEAD_HOE = registerItem("pattern_head_hoe");
+    // public static final Item PATTERN_HEAD_SHOVEL = registerItem("pattern_head_shovel");
+    // public static final Item PATTERN_HEAD_AXE = registerItem("pattern_head_axe");
+    // public static final Item PATTERN_HEAD_KNIFE = registerItem("pattern_head_knife");
+    // public static final Item PATTERN_HEAD_SPEAR = registerItem("pattern_head_spear");
+    // public static final Item PATTERN_HEAD_PICKAXE = registerItem("pattern_head_pickaxe");
+    // public static final Item PATTERN_HEAD_SWORD = registerItem("pattern_head_sword");
 
     // Blocks
     public static final Item STONE_ROCK = Items.registerBlock(ModBlocks.STONE_ROCK, RockBlockItem::new);
@@ -229,21 +235,23 @@ public class ModItems {
     public static final Item TIN_BLOCK = Items.registerBlock(ModBlocks.TIN_BLOCK);
     public static final Item BRONZE_BLOCK = Items.registerBlock(ModBlocks.BRONZE_BLOCK);
 
-    public static final Item UNFIRED_CASING_HOE_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_HOE);
-    public static final Item UNFIRED_CASING_SHOVEL_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_SHOVEL);
-    public static final Item UNFIRED_CASING_AXE_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_AXE);
-    public static final Item UNFIRED_CASING_KNIFE_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_KNIFE);
-    public static final Item UNFIRED_CASING_SPEAR_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_SPEAR);
-    public static final Item UNFIRED_CASING_PICKAXE_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_PICKAXE);
-    public static final Item UNFIRED_CASING_SWORD_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_SWORD);
+    // public static final Item UNFIRED_CASING_HOE_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_HOE);
+    // public static final Item UNFIRED_CASING_SHOVEL_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_SHOVEL);
+    // public static final Item UNFIRED_CASING_AXE_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_AXE);
+    // public static final Item UNFIRED_CASING_KNIFE_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_KNIFE);
+    // public static final Item UNFIRED_CASING_SPEAR_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_SPEAR);
+    // public static final Item UNFIRED_CASING_PICKAXE_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_PICKAXE);
+    // public static final Item UNFIRED_CASING_SWORD_BLOCK = Items.registerBlock(ModBlocks.UNFIRED_CASING_SWORD);
 
-    public static final Item CASING_HOE_BLOCK = Items.registerBlock(ModBlocks.CASING_HOE);
-    public static final Item CASING_SHOVEL_BLOCK = Items.registerBlock(ModBlocks.CASING_SHOVEL);
-    public static final Item CASING_AXE_BLOCK = Items.registerBlock(ModBlocks.CASING_AXE);
-    public static final Item CASING_KNIFE_BLOCK = Items.registerBlock(ModBlocks.CASING_KNIFE);
-    public static final Item CASING_SPEAR_BLOCK = Items.registerBlock(ModBlocks.CASING_SPEAR);
-    public static final Item CASING_PICKAXE_BLOCK = Items.registerBlock(ModBlocks.CASING_PICKAXE);
-    public static final Item CASING_SWORD_BLOCK = Items.registerBlock(ModBlocks.CASING_SWORD);
+    // public static final Item CASING_HOE_BLOCK = Items.registerBlock(ModBlocks.CASING_HOE);
+    // public static final Item CASING_SHOVEL_BLOCK = Items.registerBlock(ModBlocks.CASING_SHOVEL);
+    // public static final Item CASING_AXE_BLOCK = Items.registerBlock(ModBlocks.CASING_AXE);
+    // public static final Item CASING_KNIFE_BLOCK = Items.registerBlock(ModBlocks.CASING_KNIFE);
+    // public static final Item CASING_SPEAR_BLOCK = Items.registerBlock(ModBlocks.CASING_SPEAR);
+    // public static final Item CASING_PICKAXE_BLOCK = Items.registerBlock(ModBlocks.CASING_PICKAXE);
+    // public static final Item CASING_SWORD_BLOCK = Items.registerBlock(ModBlocks.CASING_SWORD);
+
+    public static final Item WOOD_PILE_BlOCK = Items.registerBlock(ModBlocks.WOOD_PILE);
 
     public static Item registerItem(String string) {
         return Items.registerItem(moddedItemId(string), Item::new, new Item.Properties());
@@ -267,7 +275,11 @@ public class ModItems {
 
     public static final ResourceKey<CreativeModeTab> CUSTOM_ITEM_GROUP_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "item_group"));
     public static final CreativeModeTab CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(CRUCIBLE))
+            .icon(() -> {
+                ItemStack stack = new ItemStack(CRUCIBLE);
+                stack.set(DataComponents.ITEM_MODEL, Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, "crucible_lit"));
+                return stack;
+            })
             .title(Component.translatable("itemGroup.first_steps"))
             .build();
 
@@ -368,6 +380,7 @@ public class ModItems {
 
             // Copper tools
             itemGroup.accept(ModItems.COPPER_KNIFE);
+            itemGroup.accept(COPPER_SMITHING_HAMMER);
 
             // Bronze tools
             itemGroup.accept(ModItems.BRONZE_HOE);
@@ -377,9 +390,13 @@ public class ModItems {
             itemGroup.accept(ModItems.BRONZE_SPEAR);
             itemGroup.accept(ModItems.BRONZE_PICKAXE);
             itemGroup.accept(ModItems.BRONZE_SWORD);
+            itemGroup.accept(BRONZE_SMITHING_HAMMER);
 
             // Iron tools
             itemGroup.accept(ModItems.IRON_KNIFE);
+            itemGroup.accept(IRON_SMITHING_HAMMER);
+
+            itemGroup.accept(WOODEN_TONGS);
 
             // Firestarter
             itemGroup.accept(FIRESTARTER);
@@ -439,34 +456,34 @@ public class ModItems {
             itemGroup.accept(TIN_INGOT);
             itemGroup.accept(BRONZE_INGOT);
 
-            itemGroup.accept(WOODEN_TONGS);
-
             itemGroup.accept(ANIMAL_FAT);
             itemGroup.accept(TALLOW);
 
-            itemGroup.accept(PATTERN_HEAD_HOE);
-            itemGroup.accept(PATTERN_HEAD_SHOVEL);
-            itemGroup.accept(PATTERN_HEAD_AXE);
-            itemGroup.accept(PATTERN_HEAD_KNIFE);
-            itemGroup.accept(PATTERN_HEAD_SPEAR);
-            itemGroup.accept(PATTERN_HEAD_PICKAXE);
-            itemGroup.accept(PATTERN_HEAD_SWORD);
+            // itemGroup.accept(PATTERN_HEAD_HOE);
+            // itemGroup.accept(PATTERN_HEAD_SHOVEL);
+            // itemGroup.accept(PATTERN_HEAD_AXE);
+            // itemGroup.accept(PATTERN_HEAD_KNIFE);
+            // itemGroup.accept(PATTERN_HEAD_SPEAR);
+            // itemGroup.accept(PATTERN_HEAD_PICKAXE);
+            // itemGroup.accept(PATTERN_HEAD_SWORD);
 
-            itemGroup.accept(UNFIRED_CASING_HOE_BLOCK);
-            itemGroup.accept(UNFIRED_CASING_SHOVEL_BLOCK);
-            itemGroup.accept(UNFIRED_CASING_AXE_BLOCK);
-            itemGroup.accept(UNFIRED_CASING_KNIFE_BLOCK);
-            itemGroup.accept(UNFIRED_CASING_SPEAR_BLOCK);
-            itemGroup.accept(UNFIRED_CASING_PICKAXE_BLOCK);
-            itemGroup.accept(UNFIRED_CASING_SWORD_BLOCK);
+            // itemGroup.accept(UNFIRED_CASING_HOE_BLOCK);
+            // itemGroup.accept(UNFIRED_CASING_SHOVEL_BLOCK);
+            // itemGroup.accept(UNFIRED_CASING_AXE_BLOCK);
+            // itemGroup.accept(UNFIRED_CASING_KNIFE_BLOCK);
+            // itemGroup.accept(UNFIRED_CASING_SPEAR_BLOCK);
+            // itemGroup.accept(UNFIRED_CASING_PICKAXE_BLOCK);
+            // itemGroup.accept(UNFIRED_CASING_SWORD_BLOCK);
 
-            itemGroup.accept(CASING_HOE_BLOCK);
-            itemGroup.accept(CASING_SHOVEL_BLOCK);
-            itemGroup.accept(CASING_AXE_BLOCK);
-            itemGroup.accept(CASING_KNIFE_BLOCK);
-            itemGroup.accept(CASING_SPEAR_BLOCK);
-            itemGroup.accept(CASING_PICKAXE_BLOCK);
-            itemGroup.accept(CASING_SWORD_BLOCK);
+            // itemGroup.accept(CASING_HOE_BLOCK);
+            // itemGroup.accept(CASING_SHOVEL_BLOCK);
+            // itemGroup.accept(CASING_AXE_BLOCK);
+            // itemGroup.accept(CASING_KNIFE_BLOCK);
+            // itemGroup.accept(CASING_SPEAR_BLOCK);
+            // itemGroup.accept(CASING_PICKAXE_BLOCK);
+            // itemGroup.accept(CASING_SWORD_BLOCK);
+
+            itemGroup.accept(ModBlocks.WOOD_PILE);
         });
     }
 }

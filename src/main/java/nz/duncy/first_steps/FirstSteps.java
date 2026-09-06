@@ -81,7 +81,7 @@ public class FirstSteps implements ModInitializer {
         ServerPlayNetworking.registerGlobalReceiver(AnvilSelectionPacketPayload.TYPE, (payload, context) -> {
             AbstractContainerMenu containerMenu = context.player().containerMenu;
             if (containerMenu instanceof AnvilMenu anvilMenu) {
-                LOGGER.info(payload.selection() + " " + context.player());
+                anvilMenu.dropHead(payload.selection(), context.player());
             }
 	    });
 

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_logs": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
@@ -31,7 +31,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_logs",
+      "has_stick",
       "has_tinder"
     ]
   ],

@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.display.SlotDisplayContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.crafting.SelectableRecipe.SingleInputSet;
-import nz.duncy.first_steps.network.protocol.common.custom.PottersWheelRecipePayload;
+import nz.duncy.first_steps.network.protocol.common.custom.PottersWheelRecipePacketPayload;
 import nz.duncy.first_steps.world.item.crafting.PottersWheelRecipe;
 import nz.duncy.first_steps.world.level.block.entity.PottersWheelBlockEntity;
 
@@ -32,7 +32,7 @@ public class PottersWheelMenu extends RecipeSelectionMenu<PottersWheelRecipe, Po
     @Override
     protected void sendRecipes(Player player) {
         if (!player.level().isClientSide()) {
-            ServerPlayNetworking.send((ServerPlayer) player, new PottersWheelRecipePayload(getRecipes()));
+            ServerPlayNetworking.send((ServerPlayer) player, new PottersWheelRecipePacketPayload(getRecipes()));
         }
     }
     

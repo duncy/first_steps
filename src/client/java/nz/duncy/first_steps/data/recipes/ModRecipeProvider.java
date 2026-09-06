@@ -295,7 +295,37 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             }
 
             public void buildAnvilRecipes() {
-                anvilResultFromBase(RecipeCategory.DECORATIONS, ModItems.IRON_HEAD_HOE, Items.IRON_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.COPPER_HEAD_AXE, Items.COPPER_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.COPPER_HEAD_SHOVEL, Items.COPPER_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.COPPER_HEAD_KNIFE, Items.COPPER_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.COPPER_HEAD_HOE, Items.COPPER_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.COPPER_HEAD_SPEAR, Items.COPPER_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.COPPER_HEAD_SWORD, Items.COPPER_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.COPPER_HEAD_PICKAXE, Items.COPPER_INGOT);
+
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.BRONZE_HEAD_AXE, ModItems.BRONZE_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.BRONZE_HEAD_SHOVEL, ModItems.BRONZE_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.BRONZE_HEAD_KNIFE, ModItems.BRONZE_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.BRONZE_HEAD_HOE, ModItems.BRONZE_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.BRONZE_HEAD_SPEAR, ModItems.BRONZE_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.BRONZE_HEAD_SWORD, ModItems.BRONZE_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.BRONZE_HEAD_PICKAXE, ModItems.BRONZE_INGOT);
+
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.IRON_HEAD_AXE, Items.IRON_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.IRON_HEAD_SHOVEL, Items.IRON_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.IRON_HEAD_KNIFE, Items.IRON_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.IRON_HEAD_HOE, Items.IRON_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.IRON_HEAD_SPEAR, Items.IRON_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.IRON_HEAD_SWORD, Items.IRON_INGOT);
+                anvilResultFromBase(RecipeCategory.MISC, ModItems.IRON_HEAD_PICKAXE, Items.IRON_INGOT);
+
+                // anvilResultFromBase(RecipeCategory.MISC, ModItems.GOLD_HEAD_AXE, Items.GOLD_INGOT);
+                // anvilResultFromBase(RecipeCategory.MISC, ModItems.GOLD_HEAD_SHOVEL, Items.GOLD_INGOT);
+                // anvilResultFromBase(RecipeCategory.MISC, ModItems.GOLD_HEAD_KNIFE, Items.GOLD_INGOT);
+                // anvilResultFromBase(RecipeCategory.MISC, ModItems.GOLD_HEAD_HOE, Items.GOLD_INGOT);
+                // anvilResultFromBase(RecipeCategory.MISC, ModItems.GOLD_HEAD_SPEAR, Items.GOLD_INGOT);
+                // anvilResultFromBase(RecipeCategory.MISC, ModItems.GOLD_HEAD_SWORD, Items.GOLD_INGOT);
+                // anvilResultFromBase(RecipeCategory.MISC, ModItems.GOLD_HEAD_PICKAXE, Items.GOLD_INGOT);
             }
 
             public void buildPottersWheelRecipes() {

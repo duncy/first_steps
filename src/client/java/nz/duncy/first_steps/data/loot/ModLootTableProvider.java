@@ -1,6 +1,5 @@
 package nz.duncy.first_steps.data.loot;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -10,7 +9,6 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -38,6 +36,7 @@ import nz.duncy.first_steps.world.level.block.DecoratedJarBlock;
 import nz.duncy.first_steps.world.level.block.ModBlocks;
 import nz.duncy.first_steps.world.level.block.RockBlock;
 import nz.duncy.first_steps.world.level.block.UnfiredDecoratedBlock;
+import nz.duncy.first_steps.world.level.block.WoodPileBlock;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate.Builder;
 
@@ -60,13 +59,13 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         dropSelf(ModBlocks.UNFIRED_FLOWER_POT);
         dropSelf(ModBlocks.UNFIRED_CRUCIBLE);
         dropSelf(ModBlocks.UNFIRED_INGOT_CAST);
-        dropSelf(ModBlocks.UNFIRED_CASING_HOE);
-        dropSelf(ModBlocks.UNFIRED_CASING_SHOVEL);
-        dropSelf(ModBlocks.UNFIRED_CASING_AXE);
-        dropSelf(ModBlocks.UNFIRED_CASING_KNIFE);
-        dropSelf(ModBlocks.UNFIRED_CASING_SPEAR);
-        dropSelf(ModBlocks.UNFIRED_CASING_PICKAXE);
-        dropSelf(ModBlocks.UNFIRED_CASING_SWORD);
+        // dropSelf(ModBlocks.UNFIRED_CASING_HOE);
+        // dropSelf(ModBlocks.UNFIRED_CASING_SHOVEL);
+        // dropSelf(ModBlocks.UNFIRED_CASING_AXE);
+        // dropSelf(ModBlocks.UNFIRED_CASING_KNIFE);
+        // dropSelf(ModBlocks.UNFIRED_CASING_SPEAR);
+        // dropSelf(ModBlocks.UNFIRED_CASING_PICKAXE);
+        // dropSelf(ModBlocks.UNFIRED_CASING_SWORD);
 
         dropSelf(ModBlocks.POTTERS_WHEEL);
 
@@ -87,6 +86,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         add(ModBlocks.CRUCIBLE, createCrucibleDrop(ModBlocks.CRUCIBLE));
         dropSelf(ModBlocks.INGOT_CAST);
+
+        dropWoodPile(ModBlocks.WOOD_PILE);
     }
 
     public LootTable.Builder createCrucibleDrop(Block block) {
@@ -145,10 +146,23 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         add(brokenBlock, (block) -> {
             return LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-                .add(this.applyExplosionDecay(brokenBlock, LootItem.lootTableItem(item).apply(List.of(2, 3, 4), (integer) -> {
+                .add(this.applyExplosionDecay(brokenBlock, LootItem.lootTableItem(item).apply(RockBlock.ROCKS.getPossibleValues(), (integer) -> {
                     return SetItemCountFunction.setCount(ConstantValue.exactly((float)integer))
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
                         .setProperties(Builder.properties().hasProperty(RockBlock.ROCKS, integer)));
+                    }
+            ))));
+        });
+    }
+
+    private final void dropWoodPile(Block brokenBlock) {
+        add(brokenBlock, (block) -> {
+            return LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                .add(this.applyExplosionDecay(brokenBlock, LootItem.lootTableItem(brokenBlock).apply(WoodPileBlock.PILE_SIZE.getPossibleValues(), (integer) -> {
+                    return SetItemCountFunction.setCount(ConstantValue.exactly((float)integer))
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                        .setProperties(Builder.properties().hasProperty(WoodPileBlock.PILE_SIZE, integer)));
                     }
             ))));
         });

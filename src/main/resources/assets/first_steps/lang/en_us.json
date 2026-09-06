@@ -1,5 +1,5 @@
 {
-    "screen.first_steps.knapping.switcher": "Select a tool head",
+    "screen.first_steps.tool_head.switcher": "Select a tool head",
     "screen.first_steps.potters_wheel.switcher": "Select a pottery shape",
 
     "item.first_steps.stone_head_hoe": "Stone Hoe Head",
@@ -114,6 +114,8 @@
     "item.first_steps.tallow": "Tallow",
 
     "item.first_steps.wooden_tongs": "Wooden Tongs",
+
+    "item.first_steps.iron_smithing_hammer": "Iron Smithing Hammer",
     
     "block.first_steps.stone_rock": "Rock",
     "block.first_steps.flint_rock": "Flint",
@@ -165,6 +167,8 @@
     "block.first_steps.casing_spear": "Spear Casing",
     "block.first_steps.casing_pickaxe": "Pickaxe Casing",
     "block.first_steps.casing_sword": "Sword Casing",
+
+    "block.first_steps.wood_pile": "Firewood",
 
     
     "container.first_steps.decorated_jar": "Decorated Jar",

@@ -21,14 +21,14 @@ public class ModBlockEntityType {
         UnfiredGenericBlockEntity::new,
         ModBlocks.UNFIRED_FLOWER_POT,
         ModBlocks.UNFIRED_CRUCIBLE,
-        ModBlocks.UNFIRED_INGOT_CAST,
-        ModBlocks.UNFIRED_CASING_HOE, 
-        ModBlocks.UNFIRED_CASING_SHOVEL,
-        ModBlocks.UNFIRED_CASING_AXE,
-        ModBlocks.UNFIRED_CASING_KNIFE,
-        ModBlocks.UNFIRED_CASING_SPEAR,
-        ModBlocks.UNFIRED_CASING_PICKAXE,
-        ModBlocks.UNFIRED_CASING_SWORD
+        ModBlocks.UNFIRED_INGOT_CAST
+        // ModBlocks.UNFIRED_CASING_HOE, 
+        // ModBlocks.UNFIRED_CASING_SHOVEL,
+        // ModBlocks.UNFIRED_CASING_AXE,
+        // ModBlocks.UNFIRED_CASING_KNIFE,
+        // ModBlocks.UNFIRED_CASING_SPEAR,
+        // ModBlocks.UNFIRED_CASING_PICKAXE,
+        // ModBlocks.UNFIRED_CASING_SWORD
     );
     public static final BlockEntityType<PottersWheelBlockEntity> POTTERS_WHEEL = register("potters_wheel", PottersWheelBlockEntity::new, ModBlocks.POTTERS_WHEEL);
     public static final BlockEntityType<KilnBlockEntity> KILN = register("kiln", KilnBlockEntity::new, ModBlocks.KILN);

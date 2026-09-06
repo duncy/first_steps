@@ -243,27 +243,26 @@ public class ModEvents {
         });
 
         UseBlockCallback.EVENT.register((player, level, hand, hitResult) -> {
-            ItemStack itemStack = player.getItemInHand(hand);
+            ItemStack ingotItemStack = player.getMainHandItem();
+            ItemStack hammerItemStack = player.getOffhandItem();
 
-            if (itemStack.is(ModItemTags.ONE_INGOT_EQUIVALENT)) {
-                BlockPos pos = hitResult.getBlockPos();
-                BlockState blockState = level.getBlockState(pos);
+            if (ingotItemStack.is(ModItemTags.SMITHABLE_INGOTS)) {
+                if (hammerItemStack.is(ModItemTags.SMITHING_HAMMERS)) {
+                    BlockPos pos = hitResult.getBlockPos();
+                    BlockState blockState = level.getBlockState(pos);
 
-                if (blockState.is(BlockTags.ANVIL)) {
-                    if (!level.isClientSide()) {
-                    
-                        SingleInputSet<AnvilRecipe> recipes = getAnvilRecipes(level).selectByInput(itemStack);
+                    if (blockState.is(BlockTags.ANVIL)) {
+                        if (!level.isClientSide()) {
+                            SingleInputSet<AnvilRecipe> recipes = getAnvilRecipes(level).selectByInput(ingotItemStack);
 
-                        FirstSteps.LOGGER.info("anvil with ingot equivalent has " + recipes.size() + " recipes");
-
-                        if (recipes.size() > 0) {
-                            player.openMenu(getAnvilMenuProvider(blockState, level, pos, recipes));
+                            if (recipes.size() > 0) {
+                                player.openMenu(getAnvilMenuProvider(blockState, level, pos, recipes, ingotItemStack, hammerItemStack));
+                            }
                         }
+                        return InteractionResult.SUCCESS_SERVER;
                     }
-                    return InteractionResult.SUCCESS_SERVER;
                 }
             }
-
             return InteractionResult.PASS;
         });
     }
@@ -288,9 +287,9 @@ public class ModEvents {
         return new SingleInputSet<AnvilRecipe>(list);
     }
     
-    protected static MenuProvider getAnvilMenuProvider(BlockState blockState, Level level, BlockPos blockPos, SingleInputSet<AnvilRecipe> recipes) {
+    protected static MenuProvider getAnvilMenuProvider(BlockState blockState, Level level, BlockPos blockPos, SingleInputSet<AnvilRecipe> recipes, ItemStack ingotItemStack, ItemStack hammerItemStack) {
         return new SimpleMenuProvider((i, inventory, player) -> {
-            return new AnvilMenu(i, inventory, recipes, blockPos);  
+            return new AnvilMenu(i, inventory, recipes, blockPos, ingotItemStack, hammerItemStack);  
         }, Component.empty());
     }
 }

@@ -36,6 +36,6 @@ public class KnappingScreen extends RecipeSelectionScreen<StonecutterRecipe, Kna
 
     @Override
     public Component getTitle() {
-        return Component.translatable("screen." + FirstSteps.MOD_ID + ".knapping.switcher");
+        return Component.translatable("screen." + FirstSteps.MOD_ID + ".tool_head.switcher");
     }
 }

@@ -1,8 +1,38 @@
 {
 "variants": {
-    "facing=north": { "model": "first_steps:block/ingot_cast", "y": 90 },
-    "facing=east":  { "model": "first_steps:block/ingot_cast" },
-    "facing=south": { "model": "first_steps:block/ingot_cast", "y": 270 },
-    "facing=west":  { "model": "first_steps:block/ingot_cast", "y": 180 }
+    "facing=north,metal=none": { "model": "first_steps:block/ingot_cast", "y": 90 },
+    "facing=east,metal=none":  { "model": "first_steps:block/ingot_cast" },
+    "facing=south,metal=none": { "model": "first_steps:block/ingot_cast", "y": 270 },
+    "facing=west,metal=none":  { "model": "first_steps:block/ingot_cast", "y": 180 },
+
+    "facing=north,metal=copper": { "model": "first_steps:block/ingot_cast_metal", "y": 90 },
+    "facing=east,metal=copper":  { "model": "first_steps:block/ingot_cast_metal" },
+    "facing=south,metal=copper": { "model": "first_steps:block/ingot_cast_metal", "y": 270 },
+    "facing=west,metal=copper":  { "model": "first_steps:block/ingot_cast_metal", "y": 180 },
+
+    "facing=north,metal=bronze": { "model": "first_steps:block/ingot_cast_metal", "y": 90 },
+    "facing=east,metal=bronze":  { "model": "first_steps:block/ingot_cast_metal" },
+    "facing=south,metal=bronze": { "model": "first_steps:block/ingot_cast_metal", "y": 270 },
+    "facing=west,metal=bronze":  { "model": "first_steps:block/ingot_cast_metal", "y": 180 },
+
+    "facing=north,metal=tin": { "model": "first_steps:block/ingot_cast_metal", "y": 90 },
+    "facing=east,metal=tin":  { "model": "first_steps:block/ingot_cast_metal" },
+    "facing=south,metal=tin": { "model": "first_steps:block/ingot_cast_metal", "y": 270 },
+    "facing=west,metal=tin":  { "model": "first_steps:block/ingot_cast_metal", "y": 180 },
+
+    "facing=north,metal=iron": { "model": "first_steps:block/ingot_cast_metal", "y": 90 },
+    "facing=east,metal=iron":  { "model": "first_steps:block/ingot_cast_metal" },
+    "facing=south,metal=iron": { "model": "first_steps:block/ingot_cast_metal", "y": 270 },
+    "facing=west,metal=iron":  { "model": "first_steps:block/ingot_cast_metal", "y": 180 },
+
+    "facing=north,metal=gold": { "model": "first_steps:block/ingot_cast_metal", "y": 90 },
+    "facing=east,metal=gold":  { "model": "first_steps:block/ingot_cast_metal" },
+    "facing=south,metal=gold": { "model": "first_steps:block/ingot_cast_metal", "y": 270 },
+    "facing=west,metal=gold":  { "model": "first_steps:block/ingot_cast_metal", "y": 180 },
+
+    "facing=north,metal=netherite": { "model": "first_steps:block/ingot_cast_metal", "y": 90 },
+    "facing=east,metal=netherite":  { "model": "first_steps:block/ingot_cast_metal" },
+    "facing=south,metal=netherite": { "model": "first_steps:block/ingot_cast_metal", "y": 270 },
+    "facing=west,metal=netherite":  { "model": "first_steps:block/ingot_cast_metal", "y": 180 }
   }
 }

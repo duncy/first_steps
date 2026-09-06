@@ -1,7 +1,10 @@
 {
-"variants": {
-    "": {
-      "model": "first_steps:block/crucible"
+    "variants": {
+      "lit=false": {
+        "model": "first_steps:block/crucible"
+      },
+      "lit=true": {
+        "model": "first_steps:block/crucible_lit"
+      }
     }
-  }
 }

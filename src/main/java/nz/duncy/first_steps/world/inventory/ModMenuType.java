@@ -14,13 +14,16 @@ public class ModMenuType {
         register("knapping_selection", KnappingMenu::new);
 
     public static final MenuType<PottersWheelMenu> POTTERS_WHEEL_SELECTION_MENU = 
-        register("potters_wheel", PottersWheelMenu::new);
+        register("potters_wheel_selection", PottersWheelMenu::new);
 
     public static final MenuType<CrucibleMenu> CRUCIBLE_MENU = 
         register("crucible", CrucibleMenu::new);
 
     public static final MenuType<KilnMenu> KILN_MENU = 
         register("kiln", KilnMenu::new);
+
+    public static final MenuType<AnvilMenu> ANVIL_SELECTION_MENU = 
+        register("anvil_selection", AnvilMenu::new);
 
     private static <T extends AbstractContainerMenu> MenuType<T> register(String string, MenuSupplier<T> menuSupplier) {
         return Registry.register(BuiltInRegistries.MENU, Identifier.fromNamespaceAndPath(FirstSteps.MOD_ID, string), new MenuType<T>(menuSupplier, FeatureFlags.VANILLA_SET));

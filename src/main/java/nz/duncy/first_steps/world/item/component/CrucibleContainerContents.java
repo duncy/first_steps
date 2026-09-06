@@ -49,6 +49,7 @@ public record CrucibleContainerContents(int temperature, ItemContainerContents i
 
                 if (amount > 0) {
                     for (Metal metal : Metal.values()) {
+                        if (metal == Metal.NONE) continue;
                         if (stack.is(metal.getItemTag())) {
                             capacity.merge(metal, amount, Integer::sum);
                             break;

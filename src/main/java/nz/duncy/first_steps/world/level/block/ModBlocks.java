@@ -109,21 +109,23 @@ public class ModBlocks {
     public static final Block WALL_UNLIT_TORCH = register("wall_unlit_torch", WallUnlitTorchBlock::new, wallVariant(UNLIT_TORCH, true).noCollision().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
 
     // Inset Molds
-    public static final Block UNFIRED_CASING_HOE = register("unfired_casing_hoe", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block UNFIRED_CASING_SHOVEL = register("unfired_casing_shovel", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block UNFIRED_CASING_AXE = register("unfired_casing_axe", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block UNFIRED_CASING_KNIFE = register("unfired_casing_knife", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block UNFIRED_CASING_SPEAR = register("unfired_casing_spear", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block UNFIRED_CASING_PICKAXE = register("unfired_casing_pickaxe", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block UNFIRED_CASING_SWORD = register("unfired_casing_sword", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block UNFIRED_CASING_HOE = register("unfired_casing_hoe", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block UNFIRED_CASING_SHOVEL = register("unfired_casing_shovel", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block UNFIRED_CASING_AXE = register("unfired_casing_axe", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block UNFIRED_CASING_KNIFE = register("unfired_casing_knife", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block UNFIRED_CASING_SPEAR = register("unfired_casing_spear", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block UNFIRED_CASING_PICKAXE = register("unfired_casing_pickaxe", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block UNFIRED_CASING_SWORD = register("unfired_casing_sword", UnfiredCasingBlock::new, Properties.of().mapColor(MapColor.CLAY).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
 
-    public static final Block CASING_HOE = register("casing_hoe", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block CASING_SHOVEL = register("casing_shovel", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block CASING_AXE = register("casing_axe", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block CASING_KNIFE = register("casing_knife", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block CASING_SPEAR = register("casing_spear", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block CASING_PICKAXE = register("casing_pickaxe", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
-    public static final Block CASING_SWORD = register("casing_sword", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block CASING_HOE = register("casing_hoe", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block CASING_SHOVEL = register("casing_shovel", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block CASING_AXE = register("casing_axe", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block CASING_KNIFE = register("casing_knife", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block CASING_SPEAR = register("casing_spear", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block CASING_PICKAXE = register("casing_pickaxe", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+    // public static final Block CASING_SWORD = register("casing_sword", Block::new, Properties.of().mapColor(MapColor.TERRACOTTA_RED).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion());
+
+    public static final Block WOOD_PILE = register("wood_pile", WoodPileBlock::new,  Properties.of().mapColor(MapColor.WOOD).strength(1.0F).instrument(NoteBlockInstrument.BASS).pushReaction(PushReaction.DESTROY).noOcclusion().randomTicks().sound(SoundType.WOOD).ignitedByLava());
 
 
     private static BlockBehaviour.Properties wallVariant(Block block, boolean bl) {

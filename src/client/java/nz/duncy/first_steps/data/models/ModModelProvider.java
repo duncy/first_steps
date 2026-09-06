@@ -212,33 +212,39 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CRUCIBLE, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.UNFIRED_INGOT_CAST, ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_HOE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_AXE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_SHOVEL, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_SPEAR, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_KNIFE, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_SWORD, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_PICKAXE, ModelTemplates.FLAT_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.COPPER_SMITHING_HAMMER, ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.BRONZE_SMITHING_HAMMER, ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModelGenerator.generateFlatItem(ModItems.IRON_SMITHING_HAMMER, ModelTemplates.FLAT_HANDHELD_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_HOE_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_AXE_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_SHOVEL_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_SPEAR_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_KNIFE_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_SWORD_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_PICKAXE_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_HOE, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_AXE, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_SHOVEL, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_SPEAR, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_KNIFE, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_SWORD, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.PATTERN_HEAD_PICKAXE, ModelTemplates.FLAT_ITEM);
 
-        itemModelGenerator.generateFlatItem(ModItems.CASING_HOE_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CASING_AXE_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CASING_SHOVEL_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CASING_SPEAR_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CASING_KNIFE_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CASING_SWORD_BLOCK, ModelTemplates.FLAT_ITEM);
-        itemModelGenerator.generateFlatItem(ModItems.CASING_PICKAXE_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_HOE_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_AXE_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_SHOVEL_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_SPEAR_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_KNIFE_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_SWORD_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.UNFIRED_CASING_PICKAXE_BLOCK, ModelTemplates.FLAT_ITEM);
+
+        // itemModelGenerator.generateFlatItem(ModItems.CASING_HOE_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.CASING_AXE_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.CASING_SHOVEL_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.CASING_SPEAR_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.CASING_KNIFE_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.CASING_SWORD_BLOCK, ModelTemplates.FLAT_ITEM);
+        // itemModelGenerator.generateFlatItem(ModItems.CASING_PICKAXE_BLOCK, ModelTemplates.FLAT_ITEM);
 
         itemModelGenerator.generateFlatItem(ModItems.WOODEN_TONGS, ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.ANIMAL_FAT, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.TALLOW, ModelTemplates.FLAT_ITEM);
+
+        itemModelGenerator.generateFlatItem(ModItems.WOOD_PILE_BlOCK, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
     @Override

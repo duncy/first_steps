@@ -35,7 +35,7 @@ public class CrucibleBlock extends WaterloggedCrackedEntityBlock {
 
     protected CrucibleBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(LIT, false));
     }
 
     protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {

@@ -58,14 +58,21 @@ public class ModItemTagProvider extends ItemTagProvider {
             .add(ModItems.BASALT_KNIFE)
             .add(ModItems.OBSIDIAN_KNIFE);
 
+        valueLookupBuilder(ModItemTags.SMITHING_HAMMERS)
+            .add(ModItems.COPPER_SMITHING_HAMMER)
+            .add(ModItems.BRONZE_SMITHING_HAMMER)
+            .add(ModItems.IRON_SMITHING_HAMMER);
+
         valueLookupBuilder(ItemTags.MELEE_WEAPON_ENCHANTABLE)
             .addTag(ModItemTags.KNIVES);
 
         valueLookupBuilder(ItemTags.BREAKS_DECORATED_POTS)
-            .addTag(ModItemTags.KNIVES);
+            .addTag(ModItemTags.KNIVES)
+            .addTag(ModItemTags.SMITHING_HAMMERS);
 
         valueLookupBuilder(ItemTags.DURABILITY_ENCHANTABLE)
-            .addTag(ModItemTags.KNIVES);
+            .addTag(ModItemTags.KNIVES)
+            .addTag(ModItemTags.SMITHING_HAMMERS);
 
         valueLookupBuilder(ModItemTags.NINE_INGOTS_EQUIVALENT)
             .add(Items.RAW_COPPER_BLOCK)
@@ -80,18 +87,21 @@ public class ModItemTagProvider extends ItemTagProvider {
             .add(Items.GOLD_BLOCK)
             .add(Items.NETHERITE_BLOCK);
 
+        valueLookupBuilder(ModItemTags.SMITHABLE_INGOTS)
+            .add(Items.COPPER_INGOT)
+            .add(Items.IRON_INGOT)
+            .add(Items.GOLD_INGOT)
+            .add(ModItems.BRONZE_INGOT)
+            .add(ModItems.TIN_INGOT)
+            .add(Items.NETHERITE_INGOT);
+
         valueLookupBuilder(ModItemTags.ONE_INGOT_EQUIVALENT)
             .add(Items.RAW_COPPER)
             .add(Items.RAW_IRON)
             .add(Items.RAW_GOLD)
-            .add(Items.COPPER_INGOT)
-            .add(Items.IRON_INGOT)
-            .add(Items.GOLD_INGOT)
             .add(ModItems.RAW_BRONZE)
             .add(ModItems.RAW_TIN)
-            .add(ModItems.BRONZE_INGOT)
-            .add(ModItems.TIN_INGOT)
-            .add(Items.NETHERITE_INGOT);
+            .addTag(ModItemTags.SMITHABLE_INGOTS);
 
         valueLookupBuilder(ModItemTags.ONE_NINTH_INGOT_EQUIVALENT)
             .add(ModItems.TIN_NUGGET)
@@ -143,8 +153,8 @@ public class ModItemTagProvider extends ItemTagProvider {
             .addTag(ModItemTags.GOLD_SOURCE);
 
         valueLookupBuilder(ModItemTags.WAX)
-            .add(Items.HONEYCOMB)
-            .add(ModItems.TALLOW);
+            .add(Items.HONEYCOMB);
+            // .add(ModItems.TALLOW);
 
     }
 }
