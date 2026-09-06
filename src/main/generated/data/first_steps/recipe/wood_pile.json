@@ -1,0 +1,12 @@
+{
+  "type": "first_steps:durability_loss_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#minecraft:logs",
+    "#minecraft:axes"
+  ],
+  "result": {
+    "count": 4,
+    "id": "first_steps:wood_pile"
+  }
+}
